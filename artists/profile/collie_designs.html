@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/collie_designs by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:52:55 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>collie_designs</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&amp;display=swap');
+
+    html {
+      background: url('../images/collie2.png') center/cover no-repeat fixed;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter Tight', sans-serif;
+      color: #03343f;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      user-select: none;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h2, h3 {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      user-select: text;
+    }
+    
+        /* ===============================
+       HOSTED BY / RETURN BUTTON
+       ===============================
+       Edit the href to point to your homepage,
+       change the label, or swap the logo image */
+    .uplink-box { 
+      position: fixed; 
+      bottom: 20px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      cursor: pointer; 
+      max-width: 100px; 
+      width: 100%; 
+      text-align: center; 
+      user-select: none; 
+      z-index: 9999; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      text-decoration: none; 
+    }
+    .uplink-box img { 
+      max-height: 32px; 
+      height: auto; 
+      border-radius: 8px; 
+      display: block; 
+      margin: 0 auto; 
+      pointer-events: none; 
+      filter: drop-shadow(1px 1px 2px white); 
+    }
+    .uplink-box .hosted-by { 
+      font-size: 14px; 
+      color: #333; 
+      text-decoration: none; 
+      text-shadow: 1px 1px 2px white; 
+      margin-bottom: 4px; 
+      user-select: none; 
+      display: block; 
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 960px;
+      width: 100%;
+      gap: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bubble-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(ellipse at 30% 70%, rgba(255,255,255,0.05), transparent 70%) no-repeat;
+      background-size: 200% 200%;
+      animation: causticsMove 40s ease-in-out infinite;
+    }
+
+    @keyframes causticsMove {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -150px;
+      border-radius: 50%;
+      backdrop-filter: blur(6px) saturate(150%);
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(160,220,255,0.05));
+      box-shadow:
+        inset 0 0 15px rgba(255,255,255,0.6),
+        0 0 20px rgba(255,255,255,0.2);
+      opacity: 0.6;
+      animation: rise 22s linear infinite, drift 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 0.9; }
+      100% { transform: translateY(-120vh) scale(1.1); opacity: 0; }
+    }
+
+    @keyframes drift {
+      0% { transform: translateX(0) rotate(0deg); }
+      100% { transform: translateX(30px) rotate(6deg); }
+    }
+
+    .bubble:nth-child(1) { left: 10%; width: 90px; height: 90px; animation-duration: 28s; animation-delay: 0s; }
+    .bubble:nth-child(2) { left: 25%; width: 45px; height: 55px; animation-duration: 20s; animation-delay: 3s; }
+    .bubble:nth-child(3) { left: 40%; width: 70px; height: 80px; animation-duration: 32s; animation-delay: 6s; }
+    .bubble:nth-child(4) { left: 55%; width: 120px; height: 100px; animation-duration: 36s; animation-delay: 2s; }
+    .bubble:nth-child(5) { left: 70%; width: 60px; height: 70px; animation-duration: 18s; animation-delay: 5s; }
+    .bubble:nth-child(6) { left: 85%; width: 130px; height: 110px; animation-duration: 40s; animation-delay: 8s; }
+
+    .foreground-bubbles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 5;
+    }
+
+    .floating-bubble {
+      position: absolute;
+      bottom: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), rgba(180,240,255,0.15));
+      box-shadow:
+        inset 0 0 20px rgba(255,255,255,0.6),
+        0 0 25px rgba(150,220,255,0.4);
+      backdrop-filter: blur(8px);
+      opacity: 0.4;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.5; }
+      80% { opacity: 0.9; }
+      100% { transform: translateY(-110vh) scale(1.05); opacity: 0; }
+    }
+
+    .floating-bubble:nth-child(1) { left: 8%; width: 80px; height: 80px; animation-duration: 38s; animation-delay: 0s; }
+    .floating-bubble:nth-child(2) { left: 22%; width: 50px; height: 50px; animation-duration: 26s; animation-delay: 6s; }
+    .floating-bubble:nth-child(3) { left: 40%; width: 100px; height: 100px; animation-duration: 44s; animation-delay: 10s; }
+    .floating-bubble:nth-child(4) { left: 60%; width: 65px; height: 65px; animation-duration: 32s; animation-delay: 3s; }
+    .floating-bubble:nth-child(5) { left: 75%; width: 120px; height: 120px; animation-duration: 55s; animation-delay: 12s; }
+    .floating-bubble:nth-child(6) { left: 90%; width: 40px; height: 40px; animation-duration: 25s; animation-delay: 5s; }
+
+    .profile-container {
+      display: flex;
+      flex-direction: row;
+      background: rgba(255,255,255,0.55);
+      border: 2px solid rgba(255,255,255,0.8);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0, 100, 120, 0.3);
+      max-width: 960px;
+    }
+
+    .sidebar {
+      width: 300px;
+      padding: 1.5rem 1rem;
+      background: linear-gradient(180deg, rgba(235,255,255,0.85) 0%, rgba(220,255,240,0.85) 100%);
+      border-right: 2px solid rgba(255,255,255,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 250px; height: 250px;
+      background: url('../images/collie_head.png') center/cover no-repeat;
+      border: 3px solid rgba(255,255,255,0.9);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 100, 120, 0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05) rotate(1deg);
+      box-shadow: 0 10px 30px rgba(0, 150, 200, 0.4);
+    }
+
+    .basic-info {
+      margin-top: 1.5rem;
+      width: 100%;
+      background: rgba(255,255,255,0.6);
+      border: 2px solid rgba(255,255,255,0.8);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: inset 0 0 12px rgba(255,255,255,0.6);
+    }
+
+    .basic-info h2 { color: #00556b; font-size: 1rem; }
+    .basic-info p { margin: 0.3rem 0; font-size: 0.85rem; }
+
+    .content-area {
+      flex: 1;
+      padding: 2rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(220,250,240,0.75) 100%);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+
+    .content-area h3 {
+      font-size: 1rem;
+      border-bottom: 2px solid rgba(0,90,120,0.3);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+      color: #004f60;
+    }
+
+    .links a {
+      display: inline-block;
+      background: linear-gradient(135deg, #d2f9ff, #b0ffe1);
+      border: 2px solid rgba(255,255,255,0.9);
+      color: #004b5c;
+      text-decoration: none;
+      padding: 0.5rem 1.1rem;
+      margin-right: 0.5rem;
+      font-weight: 600;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: all 0.25s ease;
+    }
+
+    .links a:hover {
+      background: linear-gradient(135deg, #a8eaff, #8cffda);
+      box-shadow: 0 4px 14px rgba(0,100,150,0.3);
+      transform: translateY(-2px);
+    }
+
+    .showcase-carousel {
+      display: block;
+      white-space: nowrap;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 1rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.35);
+      backdrop-filter: blur(10px);
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.3);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .showcase-carousel img {
+      display: inline-block;
+      border-radius: 14px;
+      width: 240px;
+      height: 180px;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.8);
+      box-shadow: 0 4px 12px rgba(0,80,120,0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-right: 1rem;
+    }
+
+    .showcase-carousel img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 22px rgba(0,150,200,0.45);
+    }
+
+    .showcase-slider {
+      width: 100%;
+      padding: 0.5rem 1rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(12px) saturate(160%);
+      border-radius: 16px;
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.3), 0 4px 16px rgba(0, 120, 150, 0.2);
+      margin-top: -0.5rem;
+    }
+
+    .showcase-slider input[type="range"] {
+      -webkit-appearance: none;
+      width: 90%;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(180,255,240,0.4), rgba(100,220,255,0.5));
+      outline: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    .showcase-slider input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, rgba(180,255,255,0.8));
+      box-shadow: 0 0 8px rgba(0,180,255,0.6), inset 0 0 6px rgba(255,255,255,0.9);
+      cursor: grab;
+      transition: transform 0.2s ease;
+    }
+
+    .showcase-slider input[type="range"]::-webkit-slider-thumb:active {
+      transform: scale(1.2);
+      cursor: grabbing;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+
+    .lightbox.active { display: flex; }
+
+    @media (max-width: 768px) {
+      .profile-container { flex-direction: column; }
+      .sidebar { width: 100%; border-right: none; border-bottom: 2px solid rgba(255,255,255,0.6); }
+      .profile-pic { width: 80%; max-width: 200px; height: auto; }
+      .showcase-carousel img { width: 60%; height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bubble-overlay">
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  </div>
+
+  <div class="foreground-bubbles">
+    <div class="floating-bubble"></div>
+    <div class="floating-bubble"></div>
+    <div class="floating-bubble"></div>
+    <div class="floating-bubble"></div>
+    <div class="floating-bubble"></div>
+    <div class="floating-bubble"></div>
+  </div>
+
+  <div class="page-wrapper">
+    <div class="profile-container">
+      <aside class="sidebar">
+        <div class="profile-pic"></div>
+        <div class="basic-info">
+          <h2>About</h2>
+          <p><strong>Location:</strong> Cascadian Region, USA</p>
+          <p><strong>Mediums:</strong> Music Production, Visual Design</p>
+          <h2>Favourites</h2>
+          <p><strong>Album:</strong> Self Titled – And It’s Name Was Epyon</p>
+          <p><strong>Movie:</strong> Terminator II</p>
+        </div>
+      </aside>
+
+      <section class="content-area">
+        <h3>collie_designs</h3>
+        <p>I have always, even in my time doing design for others, been inspired by the 2000s art designs in the Fruitger styles, and even in the 2010s by early minimalism before it was overcorporatized.</p>
+
+        <h3>Showcase</h3>
+        <div class="showcase-carousel" id="carousel">
+          <img src="../images/collie1.png" alt="Artwork 1" />
+          <img src="../images/collie_bg.png" alt="Artwork 2" />
+          <img src="../images/collie4.png" alt="Artwork 3" />
+          <img src="../images/collie5.png" alt="Artwork 4" />
+        </div>
+        <div class="showcase-slider">
+          <input type="range" id="carouselSlider" min="0" max="100" value="0" step="0.1">
+        </div>
+
+        <div style="margin-top:1rem; text-align:center;">
+          <button id="playMusicBtn" style="background:rgba(255,255,255,0.7); border:none; padding:0.6rem 1.4rem; border-radius:14px; cursor:pointer; font-weight:600; color:#004b5c; box-shadow:0 4px 10px rgba(0,0,0,0.15);">▶️ Play Background Track</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+    <!-- ===============================
+         HOSTED BY BUTTON
+         ===============================
+         Change href, text, or logo -->
+    <a href="../uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+      <span class="hosted-by">Hosted by</span>
+      <img src="../../R-Transparent.png" alt="Uplink Logo" />
+    </a>
+
+  <div class="lightbox" id="lightbox">
+    <img src="#" alt="Expanded artwork">
+  </div>
+
+  <!-- YouTube API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    // Lightbox
+    const carousel = document.getElementById('carousel');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    carousel.querySelectorAll('img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+
+    // Showcase slider control
+    const slider = document.getElementById('carouselSlider');
+    slider.addEventListener('input', () => {
+      const scrollMax = carousel.scrollWidth - carousel.clientWidth;
+      carousel.scrollLeft = (slider.value / 100) * scrollMax;
+    });
+
+    carousel.addEventListener('scroll', () => {
+      const scrollMax = carousel.scrollWidth - carousel.clientWidth;
+      slider.value = (carousel.scrollLeft / scrollMax) * 100;
+    });
+
+    // Background music (YouTube autoplay-safe)
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('hiddenPlayer', {
+        height: '0',
+        width: '0',
+        videoId: 'xsdWibwQdZE',
+        playerVars: { autoplay: 0, loop: 1, playlist: 'xsdWibwQdZE' },
+      });
+    }
+
+    const playBtn = document.getElementById('playMusicBtn');
+    playBtn.addEventListener('click', () => {
+      if (!player) return;
+      const state = player.getPlayerState();
+      if (state !== YT.PlayerState.PLAYING) {
+        player.playVideo();
+        playBtn.textContent = '⏸️ Pause Background Track';
+      } else {
+        player.pauseVideo();
+        playBtn.textContent = '▶️ Play Background Track';
+      }
+    });
+  </script>
+
+  <div id="hiddenPlayer"></div>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/collie_designs by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:01 GMT -->
+</html>

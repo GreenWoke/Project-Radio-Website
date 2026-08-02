@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  background-color: #00121f;
+  background-image:
+    radial-gradient(circle, #1a3c66 2px, transparent 2px),
+    radial-gradient(circle, #5c7d99 1px, transparent 1px);
+  background-size: 50px 50px, 10px 10px;
+  background-repeat: repeat, repeat;
+  color: #16334f;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../artists/box3.png') center/cover no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * { position: relative; z-index: 1; }
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.xp-window {
+  position: relative;
+  z-index: 5;
+  border: 2px solid #2c4e70;
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px #121f0a;
+  background: #d0deef;
+}
+
+.xp-titlebar {
+  background: linear-gradient(to bottom, #4a77a3, #2d557d);
+  padding: 0.4rem 0.6rem;
+  border-bottom: 2px solid #2c4e70;
+  color: #e5ecf7;
+  text-shadow: 1px 1px 1px #1d334f;
+}
+
+.title-text { font-size: 0.8rem; }
+
+.xp-body { padding: 1rem; color: #1a304a; }
+
+.sparkle {
+  color: #2d588c;
+  font-weight: 900;
+  animation: blink 1.6s infinite alternate;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 220px;
+  background: url("TUNERNAVBG.png") bottom center no-repeat, #3566a6;
+  background-size: contain, cover;
+  border-right: 5px solid #003366;
+  padding: 0;
+  box-shadow: 2px 0 5px #121f0a;
+  z-index: 10;
+}
+
+.sidebar-logo { display: block; max-width: 100%; height: auto; margin: 0 auto 0.5rem auto; }
+
+.sidebar nav { display: flex; flex-direction: column; }
+
+.sidebar nav a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #bcd0e6;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px solid #284a6d;
+  text-shadow: 1px 1px 0px #0d2333;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar nav a:hover { background: rgba(30, 70, 120, 0.3); color: #001020; }
+
+.main-content {
+  margin-left: 220px;
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.artist-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.artist-profile {
+  position: relative;
+  aspect-ratio: 1/1;
+  border: 3px solid #2c4e70;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #2d557d;
+  box-shadow: 3px 3px 8px #121f0a;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artist-profile img:first-child {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.artist-profile .overlay-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.artist-profile:hover .overlay-logo { opacity: 0; }
+
+.artist-profile:hover { transform: scale(1.03); box-shadow: 0 0 20px #4da3ff, inset 0 0 12px #79c7ff; }
+
+.artist-info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(0,0,40,0.7);
+  color: #e5ecf7;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.artist-profile:hover .artist-info { opacity: 1; }
+
+.artist-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 4px #000;
+  margin-bottom: 0.5rem;
+}
+
+.artist-bio { font-size: 0.85rem; opacity: 0.95; }
+
+@media (max-width: 720px) {
+  .sidebar { position: relative; width: 100%; height: auto; box-shadow: none; }
+  .main-content { margin-left: 0; }
+  .artist-showcase { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+}

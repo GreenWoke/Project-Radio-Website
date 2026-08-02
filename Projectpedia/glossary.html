@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta property="og:title" content="Projectpedia">
+<meta property="og:description" content="An in-universe archive documenting characters, locations, and incidents tied to Project Radio.">
+<meta property="og:image" content="https://projectradio.org/Projectpedia/Art/pos-atc-2.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="projectradio.org">
+
+<title>Project Radio Wiki</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="https://projectradio.org/rah.ico">
+<style>
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  color: #f5f5f5;
+  background: #1c1c1c;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 8px 8px;
+  opacity:0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: url('https://projectradio.org/Projectpedia/bgtester.png') center/cover no-repeat;
+  opacity: 0.15;
+  pointer-events:none;
+  z-index:0;
+}
+
+body > * { position: relative; z-index:1; }
+
+.container { display: flex; min-height:100vh; overflow-x: hidden; }
+
+/*/* ===== SIDEBAR (UNCHANGED STRUCTURE) ===== */
+.sidebar {
+  width: 220px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background:
+    url("https://projectradio.org/Projectpedia/wikinav.png") bottom center no-repeat,
+    linear-gradient(#dcd4a8, #c9c192);
+  background-size: contain, cover;
+  border-right: 5px solid #9f986a;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #2f2d1f;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px solid #9f986a;
+  background: #dcd4a8;
+  text-shadow: 1px 1px 0 #fdfcf4;
+}
+
+.sidebar nav a:hover {
+  background: #efeac8;
+}
+
+.sidebar-logo {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 0.5rem auto;
+  filter: grayscale(100%) brightness(0.85);
+}
+/* ===== MAIN ===== */
+.main-content { 
+  margin-left: 220px; 
+  padding: 24px; 
+  flex: 1; 
+  overflow-x: hidden; 
+  max-width: 1100px;
+  margin-right: auto;
+  margin-left: calc(220px + (100vw - 220px - 1100px) / 2);
+}
+
+@media (max-width: 1400px) {
+  .main-content {
+    margin-left: 220px;
+    margin-right: 0;
+    max-width: none;
+  }
+}
+
+/* XP Window */
+.xp-window {
+  background: rgba(50,50,50,0.85);
+  border: 2px solid #9f986a;
+  margin-bottom: 24px;
+}
+
+.xp-titlebar {
+  background: linear-gradient(#fff6d1, #f1e2a2);
+  padding:6px;
+  border-bottom:2px solid #9f986a;
+  text-align:center;
+}
+
+.title-text { font-size:13px; color:#2b2a23; }
+
+.xp-body { padding:14px; font-size:11px; line-height:1.9; color:#f0f0f0; }
+
+/* ===== CARD CAROUSEL ===== */
+.carousel-wrapper {
+  overflow: hidden;
+  padding: 16px 0;
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 15s linear infinite;
+  cursor: grab;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.carousel-inner {
+  display: flex;
+  gap: 16px;
+}
+
+.card {
+  flex: 0 0 140px;
+  min-width:140px;
+  height:200px;
+  border:2px solid #9f986a;
+  border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.5);
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  color:#fff;
+  text-decoration:none;
+  position:relative;
+  overflow:hidden;
+  transition: transform 0.2s;
+  background-size: cover;
+  background-position: center;
+  -webkit-user-drag: none;
+}
+
+.card img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+@media (min-width: 600px) {
+  .card {
+    flex: 0 0 180px;
+    min-width:180px;
+    height:260px;
+  }
+  .carousel-inner { gap: 20px; }
+}
+
+@media (min-width: 900px) {
+  .card {
+    flex: 0 0 200px;
+    min-width:200px;
+    height:280px;
+  }
+}
+
+.card:hover { transform: translateY(-8px) scale(1.05); }
+
+/* Overlay for readability */
+.card::before {
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 100%);
+  z-index:0;
+}
+
+.card-info {
+  margin:12px;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+.card-info strong { display:block; font-size:13px; margin-bottom:4px; color:#ffe680; }
+.card-info p { font-size:10px; margin:0; color:#e0e0e0; }
+
+/* ===== DIRECTORY TOGGLE ===== */
+.directory-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.directory-toggle {
+  background: linear-gradient(#dcd4a8, #c9c192);
+  border: 2px solid #9f986a;
+  padding: 8px 12px;
+  font-size: 9px;
+  font-family: 'Press Start 2P', monospace;
+  color: #2f2d1f;
+  cursor: pointer;
+  border-radius: 4px;
+  text-shadow: 1px 1px 0 #fdfcf4;
+}
+.directory-toggle:hover { 
+  background: linear-gradient(#efeac8, #dcd4a8); 
+}
+
+.directory-section { display: none; margin-bottom:16px; }
+.directory-section.show { display: block; }
+.directory-section h3 {
+  font-size:11px;
+  margin-bottom:6px;
+  border-bottom:2px solid #9f986a;
+  padding-bottom:4px;
+  color:#fff8c8;
+}
+.directory-links { columns: 2; column-gap: 22px; }
+.directory-links a { display:block; font-size:10px; color:#f5f5f5; text-decoration:none; margin-bottom:6px; }
+.directory-links a:hover { text-decoration:underline; }
+
+@media (min-width: 600px) {
+  .directory-links { columns: 3; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<aside class="sidebar">
+  <a href="https://projectradio.org/"><img src="https://projectradio.org/projectR-ver1.0.png" class="sidebar-logo"></a>
+  <nav>
+        <a href="https://artist.projectradio.org/">Artist Uplink</a>
+        <a href="https://projectradio.org/radio/tuner">Radio Tuner</a>
+        <a href="https://projectradio.org/Articles/uplink">Article Uplink</a>
+        <a href="https://projectradio.org/downloads_page.html">Downloads</a>
+        <a href="https://discord.gg/qUFrxKxchg">Discord</a>
+    <a href="https://projectradio.org/">Return to Radio</a>
+  </nav>
+</aside>
+
+<main class="main-content">
+
+<!-- le intro -->
+<section class="xp-window hero">
+  <div class="xp-titlebar"><span class="title-text">PROJECT RADIO WIKI</span></div>
+  <div class="xp-body">The Project Radio Wiki is a collaborative encyclopedia documenting the characters, organizations, locations, technology, and events of the Project Radio universe. The wiki is continuously expanding as new material is developed, refined, and integrated into the setting’s timeline.</div>
+</section>
+
+<!-- CARD CAROUSEL -->
+<section class="xp-window">
+  <div class="xp-titlebar"><span class="title-text">POPULAR PAGES</span></div>
+  <div class="xp-body">
+    <div class="carousel-wrapper">
+      <div class="carousel-track" id="cardCarousel">
+        <div class="carousel-inner">
+          <!-- Set 1 -->
+          <a href="https://projectradio.org/Projectpedia/vandal.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/VandalCard.png');">
+            <div class="card-info"><strong>Vandal</strong><p>Pirate symbol</p></div>
+          </a>
+          <a href="https://projectradio.org/Projectpedia/naomi.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/NaomiCard.png');">
+            <div class="card-info"><strong>Naomi</strong><p>Field agent</p></div>
+          </a>
+          <a href="https://projectradio.org/Projectpedia/pilot.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/PilotCard.png');">
+            <div class="card-info"><strong>Pilot</strong><p>Transmission coordinator</p></div>
+          </a>
+          <a href="https://projectradio.org/Projectpedia/ProjectRadio.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/projectradiocard.png');">
+            <div class="card-info"><strong>PROJECT RADIO</strong><p>Rebel crew</p></div>
+          </a>
+          <a href="#" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/GEARSCard.png');">
+            <div class="card-info"><strong>G.E.A.R.S.</strong><p>Antagonist corp</p></div>
+
+                      <a href="https://projectradio.org/Projectpedia/ChapterOne" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/chapter1card.png');">
+            <div class="card-info"><strong>Chapter One</strong><p>It Begins</p></div>
+          </a>
+                    <a href="https://projectradio.org/Projectpedia/ChapterZero.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/pos-cpz.png');">
+            <div class="card-info"><strong>Chapter Zero</strong><p>Catch Up</p></div>
+          </a>
+          <a href="#" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/GruntCard.png');">
+            <div class="card-info"><strong>Grunt</strong><p>G.E.A.R.S. soldier</p></div>
+          </a>
+<a href="https://projectradio.org/Projectpedia/wonda.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/WondaCard.png');">
+            <div class="card-info"><strong>Wonda</strong><p>Radio Host</p></div>
+          </a>
+          <a href="#" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/TheCityCard.png');">
+            <div class="card-info"><strong>The City</strong><p>Setting</p></div>
+          </a>
+          <!-- Set 2 (duplicate for infinite loop) -->
+          <a href="https://projectradio.org/Projectpedia/vandal.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/VandalCard.png');">
+            <div class="card-info"><strong>Vandal</strong><p>Pirate symbol</p></div>
+          </a>
+          <a href="https://projectradio.org/Projectpedia/naomi.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/NaomiCard.png');">
+            <div class="card-info"><strong>Naomi</strong><p>Field agent</p></div>
+          </a>
+          <a href="https://projectradio.org/Projectpedia/pilot.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/PilotCard.png');">
+            <div class="card-info"><strong>Pilot</strong><p>Transmission coordinator</p></div>
+          </a>
+          <a href="https://projectradio.org/Projectpedia/ProjectRadio.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/projectradiocard.png');">
+            <div class="card-info"><strong>PROJECT RADIO</strong><p>Rebel crew</p></div>
+          </a>
+          <a href="#" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/GEARSCard.png');">
+            <div class="card-info"><strong>G.E.A.R.S.</strong><p>Antagonist corp</p></div>
+          </a>
+          <a href="#" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/pos-atc-2.png');">
+            <div class="card-info"><strong>Chapter One</strong><p>It Begins</p></div>
+          </a>
+          <a href="#" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/pos-cpz.png');">
+            <div class="card-info"><strong>Chapter Zero</strong><p>Catch Up</p></div>
+          </a>
+          <a href="#" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/GruntCard.png');">
+            <div class="card-info"><strong>Grunt</strong><p>G.E.A.R.S. soldier</p></div>
+          </a>
+          <a href="https://projectradio.org/Projectpedia/wonda.html" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/WondaCard.png');">
+            <div class="card-info"><strong>Wonda</strong><p>Radio Host</p></div>
+          </a>
+                    <a href="#" class="card" draggable="false" style="background-image: url('https://projectradio.org/Projectpedia/Art/TheCityCard.png');">
+            <div class="card-info"><strong>The City</strong><p>Setting</p></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="xp-window hero">
+  <div class="xp-body">Built as an open, community-driven resource, the Project Radio Wiki allows anyone to create or edit articles. Its goal is to serve as a comprehensive and internally consistent archive of the world of Project Radio, from the upper levels of The City to its lowest depths, and from early corporate consolidation to the rise of Project Radio and beyond.</div>
+</section>
+
+<!-- DIRECTORY -->
+<section class="xp-window">
+  <div class="xp-titlebar"><span class="title-text">DIRECTORY</span></div>
+  <div class="xp-body">
+    <div class="directory-buttons">
+      <button class="directory-toggle" onclick="toggleDirectory('characters')">Characters</button>
+      <button class="directory-toggle" onclick="toggleDirectory('locations')">Locations</button>
+      <button class="directory-toggle" onclick="toggleDirectory('groups')">Groups</button>
+      <button class="directory-toggle" onclick="toggleDirectory('plot')">Plot Chapters</button>
+      <button class="directory-toggle" onclick="toggleDirectory('roles')">Roles</button>
+      <button class="directory-toggle" onclick="toggleDirectory('gear')">Gear</button>
+    </div>
+
+    <div id="characters" class="directory-section">
+      <h3>Characters</h3>
+      <div class="directory-links">
+        <a href="vandal.html">Vandal</a>
+        <a href="naomi.html">Naomi Kowalska</a>
+        <a href="pilot.html">Pilot</a>
+        <a href="wonda.html">Wonda</a>
+        <a href="rosemary.html">Rosemary</a>
+        <a href="#">[Placeholder]</a>
+      </div>
+    </div>
+
+    <div id="locations" class="directory-section">
+      <h3>Locations</h3>
+      <div class="directory-links">
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+      </div>
+    </div>
+
+    <div id="groups" class="directory-section">
+      <h3>Groups</h3>
+      <div class="directory-links">
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+      </div>
+    </div>
+
+    <div id="plot" class="directory-section">
+      <h3>Plot</h3>
+      <div class="directory-links">
+        <a href="https://projectradio.org/Projectpedia/ChapterZero">Chapter Zero</a>
+        <a href="https://projectradio.org/Projectpedia/ChapterOne">Chapter One</a>
+        <a href="https://projectradio.org/Projectpedia/Y2K.html">Y2K</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+      </div>
+    </div>
+
+    <div id="roles" class="directory-section">
+      <h3>Roles & Occupations</h3>
+      <div class="directory-links">
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+      </div>
+    </div>
+
+    <div id="gear" class="directory-section">
+      <h3>Objects, Gear & Weapons</h3>
+      <div class="directory-links">
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+        <a href="#">[Placeholder]</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="xp-window" style="margin-top: 30px; max-width: 100%;">
+  <div class="xp-titlebar"><span class="title-text">WANT TO CONTRIBUTE?</span></div>
+  <div class="xp-body" style="text-align: center;">
+    <p>Want to contribute or learn more about Project Radio? <a href="https://discord.gg/qUFrxKxchg" style="color: #ffe680;">Join the Discord</a> to connect with the community!</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const track = document.getElementById('cardCarousel');
+  let isDown = false;
+  let startX;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let animationId;
+  let isDragging = false;
+
+  // Disable default drag
+  track.addEventListener('dragstart', (e) => e.preventDefault());
+
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    isDragging = true;
+    startX = e.clientX;
+    track.style.animationPlayState = 'paused';
+    track.style.cursor = 'grabbing';
+  });
+
+  track.addEventListener('mouseleave', () => {
+    if (isDown) {
+      isDown = false;
+      isDragging = false;
+      track.style.animationPlayState = 'running';
+      track.style.cursor = 'grab';
+    }
+  });
+
+  track.addEventListener('mouseup', () => {
+    isDown = false;
+    isDragging = false;
+    track.style.animationPlayState = 'running';
+    track.style.cursor = 'grab';
+  });
+
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.clientX;
+    const diff = startX - x;
+    const newTranslate = prevTranslate - diff;
+    track.style.transform = `translateX(${newTranslate}px)`;
+    currentTranslate = newTranslate;
+  });
+
+  // Reset position after drag ends to maintain loop
+  track.addEventListener('mouseup', () => {
+    if (currentTranslate < -track.offsetWidth / 2) {
+      currentTranslate += track.offsetWidth / 2;
+    } else if (currentTranslate > 0) {
+      currentTranslate -= track.offsetWidth / 2;
+    }
+    prevTranslate = currentTranslate;
+    track.style.transition = 'transform 0.3s ease-out';
+    track.style.transform = `translateX(${currentTranslate}px)`;
+    setTimeout(() => {
+      track.style.transition = 'none';
+    }, 300);
+  });
+
+  // Touch support
+  track.addEventListener('touchstart', (e) => {
+    isDown = true;
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    track.style.animationPlayState = 'paused';
+  });
+
+  track.addEventListener('touchend', () => {
+    isDown = false;
+    isDragging = false;
+    track.style.animationPlayState = 'running';
+    
+    if (currentTranslate < -track.offsetWidth / 2) {
+      currentTranslate += track.offsetWidth / 2;
+    } else if (currentTranslate > 0) {
+      currentTranslate -= track.offsetWidth / 2;
+    }
+    prevTranslate = currentTranslate;
+    track.style.transition = 'transform 0.3s ease-out';
+    track.style.transform = `translateX(${currentTranslate}px)`;
+    setTimeout(() => {
+      track.style.transition = 'none';
+    }, 300);
+  });
+
+  track.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    const x = e.touches[0].clientX;
+    const diff = startX - x;
+    const newTranslate = prevTranslate - diff;
+    track.style.transform = `translateX(${newTranslate}px)`;
+    currentTranslate = newTranslate;
+  });
+});
+</script>
+
+<script>
+function toggleDirectory(id) {
+  const section = document.getElementById(id);
+  section.classList.toggle('show');
+}
+</script>
+
+</body>
+</html>

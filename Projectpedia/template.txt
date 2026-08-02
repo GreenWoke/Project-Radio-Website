@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>PLACEHOLDER — Project Radio Wiki</title>
+
+<!-- ===== EMBED / OG META ===== -->
+<meta property="og:title" content="PLACEHOLDER — Project Radio Wiki">
+<meta property="og:description" content="PLACEHOLDER">
+<meta property="og:image" content="https://projectradio.org/Projectpedia/Art/PLACEHOLDERCard.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="projectradio.org">
+
+
+<link rel="icon" type="image/x-icon" href="https://projectradio.org/rah.ico">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  color: #f5f5f5;
+  background: #1c1c1c;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 8px 8px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('https://projectradio.org/Projectpedia/bgtester.png') center/cover no-repeat;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== SIDEBAR (UNCHANGED STRUCTURE) ===== */
+.sidebar {
+  width: 220px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background:
+    url("https://projectradio.org/Projectpedia/wikinav.png") bottom center no-repeat,
+    linear-gradient(#dcd4a8, #c9c192);
+  background-size: contain, cover;
+  border-right: 5px solid #9f986a;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #2f2d1f;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px solid #9f986a;
+  background: #dcd4a8;
+  text-shadow: 1px 1px 0 #fdfcf4;
+}
+
+.sidebar nav a:hover {
+  background: #efeac8;
+}
+
+.sidebar-logo {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 0.5rem auto;
+  filter: grayscale(100%) brightness(0.85);
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  margin-left: 220px;
+  padding: 24px;
+  flex: 1;
+
+  max-width: 1100px;
+  margin-right: auto;
+  margin-left: calc(220px + (100vw - 220px - 1100px) / 2);
+}
+
+@media (max-width: 1400px) {
+  .main-content {
+    margin-left: 220px;
+    margin-right: 0;
+    max-width: none;
+  }
+}
+
+/* ===== PAGE HEADER ===== */
+.page-title {
+  font-size: 18px;
+  margin-bottom: 14px;
+  border-bottom: 3px solid #9f986a;
+  padding-bottom: 8px;
+}
+
+/* ===== INFOBOX ===== */
+.infobox {
+  float: right;
+  width: 380px;
+  background: #2b2a23;
+  border: 3px solid #9f986a;
+  margin: 0 0 18px 18px;
+  font-size: 11px;
+  color: #f5f5f5;
+}
+
+.status-banner {
+  text-align: center;
+  font-size: 10px;
+  padding: 6px;
+  border-bottom: 3px solid #9f986a;
+}
+
+.status-active {
+  background: linear-gradient(#5a7c5a, #3a593a);
+  color: #f5f5f5;
+}
+
+.infobox-header {
+  background: linear-gradient(#44423c, #5a584e);
+  text-align: center;
+  padding: 10px;
+  border-bottom: 3px solid #9f986a;
+  font-size: 13px;
+  color: #ffe680;
+}
+
+.infobox img {
+  width: 100%;
+  display: block;
+  border-bottom: 3px solid #9f986a;
+}
+
+.infobox table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.infobox td {
+  padding: 10px;
+  border-bottom: 1px solid #66614d;
+}
+
+.infobox td.label {
+  font-weight: bold;
+  width: 38%;
+  color: #ffe680;
+}
+
+/* ===== ROLE TAGS ===== */
+.role {
+  display: inline-block;
+  font-size: 9px;
+  padding: 3px 7px;
+  margin-left: 6px;
+  border: 1px solid #f5f5f5;
+  color: #1c1c1c;
+  background: linear-gradient(#ffd966, #e5c95c);
+}
+
+.role.leader {
+  background: linear-gradient(#f0e39a, #d6c96e);
+  font-weight: bold;
+}
+
+.role.friend {
+  background: linear-gradient(#8fc1e3, #5aa3c0);
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  margin-bottom: 22px;
+}
+
+.section h2 {
+  font-size: 14px;
+  border-bottom: 2px solid #9f986a;
+  padding-bottom: 6px;
+}
+
+.section p {
+  font-size: 12px;
+  line-height: 2;
+  color: #f5f5f5;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 220px;
+    padding: 14px;
+  }
+
+  .infobox {
+    float: none;
+    width: 100%;
+    margin: 0 0 20px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .section p {
+    font-size: 11px;
+    line-height: 1.8;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <a href="https://projectradio.org">
+    <img src="https://projectradio.org/projectR-ver1.0.png" class="sidebar-logo">
+  </a>
+  <nav>
+        <a href="https://projectradio.org/Projectpedia/glossary.html">Projectpedia</a>
+        <a href="https://projectradio.org/artists/uplink">Artist Uplink</a>
+        <a href="https://projectradio.org/radio/tuner">Radio Tuner</a>
+        <a href="https://projectradio.org/Articles/uplink">Article Uplink</a>
+        <a href="https://projectradio.org/downloads_page.html">Downloads</a>
+        <a href="https://discord.gg/qUFrxKxchg">Chat Room</a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main class="main-content">
+
+<h3 class="page-title">PLACEHOLDER</h3>
+
+<aside class="infobox">
+  <div class="status-banner status-active">STATUS: PLACEHOLDER</div>
+  <div class="infobox-header"><strong>PLACEHOLDER</strong></div>
+  <img src="https://projectradio.org/Projectpedia/Art/refcard-PLACEHOLDER.png" alt="PLACEHOLDER portrait">
+  <table>
+    <tr><td class="label">Name</td><td>PLACEHOLDER</td></tr>
+    <tr><td class="label">DOB</td><td>PLACEHOLDER</td></tr>
+    <tr><td class="label">Species</td><td>PLACEHOLDER</td></tr>
+    <tr><td class="label">Height</td><td>PLACEHOLDER</td></tr>
+    <tr><td class="label">Gender</td><td>PLACEHOLDER</td></tr>
+    <tr>
+      <td class="label">Affiliation</td>
+      <td>
+        PLACEHOLDER <span class="role leader">PLACEHOLDER</span><br>
+      </td>
+    </tr>
+  </table>
+</aside>
+
+<section class="section">
+  <h2>Overview</h2>
+  <p>
+PLACEHOLDER
+  </p>
+</section>
+
+<section class="section">
+  <h3>History</h3>
+  <h2>PLACEHOLDER</h2>
+  <p>PLACEHOLDER </p>
+    <span style="float: left; margin-right: 15px; text-align: center;">
+      <img src="https://projectradio.org/Projectpedia/Art/PLACEHOLDER.png" alt="PLACEHOLDER" style="max-width: 180px; border: 3px solid #9f986a; display: block;">
+      <span style="font-size: 10px; color: #ffe680;">PLACEHOLDER</span>
+    </span>
+  </p>
+</section>
+
+</main>
+</div>
+
+</body>
+</html>

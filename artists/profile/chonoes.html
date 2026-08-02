@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/chonoes by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:52:54 GMT -->
+<head>
+  <!-- ✅ BASIC PAGE SETTINGS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chonoes</title>
+
+  <!-- ✅ CUSTOM FONT -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+
+    /* ✅ MOBILE STYLES */
+    @media (max-width: 768px) {
+      .page-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+      }
+
+      .profile-container {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #992200;
+        align-items: center;
+      }
+
+      .profile-pic {
+        width: 180px;
+        height: 180px;
+      }
+
+      .basic-info, .content-area {
+        padding: 1rem;
+        font-size: 0.95rem;
+      }
+
+      .gallery img {
+        width: 45%;
+        height: auto;
+      }
+    }
+
+    /* ✅ PAGE-WIDE STYLES */
+    html {
+      --s: 200px;
+      --c1: #5b2f2f;
+      --c2: #5c5c5c;
+      --c3: #1a1a1a;
+
+      background:
+        repeating-conic-gradient(from 30deg,#0000 0 120deg,var(--c3) 0 50%) 
+        calc(var(--s)/2) calc(var(--s)*tan(30deg)/2),
+        repeating-conic-gradient(from 30deg,var(--c1) 0 60deg,var(--c2) 0 120deg,var(--c3) 0 50%);
+      background-size: var(--s) calc(var(--s)*tan(30deg));
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive, monospace;
+      color: white;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .profile-container {
+      display: flex;
+      width: 100%;
+      max-width: 960px;
+      border: 6px solid #992200;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 300px;
+      background: #1A1A1A;
+      border-right: 2px solid #992200;
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 250px;
+      height: 250px;
+      background: url('../images/chonoes_head.jpg') center/cover no-repeat;
+      border: 4px solid #992200;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .basic-info {
+      margin-top: 1.5rem;
+      background: #992200;
+      border: 2px solid #992200;
+      border-radius: 10px;
+      width: 100%;
+      padding: 1rem 1.2rem;
+      color: white;
+    }
+
+    .basic-info h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .basic-info p {
+      margin: 0.3rem 0;
+      font-size: 0.7rem;
+    }
+
+    .content-area {
+      flex: 1;
+      background: #1A1A1A;
+      padding: 2rem 2.5rem;
+      border-left: 2px solid #992200;
+      color: white;
+    }
+
+    .content-area h3 {
+      font-size: 1rem;
+      border-bottom: 2px solid #992200;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .links {
+      margin: 1rem 0;
+    }
+
+    .links a {
+      display: inline-block;
+      background: #ddd;
+      border: 2px solid #bbb;
+      color: #222;
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      margin-right: 0.6rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .gallery {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .gallery img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border: 2px solid #992200;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    h2, h3 {
+      user-select: text;
+    }
+
+    /* ✅ Hosted by button */
+    .uplink-box {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer;
+      max-width: 100px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      z-index: 9999;
+    }
+
+    .uplink-box img {
+      max-height: 32px;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(1px 1px 2px white);
+    }
+
+    .uplink-box .hosted-by {
+      font-size: 14px;
+      color: #fff;
+      text-shadow: 1px 1px 2px black;
+      margin-bottom: 4px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+
+    <!-- ✅ PROFILE + MAIN CONTENT -->
+    <div class="profile-container" role="main" aria-label="Artist Profile">
+
+      <!-- ✅ SIDEBAR: PHOTO + BASIC DETAILS -->
+      <aside class="sidebar">
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+
+        <div class="basic-info">
+          <h2>About</h2>
+          <p><strong>Location:</strong> Greensboro, NC</p>
+          <p><strong>Mediums:</strong> Music Production</p>
+
+          <h2>Favourites</h2>
+          <p><strong>Album:</strong> if you were here i'd be home now - Smush</p>
+          <p><strong>Movie:</strong> El Camino</p>
+        </div>
+      </aside>
+
+      <!-- ✅ MAIN PROFILE CONTENT -->
+      <section class="content-area">
+        <h3>Chonoes</h3>
+        <p>hey my name jonas and i make music</p>
+
+        <h3>Links &amp; Work</h3>
+        <div class="links">
+          <a href="https://tr.ee/x3x81RETd8">Spotify</a>
+          <a href="https://music.apple.com/us/artist/chonoes/1803549650">Apple Music</a>
+          <a href="https://www.instagram.com/chonoes1">Instagram</a>
+          <a href="https://www.audiotool.com/user/redguy5009">Audio Tool</a>
+          <a href="https://soundcloud.com/chonoes">Sound Cloud</a>
+          <a href="https://www.audiotool.com/user/redguy5009">Youtube</a>
+        </div>
+
+        <h3>Showcase</h3>
+        <div class="gallery">
+          <a href="https://soundcloud.com/chonoes/redroomtitanasylum">
+            <img src="../../../i1.sndcdn.com/artworks-tXlWM8PBrKEeDsBP-G7IKjg-t500x500.jpg" alt="Showcase Item 1" />
+          </a>
+          <a href="https://soundcloud.com/chonoes/flawless">
+            <img src="../../../i1.sndcdn.com/artworks-KSp0yd0xPpOt7vTQ-nrEDdA-t500x500.jpg" alt="Showcase Item 2" />
+          </a>
+          <a href="https://soundcloud.com/chonoes/loss">
+            <img src="../../../i1.sndcdn.com/artworks-YkzO3ychbPTykbcJ-BYy7yg-t500x500.jpg" alt="Showcase Item 3" />
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ✅ HOSTED BY BUTTON -->
+  <a href="../uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+    <span class="hosted-by">Hosted by</span>
+    <img src="../../R-Transparent.png" alt="Uplink Logo" />
+  </a>
+
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/chonoes by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:52:55 GMT -->
+</html>

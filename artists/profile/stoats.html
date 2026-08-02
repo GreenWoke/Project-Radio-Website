@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/stoats by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:39 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>stoats</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&amp;display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background: url("../images/stoats_head3.png") no-repeat center center / cover;
+    }
+
+    body {
+      font-family: 'Press Start 2P', cursive, monospace;
+      color: #333;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;   
+      padding: 2rem 1rem 5rem;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .profile-container {
+      font-family: "DM Serif Text", serif;
+      width: 100%;
+      max-width: 850px;    
+      margin: 0 auto;
+      border: 2px solid white;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: rgba(240, 240, 240, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-right: 2px solid white;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      background: url('../images/stoats_head.png') center/cover no-repeat;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 4px solid rgba(255, 255, 255, 0.7);
+      box-shadow:
+        inset 0 0 20px 3px rgba(255, 255, 255, 0.6),
+        0 0 15px 5px rgba(255, 255, 255, 0.5),
+        0 0 30px 10px rgba(173, 216, 230, 0.4);
+    }
+
+    .basic-info {
+      margin-top: 1rem;
+      width: 100%;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    .content-area {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 1.5rem 2rem;
+    }
+
+    .content-area h3 {
+      font-size: 1rem;
+      border-bottom: 2px solid white;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .links {
+      margin: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .links a {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      border: white;
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-weight: 700;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .links a:hover {
+      background: rgba(255, 255, 255, 0.35);
+      color: #a3d9ff;
+      box-shadow: 0 0 15px rgba(173, 216, 230, 0.9);
+    }
+
+    .gallery {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border: 2px solid white;
+      border-radius: 10px;
+    }
+
+    .video-embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      margin-top: 1.5rem;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid white;
+      background: #000;
+    }
+
+    .video-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .uplink-box {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      text-decoration: none;
+      z-index: 9999;
+    }
+
+    .uplink-box img {
+      max-height: 32px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .uplink-box .hosted-by {
+      font-size: 14px;
+      color: #333;
+      text-shadow: 1px 1px 2px white;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="profile-container">
+    <aside class="sidebar">
+      <div class="profile-pic"></div>
+      <div class="basic-info">
+        <h2>About</h2>
+        <p><strong>Location:</strong> Poland</p>
+        <p><strong>Mediums:</strong> Music Production, Visual Art, Singer/ Songwriter, Graphic Design</p>
+        <h2>Favourites</h2>
+        <p><strong>Album:</strong> nurture - Porter Robinson</p>
+        <p><strong>Movie:</strong> Mad God</p>
+      </div>
+            <h3>Links & Work</h3>
+      <div class="links">
+        <a href="https://www.youtube.com/@stoatsfromborderworld">Youtube</a>
+        <a href="https://soundcloud.com/stoatsfromborderworld">SoundCloud</a>
+        <a href="https://www.instagram.com/stoatsfromborderworld/">Instagram</a>
+        <a href="https://open.spotify.com/artist/5hCJUAW5DG0R9oAusrSi38">Spotify</a>
+      </div>
+    </aside>
+
+    <section class="content-area">
+      <h3>stoats</h3>
+      <p>MUSIC FROM THE BORDERWORLD. Folktronika music producer from Poland heavily inspired by tracker music, experimental rock genres, long walks, Porter Robinson and The Brave Little Abacus.</p>
+
+
+
+      <h3>Showcase</h3>
+      <div class="gallery">
+        <a href='https://on.soundcloud.com/syxjGuyNfXOFr1MgMX'>
+          <img src="../../../i1.sndcdn.com/artworks-INFsb1hjzQ3zuDXt-Td67jw-t500x500.jpg" />
+        </a>
+        <a href='https://on.soundcloud.com/WZRRa60Ir3y2z4qjYs'>
+          <img src="../../../i1.sndcdn.com/avatars-HUpsqCDuPhy6rVyG-ag5PWA-t500x500.jpg" />
+        </a>
+        <a href='https://on.soundcloud.com/2pn3BaodtZMXct2KqC'>
+          <img src="../../../i1.sndcdn.com/artworks-TywdmuSJde5cYnra-zszAGw-t500x500.jpg" />
+        </a>
+      </div>
+
+      <div class="video-embed">
+        <iframe
+          src="https://www.youtube.com/embed/36LQphr4Wgw?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=36LQphr4Wgw"
+          allow="autoplay; encrypted-media"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+  </div>
+
+  <a href="../uplink.html" class="uplink-box">
+    <span class="hosted-by">Hosted by</span>
+    <img src="../../R-Transparent.png" />
+  </a>
+
+  <canvas id="bg-canvas"></canvas>
+
+  <script src="../../../cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.2/browser/pixi.min.js"></script>
+  <script>
+    (function () {
+      const canvas = document.getElementById("bg-canvas");
+      const app = new PIXI.Application({
+        view: canvas,
+        resizeTo: window,
+        transparent: true
+      });
+
+      const glitchFilter = new PIXI.Filter(null, `
+        precision mediump float;
+        varying vec2 vTextureCoord;
+        uniform float time;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453);
+        }
+
+        void main() {
+          vec2 uv = vTextureCoord;
+
+          float blocks = 34.0;
+          vec2 id = floor(uv * blocks);
+          vec2 local = fract(uv * blocks);
+
+          float r = hash(id);
+
+          // slow drifting blocks
+          uv += vec2(
+            sin(time * 0.12 + r * 6.28) * 0.015,
+            cos(time * 0.10 + r * 6.28) * 0.01
+          );
+
+          // choose some blocks to become static
+          float staticMask = step(0.78, r);
+          float staticNoise = hash(id + local * time * 25.0);
+
+          // healing cycle
+          float heal = smoothstep(0.0, 1.0, sin(time * 0.25 + r * 8.0));
+          float value = mix(staticNoise, r, heal);
+
+          // rare horizontal tear
+          float tear = step(0.997, hash(vec2(time * 0.4, id.y)));
+          uv.x += tear * (value - 0.5) * 0.2;
+
+          // very rare full-frame collapse
+          float collapse = step(0.9992, hash(vec2(time * 0.15)));
+          value = mix(value, hash(uv * time), collapse);
+
+          vec3 color = vec3(value);
+
+          // subtle chroma corruption
+          color.r += staticMask * 0.04;
+          color.g -= staticMask * 0.03;
+          color.b += staticMask * 0.05;
+
+          gl_FragColor = vec4(color, 0.18);
+        }
+      `, { time: 0 });
+
+      const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
+      sprite.width = app.screen.width;
+      sprite.height = app.screen.height;
+      sprite.filters = [glitchFilter];
+      app.stage.addChild(sprite);
+
+      app.ticker.add(delta => {
+        glitchFilter.uniforms.time += delta * 0.03;
+        sprite.width = app.screen.width;
+        sprite.height = app.screen.height;
+      });
+    })();
+  </script>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/stoats by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:43 GMT -->
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/carrophobia by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:52:51 GMT -->
+<head>
+  <!-- ✅ BASIC PAGE SETTINGS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrophobia</title>
+
+  <!-- ✅ CUSTOM FONT -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+
+    /* ✅ MOBILE STYLES */
+    @media (max-width: 768px) {
+      .page-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+      }
+
+      .profile-container {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px dashed #333;
+        align-items: center;
+      }
+
+      .profile-pic {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+      }
+
+      .basic-info, .content-area {
+        width: 100%;
+        padding: 1rem;
+        font-size: 0.95rem;
+      }
+
+      .gallery img {
+        width: 45%;
+        height: auto;
+      }
+    }
+
+    /* ✅ PAGE-WIDE STYLES */
+    html {
+      background-color: #fafafa;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive, monospace;
+      color: #333;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .profile-container {
+      display: flex;
+      width: 100%;
+      max-width: 960px;
+      background-color: #fdfdfd;
+      border: 2px dashed #333;
+      box-shadow: inset 0 0 0 2px #999;
+      border-radius: 12px;
+      overflow: hidden;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .sidebar {
+      width: 300px;
+      background-color: black;
+      border-right: 2px dashed #333;
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 250px;
+      height: 250px;
+      background: url('../images/carro_head2.png') center/cover no-repeat;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .basic-info {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 1rem 1.2rem;
+      font-family: monospace;
+      color: white;
+      line-height: 1.4;
+    }
+
+    .basic-info h2 {
+      color: white;
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+      border-bottom: 1px dashed white;
+      text-transform: uppercase;
+    }
+
+    .basic-info p {
+      color: white;
+      margin: 0.3rem 0;
+      font-size: 0.8rem;
+    }
+
+    .content-area {
+      flex: 1;
+      background-color: black;
+      padding: 2rem 2.5rem;
+      border-left: 2px dashed #333;
+      font-family: Helvetica, Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .content-area h3 {
+      color: white;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      border-bottom: 1px dashed #aaa;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .content-area p {
+      font-family: monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: white;
+    }
+
+    .links {
+      margin: 1rem 0;
+    }
+
+    .links a {
+      display: inline-block;
+      border: 1px dashed #444;
+      color: white;
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      margin-right: 0.6rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: monospace;
+    }
+
+    .links a:hover {
+      background-color: #ddd;
+      border-color: #111;
+      color: #111;
+    }
+
+    .gallery {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .gallery img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border: 1px dashed #666;
+      cursor: pointer;
+    }
+
+    video.bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    /* ✅ Hosted by button */
+    .uplink-box {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer;
+      max-width: 100px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      z-index: 9999;
+    }
+
+    .uplink-box img {
+      max-height: 32px;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(1px 1px 2px white);
+    }
+
+    .uplink-box .hosted-by {
+      font-size: 14px;
+      color: #fff;
+      text-shadow: 1px 1px 2px black;
+      margin-bottom: 4px;
+    }
+
+    h2, h3 {
+      user-select: text;
+    }
+
+  </style>
+</head>
+
+<body>
+  <video class="bg-video" autoplay loop muted playsinline>
+    <source src="../images/carrophobia_bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="page-wrapper">
+
+    <!-- ✅ PROFILE + MAIN CONTENT -->
+    <div class="profile-container" role="main" aria-label="Artist Profile">
+
+      <!-- ✅ SIDEBAR: PHOTO + BASIC DETAILS -->
+      <aside class="sidebar">
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+
+        <div class="basic-info">
+<pre style="font-family: monospace; font-size: 0.75rem; line-height: 1.1; margin-bottom: 1rem; color: white;">
+          )                ) 
+    )  ( /(         (   ( /( 
+ ( /(  )\())  (    ))\  )\())
+ )(_))((_)\   )\  /((_)(_))/ 
+((_)_ | |(_) ((_)(_))( | |_  
+/ _` || '_ \/ _ \| || ||  _| 
+\__,_||_.__/\___/ \_,_| \__| 
+</pre>
+          <p><strong>Location:</strong> Fₗₒᵣᵢ𝒹ₐ, ᵤₛₐ</p>
+          <p><strong>Mediums:</strong> [e.g. Producer, DJ, Composer]</p>
+<pre style="font-family: monospace; font-size: 0.75rem; line-height: 1.1; margin-bottom: 1rem; color: white;">
+ __                  
+|__    _     _.|_ _ _
+|(_|\/(_)|_|| ||_(-_)
+</pre>
+          <p><strong>Album:</strong> ᴱˣᶜᴱᴸˢᴵᴼᴿ ⁻ ˢˡᵃᵘˢᵒⁿ ᴹᵃˡᵒⁿᵉ ¹</p>
+          <p><strong>Movie:</strong> ᵤₙ𝒹ₑᵣ ₜₕₑ ₛᵢₗᵥₑᵣ ₗₐₖₑ</p>
+        </div>
+      </aside>
+
+      <!-- ✅ MAIN PROFILE CONTENT -->
+      <section class="content-area">
+<pre style="font-family: monospace; font-size: 0.75rem; line-height: 1.1; margin-bottom: 1rem; color: white;">
+                                _           _     _       
+  ___ __ _ _ __ _ __ ___  _ __ | |__   ___ | |__ (_) __ _ 
+ / __/ _` | '__| '__/ _ \| '_ \| '_ \ / _ \| '_ \| |/ _` |
+| (_| (_| | |  | | | (_) | |_) | | | | (_) | |_) | | (_| |
+ \___\__,_|_|  |_|  \___/| .__/|_| |_|\___/|_.__/|_|\__,_|
+                         |_|                              
+</pre>
+
+        <p>ᴍʏ ғᴀᴠᴏʀɪᴛᴇ ᴡᴀʏ ᴛᴏ ᴘᴜᴛ ɪᴛ ɪs "ɴᴏɴ-ɴᴇᴡᴛᴏɴɪᴀɴ". ᴍʏ ᴍᴜsɪᴄ ɪs ᴍᴀɪɴʟʏ ɪɴғʟᴜᴇɴᴄᴇᴅ ʙʏ ɴᴀᴛᴜʀᴀʟ ᴘʜᴇɴᴏᴍᴇɴᴀ, ʟɪᴋᴇ ᴛʜᴇ ᴡᴀʏ ᴡᴀᴛᴇʀ ᴍᴏᴠᴇs ᴀɴᴅ sʜɪᴛ ʟɪᴋᴇ ᴛʜᴀᴛ. I ғᴇᴇʟ ɪɴsᴘɪʀᴇᴅ ʙʏ ᴀɴʏᴛʜɪɴɢ ᴛʜᴀᴛ ᴘᴜʟʟs ᴀʀᴛ ɪɴ ᴀ ɴᴇᴡ ᴅɪʀᴇᴄᴛɪᴏɴ ᴡɪᴛʜᴏᴜᴛ ʟᴏᴏᴋɪɴɢ ʟɪᴋᴇ ᴀ ᴄᴏᴍᴘʟᴇᴛᴇ ᴀᴄᴄɪᴅᴇɴᴛ.</p>
+
+        <h3>Links &amp; Work</h3>
+        <div class="links">
+          <a href="https://soundcloud.com/synplant">ₛₒᵤₙ𝒹𝒸ₗₒᵤ𝒹</a>
+          <a href="https://www.instagram.com/carrophobia">ᵢₙₛₜₐ𝓰ᵣₐₘ</a>
+          <a href="https://carrophobia.bandcamp.com/">ᵦₐₙ𝒹𝒸ₐₘₚ</a>
+        </div>
+
+        <h3>Showcase</h3>
+        <div class="gallery">
+          <a href="https://soundcloud.com/synplant/sculpt-me-softly">
+            <img src="../../../i1.sndcdn.com/artworks-WaFZ1mjSDe69Tp0b-M1W2Tg-t500x500.jpg" alt="Showcase Item 1" />
+          </a>
+          <a href="https://carrophobia.bandcamp.com/album/planes-keep-crashing-in-my-area">
+            <img src="../../../f4.bcbits.com/img/a1243833171_16.jpg" alt="Showcase Item 2" />
+          </a>
+          <a href="https://soundcloud.com/synplant/cl-1-my-love-save-me-cloudlifterrrr">
+            <img src="../../../i1.sndcdn.com/artworks-4L7vn2Ef7bUrNWeU-CkawKg-t500x500.jpg" alt="Showcase Item 3" />
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ✅ HOSTED BY BUTTON -->
+  <a href="../uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+    <span class="hosted-by">Hosted by</span>
+    <img src="../../R-Transparent.png" alt="Uplink Logo" />
+  </a>
+
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/carrophobia by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:52:54 GMT -->
+</html>

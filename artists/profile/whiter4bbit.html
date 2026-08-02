@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/whiter4bbit by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:55 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhiteR4bbit</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Press Start 2P', cursive, monospace;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -2;
+    }
+
+    .video-background iframe {
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+    }
+
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(8px) grayscale(100%);
+      z-index: -1;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      user-select: none;
+    }
+
+    h2, h3 { 
+      user-select: text; 
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* dark shadow for headings */
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 960px;
+      width: 100%;
+      gap: 1rem;
+    }
+
+    .uplink-box { 
+      position: fixed; 
+      bottom: 20px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      cursor: pointer; 
+      max-width: 100px; 
+      width: 100%; 
+      text-align: center; 
+      user-select: none; 
+      z-index: 9999; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      text-decoration: none; 
+    }
+    .uplink-box img { 
+      max-height: 32px; 
+      height: auto; 
+      border-radius: 8px; 
+      display: block; 
+      margin: 0 auto; 
+      pointer-events: none; 
+      filter: drop-shadow(1px 1px 2px white); 
+    }
+    .uplink-box .hosted-by { 
+      font-size: 14px; 
+      color: #fff; 
+      text-decoration: none; 
+      text-shadow: 1px 1px 2px black; 
+      margin-bottom: 4px; 
+      user-select: none; 
+      display: block; 
+    }
+
+    .profile-container {
+      display: flex;
+      flex-direction: row;
+      border: 6px solid #e8c92f;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      position: relative; 
+      width: 300px;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      background: url('https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:znua6mzlcejv64clu5cjiqbz/bafkreigac7hpf2dr5ktbv3zaim7l7rd7b5tckuuth3kcz5qrmh4uleug6a@jpeg') center center / cover no-repeat fixed;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8); /* dark box shadow for sidebar/profile card */
+      border-radius: 12px;
+    }
+
+    .sidebar::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 0;
+      border-radius: 12px;
+    }
+
+    .profile-pic {
+      position: relative;
+      z-index: 1;
+      width: 250px;
+      height: 250px;
+      background: url('../images/lemon_head.png') center/cover no-repeat;
+      border: 4px solid #e8c92f;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8); /* dark shadow for profile pic */
+      border-radius: 12px;
+    }
+
+    .basic-info {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 1rem;
+    }
+    .basic-info h2 { margin-bottom: 0.5rem; font-size: 1rem; color: #e8c92f;}
+    .basic-info p { margin: 0.3rem 0; font-size: 0.8rem; color: white;}
+
+    .content-area {
+      position: relative;
+      z-index: 1;
+      color: white;
+      flex: 1;
+      padding: 2rem;
+      background: url('https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:znua6mzlcejv64clu5cjiqbz/bafkreigac7hpf2dr5ktbv3zaim7l7rd7b5tckuuth3kcz5qrmh4uleug6a@jpeg') center center / cover no-repeat fixed;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8); /* shadow around content area */
+      border-radius: 12px;
+    }
+
+    .content-area::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 0;
+      border-radius: 12px;
+    }
+
+    .content-area h3 {
+      position: relative;
+      z-index: 1;
+      color: #e8c92f;
+      font-size: 1rem;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8); /* stronger shadow for headings */
+    }
+
+    .links {
+      position: relative;
+      z-index: 1;
+    }
+    .links a {
+      display: inline-block;
+      border: 2px solid #e8c92f;
+      color: white;
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      margin-right: 0.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .links a:hover { background: #e8c92f; }
+
+    /* CAROUSEL */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      margin-top: 1rem;
+      overflow: hidden;
+      border-radius: 12px;
+      z-index: 1;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8); /* dark shadow for carousel */
+    }
+    .carousel-slide {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease-in-out;
+    }
+    .carousel-slide img {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0 0.5rem;
+      z-index: 2;
+      border-radius: 4px;
+      user-select: none;
+    }
+    .carousel-arrow.left { left: 10px; }
+    .carousel-arrow.right { right: 10px; }
+
+    @media (max-width: 768px) {
+      .profile-container { flex-direction: column; }
+      .sidebar { width: 100%; align-items: center; }
+      .profile-pic {
+        width: 80%;
+        height: auto;
+        aspect-ratio: 1/1;
+        min-width: 150px;
+        margin-bottom: 1.5rem;
+      }
+      .basic-info { font-size: 0.9rem; padding: 1rem; text-align: center; }
+      .content-area { font-size: 0.95rem; padding: 1rem; }
+      .carousel-container { height: 200px; }
+    }
+  </style>
+</head>
+
+<body>
+  
+<div class="video-background">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/G7y2gziyDwc?start=2&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=G7y2gziyDwc&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;playsinline=1&amp;showinfo=0&amp;iv_load_policy=3"
+    frameborder="0"
+    allow="autoplay; fullscreen"
+    allowfullscreen
+  ></iframe>
+</div>
+
+
+
+  
+  <div class="video-overlay"></div>
+
+  <div class="page-wrapper">
+
+    <a href="../uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+      <span class="hosted-by">Hosted by</span>
+      <img src="../../R-Transparent.png" alt="Uplink Logo" />
+    </a>
+
+    <div class="profile-container">
+
+      <aside class="sidebar">
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+        <div class="basic-info">
+          <h2>About</h2>
+          <p><strong>Location:</strong> Skopje, Macedonia</p>
+          <p><strong>Mediums:</strong> </p>
+
+          <h2>Favourites</h2>
+          <p><strong>Album:</strong> Nervermind - Nirvana</p>
+          <p><strong>Movie:</strong> The Matrix</p>
+        </div>
+      </aside>
+
+      <section class="content-area">
+        <h3>WhiteR4bbit</h3>
+        <p>Head of Aegis Robotics and director of CyberReading. Made, not born.</p>
+
+        <h3>Links &amp; Work</h3>
+        <div class="links">
+          <a href="https://bsky.app/profile/lemonjuice33.bsky.social">Bluesky</a>
+        </div>
+
+        <h3>Showcase</h3>
+        <div class="carousel-container">
+          <button class="carousel-arrow left">&#10094;</button>
+          <div class="carousel-slide">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:znua6mzlcejv64clu5cjiqbz/bafkreig2aefbqlqalldg2ota2gmwv4guzy25v5ipz7tpsbqdiapusog6xm@jpeg" alt="Artwork 1">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:znua6mzlcejv64clu5cjiqbz/bafkreiavjcnldjhmxsf4hzikat74ftk5cuztwupq7hgw6mx7bi65lgtade@jpeg" alt="Artwork 2">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:znua6mzlcejv64clu5cjiqbz/bafkreidtdz5jsbsrj5sopy4rqe7luruylfozkwx7t3w7zddowqp5cpvlye@jpeg" alt="Artwork 3">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:znua6mzlcejv64clu5cjiqbz/bafkreicwwi4z4l2u7nfxvln3aswvfnhnxyywl35ipek6atjb6e5zlyuxci@jpeg" alt="Artwork 4">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:desrhveb7kmq7som2ijirv4e/bafkreialrsknij5xjyzlxnanzb2nocdtt5sbxj2ajgjbvixqixmabarxty@jpeg" alt="Artwork 5">
+            <img src="https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:znua6mzlcejv64clu5cjiqbz/bafkreicnz3vo2xsfumstrvblcnfryskbas7225sy4duiwyrdvtial3qeou@jpeg" alt="Artwork 6">
+          </div>
+          <button class="carousel-arrow right">&#10095;</button>
+        </div>
+
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    const slide = document.querySelector('.carousel-slide');
+    const images = document.querySelectorAll('.carousel-slide img');
+    const prevBtn = document.querySelector('.carousel-arrow.left');
+    const nextBtn = document.querySelector('.carousel-arrow.right');
+
+    let counter = 0;
+    const total = images.length;
+
+    function updateSlide() {
+      slide.style.transform = `translateX(-${counter * 100}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      counter = (counter - 1 + total) % total;
+      updateSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      counter = (counter + 1) % total;
+      updateSlide();
+    });
+
+    setInterval(() => {
+      counter = (counter + 1) % total;
+      updateSlide();
+    }, 4000);
+  </script>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/whiter4bbit by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:55 GMT -->
+</html>

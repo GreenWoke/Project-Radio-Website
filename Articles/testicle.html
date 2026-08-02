@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="rah.ico">
+<title>Article Uplink</title>
+    <meta property="og:title" content="ARTICLE UPLINK" />
+  <meta property="og:description" content="PROJECT RADIO is your uplink into the archives of the underground. A living database of articles that decode forgotten art movements, dissect lost games, and shine a light on subcultures both past and present. Each piece dives beneath the surface of culture—unearthing stories overlooked by the mainstream and amplifying voices buried in static." />
+  <meta property="og:image" content="https://projectradio.org/Articles/article.png" />
+  <meta property="og:url" content="https://projectradio.org/articles/uplink" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Project Radio" />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-iconn" href="rah.ico">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  background-color: #120914;
+  color: #1a0b1c;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('https://projectradio.org/artists/box3.png') center/cover no-repeat;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(3px);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-radial-gradient(circle,#e7d4ef 0px,#e7d4ef 3px,#2a1433 4px,#2a1433 6px);
+  background-size: 64px 64px;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * { position: relative; z-index: 2; }
+
+.container {
+  display: flex;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* SIDEBAR — ORIGINAL COLORS */
+.sidebar {
+  width: 220px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: #cfa5d6;
+  background-image: url("https://projectradio.org/Articles/NAVTICLE.png");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: contain;
+  border-right: 5px solid #613369;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #613369;
+  text-decoration: none;
+  border-bottom: 1px solid #613369;
+  text-shadow: 1px 1px 1px #613369;
+}
+
+.sidebar-logo {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 0.5rem;
+}
+
+.main-content {
+  margin-left: 220px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* WINDOWS */
+.xp-window {
+  border: 2px solid #3a1b47;
+  border-radius: 8px;
+  background: rgba(231,212,239,0.45);
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+.xp-titlebar {
+  background: linear-gradient(to bottom,#f0e6f5,#6b3a7c);
+  padding: 0.6rem;
+  border-bottom: 2px solid #3a1b47;
+  text-align: center;
+}
+
+.title-text {
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #3a1b47;
+  width: 0;
+  animation: typing 4s steps(30,end) forwards, blink 0.8s step-end infinite alternate;
+}
+
+@keyframes typing { to { width: 100%; } }
+@keyframes blink { to { border-color: transparent; } }
+
+.xp-body { padding: 1.5rem; }
+
+/* FILTER */
+.filter-bar {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: inherit;
+  font-size: 0.7rem;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 2px solid #3a1b47;
+  background: linear-gradient(to bottom,#f4eafa,#b88bcc);
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background: linear-gradient(to bottom,#6b3a7c,#2a1433);
+  color: #f4eafa;
+}
+
+/* ARTICLES */
+.article-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+  gap: 1.5rem;
+}
+
+.article-profile {
+  aspect-ratio: 1/1;
+  border: 3px solid #3a1b47;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.article-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.article-info {
+  position: absolute;
+  inset: 0;
+  background: rgba(107,58,124,0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: #f4eafa;
+}
+
+.article-profile:hover .article-info { opacity: 1; }
+
+.archive-section { display: none; }
+.archive-section.active { display: block; }
+
+.archive-title {
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<aside class="sidebar">
+  <a href="https://projectradio.org">
+    <img src="https://projectradio.org/projectR-ver1.0.png" class="sidebar-logo">
+  </a>
+  <nav>
+    <a href="https://projectradio.org/artists/uplink">Artist Uplink</a>
+    <a href="https://projectradio.org/radio/tuner">The Radio</a>
+    <a href="https://projectradio.org/downloads">Downloads</a>
+    <a href="https://discord.gg/qUFrxKxchg">Chatroom</a>
+    <a href="https://projectradio.org/">Return To Radio</a>
+  </nav>
+</aside>
+
+<main class="main-content">
+
+<section class="xp-window">
+  <div class="xp-titlebar"><span class="title-text">ARTICLE UPLINK</span></div>
+  <div class="xp-body">
+    <p>
+      PROJECT RADIO is your uplink into the archives of the underground. A living database of articles that decode forgotten art movements, dissect lost games, and shine a light on subcultures both past and present. Each piece dives beneath the surface of culture—unearthing stories overlooked by the mainstream and amplifying voices buried in static.
+    </p>
+  </div>
+</section>
+
+<section class="xp-window">
+<div class="xp-body">
+
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="latest">LATEST</button>
+  <button class="filter-btn" data-filter="workshop">WORKSHOP</button>
+  <button class="filter-btn" data-filter="music">MUSIC</button>
+  <button class="filter-btn" data-filter="restoration">RESTORATION</button>
+  <button class="filter-btn" data-filter="showcase">SHOWCASE</button>
+</div>
+
+
+
+<!-- LATEST -->
+<div class="archive-section active" data-section="latest">
+  <h3 class="archive-title">LATEST</h3>
+  <div class="article-showcase">
+  
+  <!-- SHOWCASE -->
+    <a href="https://projectradio.org/Articles/spotlight/Artist-Mile_DeVoe" class="article-profile">
+      <img src="https://projectradio.org/Articles/spotlight/artworks-2zPz0LLq6hKxMP5N-pfWvww-t500x500.jpg">
+      <div class="article-info">
+        <div class="article-name">Miles DeVoe</div>
+      </div>
+    </a>
+
+  
+    <!-- Buddha Jane -->
+    <a href="https://projectradio.org/Articles/music/TheVoiceofBuddhaJane" class="article-profile">
+      <img src="https://projectradio.org/Articles/images/bj1.png">
+      <div class="article-info">
+        <div class="article-name">The Voice of Buddha Jane</div>
+        <div class="article-bio">From secretly playing music in her bedroom to performing on Tokyo’s underground rocky stage, Saki Nishioka turns her fears into art.</div>
+      </div>
+    </a>
+
+    <!-- Sticker -->
+    <a href="https://projectradio.org/Articles/Workshop/slaps" class="article-profile">
+      <img src="https://projectradio.org/Articles/Workshop/IMG_0997.JPG">
+      <div class="article-info">
+        <div class="article-name">STICKER SLAP DIY</div>
+        <div class="article-bio">In this workshop we will show you how to make your own DIY sticker slaps!</div>
+      </div>
+    </a>
+
+    <!-- Virtual Idols -->
+    <a href="https://projectradio.org/Articles/Virtual%20Idols/Virtual%20Idols" class="article-profile">
+      <img src="https://upload.wikimedia.org/wikipedia/en/8/82/Ananova.jpg">
+      <div class="article-info">
+        <div class="article-name">Virtual Idols</div>
+        <div class="article-bio">A new generation of celebrities is threatening to displace actors, actresses and pop stars in the minds of the young. Only this time, they are not real...</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- WORKSHOP -->
+<div class="archive-section" data-section="workshop">
+  <h3 class="archive-title">WORKSHOP</h3>
+  <div class="article-showcase">
+    <a href="https://projectradio.org/Articles/Workshop/slaps" class="article-profile">
+      <img src="https://projectradio.org/Articles/Workshop/IMG_0997.JPG">
+      <div class="article-info">
+        <div class="article-name">STICKER SLAP DIY</div>
+        <div class="article-bio">In this workshop we will show you how to make your own DIY sticker slaps!</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- MUSIC -->
+<div class="archive-section" data-section="music">
+  <h3 class="archive-title">MUSIC</h3>
+  <div class="article-showcase">
+    <a href="https://projectradio.org/Articles/music/TheVoiceofBuddhaJane" class="article-profile">
+      <img src="https://projectradio.org/Articles/images/bj1.png">
+      <div class="article-info">
+        <div class="article-name">The Voice of Buddha Jane</div>
+        <div class="article-bio">From secretly playing music in her bedroom to performing on Tokyo’s underground rocky stage, Saki Nishioka turns her fears into art.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- RESTORATION -->
+<div class="archive-section" data-section="restoration">
+  <h3 class="archive-title">RESTORATION PROTOCOL</h3>
+  <div class="article-showcase">
+    <a href="https://projectradio.org/Articles/Virtual%20Idols/Virtual%20Idols" class="article-profile">
+      <img src="https://upload.wikimedia.org/wikipedia/en/8/82/Ananova.jpg">
+      <div class="article-info">
+        <div class="article-name">Virtual Idols</div>
+        <div class="article-bio">A new generation of celebrities is threatening to displace actors, actresses and pop stars in the minds of the young. Only this time, they are not real...</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- SHOWCASE -->
+<div class="archive-section" data-section="showcase">
+  <h3 class="archive-title">SHOWCASE</h3>
+  <div class="article-showcase">
+    <a href="https://projectradio.org/Articles/spotlight/Artist-Mile_DeVoe" class="article-profile">
+      <img src="https://projectradio.org/Articles/spotlight/artworks-2zPz0LLq6hKxMP5N-pfWvww-t500x500.jpg">
+      <div class="article-info">
+        <div class="article-name">Miles DeVoe</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+</div>
+</section>
+
+</main>
+</div>
+
+<script>
+const buttons = document.querySelectorAll('.filter-btn');
+const sections = document.querySelectorAll('.archive-section');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    sections.forEach(sec => {
+      sec.classList.toggle('active', sec.dataset.section === btn.dataset.filter);
+    });
+  });
+});
+</script>
+
+</body>
+</html>

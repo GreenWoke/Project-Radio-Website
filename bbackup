@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome To The Wire</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/x-icon" href="rah.ico">
+  <link href="cyanobacteria.css" rel="stylesheet" type="text/css" media="all">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+    /* Splash Screen Core */
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      background: black;
+      color: #0f0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+      font-family: 'VT323', monospace;
+    }
+
+    #splash-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* BIOS Console */
+    .console-container {
+      width: 80%;
+      max-width: 800px;
+      height: 400px;
+      background-color: black;
+      border: 2px solid #0f0;
+      border-radius: 5px;
+      padding: 15px;
+      overflow: hidden;
+      position: relative;
+      text-align: left;
+    }
+
+    .console-text {
+      white-space: pre-line;
+      font-size: 18px;
+      line-height: 1.3;
+      color: #0f0;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    }
+
+    /* Cursor blink */
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      background-color: #0f0;
+      animation: blink 0.8s step-end infinite;
+      margin-left: 2px;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    
+    .loading-label {
+      color: #0f0;
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ Enhanced BIOS-Style Splash Screen -->
+  <div id="splash-screen">
+    <input class="sr-only" type="checkbox" id="flip">
+    <label for="flip"></label>
+    <div class="scene">
+      <span class="loading-label">PROJECT RADIO BOOT</span>
+      <div class="console-container">
+        <div class="console-text" id="console-output"></div>
+        <span class="cursor"></span>
+      </div>
+    </div>
+    <audio id="boot-sound" src="https://projectradio.org/Firin%20Line%20Break.wav" preload="auto"></audio>
+  </div>
+
+  <!-- 🔻 Main Content Starts -->
+  <div class="container">
+    <div class="small">
+      <nav>
+        <div>navigation</div>
+        <a href="">Home</a>
+        <a>About (coming soon)</a>
+        <a href="https://projectradio.org/radio/radio">The Radio</a>
+        <a>Downloads (coming soon)</a>
+        <a>Workshop (coming soon)</a>
+        <a href="https://project-radio.neocities.org/magazine/issue0">link</a>
+        <a>Contact (coming soon)</a>
+        <div>external</div>
+        <a>(coming soon)</a>
+        <a href="https://neocities.org">Build Your Own Site</a>
+        <a href="https://discord.gg/qUFrxKxchg">Discord</a>
+      </nav>
+      <center><img src="https://projectradio.org/spinkskull.gif"></center>
+    </div>
+
+    <section class="half">
+      <br>
+      <center>
+        <h3>Welcome to PROJECT RADIO — where creative signals cut through the static...</h3>
+      </center>
+      <br>
+      <p>PROJECT RADIO is a digital gateway to underground creativity—a vibrant hub connecting the global noise network. We stream a carefully curated yet chaotic blend of boundary-pushing art, experimental music, and cyberpunk-inspired resources directly to your digital consciousness.
+We amplify voices from the margins, broadcasting distorted frequencies from artists across the world into the digital void. Our platform pulses with practical tools: comprehensive tutorials, creation software, hardware and tools, alongside raw data packets—all engineered to empower your own artistic experimentation.
+Welcome to the transmission.</p>
+    </section>
+
+    <section class="small">
+      <h2>Latest</h2>
+      <p>18/04/25 - First restored article uploaded</p>
+      <p>16/04/25 - Project begins construction!</p>
+    </section>
+
+    <section class="full">
+      <marquee direction="left">
+        [BOOTING SYS-KERNEL :: v3.98x] ... SYSCORE COMPROMISED — MISSION SUCCESSFUL
+      </marquee>
+    </section>
+
+    <section class="half">
+      <a href="https://projectradio.org/retro/retro">
+        <h2>Read Our First Restored Article!</h2>
+      </a>
+    </section>
+
+    <section class="half">
+      <h2 href="https://project-radio.neocities.org/magazine/issue0">coming soon!</h2>
+    </section>
+  </div>
+
+  <!-- ✅ Enhanced JavaScript for BIOS-style Boot Sequence -->
+  <script>
+    window.addEventListener('load', () => {
+      const splash = document.getElementById('splash-screen');
+      const consoleOutput = document.getElementById('console-output');
+      const sound = document.getElementById('boot-sound');
+      
+      // BIOS-style boot messages
+      const bootMessages = [
+        "PROJECT RADIO BIOS v2.7.5",
+        "Copyright (C) 2025 PROJECT RADIO Foundation",
+        "",
+        "Performing system checks...",
+        "CPU: ARMv9 Cortex-X5 @ 3.8GHz",
+        "Memory Test: 32768MB OK",
+        "Initializing Signal Processors... DONE",
+        "Loading Cryptographic Modules... DONE",
+        "Engaging Quantum Entanglement Array... DONE",
+        "Detecting Peripheral Networks... FOUND",
+        "Initializing PROJECT RADIO",
+      ];
+      
+      let messageIndex = 0;
+      let charIndex = 0;
+      
+      // Start sound
+      sound.play().catch(e => console.warn('Autoplay blocked:', e));
+      
+      // Type effect function - much faster now
+      function typeNextChar() {
+        if (messageIndex < bootMessages.length) {
+          // Still have messages to type
+          const currentMessage = bootMessages[messageIndex];
+          
+          if (charIndex < currentMessage.length) {
+            // Still typing current message
+            consoleOutput.textContent += currentMessage.charAt(charIndex);
+            charIndex++;
+            
+            // Much faster typing speed between 1ms and 3ms
+            const randomDelay = Math.floor(Math.random() * 2) + 1;
+            setTimeout(typeNextChar, randomDelay);
+          } else {
+            // End of current message, move to next line
+            consoleOutput.textContent += "\n";
+            messageIndex++;
+            charIndex = 0;
+            
+            // Shorter pause between messages - just 20ms
+            setTimeout(typeNextChar, 20);
+          }
+        } else {
+          // All messages typed, fade out splash after a short delay
+          setTimeout(() => {
+            splash.classList.add('fade-out');
+            splash.addEventListener('transitionend', () => splash.remove());
+          }, 400);
+        }
+      }
+      
+      // Start typing immediately
+      typeNextChar();
+    });
+  </script>
+</body>
+</html>

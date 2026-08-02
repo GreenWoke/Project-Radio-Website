@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 2px 0 red, -2px 0 blue, 2px 2px green, -2px -2px yellow; transform: translateX(0); }
+            10% { text-shadow: -2px 0 red, 2px 0 blue, -2px 2px green, 2px -2px yellow; transform: translateX(1px); }
+            20% { text-shadow: 3px 0 red, -3px 0 blue, 3px 3px green, -3px -3px yellow; transform: translateX(-2px); }
+            30% { text-shadow: -4px 0 red, 4px 0 blue, -4px 4px green, 4px -4px yellow; transform: translateX(3px); }
+            40% { text-shadow: 5px 0 red, -5px 0 blue, 5px 5px green, -5px -5px yellow; transform: translateX(-3px); }
+            50% { text-shadow: 6px 0 red, -6px 0 blue, 6px 6px green, -6px -6px yellow; transform: translateX(4px); }
+            60% { text-shadow: -7px 0 red, 7px 0 blue, -7px 7px green, 7px -7px yellow; transform: translateX(-4px); }
+        }
+
+        marquee {
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            color: #00FF00;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        marquee span {
+            display: inline-block;
+            animation: glitch 1s infinite linear;
+        }
+
+        .highlight-box {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 1.5em;
+            margin: 1em 0;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            box-shadow: 0 0 10px #0ff3;
+        }
+
+        .section-with-image {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-image: url('https://projectradio.org/radio/banner2-2.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .section-with-image h2 {
+            padding: 0.5em;
+            border-radius: 5px;
+            background-color: transparent;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .marquee-section {
+            background-color: black;
+            padding: 10px 0;
+        }
+
+        .flavour-label {
+            background-color: black;
+            color: white;
+            padding: 0.2em 0.5em;
+            border-radius: 0.3em;
+            font-family: monospace;
+            display: inline-block;
+            margin-bottom: 0.2em;
+        }
+
+        .content-box {
+            background: rgba(0,0,0,0.6);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            color: #ccc;
+        }
+
+        .content-box h4 {
+            color: #0f0;
+            margin-bottom: 0.5rem;
+        }
+
+        .artist-uplink-box {
+            background-image: url('https://projectradio.org/radio/banner1-1.png'); /* New image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .artist-uplink-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .artist-interface-box {
+            background-image: url('https://projectradio.org/radio/banner3-3.png'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .artist-interface-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+        
+        .download-box {
+            background-image: url('https://projectradio.org/radio/banner4-4.png'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .download-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+                .comm-box {
+            background-image: url('https://projectradio.org/radio/banner2-2.png'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .comm-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+                .workshop-box {
+            background-image: url('https://projectradio.org/radio/banner5-5.png'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .workshop-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .intro-paragraph, .category-paragraph {
+            line-height: 1.5;
+            font-size: 1rem;
+        }
+
+        .white-text {
+            color: #ffffff;
+        }
+    </style>
+
+    <title>WORKSHOP</title>
+    <link rel="icon" type="image/x-icon" href="rah.ico">
+    <link href="cyanobacteria.css" rel="stylesheet" type="text/css" media="all">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+</head>
+
+<body>
+  <div class="container">
+    <div class="small">
+      <nav>
+              <div><img src="https://projectradio.org/PRTITLEW.png" >
+</div>
+        <a href="">Home</a>
+        <a href="https://projectradio.org/radio/tuner">The Radio</a>
+        <a href="https://projectradio.org/artists/uplink">Artist Uplink</a>
+        <a href="https://projectradio.org/downloads">Downloads</a>
+        <a href="https://projectradio.org/workshop">Workshop</a>
+        <a href="https://project-radio.neocities.org/magazine/issue0">Magazine (coming soon)</a>
+        <a>Contact (coming soon)</a>
+        <a>Credits (coming soon)</a>
+        <a href="https://neocities.org">Build Your Own Site</a>
+        <a href="https://discord.gg/qUFrxKxchg">Discord</a>
+      </nav>
+    </div>
+
+<section class="half">
+  <center>
+    <h3>LET'S GET TO WORK</h3>
+  </center>
+
+  <div class="content-box">
+    <center>
+      <span class="highlight-text">WORKSHOP PROJECTS</span>
+    </center>
+
+    <table style="width:100%; margin-top: 1em; border-collapse: collapse; color: #ccc; font-family: 'Orbitron', sans-serif;">
+      <thead>
+        <tr style="border-bottom: 2px solid #0f0;">
+          <th style="text-align: left; padding: 0.5em;">Project Title</th>
+          <th style="text-align: left; padding: 0.5em;">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.2);">
+          <td style="padding: 0.5em;">
+          <a href="https://projectradio.org/workshop/slaps">
+            <button style="
+              background-color: black;
+              border: 2px solid #0f0;
+              color: #0f0;
+              font-family: 'Orbitron', sans-serif;
+              padding: 0.4em 0.8em;
+              border-radius: 5px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+            " onmouseover="this.style.backgroundColor='#0f0'; this.style.color='black';"
+               onmouseout="this.style.backgroundColor='black'; this.style.color='#0f0';">
+              Skull Stuck Slap
+            </button>
+            </a>
+          </td>
+          <td style="padding: 0.5em;">Walkthrough on how to make Project Radio street art to further boost signal around the world!</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+</section>
+
+
+
+
+<br>
+    </section>
+
+
+  </div>
+</body>
+</html>

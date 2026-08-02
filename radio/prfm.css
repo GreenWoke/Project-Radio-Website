@@ -1,0 +1,355 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --gradientTop: Rgba(0, 55, 0, 0.95);
+  --gradientBottom: rgba(0,139,0,0.85);
+}
+
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("TEST.png") no-repeat;
+  background-size: 100% 100%;
+  z-index: -999;
+}
+
+/* COMPONENTS */
+.player-title-box {
+  background: linear-gradient(to right, rgba(0,0,128,0.85), rgba(0,0,128,0.85));
+  border: 4px ridge rgba(160,160,255,0.65);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: rgb(205,206,255);
+  text-shadow: 0 0 2px rgb(205,206,255);
+  width: 400px;
+  max-width: 100%;
+  margin-bottom: 0;
+  box-shadow: 0 4px 10px rgba(160,160,255,0.65);
+  text-align: center;
+  user-select: none;
+}
+
+.player-title-bottom {
+  background: linear-gradient(to right, rgba(0,0,128,0.85), rgba(0,0,128,0.85));
+  border: 4px ridge rgba(160,160,255,0.65);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: rgb(205,206,255);
+  text-shadow: 0 0 2px rgb(205,206,255);
+  width: 400px;
+  max-width: 100%;
+  margin-top: -4px;
+  box-shadow: 0 4px 10px rgba(160,160,255,0.65);
+  text-align: center;
+  user-select: none;
+}
+
+.dos-player {
+  background-image: url('212b6b88243c6407a4b4fad33bcb3632.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 400px;
+  height: 250px;
+  border: 4px ridge rgba(160,160,255,0.65);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 10px rgba(160,160,255,0.65);
+}
+
+/* Layout Helpers */
+.small { flex: 1 1 9%; }
+.large { flex: 1 1 82%; }
+.full  { flex: 1 1 100%; }
+.half  { flex: 1 1 49%; }
+
+/* Navigation Bar */
+nav.dreamcast-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: linear-gradient(to right, rgba(0,0,128,0.85), rgba(0,0,64,0.95));
+  border-bottom: 4px ridge rgba(160,160,255,0.65);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 10px rgba(160,160,255,0.65);
+}
+
+/* Footer */
+footer.dreamcast-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: linear-gradient(to right, rgba(0,0,128,0.85), rgba(0,0,64,0.95));
+  border-top: 4px ridge rgba(160,160,255,0.65);
+  border-radius: 10px 10px 0 0;
+  color: white;
+  box-shadow: 0 -4px 10px rgba(160,160,255,0.65);
+}
+
+/* Logos */
+nav .logo img,
+footer .logo img {
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 5px;
+  filter: invert(100%);
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+.nav-links a {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(205,236,255,0.54);
+  border-radius: 6px;
+  text-decoration: none;
+  color: rgb(205,206,255);
+  font-weight: bold;
+  text-shadow: 0 0 2px rgb(205,206,255);
+  transition: all 0.2s ease-in-out;
+}
+.nav-links a:hover {
+  background: rgb(36,35,34);
+  color: white;
+}
+
+div.small > img {
+  display: block;
+  margin: 5px auto;
+  border: 2px ridge red;
+  border-radius: 5px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6, p {
+  margin: 5px;
+  line-height: 1.2;
+}
+h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: normal;
+  text-align: center;
+  padding-bottom: 5px;
+  margin-top: 0;
+}
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+h3 {
+  font-size: 1.1rem;
+}
+h4 {
+  font-size: 1rem;
+  color: var(--accent);
+  padding-left: 12px;
+}
+
+img {
+  max-width: 100%;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: black;
+}
+footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Glitch title */
+.glitch-title-box {
+  margin: 30px auto;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  color: #0f0;
+  background: yellow;
+  border: 2px solid orange;
+  border-radius: 12px;
+  padding: 30px 20px;
+  max-width: 600px;
+  box-shadow: 0 0 15px #0f0;
+  animation: pulseBox 3s infinite;
+}
+
+.glitch {
+  position: relative;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  animation: glitch 2s infinite;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: white;
+  clip: rect(0, 0, 0, 0);
+}
+.glitch::after {
+  animation: glitchBottom 2s infinite;
+  color: #f0f;
+}
+.glitch::before {
+  animation: glitchTop 2s infinite;
+  color: #0f0;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #aaa;
+  margin-top: 10px;
+  font-family: 'VT323', monospace;
+}
+
+.player-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin-top: 10px;
+}
+
+.player-controls button {
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  background-color: rgba(160,160,255,0.65);
+  color: white;
+  border: 2px solid rgb(160,160,255);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  user-select: none;
+  text-shadow: 0 0 5px rgba(0,0,255,0.35);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  body {
+    padding: 0 5px;
+  }
+
+  .player-title-box,
+  .player-title-bottom,
+  .dos-player {
+    width: 100%;
+  }
+
+  nav.dreamcast-nav,
+  footer.dreamcast-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  nav .logo img,
+  footer .logo img {
+    height: 32px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .glitch-title-box {
+    padding: 20px 10px;
+    margin: 20px auto;
+  }
+
+  .glitch {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .player-controls {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .player-controls button {
+    font-size: 1rem;
+    padding: 6px 12px;
+    min-width: 80px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  footer {
+    font-size: 0.7rem;
+  }
+
+  div.small > img {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .glitch {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+  }
+
+  .nav-links a {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+
+  .player-controls button {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+  }
+}

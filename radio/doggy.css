@@ -1,0 +1,171 @@
+/* Body & background */
+body {
+  background: url("https://projectradio.org/radio/amer-football-2000.webp") no-repeat center center fixed;
+  background-size: cover;
+  color: #eee;
+  font-family: 'Rock Salt', cursive;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* ensures rain stays within window */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.1));
+  z-index: -2; /* below rain */
+}
+
+/* Page wrapper */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  z-index: 2; /* above rain */
+}
+
+/* Navigation */
+.emo-nav {
+  color: #d2b48c;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: rgba(0,0,0,0.90);
+}
+
+.nav-links a {
+  display: inline-block;
+  padding: 6px 12px;
+  text-decoration: none;
+  color: rgba(0,95,0,0.65);
+  font-weight: bold;
+  text-shadow: 0 0 2px rgb(205,206,255);
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-links a:hover {
+  background: rgba(0,95,0,0.65);
+  color: white;
+}
+
+/* Star glow animation */
+@keyframes pulse-glow {
+  0% { filter: blur(20px); opacity: 0.6; }
+  50% { filter: blur(40px); opacity: 1; }
+  100% { filter: blur(20px); opacity: 0.6; }
+}
+
+/* Star wrapper */
+.star-wrapper {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(
+    50% 0%, 65% 35%, 98% 40%, 70% 60%, 
+    80% 95%, 50% 75%, 20% 95%, 30% 60%, 
+    2% 40%, 35% 35%
+  );
+  z-index: 2;
+}
+
+.star-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 255, 0, 0.4);
+  clip-path: inherit;
+  filter: blur(30px);
+  z-index: -1;
+  animation: pulse-glow 2s infinite alternate;
+}
+
+/* Radio player inside star */
+.radio-player {
+  width: 85%;  /* smaller than star wrapper */
+  height: 85%;
+  background-image: url("https://projectradio.org/radio/banner3-3.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+audio {
+  width: 100%;
+  outline: none;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Footer */
+.site-footer {
+  position: fixed;
+  font-size: 12px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  background: rgba(0,0,0,0.90);
+  color: rgba(0,90,0,.90);
+}
+
+.site-footer a {
+  text-decoration: none;
+  color: rgba(0,95,0,0.65);
+}
+
+/* Responsive star scaling */
+@media (max-width: 1024px) {
+  .star-wrapper { width: 650px; height: 650px; }
+  .radio-player { width: 85%; height: 85%; }
+}
+
+@media (max-width: 800px) {
+  .star-wrapper { width: 500px; height: 500px; }
+  .radio-player { width: 85%; height: 85%; }
+}
+
+@media (max-width: 600px) {
+  .emo-nav { flex-direction: column; align-items: center; }
+  .nav-links { flex-direction: column; gap: 8px; margin-top: 10px; justify-content: center; width: 100%; text-align: center; }
+  .nav-links a { padding: 8px 0; width: 100%; }
+  .emo-nav .nav-logo { max-width: 200px; margin-bottom: 10px; }
+  .star-wrapper { width: 350px; height: 350px; }
+  .radio-player { width: 85%; height: 85%; }
+}
+
+/* Rain canvas */
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* behind star wrapper */
+  pointer-events: none;
+}

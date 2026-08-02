@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/downloads_page.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:14 GMT -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download Uplink</title>
+
+<link rel="icon" type="image/x-icon" href="rah.ico">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #f0f0f0,
+      #f0f0f0 2px,
+      #ebebeb 2px,
+      #ebebeb 4px
+    );
+  color: #000;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('artists/box3.png') center/cover no-repeat;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background:
+    url("spinkskull.gif") bottom center no-repeat,
+    #c94a4a;
+  background-size: contain, cover;
+  border-right: 5px solid #7a2e2e;
+  box-shadow: 2px 0 5px #200c0c;
+  z-index: 10;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #f0dede;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px solid #7a2e2e;
+  background: #c94a4a;
+  text-shadow: 1px 1px 1px #2a1010;
+}
+
+.sidebar nav a:hover {
+  background: rgba(58, 31, 31, 0.6);
+  color: #ffffff;
+}
+
+.sidebar-logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 0.5rem auto;
+  filter:
+    grayscale(100%)
+    sepia(100%)
+    hue-rotate(-10deg)
+    saturate(350%)
+    brightness(0.9);
+}
+
+.main-content {
+  margin-left: 220px;
+  flex: 1;
+  padding: 12px;
+}
+
+.xp-window {
+  background: rgb(156,156,156,0.7);
+  border: 2px solid #9b2a2a;
+  margin-bottom: 12px;
+}
+
+.xp-titlebar {
+  background: linear-gradient(#c94a4a, #8b1e1e);
+  padding: 6px;
+  color: #fff;
+  border-bottom: 2px solid #6b0f0f;
+  text-align: center;
+}
+
+.title-text {
+  font-size: 14px;
+}
+
+.xp-body {
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.filter-bar {
+  margin-bottom: 12px;
+}
+
+.filter-bar input,
+.filter-bar button {
+  font-family: inherit;
+  font-size: 11px;
+  padding: 6px;
+  margin: 2px;
+  background: #ffffff;
+  border: 2px solid #9b2a2a;
+}
+
+.filter-bar button:hover {
+  background: #9b2a2a;
+  color: #fff;
+}
+
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.download-item {
+  background:
+    url("bg-noise.html"),
+    #ffffff;
+  border: 2px solid #9b2a2a;
+  padding: 10px;
+  font-size: 12px;
+}
+
+.flag {
+  display: inline-block;
+  font-size: 10px;
+  padding: 3px 5px;
+  margin-right: 4px;
+  margin-bottom: 6px;
+  border: 1px solid #000;
+  background: #fff;
+}
+
+.flag.art { background: #607a24; color: #fff; }
+.flag.sound { background: #3b82f6; }
+.flag.software { background: #ddd; }
+.flag.manual { background: #eee; }
+.flag.publishing { background: yellow; }
+
+.download-item button {
+  font-family: inherit;
+  font-size: 11px;
+  padding: 6px;
+  margin-top: 8px;
+  background: #ffffff;
+  border: 2px solid #9b2a2a;
+}
+
+.download-item button:hover {
+  background: #9b2a2a;
+  color: #fff;
+}
+
+.pagination {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.pagination button {
+  font-family: inherit;
+  font-size: 11px;
+  padding: 6px 12px;
+  margin: 2px;
+  background: #ffffff;
+  border: 2px solid #9b2a2a;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background: #9b2a2a;
+  color: #fff;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.page-info {
+  display: inline-block;
+  margin: 0 8px;
+  font-size: 11px;
+  vertical-align: middle;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <a href="index.html">
+      <img src="projectR-ver1.0.png" class="sidebar-logo">
+    </a>
+    <nav>
+      <a href="#">Download Uplink</a>
+      <a href="https://artist.projectradio.org/">Artist Uplink</a>
+      <a href="artists/profiles.html">Profile List</a>
+        <a href="https://discord.gg/qUFrxKxchg">Discord</a>
+      <a href="index-2.html">Return to Radio</a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+
+    <section class="xp-window">
+      <div class="xp-titlebar">
+        <span class="title-text">DOWNLOAD UPLINK</span>
+      </div>
+      <div class="xp-body">
+        Public domain and open-source assets distributed via Project Radio.
+      </div>
+    </section>
+
+    <section class="xp-window">
+      <div class="xp-titlebar">
+        <span class="title-text">ARCHIVE</span>
+      </div>
+      <div class="xp-body">
+
+        <div class="filter-bar">
+          <input type="text" id="search" placeholder="Search…">
+          <button data-filter="all">ALL</button>
+          <button data-filter="art">ART</button>
+          <button data-filter="sound">SOUND</button>
+          <button data-filter="software">SOFTWARE</button>
+          <button data-filter="manual">MANUALS</button>
+          <button data-filter="publishing">PUBLISHING</button>
+        </div>
+
+        <div class="download-grid" id="download-grid">
+
+          <div class="download-item" data-flags="art manual">
+            <strong>Skull Stuck Stickers</strong><br><br>
+            <span class="flag art">ART</span>
+            <span class="flag manual">MANUAL</span>
+            <p>Printable sticker sheets + guide.</p>
+            <a href="downloads/skull%20stuck.pdf">
+            <button>DOWNLOAD</button>
+            </a>
+          </div>
+
+          <div class="download-item" data-flags="sound">
+            <strong>PR SFX VOL.1</strong><br><br>
+            <span class="flag sound">SOUND</span>
+            <p>Station idents and startup tones.</p>
+            <a href="downloads/PR%20SFX%20VOL1.zip">
+            <button>DOWNLOAD</button>
+            </a>
+          </div>
+          
+          <div class="download-item" data-flags="publishing">
+            <strong>Naomi 'Agent' Wallpaper</strong><br><br>
+            <span class="flag publishing">PUBLISHING</span>
+            <p>Naomi wallpaper from the Agent series</p>
+            <a href="downloads/agentnaomiwallpaper.png">
+            <button>DOWNLOAD</button>
+            </a>
+          </div>
+          
+          <div class="download-item" data-flags="publishing">
+            <strong>Vandal Reference Card</strong><br><br>
+            <span class="flag publishing">PUBLISHING</span>
+            <p>Reference art for Vandal.</p>
+            <a href="downloads/refcard%20-%20Vandal.png">
+            <button>DOWNLOAD</button>
+            </a>
+          </div>
+          
+          <div class="download-item" data-flags="art publishing">
+            <strong>Naomi Reference Card</strong><br><br>
+            <span class="flag publishing">PUBLISHING</span>
+            <p>Reference art for Naomi.</p>
+            <a href="downloads/refcard%20-%20Naomi.png">
+            <button>DOWNLOAD</button>
+            </a>
+          </div>
+          
+          <div class="download-item" data-flags="art publishing">
+            <strong>Project Radio Logo (Vandal)</strong><br><br>
+            <span class="flag publishing">PUBLISHING</span>
+            <p>Project Radio Vandal Skull Logo.</p>
+            <a href="downloads/tobetransparentfuckyou.png">
+            <button>DOWNLOAD</button>
+            </a>
+          </div>
+          
+          <div class="download-item" data-flags="art">
+            <strong>Answer The Call Poster (1)</strong><br><br>
+            <span class="flag art">ART</span>
+            <p>Poster 1 from the 'Answer The Call' series.</p>
+            <a href="downloads/post-atc-1.png">
+            <button>DOWNLOAD</button>
+            </a>
+          </div>
+          
+          <div class="download-item" data-flags="art">
+            <strong>Vandal Theme</strong><br><br>
+            <span class="flag sound">SOUND</span>
+            <p>Vandal Theme by Balynsus</p>
+            <a href="artists/images/VandalTheme.mp3">
+            <button>DOWNLOAD</button>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="pagination" id="pagination">
+          <button id="prev-page">Prev</button>
+          <span class="page-info" id="page-info"></span>
+          <button id="next-page">Next</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+const items = Array.from(document.querySelectorAll('.download-item'));
+const buttons = document.querySelectorAll('[data-filter]');
+const search = document.getElementById('search');
+
+let currentFilter = 'all';
+let currentSearch = '';
+let currentPage = 1;
+const itemsPerPage = 4;
+
+function updateDisplay() {
+  let filteredItems = items.filter(i => {
+    const matchesFilter = currentFilter === 'all' || i.dataset.flags.toLowerCase().includes(currentFilter);
+    const matchesSearch = i.innerText.toLowerCase().includes(currentSearch);
+    return matchesFilter && matchesSearch;
+  });
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage) || 1;
+  if (currentPage > totalPages) currentPage = totalPages;
+
+  items.forEach(i => i.style.display = 'none');
+
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  filteredItems.slice(start, end).forEach(i => i.style.display = 'block');
+
+  const pagination = document.getElementById('pagination');
+  if (filteredItems.length > itemsPerPage) {
+    pagination.style.display = 'block';
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
+    document.getElementById('page-info').innerText = `Page ${currentPage} of ${totalPages}`;
+  } else {
+    pagination.style.display = 'none';
+  }
+}
+
+buttons.forEach(btn => {
+  btn.onclick = () => {
+    currentFilter = btn.dataset.filter.toLowerCase();
+    currentPage = 1;
+    updateDisplay();
+  };
+});
+
+search.oninput = () => {
+  currentSearch = search.value.toLowerCase();
+  currentPage = 1;
+  updateDisplay();
+};
+
+document.getElementById('prev-page').onclick = () => {
+  if (currentPage > 1) { currentPage--; updateDisplay(); }
+};
+
+document.getElementById('next-page').onclick = () => {
+  currentPage++; updateDisplay();
+};
+
+updateDisplay();
+</script>
+
+</body>
+
+<!-- Mirrored from projectradio.org/downloads_page.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:21 GMT -->
+</html>

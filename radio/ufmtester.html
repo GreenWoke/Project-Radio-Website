@@ -1,0 +1,885 @@
+<!--reminder for me to fix sumn on the webamp player when stuff is back up-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Underground.fm</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+    @font-face {
+      font-family: 'W95';
+      src: url(fonts/w95font.woff2);
+    }
+
+    /* global variables, for manipulation via JS */
+    :root {
+      --skin-gradient-color: #6ebf00;
+      --skin-primary-color: #96bf55;
+      --preview-gradient-color: #f0f0f0;
+      --preview-primary-color: #d0d0d0;
+    }
+
+    #wallpaper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000 url('https://projectradio.org/DRAINPAPER.PNG') no-repeat center center;
+      background-size: 100% 100%;
+      /* 🔄 stretch to fit */
+      z-index: -1;
+    }
+
+    .window-box {
+      width: 300px;
+      background: #c0c0c0;
+      border: 2px solid #808080;
+      border-radius: 4px;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      box-shadow: 2px 2px 0 #fff inset, -2px -2px 0 #404040 inset;
+      font-family: Tahoma, sans-serif;
+      z-index: 1000;
+    }
+
+    .window-header {
+      background: linear-gradient(to bottom, var(--skin-gradient-color) 0%, var(--skin-primary-color) 100%);
+      color: #fff;
+      padding: 6px;
+      font-weight: bold;
+      cursor: move;
+      border-bottom: 2px solid #000080;
+      font-family: 'W95', 'VT323', monospace;
+    }
+
+    .window-content {
+      padding: 10px;
+      font-family: 'W95', 'VT323', monospace;
+    }
+
+    .now-playing h2 {
+      margin: 0 0 5px 0;
+      font-size: 16px;
+    }
+
+    .now-playing-message {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .controls button {
+      background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+      border: 2px solid #808080;
+      border-radius: 3px;
+      padding: 6px 12px;
+      font-family: "W95", sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+      margin-right: 5px;
+    }
+
+    .controls button:hover {
+      background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+    }
+
+    .controls button:active {
+      box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #fff;
+    }
+
+    .taskbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--skin-gradient-color) 0%, var(--skin-primary-color) 100%);
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      z-index: 1000;
+      justify-content: space-between;
+    }
+
+    .icon-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(to bottom, var(--skin-gradient-color) 0%, var(--skin-primary-color) 100%);
+      padding: 4px 6px;
+      border-radius: 3px;
+    }
+
+    .window-button {
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .window-button img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .speaker-icon {
+      width: 36px;
+      height: 36px;
+      background: url('https://projectradio.org/radio/Sound_Recorder_2001.webp') no-repeat center center;
+      background-size: contain;
+      cursor: pointer;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+
+    .volume-popup {
+      display: none;
+      position: fixed;
+      bottom: 55px;
+      right: 20px;
+      width: 140px;
+      background: #c0c0c0;
+      border: 2px solid #808080;
+      border-radius: 3px;
+      padding: 10px;
+      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+      z-index: 2000;
+    }
+
+    .volume-arrow {
+      position: absolute;
+      bottom: -6px;
+      right: 10px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #c0c0c0;
+    }
+
+    .volume-popup input[type="range"] {
+      width: 100%;
+    }
+
+    .start-menu {
+      display: none;
+      position: fixed;
+      bottom: 50px;
+      left: 0;
+      width: 200px;
+      background: #c0c0c0;
+      border: 2px solid #808080;
+      border-radius: 3px;
+      box-shadow: 2px 2px 0 #fff inset, -2px -2px 0 #404040 inset;
+      z-index: 1500;
+    }
+
+    .start-menu ul {
+      list-style: none;
+      padding: 10px;
+      margin: 0;
+    }
+
+    .start-menu li {
+      margin-bottom: 5px;
+    }
+
+    .start-menu li a {
+      text-decoration: none;
+      color: #000;
+      font-family: Tahoma, sans-serif;
+      display: block;
+      padding: 5px;
+    }
+
+    .start-menu li a:hover {
+      background: #0a64ad;
+      color: #fff;
+    }
+
+    #gallery-content {
+      display: flex;
+      overflow-x: auto;wi
+      gap: 5px;
+    }
+
+    #gallery-content img {
+      max-height: 150px;
+      border: 1px solid #808080;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    #skin-list li {
+      background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+      border: 2px solid #808080;
+      border-radius: 3px;
+      padding: 6px 12px;
+      font-family: "W95", 'VT323', monospace;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+      margin-right: 5px;
+      list-style-type: none;
+      width: 70%;
+    }
+
+    #skin-list li:hover {
+      background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+    }
+
+    #custom-skin-button {
+      background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+      border: 2px solid #808080;
+      border-radius: 3px;
+      padding: 6px 12px;
+      text-align: center;
+    }
+
+    #custom-skin-button:hover {
+      background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+      cursor: pointer;
+    }
+
+    #custom-skin-create {
+      position: absolute;
+      right: 5%;
+      top: 43%;
+      background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+      border: 2px solid #808080;
+      border-radius: 3px;
+      padding: 2px 3px;
+      text-align: center;
+    }
+
+    #custom-skin-create:hover {
+      background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+      cursor: pointer;
+      font-style: italic;
+    }
+
+    #custom-skin-preview {
+      width: 100%;
+      height: 1.5em;
+      background: linear-gradient(to bottom, var(--preview-gradient-color) 0%, var(--preview-primary-color) 100%);
+      color: white;
+      text-align: center;
+    }
+
+    #credits-blurb {
+      font-family: 'W95', 'VT323', monospace;
+      font-weight: 400;
+      font-style: normal;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    #credits-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 320px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .credits-box {
+      background: linear-gradient(to bottom, #d4d4d4 0%, #b0b0b0 100%);
+      border: 2px solid #808080;
+      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+      padding: 6px 8px;
+      font-family: 'W95', 'VT323', monospace;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      cursor: default;
+    }
+
+    .credits-box span {
+      display: block;
+      font-weight: bold;
+      text-transform: lowercase;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+
+    .credits-box p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .credits-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .credits-link:hover .credits-box {
+      background: linear-gradient(to bottom, #f0f0f0 0%, #c8c8c8 100%);
+      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset, 0 0 0 1px #00000033;
+    }
+
+    .credits-box:hover {
+      background: linear-gradient(to bottom, #f0f0f0 0%, #c8c8c8 100%);
+      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset, 0 0 0 1px #00000033;
+    }
+
+    @media (max-width: 500px) {
+      .speaker-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .volume-popup {
+        width: 120px;
+        padding: 8px;
+      }
+
+      .start-button,
+      .gallery-button,
+      .discord-button {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="wallpaper"></div>
+
+  <main class="player-container">
+    <div class="window-box" id="player-box">
+      <div class="window-header" id="player-header">/pr/underground/uplink.exe</div>
+      <div class="window-content" id="player-content">
+        <div class="now-playing">
+          <h2>Underground.fm Player</h2>
+          <p class="now-playing-message">>Check Discord for current song playing or to submit songs!</p>
+          <p class="now-playing-message">>Use the gallery to change wallpapers!</p>
+        </div>
+        <div class="controls">
+          <button id="play-btn">▶ Play</button>
+          <button id="pause-btn">⏸ Pause</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="app" style="height: 100vh; display: none;">
+    </div>
+    <script type="module">
+      import Webamp from "https://unpkg.com/webamp@^2";
+      let currentPlayedAt = null;
+
+      async function fetchNowPlaying() {
+        try {
+          const res = await fetch("http://transport.projectradio.org:8080/api/nowplaying/underground.fm", { cache: "no-store" });
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          const data = await res.json();
+          const np = data?.now_playing || {};
+          return {
+            title: np?.song?.title || null,
+            artist: np?.song?.artist || null,
+            duration: typeof np?.duration === 'number' ? np.duration : null,
+            elapsed: typeof np?.elapsed === 'number' ? np.elapsed : null,
+            played_at: typeof np?.played_at === 'number' ? np.played_at : null,
+            streamUrl: data?.station?.listen_url || "http://transport.projectradio.org:8080/underground.fm"
+          };
+        } catch (e) {
+          return { title: null, artist: null, duration: null, elapsed: null, played_at: null, streamUrl: "http://transport.projectradio.org:8080/underground.fm" };
+        }
+      }
+
+      function setInitialElapsed(backElapsed) {
+        if (!window.webamp) return;
+        if (typeof backElapsed !== 'number' || backElapsed < 0) return;
+        try {
+          window.webamp.store.dispatch({ type: 'UPDATE_TIME_ELAPSED', elapsed: backElapsed });
+        } catch (e) { }
+      }
+
+      function updateWebampMetadata({ artist, title, duration, elapsed, played_at }) {
+        if (!window.webamp) return;
+        try {
+          const state = window.webamp.store.getState();
+          const currentId = state.playlist.currentTrack;
+          if (currentId != null) {
+            if (typeof duration === 'number' && duration > 0) {
+              window.webamp.store.dispatch({ type: 'SET_MEDIA_DURATION', id: currentId, duration });
+            }
+            if (typeof played_at === 'number' && played_at > 0) {
+              currentPlayedAt = played_at;
+              const nowSec = Date.now() / 1000;
+              const alreadyElapsed = Math.max(0, nowSec - currentPlayedAt);
+              const startingElapsed = typeof elapsed === 'number' && elapsed >= 0 ? elapsed : alreadyElapsed;
+              setInitialElapsed(startingElapsed);
+            }
+            window.webamp.store.dispatch({
+              type: "SET_MEDIA_TAGS",
+              id: currentId,
+              artist: artist || "",
+              title: title || "",
+              album: undefined,
+              albumArtUrl: null,
+              numberOfChannels: state.tracks[currentId]?.channels ?? 2,
+              bitrate: state.tracks[currentId]?.kbps ? Number(state.tracks[currentId].kbps) * 1000 : 128000,
+              sampleRate: 44100,
+            });
+            if (typeof elapsed === 'number' && elapsed >= 0 && !played_at) {
+              setInitialElapsed(elapsed);
+            }
+          }
+        } catch (e) {
+        }
+        const marquee = document.querySelector("#app .marquee, #app .winamp2-js__title .marquee");
+        if (marquee) marquee.textContent = `${artist || ''}${artist && title ? ' - ' : ''}${title || ''}`;
+      }
+
+      async function applyMetadataOnce() {
+        const meta = await fetchNowPlaying();
+        if (meta.title && meta.artist) {
+          updateWebampMetadata({ artist: meta.artist, title: meta.title, duration: meta.duration, elapsed: meta.elapsed, played_at: meta.played_at });
+        }
+      }
+
+      function startPolling() { setInterval(applyMetadataOnce, 10000); }
+
+      async function init() {
+        const meta = await fetchNowPlaying();
+
+        const initialTitle = (meta.title && meta.artist) ? meta.title : "";
+        const initialArtist = (meta.title && meta.artist) ? meta.artist : "";
+        currentPlayedAt = meta.played_at || null;
+
+        const skinUrlMap = {
+          "Wired Lime": "skin1.wsz",
+          "Terminal Tulip": "skin2.wsz",
+          "Take Cover": "skin3.wsz",
+          "Mosh Pit": "skin4.wsz",
+          "Uranium Junkyard": "skin5.wsz"
+        };
+        const skinColorMap = {
+          "Wired Lime": ["#6ebf00", "#96bf55"],
+          "Terminal Tulip": ['#ff5b5b', '#676767'],
+          "Take Cover": ["#40713b", "#34552d"],
+          "Mosh Pit": ["#000000", "#2f2f2f"],
+          "Uranium Junkyard": ["#555555", "#f8f861"]
+        };
+
+        let initialSkin = "skin1.wsz";
+        try {
+          const savedSkinName = window.localStorage.getItem("selectedWinampSkin");
+          if (savedSkinName && skinUrlMap[savedSkinName]) {
+            initialSkin = skinUrlMap[savedSkinName];
+            const savedSkinData = skinColorMap[savedSkinName];
+            if (savedSkinData) {
+              document.querySelector(':root').style.setProperty('--skin-primary-color', savedSkinData[0]);
+              document.querySelector(':root').style.setProperty('--skin-gradient-color', savedSkinData[1]);
+            }
+          }
+        } catch (e) {
+        }
+        const webamp = new Webamp({
+          initialTracks: [{
+            url: meta.streamUrl,
+            metaData: { title: initialTitle, artist: initialArtist },
+            duration: 0
+          }],
+          initialSkin: { url: initialSkin },
+          windowLayout: {
+            main: { position: { x: 0, y: 0 } },
+            equalizer: { position: { x: 0, y: 116 } },
+            playlist: { position: { x: 275, y: 0 }, size: [0, 4], closed: true }
+          }
+        });
+
+        await webamp.renderWhenReady(document.getElementById("app"));
+        window.webamp = webamp;
+
+        setTimeout(() => { updateWebampMetadata({ artist: initialArtist, title: initialTitle, duration: meta.duration, elapsed: meta.elapsed, played_at: meta.played_at }); }, 300);
+        setTimeout(applyMetadataOnce, 1500);
+        startPolling();
+      }
+      init().catch(() => { });
+    </script>
+    <audio id="audio" preload="none">
+      <source src="https://radio.projectradio.org/listen/underground.fm/radio.mp3" type="audio/mpeg">
+    </audio>
+  </main>
+
+  <div class="taskbar">
+    <div class="icon-container">
+      <div class="window-button" id="start-button">
+        <img src="https://projectradio.org/R-Transparent.png" alt="Start Logo">
+      </div>
+      <div class="window-button" id="gallery-button">
+        <img src="https://projectradio.org/radio/RjMRqmK.png" alt="Gallery Icon">
+      </div>
+      <div class="window-button" id="skin-selector-button">
+        <img
+          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwinaero.com%2Fblog%2Fwp-content%2Fuploads%2F2019%2F05%2FMicrosoft-Paint-icon-big-256.png&f=1&nofb=1&ipt=bbe778048491c3b87b6c9b8508b070d1212eafe7cc945d504044b4d8cfce6121"
+          alt="Skin Selector">
+      </div>
+      <div class="window-button" id="winamp-button">
+      <img src="Winamp-logo.svg.png" alt="Winamp Icon">
+    </div>
+      <div class="window-button" id="discord-button">
+        <img
+          src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/41611b21-a7ce-419b-bc77-4644f8105930/dek5r4f-2a6c12b8-588e-4224-b723-62d328f3a77c.png/v1/fill/w_894,h_894/3d_discord_icon_by_therprtnetwork_dek5r4f-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAwMCIsInBhdGgiOiJcL2ZcLzQxNjExYjIxLWE3Y2UtNDE5Yi1iYzc3LTQ2NDRmODEwNTkzMFwvZGVrNXI0Zi0yYTZjMTJiOC01ODhlLTQyMjQtYjcyMy02MmQzMjhmM2E3N2MucG5nIiwid2lkdGgiOiI8PTEwMDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.LGtFaLbHGgh-_ZF0i_vwjb1DZn5WrwnVYEDEGIslJqQ"
+          alt="Discord Icon">
+      </div>
+      <div class="window-button" id="credits-button">
+        <img src="https://projectradio.org/radio/taskmanager-icon.png" alt="Task Manager">
+      </div>
+    </div>
+    <div class="speaker-icon" id="speaker-icon"></div>
+    <div class="volume-popup" id="volume-popup">
+      <div class="volume-arrow"></div>
+      <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+    </div>
+  </div>
+
+  <div class="start-menu" id="start-menu">
+    <ul>
+      <li><a href="https://projectradio.org">Return To Radio</a></li>
+      <li><a href="https://projectradio.org/radio/projectfm">Project.fm</a></li>
+      <li><a href="https://projectradio.org/radio/ruggedraw94">RuggedRaw.94</a></li>
+      <li><a href="https://projectradio.org/radio/dogstar">DogStar</a></li>
+    </ul>
+  </div>
+
+  <div class="window-box" id="gallery-box" style="display:none; top:100px; left:100px;">
+    <div class="window-header" id="gallery-header">Gallery</div>
+    <div class="window-content" id="gallery-content">
+      <img src="https://projectradio.org/DRAINPAPER.PNG" alt="Sample5">
+      <img src="https://projectradio.org/radio/PRwallpaper2024.png" alt="Sample3">
+      <img src="https://projectradio.org/PROJECTR.jpg" alt="Sample2">
+      <img src="https://projectradio.org/whatthefuckboom.png" alt="Sample4">
+      <img src="https://projectradio.org/downloads/agentnaomiwallpaper.png" alt="Sample1">
+    </div>
+  </div>
+
+  <div class="window-box" id="skin-selector-box" style="display:none; top: 150px; left: 150px;">
+    <div class="window-header" id="skin-selector-header">Skins</div>
+    <div class="window-content" id="skin-selector-content">
+      <ul id="skin-list">
+      </ul>
+      <div id="custom-skin-button">Make your own!</div>
+    </div>
+  </div>
+
+  <div class="window-box" id="custom-skin-box" style="display:none; top: 150px; left: 150px;">
+    <div class="window-header" id="custom-skin-header">Custom Skin</div>
+    <div class="window-content" id="custom-skin-content">
+      <input type="text" id="custom-skin-name" placeholder="Tribal Drums">
+      <input type="text" id="custom-skin-primary" placeholder="HEX 0 (ex #111111)">
+      <input type="text" id="custom-skin-secondary" placeholder="HEX 1">
+      <div id="custom-skin-create">SKIN MY SHIT</div>
+      <div id="custom-skin-preview"></div>
+    </div>
+  </div>
+
+  <div class="window-box" id="discord-box" style="display:none; top:200px; left:200px;">
+    <div class="window-header" id="discord-header">Discord</div>
+    <div class="window-content" id="discord-content">
+      <p>Join our community on Discord:</p>
+      <a href="https://discord.gg/qUFrxKxchg" target="_blank">Click here to join</a>
+    </div>
+  </div>
+
+  <div class="window-box" id="credits-box" style="display:none; top:200px; left:200px;">
+    <div class="window-header" id="credits-header">Task Manager</div>
+    <div class="window-content" id="credits-content">
+      <p id="credits-blurb">project radio rocks. here are the people who brought you this kickass site:</p>
+      <div id="credits-list">
+          <a id="merlin-credit" class="credits-link" href="https://projectradio.org/artists/profile/merlin" target="_blank" rel="noopener noreferrer">
+            <div class="credits-box">
+              <span>merlin</span>
+              <p>the grand mastermind themself - big dawg behind PR as a whole</p>
+            </div>
+          </a>
+          <a id="autumn-credit" class="credits-link" href="https://projectradio.org/artists/profile/deepin" target="_blank" rel="noopener noreferrer">
+            <div class="credits-box">
+              <span>autumn</span>
+              <p>backend blacksmith and DJ extraordinaire</p>
+            </div>
+          </a>
+
+          <div id="guac-credit" class="credits-box">
+            <span>guac</span>
+            <p>front-end fool and general jester</p>
+          </div>
+
+          <div id="lou-credit" class="credits-box">
+            <span>v1peridae</span>
+            <p>webamp wizard and tastemaker supreme</p>
+          </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // -------- DOM identifications --------
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('play-btn');
+    const pauseBtn = document.getElementById('pause-btn');
+    const speakerIcon = document.getElementById('speaker-icon');
+    const volumePopup = document.getElementById('volume-popup');
+    const volumeSlider = document.getElementById('volume-slider');
+    const startButton = document.getElementById('start-button');
+    const startMenu = document.getElementById('start-menu');
+    const galleryButton = document.getElementById('gallery-button');
+    const galleryBox = document.getElementById('gallery-box');
+    const skinButton = document.getElementById('skin-selector-button');
+    const skinBox = document.getElementById('skin-selector-box');
+    const customSkinButton = document.getElementById('custom-skin-button');
+    const customSkinBox = document.getElementById('custom-skin-box');
+    const discordButton = document.getElementById('discord-button');
+    const discordBox = document.getElementById('discord-box');
+    const creditsButton = document.getElementById('credits-button');
+    const creditsBox = document.getElementById('credits-box');
+    const winampButton = document.getElementById('winamp-button');
+    const webampApp = document.getElementById('app');
+    const wallpaper = document.getElementById('wallpaper');
+
+    // -------- playback controls --------
+    playBtn.addEventListener('click', () => {
+      if (window.webamp) {
+        audio.pause();
+        window.webamp.play();
+      } else { audio.play(); }
+    });
+    pauseBtn.addEventListener('click', () => {
+      if (window.webamp) {
+        window.webamp.pause();
+      }
+      audio.pause();
+    });
+
+    audio.volume = volumeSlider.value;
+    volumeSlider.addEventListener('input', () => {
+      audio.volume = volumeSlider.value;
+      if (window.webamp && typeof window.webamp.setVolume === "function") {
+        window.webamp.setVolume(Math.round(volumeSlider.value * 100));
+      }
+    });
+
+    // -------- window triggers --------
+    function opencloseWindow(element) {
+      return (e) => {
+        e.stopPropagation();
+        element.style.display = element.style.display === 'block' ? 'none' : 'block';
+      };
+    }
+
+    speakerIcon.addEventListener('click', opencloseWindow(volumePopup));
+    startButton.addEventListener('click', opencloseWindow(startMenu));
+    galleryButton.addEventListener('click', opencloseWindow(galleryBox));
+    skinButton.addEventListener('click', opencloseWindow(skinBox));
+    customSkinButton.addEventListener('click', opencloseWindow(customSkinBox));
+    discordButton.addEventListener('click', opencloseWindow(discordBox));
+    creditsButton.addEventListener('click', opencloseWindow(creditsBox));
+    /*winampButton.addEventListener('click', e => {
+      e.stopPropagation();
+        webampApp.style.display = webampApp.style.display === 'block' ? 'none' : 'block';
+    });*/
+
+    // -------- window hide triggers --------
+    document.addEventListener('click', e => {
+      if (!volumePopup.contains(e.target) && e.target !== speakerIcon) volumePopup.style.display = 'none';
+      if (!startMenu.contains(e.target) && e.target !== startButton) startMenu.style.display = 'none';
+      if (!galleryBox.contains(e.target) && e.target !== galleryButton) galleryBox.style.display = 'none';
+      if (!discordBox.contains(e.target) && e.target !== discordButton) discordBox.style.display = 'none';
+    });
+
+    // -------- drag-and-drop logic for windows --------
+    document.querySelectorAll(".window-header").forEach((header) => {
+      const elementBox = header.parentElement;
+      let isDragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
+
+      header.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.clientX; startY = e.clientY;
+        const rect = elementBox.getBoundingClientRect();
+        origX = rect.left; origY = rect.top;
+        elementBox.style.position = 'absolute'; elementBox.style.zIndex = 1000; elementBox.style.margin = 0;
+      });
+
+      document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        let dx = e.clientX - startX, dy = e.clientY - startY;
+        let newLeft = origX + dx, newTop = origY + dy;
+        const rect = elementBox.getBoundingClientRect();
+        const windowWidth = window.innerWidth, windowHeight = window.innerHeight;
+        if (newLeft < 0) newLeft = 0;
+        if (newTop < 0) newTop = 0;
+        if (newLeft + rect.width > windowWidth) newLeft = windowWidth - rect.width;
+        if (newTop + rect.height > windowHeight) newTop = windowHeight - rect.height;
+        elementBox.style.left = newLeft + 'px';
+        elementBox.style.top = newTop + 'px';
+      });
+
+      document.addEventListener("mouseup", () => { isDragging = false; });
+    });
+
+    // -------- skin selector logic --------
+    let skinDictionary = {
+      // format:
+      // "Skin Name": ["PRIMARY COLOR", "GRADIENT COLOR"]
+      "Wired Lime": ["#6ebf00", "#96bf55"],
+      "Terminal Tulip": ['#ff5b5b', '#676767'],
+      "Take Cover": ["#40713b", "#34552d"],
+      "Mosh Pit": ["#000000", "#2f2f2f"],
+      "Uranium Junkyard": ["#555555", "#f8f861"]
+    };
+    const webampSkinMap = {
+      "Wired Lime": "skin1.wsz",
+      "Terminal Tulip": "skin2.wsz",
+      "Take Cover": "skin3.wsz",
+      "Mosh Pit": "skin4.wsz",
+      "Uranium Junkyard": "skin5.wsz"
+    };
+    function changeSkin(skinName, newSkinData) {
+      document.querySelector(':root').style.setProperty('--skin-primary-color', newSkinData[0]);
+      document.querySelector(':root').style.setProperty('--skin-gradient-color', newSkinData[1]);
+      if (window.webamp && typeof window.webamp.setSkinFromUrl === 'function' && webampSkinMap[skinName]) {
+        window.webamp.setSkinFromUrl(webampSkinMap[skinName]);
+      }
+      if (storageAvailable("localStorage") && webampSkinMap[skinName]) {
+        localStorage.setItem("selectedWinampSkin", skinName);
+      }
+    }
+    const skinList = document.getElementById("skin-list");
+    for (let skin in skinDictionary) {
+      let skinEntry = document.createElement("li");
+      let skinText = document.createElement("p");
+      skinText.innerHTML = skin;
+      skinEntry.appendChild(skinText);
+      skinList.appendChild(skinEntry);
+      skinEntry.addEventListener('mouseover', () => { skinText.style.color = "#ffffff"; });
+      skinEntry.addEventListener('mouseleave', () => { skinText.style.color = "#000000"; });
+      skinEntry.addEventListener('mousedown', (e) => { changeSkin(skin, skinDictionary[skin]); });
+    }
+
+    // -------- custom skin window logic --------
+    let customSkinDictionary = undefined; // we need to load in values if they already exist
+    // check LocalStorage for the custom skin dictionary and load it if it exists
+    if (storageAvailable("localStorage")) {
+      if (localStorage.getItem("customSkins")) {
+        customSkinDictionary = JSON.parse(localStorage.getItem("customSkins"));
+        for (let skin in customSkinDictionary) {
+          let skinEntry = document.createElement("li");
+          let skinText = document.createElement("p");
+          skinText.innerHTML = skin;
+          skinEntry.appendChild(skinText);
+          skinList.appendChild(skinEntry);
+          skinEntry.addEventListener('mouseover', () => { skinText.style.color = "#ffffff"; });
+          skinEntry.addEventListener('mouseleave', () => { skinText.style.color = "#000000"; });
+          skinEntry.addEventListener('mousedown', (e) => { changeSkin(skin, customSkinDictionary[skin]); });
+        }
+      } else {
+        console.log("didn't find any custom skins already saved in the browser. that's fine, we can just make a blank dictionary");
+        customSkinDictionary = {};
+      }
+    } else {
+      console.log("uh oh... something went wrong trying to access browser's LocalStorage. making a new custom skin dictionary, but skins won't save.")
+      customSkinDictionary = {};
+    }
+    let skinNameElement = document.getElementById("custom-skin-name");
+    let hex0Element = document.getElementById("custom-skin-primary");
+    let hex1Element = document.getElementById("custom-skin-secondary");
+    function validateHex(hexString) {
+      const hexPattern = /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i // thanks github i think
+      // takes a given string and makes sure it's a valid hex code
+      return hexPattern.test(hexString);
+    }
+
+    function addSkin() {
+      let newSkinName = skinNameElement.value
+      let skinHex0 = hex0Element.value
+      let skinHex1 = hex1Element.value
+      if (newSkinName.length == 0 || !(validateHex(skinHex0)) || !(validateHex(skinHex1))) return;
+
+      if (customSkinDictionary[newSkinName]) { return; } else {
+        customSkinDictionary[newSkinName] = [skinHex0, skinHex1];
+        if (storageAvailable("localStorage")) {
+          localStorage.setItem("customSkins", JSON.stringify(customSkinDictionary));
+        }
+      }
+
+      let skinEntry = document.createElement("li");
+      let skinText = document.createElement("p");
+      skinText.innerHTML = newSkinName; // this would NOT BE A GOOD IDEA if it weren't for the fact that everything is client-side.
+      skinDictionary[newSkinName] = [skinHex0, skinHex1];
+      skinEntry.appendChild(skinText);
+      skinList.appendChild(skinEntry);
+      skinEntry.addEventListener('mouseover', () => { skinText.style.color = "#ffffff"; });
+      skinEntry.addEventListener('mouseleave', () => { skinText.style.color = "#000000"; });
+      skinEntry.addEventListener('mousedown', (e) => { changeSkin(newSkinName, skinDictionary[newSkinName]); });
+    }
+
+    document.getElementById("custom-skin-create").addEventListener('mousedown', (e) => { addSkin() });
+
+    skinNameElement.addEventListener('blur', (e) => {
+      skinNameElement.value.length < 1 ? skinNameElement.style.backgroundColor = '#e09191' : skinNameElement.style.backgroundColor = '#ffffff';
+      previewSkin();
+    })
+
+    hex0Element.addEventListener('blur', (e) => {
+      !(validateHex(hex0Element.value)) ? hex0Element.style.backgroundColor = '#e09191' : hex0Element.style.backgroundColor = '#ffffff';
+      previewSkin();
+    })
+
+    hex1Element.addEventListener('blur', (e) => {
+      !(validateHex(hex1Element.value)) ? hex1Element.style.backgroundColor = '#e09191' : hex1Element.style.backgroundColor = '#ffffff';
+      previewSkin();
+    })
+
+    function previewSkin() {
+      if (skinNameElement.value.length > 1 && validateHex(hex0Element.value) && validateHex(hex1Element.value)) {
+        document.querySelector(':root').style.setProperty('--preview-primary-color', hex0Element.value);
+        document.querySelector(':root').style.setProperty('--preview-gradient-color', hex1Element.value);
+        document.getElementById("custom-skin-preview").innerHTML = skinNameElement.value;
+      }
+    }
+
+    // -------- dynamic loading of images into gallery --------
+    const galleryImages = galleryBox.querySelectorAll('img');
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        wallpaper.style.background = `#000 url(${img.src}) no-repeat center center`;
+        wallpaper.style.backgroundSize = "100% 100%"; // 🔄 stretch to fit
+      });
+    });
+
+    // -------- template external code --------
+    // example check function for LocalStorage as found on https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#feature-detecting_localstorage
+    function storageAvailable(type) {
+      let storage;
+      try {
+        storage = window[type];
+        const x = "__storage_test__";
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+      } catch (e) {
+        return (
+          e instanceof DOMException &&
+          e.name === "QuotaExceededError" &&
+          // acknowledge QuotaExceededError only if there's something already stored
+          storage &&
+          storage.length !== 0
+        );
+      }
+    }
+  </script>
+</body>
+
+</html>

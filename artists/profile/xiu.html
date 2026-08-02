@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- ===============================
+       PAGE TITLE
+       ===============================
+       Change this to the artist's page title -->
+  <title>Xiu</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+html {
+  background: url('https://projectradio.org/artists/images/124927674_p0.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px),
+    radial-gradient(circle, rgba(173,216,230,0.4) 2px, transparent 2px);
+  background-size: 200px 200px, 150px 150px, 300px 300px;
+  animation: sparkleMove 60s linear infinite;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+@keyframes sparkleMove {
+  from { background-position: 0 0, 50px 50px, 100px 100px; }
+  to { background-position: 1000px 1000px, 900px 900px, 800px 800px; }
+}
+
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+      font-style: normal;
+      font-size: 16px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  user-select: none;
+  position: relative;
+  z-index: 2;
+}
+
+h2, h3 { user-select: text; }
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 960px;
+  width: 100%;
+  gap: 1rem;
+}
+
+.uplink-box { 
+  position: fixed; 
+  bottom: 20px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  cursor: pointer; 
+  width: 80px; 
+  text-align: center; 
+  user-select: none; 
+  z-index: 9999; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  text-decoration: none; 
+  filter: drop-shadow(0 0 6px rgba(173,216,230,0.8));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.uplink-box:hover {
+  transform: translateX(-50%) scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(100,149,237,0.9));
+}
+.uplink-box img { 
+  max-height: 24px; 
+  height: auto; 
+  border-radius: 12px; 
+  display: block; 
+  margin: 0 auto; 
+  pointer-events: none; 
+}
+.uplink-box .hosted-by { 
+  font-size: 10px; 
+  color: #222; 
+  text-shadow: 0 0 4px #fff;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  border: 4px solid rgba(100,149,237,0.6);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 25px rgba(100,149,237,0.4), 0 0 60px rgba(173,216,230,0.3);
+  position: relative;
+  animation: floaty 6s ease-in-out infinite alternate;
+}
+
+.profile-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.25) 50%, transparent 80%);
+  filter: blur(10px);
+  animation: sheenMove 8s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes sheenMove {
+  0% { left: -100%; }
+  100% { left: 120%; }
+}
+
+@keyframes floaty {
+  from { transform: translateY(0); }
+  to { transform: translateY(-5px); }
+}
+
+.sidebar {
+  width: 300px;
+  padding: 1.5rem 1rem;
+  background: linear-gradient(135deg, rgba(100,149,237,0.5), rgba(173,216,230,0.3));
+  border-right: 2px solid rgba(100,149,237,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 20px rgba(255,255,255,0.3);
+}
+
+.profile-pic {
+  width: 250px;
+  height: 250px;
+  background: url('https://projectradio.org/artists/images/xiu_head.png') center/cover no-repeat;
+  border: 4px solid #fff;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(173,216,230,0.8), 0 0 40px rgba(100,149,237,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-pic:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(173,216,230,1), 0 0 50px rgba(100,149,237,0.8);
+}
+
+.basic-info {
+  margin-top: 1.5rem;
+  width: 100%;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.basic-info h2 { margin-bottom: 0.5rem; font-size: 1rem; color: #0a3d91; }
+.basic-info p { margin: 0.3rem 0; font-size: 0.8rem; }
+
+.content-area {
+  flex: 1;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(100,149,237,0.45), rgba(173,216,230,0.3));
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 0 20px rgba(255,255,255,0.3);
+  border-left: 2px solid rgba(255,255,255,0.4);
+}
+.content-area h3 {
+  font-size: 1rem;
+  border-bottom: 2px solid rgba(255,255,255,0.7);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1rem;
+  color: #f0f8ff;
+  text-shadow: 0 0 8px rgba(100,149,237,0.8);
+}
+
+.links a {
+  display: inline-block;
+  background: rgba(255,255,255,0.6);
+  border: 2px solid rgba(100,149,237,0.6);
+  color: #333;
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  margin-right: 0.5rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(100,149,237,0.4);
+}
+.links a:hover {
+  background: rgba(100,149,237,0.9);
+  color: white;
+  box-shadow: 0 0 20px rgba(100,149,237,0.9), 0 0 40px rgba(173,216,230,0.7);
+}
+
+.gallery {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.gallery img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(100,149,237,0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery img:hover {
+  transform: scale(1.05) rotate(1deg);
+  box-shadow: 0 0 30px rgba(173,216,230,1), 0 0 50px rgba(100,149,237,0.8);
+}
+
+@media (max-width: 768px) {
+  .profile-container { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid #ccc;
+    align-items: center;
+  }
+  .profile-pic {
+    width: 80%;
+    max-width: 200px;
+    height: auto;
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+  <div class="page-wrapper">
+
+    <!-- ===============================
+         HOSTED BY BUTTON
+         ===============================
+         Change href, text, or logo -->
+    <a href="/artists/uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+      <span class="hosted-by">Hosted by</span>
+      <img src="https://projectradio.org/R-Transparent.png" alt="Uplink Logo" />
+    </a>
+
+    <!-- ===============================
+         PROFILE CONTAINER
+         =============================== -->
+    <div class="profile-container">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <!-- PROFILE PICTURE -->
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+
+        <!-- BASIC INFO -->
+        <div class="basic-info">
+          <h2>About</h2>
+          <p><strong>Location:</strong> Nuevo Leon, Mexico</p>
+          <p><strong>Mediums:</strong> Music Production, Singer / Songwritter</p>
+
+          <h2>Favourites</h2>
+          <p><strong>Album:</strong> Luv Is Rage 2 - Lil Uzi Vert</p>
+          <p><strong>Movie:</strong> Arcane</p>
+        </div>
+      </aside>
+
+      <!-- CONTENT AREA -->
+      <section class="content-area">
+        <h3>Xiu</h3>
+        <p>My favorite genre's since I was younger have been EDM, Alternative, which I have enjoyed even more growing up, getting my hands into producing. Currently I aim to make Pop, EDM, Hip-Hop music at it's core, sometimes overprocessed, sometimes gritty. One theme I like, is post apocalipse, decay, and imagining oneself being blissful despite how accelerated and hopeless things seem to be.
+        <br>
+I like sweet, contemplative, melancholic, sorrow sounds together, with a hint of love towards yourself and loved ones!</p>
+
+        <h3>Links &amp; Work</h3>
+        <div class="links">
+          <!-- Replace or remove links as needed -->
+          <a href="https://www.youtube.com/@Yurachi/featured">Youtube</a>
+          <a href="https://soundcloud.com/xiuyxy">SoundCloud</a>
+          <a href="https://www.instagram.com/xiuyxy">Instagram</a>
+        </div>
+
+        <h3>Showcase</h3>
+        <div class="gallery">
+          <!-- Replace or add artwork images -->
+          <img src="https://projectradio.org/artists/images/xiu1%20-%20Xiu%20Garza.gif" alt="Showcase Item 1" />
+          <img src="https://media.discordapp.net/attachments/1414081862753714257/1432059353979949056/happy-cat-silly-cat.gif?ex=68ffacb4&is=68fe5b34&hm=3474fe0ffaa73b85000ef4d72ae0cc283f01abbb2bab4c84bf662b210b9bbc5b&=&width=330&height=454" alt="Showcase Item 2" />
+          <img src="https://projectradio.org/artists/images/xiu-dance-chill%20-%20Xiu%20Garza.gif" alt="Showcase Item 3" />
+        </div>
+      </section>
+
+    </div>
+  </div>
+</body>
+</html>

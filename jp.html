@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>プロジェクト・ラジオ</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/x-icon" href="rah.ico">
+  <link href="cyanobacteria.css" rel="stylesheet" type="text/css" media="all">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  color: #0f0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+  font-family: 'VT323', monospace;
+  padding: 0; /* Added: remove any default padding */
+  margin: 0;  /* Added: remove margin interference */
+  min-height: 100vh; /* Ensure full height used for centering */
+  box-sizing: border-box; /* Ensure padding/margin don't shift layout */
+}
+
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .console-container {
+      width: 80%;
+      max-width: 800px;
+      height: 400px;
+      background-color: black;
+      border: 2px solid #0f0;
+      border-radius: 5px;
+      padding: 15px;
+      overflow: hidden;
+      position: relative;
+      text-align: left;
+    }
+
+    .console-text {
+      white-space: pre-line;
+      font-size: 18px;
+      line-height: 1.3;
+      color: #0f0;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      background-color: #0f0;
+      animation: blink 0.8s step-end infinite;
+      margin-left: 2px;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .loading-label {
+      color: #0f0;
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .glitch-title-box {
+      margin: 30px auto;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      color: #0f0;
+      background: linear-gradient(135deg, rgba(0,255,0,0.05) 0%, rgba(0,255,0,0.15) 100%);
+      border: 2px solid #0f0;
+      border-radius: 12px;
+      padding: 30px 20px;
+      max-width: 600px;
+      box-shadow: 0 0 15px #0f0;
+      animation: pulseBox 3s infinite;
+    }
+
+    .glitch {
+      position: relative;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      animation: glitch 2s infinite;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      color: #0f0;
+      background: black;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    .glitch::before {
+      animation: glitchTop 2s infinite;
+      color: #0f0;
+    }
+
+    .glitch::after {
+      animation: glitchBottom 2s infinite;
+      color: #f0f;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #aaa;
+      margin-top: 10px;
+      font-family: 'VT323', monospace;
+    }
+
+    @keyframes glitch {
+      0% { transform: none; }
+      20% { transform: skewX(10deg); }
+      40% { transform: skewX(-10deg); }
+      60% { transform: skewX(10deg); }
+      80% { transform: skewX(-10deg); }
+      100% { transform: none; }
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      10% { clip: rect(0, 9999px, 50%, 0); transform: translate(-2px, -2px); }
+      20% { clip: rect(0, 9999px, 10%, 0); transform: translate(2px, 2px); }
+      100% { clip: rect(0, 9999px, 0, 0); transform: none; }
+    }
+
+    @keyframes glitchBottom {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      10% { clip: rect(80%, 9999px, 100%, 0); transform: translate(2px, 2px); }
+      20% { clip: rect(60%, 9999px, 90%, 0); transform: translate(-2px, -1px); }
+      100% { clip: rect(0, 9999px, 0, 0); transform: none; }
+    }
+
+    @keyframes pulseBox {
+      0%, 100% { box-shadow: 0 0 15px #0f0; }
+      50% { box-shadow: 0 0 25px #0f0; }
+    }
+
+    .content-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 1px solid #333;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .highlight-text {
+      color: #0f0;
+      font-weight: bold;
+    }
+
+    .intro-paragraph {
+      line-height: 1.6;
+      text-align: justify;
+      margin-bottom: 15px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+      display: inline-block;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #ddd;
+      border-bottom: 1px solid #333;
+      padding-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="splash-screen">
+    <input class="sr-only" type="checkbox" id="flip">
+    <label for="flip"></label>
+    <div class="scene">
+      <span class="loading-label">PROJECT RADIO BOOT</span>
+      <div class="console-container">
+        <div class="console-text" id="console-output"></div>
+        <span class="cursor"></span>
+      </div>
+    </div>
+    <audio id="boot-sound" src="shorrt.wav" preload="auto"></audio>
+  </div>
+
+
+  <div class="container">
+    <div class="small">
+      <nav>
+        <div>navigation</div>
+        <a href="">ホームページ</a>
+        <a href="https://projectradio.org/radio">ラジオ</a>
+        <a href="https://projectradio.org/artists/uplink">アーティスト・アップリンク</a>
+        <a href="https://projectradio.org/downloads">ダウンロード</a>
+        <a href="https://projectradio.org/workshop">ワークショップ</a>
+        <div>external</div>
+        <a href="https://discord.gg/qUFrxKxchg">Discord</a>
+      </nav>
+       
+       <br>
+       
+        <div class="vandal-box">
+      <center><img src="https://projectradio.org/spinkskull.gif"></center>
+      </div>
+      
+    </div>
+
+<section class="half">
+  <center>
+    <h3>プロジェクト・ラジオへようこそ</h3>
+    <h3>創造的な信号が雑音を切り裂く場所</h3>
+  </center>
+
+  <div class="content-box">
+    <p class="intro-paragraph">プロジェクト・ラジオは、あなたのデジタルなゲートウェイとして、アンダーグラウンドの創造性へとつながる存在です。グローバルなノイズ・ネットワークを結びつけるデジタル・ハブとして機能し、境界を突破するアート、実験的な音楽、サイバーパンクにインスパイアされたリソースを、厳選されながらも混沌としたブレンドとして、直接あなたのデジタルな意識に配信します。</p>
+
+    <p class="intro-paragraph">私たちは、社会の周辺部から発せられる声を拡大し、世界中のアーティストから発信される歪んだ周波数をデジタルの虚空へと放送しています。私たちのプラットフォームは、あなたの芸術的な実験を後押しする実践的なツールで脈打っています：</p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <span class="feature-icon">▶</span>
+        <span>ワークショップとダウンロード</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">▶</span>
+        <span>アーティストの共有</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">▶</span>
+        <span>ハードウェアとソフトウェアのガイドライン</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">▶</span>
+        <span>ウェブアーカイブ</span>
+      </div>
+    </div>
+
+    <p class="intro-paragraph">Discordに参加して、他のクリエイターとつながり、作品を共有したり、アイデアを提案したり、プロジェクト・ラジオのコミュニティと交流しましょう。私たちは、一つ一つの周波数を通じて、このコミュニティを一緒に築いていっています。</p>
+  </div>
+</section>
+
+    <section class="small">
+      <h2>注意</h2>
+      <p>現在、プロジェクト・ラジオの日本語版をご覧になっています。このサイトは完全には翻訳されていません。お手伝いいただける場合は、Discordに参加してご連絡ください！</p>
+    </section>
+
+    <section class="full">
+      <marquee direction="left">
+        ウェブサイトにご訪問いただき、ありがとうございます！ ぜひごゆっくりご覧いただき、お楽しみください！
+      </marquee>
+    </section>
+
+    <section class="half">
+      <a href="https://projectradio.org/retro/retro">
+        <h2>当社のカスタムラジオ局PROJECT.fmで音楽を聴く!</h2>
+      </a>
+    </section>
+
+    <section class="half">
+    <a href="https://discord.gg/GZ65Px3RHy">
+      <h2 href="https://project-radio.neocities.org/magazine/issue0">コミュニティプロジェクトがDiscordで開始されました！</h2>
+      </a>
+    </section>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const splash = document.getElementById('splash-screen');
+      const consoleOutput = document.getElementById('console-output');
+      const sound = document.getElementById('boot-sound');
+
+      const bootMessages = [
+        "PROJECT RADIO BIOS v2.7.5",
+        "Copyright (C) 2025 PROJECT RADIO Foundation",
+        "",
+        "Performing system checks...",
+        "CPU: ARMv9 Cortex-X5 @ 3.8GHz",
+        "Memory Test: 32768MB OK",
+        "Initializing Signal Processors... DONE",
+        "Loading Cryptographic Modules... DONE",
+        "Engaging Quantum Entanglement Array... DONE",
+        "Detecting Peripheral Networks... FOUND",
+        "Initializing PROJECT RADIO",
+      ];
+
+      let messageIndex = 0;
+      let charIndex = 0;
+
+      sound.play().catch(e => console.warn('Autoplay blocked:', e));
+
+      function typeNextChar() {
+        if (messageIndex < bootMessages.length) {
+          const currentMessage = bootMessages[messageIndex];
+
+          if (charIndex < currentMessage.length) {
+            consoleOutput.textContent += currentMessage.charAt(charIndex);
+            charIndex++;
+            const randomDelay = Math.floor(Math.random() * 2) + 1;
+            setTimeout(typeNextChar, randomDelay);
+          } else {
+            consoleOutput.textContent += "\n";
+            messageIndex++;
+            charIndex = 0;
+            setTimeout(typeNextChar, 20);
+          }
+        } else {
+          setTimeout(() => {
+            splash.classList.add('fade-out');
+            splash.addEventListener('transitionend', () => splash.remove());
+          }, 400);
+        }
+      }
+
+      typeNextChar();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/radio/projectfm by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:42 GMT -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PROJECT.FM</title>
+  <meta property="og:title" content="PROJECT.FM" />
+  <meta property="og:description" content="Fast or slow, heavy or atmospheric. project.fm is 24/7 jungle, drum & bass, and turntablism—raw breaks DJ sets for anyone who lives for the sound." />
+  <meta property="og:image" content="../trrransperent.png" />
+  <meta property="og:url" content="projectfm.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Project Radio" />
+  <link rel="icon" type="image/x-icon" href="../trrransperent.png">
+  <link href="prfm.css" rel="stylesheet" type="text/css" media="all">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&amp;display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=VT323&amp;display=swap');
+
+    body {
+      color: #00FF00;
+      font-family: "Courier New", monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .dos-player {
+      padding: 20px;
+      text-align: center;
+      width: 400px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .console-container {
+      width: 80%;
+      max-width: 800px;
+      height: 400px;
+      background-color: white;
+      border: 2px solid #0f0;
+      border-radius: 5px;
+      padding: 15px;
+      overflow: hidden;
+      position: relative;
+      text-align: left;
+    }
+
+    .console-text {
+      white-space: pre-line;
+      font-size: 18px;
+      line-height: 1.3;
+      color: #0f0;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      background-color: #0f0;
+      animation: blink 0.8s step-end infinite;
+      margin-left: 2px;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .loading-label {
+      color: #0f0;
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .glitch-title-box {
+      margin: 30px auto;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      color: #0f0;
+      background: linear-gradient(135deg, rgba(0,255,0,0.05) 0%, rgba(0,255,0,0.15) 100%);
+      border: 2px solid #0f0;
+      border-radius: 12px;
+      padding: 30px 20px;
+      max-width: 600px;
+      box-shadow: 0 0 15px #0f0;
+      animation: pulseBox 3s infinite;
+    }
+
+    .glitch {
+      position: relative;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      animation: glitch 2s infinite;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      color: #0f0;
+      background: white;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    .glitch::before { animation: glitchTop 2s infinite; color: #0f0; }
+    .glitch::after { animation: glitchBottom 2s infinite; color: #f0f; }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #aaa;
+      margin-top: 10px;
+      font-family: 'VT323', monospace;
+    }
+
+    @keyframes glitch {
+      0% { transform: none; }
+      20% { transform: skewX(10deg); }
+      40% { transform: skewX(-10deg); }
+      60% { transform: skewX(10deg); }
+      80% { transform: skewX(-10deg); }
+      100% { transform: none; }
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      10% { clip: rect(0, 9999px, 50%, 0); transform: translate(-2px, -2px); }
+      20% { clip: rect(0, 9999px, 10%, 0); transform: translate(2px, 2px); }
+      100% { clip: rect(0, 9999px, 0, 0); transform: none; }
+    }
+
+    @keyframes glitchBottom {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      10% { clip: rect(80%, 9999px, 100%, 0); transform: translate(2px, 2px); }
+      20% { clip: rect(60%, 9999px, 90%, 0); transform: translate(-2px, -1px); }
+      100% { clip: rect(0, 9999px, 0, 0); transform: none; }
+    }
+
+    @keyframes pulseBox {
+      0%, 100% { box-shadow: 0 0 15px #0f0; }
+      50% { box-shadow: 0 0 25px #0f0; }
+    }
+
+    .content-box {
+      background-color: #0c0c85;
+      border: 1px solid #333;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .highlight-text { color: #c8c9fc; font-weight: bold; }
+    .intro-paragraph { line-height: 1.6; text-align: justify; margin-bottom: 15px; }
+
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+    .feature-item { display: flex; align-items: center; margin-bottom: 10px; }
+    .feature-icon { width: 24px; height: 24px; margin-right: 10px; display: inline-block; text-align: center; font-weight: bold; }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #ddd;
+      border-bottom: 1px solid #333;
+      padding-bottom: 8px;
+    }
+
+.now-playing-popup {
+  position: absolute;       /* relative to .player-container */
+  bottom: 60px;             /* sits just above player-controls */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: rgb(12,12,132,0.9);
+  border: 2px solid #7572d3;
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  color: #c8c9fc;
+  font-family: "Courier New", monospace;
+
+  box-shadow: 0 0 15px #261d80;
+  z-index: 10;             /* above player controls */
+}
+
+.now-playing-popup img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 2px solid #7572d3;
+}
+
+.np-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#np-title {
+  font-size: 14px;
+  font-weight: bold;
+  animation: scroll 5s linear infinite;
+  white-space: nowrap;
+ /* text-overflow: ellipsis;*/
+}
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-200%); }
+  }
+
+#np-artist {
+  font-size: 12px;
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+</style>
+</head>
+
+<div id="nowPlayingPopup" class="now-playing-popup hidden">
+
+  <img id="np-art" src="#" alt="Album Art" />
+
+  <div class="np-text">
+    <div id="np-title">Loading...</div>
+    <div id="np-artist"></div>
+  </div>
+</div>
+
+<body>
+
+<nav class="dreamcast-nav">
+  <div class="logo">
+    <a href="../index.html"><img src="../PRTITLE.png" alt="Project FM Logo"></a> 
+    <div class="nav-links">
+      <a href="ruggedraw94.html">RuggedRaw.94</a>
+      <a href="dogstar.html">DogStar</a>
+      <a href="undergroundfm.html">Underground.FM</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <section class="half" style="display: flex; flex-direction: column; align-items: center;">
+    <div class="player-title-box">PROJECT.FM PLAYER</div>
+    <div class="dos-player">
+      <audio id="audio" autoplay>
+        <source src="https://signal.projectradio.org/listen/prfm/radio.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="player-title-bottom">
+      <div class="control-buttons">
+        <button class="control-btn" id="play-btn" aria-label="Play">▶</button>
+        <button class="control-btn" id="pause-btn" aria-label="Pause">⏸</button>
+        <button class="control-btn" id="refresh-btn" aria-label="Refresh">↻</button>
+      </div>
+
+      <input type="range" id="volume" min="0" max="1" step="0.01" value="1" />
+      <label for="volume">Volume</label>
+    </div>
+  </section>
+</div>
+
+<script>
+  // -------------------
+  // AUDIO PLAYER CONTROLS
+  // -------------------
+  const audio = document.getElementById('audio');
+  const volumeSlider = document.getElementById('volume');
+  const playBtn = document.getElementById('play-btn');
+  const pauseBtn = document.getElementById('pause-btn');
+  const refreshBtn = document.getElementById('refresh-btn');
+
+  // Set initial volume
+  audio.volume = volumeSlider.value;
+
+  // Autoplay attempt
+  window.addEventListener('load', () => {
+    const playAttempt = audio.play();
+    if (playAttempt !== undefined) playAttempt.catch(() => console.warn("Autoplay was blocked by the browser."));
+  });
+
+  // Control events
+  volumeSlider.addEventListener('input', () => { audio.volume = volumeSlider.value; });
+  playBtn.addEventListener('click', () => { audio.play(); });
+  pauseBtn.addEventListener('click', () => { audio.pause(); });
+  refreshBtn.addEventListener('click', () => { audio.pause(); audio.currentTime = 0; audio.load(); audio.play(); });
+
+const NOW_PLAYING_API = "https://signal.projectradio.org/api/nowplaying_static/prfm.json";
+
+const npPopup = document.getElementById("nowPlayingPopup");
+const npTitle = document.getElementById("np-title");
+const npArtist = document.getElementById("np-artist");
+const npArt = document.getElementById("np-art");
+
+
+async function updateNowPlaying() {
+  try {
+    const res = await fetch(NOW_PLAYING_API);
+    const data = await res.json();
+    const song = data.now_playing.song;
+    console.log(song);
+  
+
+    npTitle.textContent = song.title || "Unknown Track";
+    npArtist.textContent = song.artist || "";
+    npArt.src = song.art || "https://projectradio.org/trrransperent.png"; 
+    npPopup.classList.remove("hidden"); 
+  } catch (err) {
+    console.error("Failed to fetch now playing:", err);
+    npTitle.textContent = "Unable to load track";
+    npArtist.textContent = "";
+    npArt.src = "../trrransperent.png";
+  }
+}
+
+// Initial fetch
+updateNowPlaying();
+
+// Poll every 15 seconds
+setInterval(updateNowPlaying, 15000);
+</script>
+
+<footer class="dreamcast-footer">
+  <p>&copy; 2025 <a href="../index.html">PROJECTRADIO.ORG</a> — Deep in the Noise. | Web design and Wallpaper by Merlin Green. | PROJECTRADIO.ORG takes no ownership of any songs provided!</p>
+</footer>
+
+</body>
+
+<!-- Mirrored from projectradio.org/radio/projectfm by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:44 GMT -->
+</html>

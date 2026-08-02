@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Artist Profile Template</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+    /* ===============================
+       GLOBAL PAGE STYLES
+       =============================== */
+    html {
+      background-color: white;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive, monospace;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      user-select: none;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h2, h3 {
+      user-select: text;
+      font-family: 'Patrick Hand', cursive;
+      letter-spacing: 1.5px;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 960px;
+      width: 100%;
+      gap: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    svg {
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+
+    @keyframes wobble {
+      0% { transform: rotate(0deg) translate(0); }
+      20% { transform: rotate(0.8deg) translate(1px, -1px); }
+      40% { transform: rotate(-0.6deg) translate(-1px, 1px); }
+      60% { transform: rotate(0.6deg) translate(1px, 1px); }
+      80% { transform: rotate(-0.4deg) translate(-1px, -1px); }
+      100% { transform: rotate(0deg) translate(0); }
+    }
+
+    @keyframes jitter {
+      0% { filter: url(#squiggle-1); }
+      50% { filter: url(#squiggle-2); }
+      100% { filter: url(#squiggle-3); }
+    }
+
+    .uplink-box {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-1deg);
+      cursor: pointer;
+      max-width: 100px;
+      text-align: center;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      animation: wobble 6s infinite ease-in-out;
+    }
+
+    .uplink-box img {
+      max-height: 32px;
+      border-radius: 10px 6px 12px 8px;
+    }
+
+    .uplink-box .hosted-by {
+      font-size: 14px;
+      color: #333;
+      text-shadow: 1px 1px 0 white;
+      margin-bottom: 4px;
+    }
+
+    .profile-container {
+      display: flex;
+      background: transparent;
+      overflow: visible;
+      animation: wobble 8s infinite ease-in-out;
+    }
+
+    .sidebar {
+      width: 300px;
+      padding: 1.5rem 1rem;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-pic,
+    .basic-info,
+    .links a,
+    .gallery img,
+    .content-area h3,
+    .instagram-profile-card {
+      border: 5px solid currentColor;
+      border-radius: 18px 10px 22px 12px;
+      position: relative;
+      animation:
+        wobble 5s infinite ease-in-out,
+        jitter 1.6s infinite steps(1);
+    }
+
+    .profile-pic::before,
+    .basic-info::before,
+    .links a::before,
+    .gallery img::before,
+    .content-area h3::before,
+    .instagram-profile-card::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border: 4px solid currentColor;
+      border-radius: inherit;
+      transform: translate(3px, -2px) rotate(0.5deg);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .profile-pic::after,
+    .basic-info::after,
+    .links a::after,
+    .gallery img::after,
+    .content-area h3::after,
+    .instagram-profile-card::after {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border: 4px solid currentColor;
+      border-radius: inherit;
+      transform: translate(-3px, 3px) rotate(-0.6deg);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .profile-pic { color: #ff2d2d; }
+    .basic-info { color: #2962ff; }
+    .content-area h3 { color: #1fa84f; }
+    .links a { color: #ff9800; }
+    .gallery img { color: #7e3ff2; }
+
+    .profile-pic {
+      width: 250px;
+      height: 250px;
+      background: url('https://projectradio.org/artists/images/CCH/IMG_1371.JPG') center/cover no-repeat;
+      cursor: pointer;
+    }
+
+    .basic-info {
+      margin-top: 1.5rem;
+      width: 100%;
+      background: #fafafa;
+      padding: 1rem;
+    }
+
+    .basic-info h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .basic-info p {
+      margin: 0.4rem 0;
+      font-size: 0.8rem;
+    }
+
+    .content-area {
+      flex: 1;
+      padding: 2rem;
+      background: transparent;
+    }
+
+    .content-area h3 {
+      font-size: 1.3rem;
+      padding: 0.3rem 0.7rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .gallery {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .instagram-profile-card {
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+      padding: 0.5rem;
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .instagram-profile-card img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .instagram-profile-card span {
+      display: block;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.9rem;
+    }
+
+    .links a {
+      display: none; /* Hide old links section */
+    }
+
+    @media (max-width: 768px) {
+      .profile-container { flex-direction: column; }
+      .sidebar { width: 100%; }
+      .profile-pic { width: 80%; max-width: 200px; height: auto; }
+      .gallery {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      .instagram-profile-card {
+        width: 90%;
+        max-width: 300px;
+      }
+    }
+
+    .bg-img {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 10px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+<svg>
+  <filter id="squiggle-1">
+    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" />
+    <feDisplacementMap scale="6" in="SourceGraphic" />
+  </filter>
+  <filter id="squiggle-2">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" />
+    <feDisplacementMap scale="8" in="SourceGraphic" />
+  </filter>
+  <filter id="squiggle-3">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" />
+    <feDisplacementMap scale="5" in="SourceGraphic" />
+  </filter>
+</svg>
+
+<div class="page-wrapper">
+
+  <a href="/artists/uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+    <span class="hosted-by">Hosted by</span>
+    <img src="https://projectradio.org/R-Transparent.png" alt="Uplink Logo" />
+  </a>
+
+  <div class="profile-container">
+
+    <aside class="sidebar">
+      <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+
+      <div class="basic-info">
+        <h2>About</h2>
+        <p><strong>Location:</strong>Tokyo, Japan</p>
+        <p><strong>Mediums:</strong>Tattoo Artist</p>
+      </div>
+
+      <button id="lang-toggle" style="
+        margin-top: 1rem;
+        padding: 0.6rem 1.2rem;
+        font-family: 'Patrick Hand', cursive;
+        font-size: 0.9rem;
+        border: 5px solid #2962ff;
+        border-radius: 18px 10px 22px 12px;
+        background: #fafafa;
+        cursor: pointer;
+        color: #2962ff;
+        position: relative;
+        animation: wobble 5s infinite ease-in-out, jitter 1.6s infinite steps(1);
+      ">日本語</button>
+
+    </aside>
+
+    <section class="content-area">
+      <h3>CCH</h3>
+      <p>I am a tattoo artist from Tokyo, Japan. Please DM me on Instagram for bookings. Thank you.</p>
+
+      <h3>Showcase</h3>
+      <div class="gallery">
+        <a href="https://www.instagram.com/ambientvaselinenurinuriswagger/" target="_blank" class="instagram-profile-card">
+          <img id="insta-profile-pic" src="" alt="Instagram profile">
+          <span>@ambientvaselinenurinuriswagger</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  // Fetch Instagram profile picture dynamically
+  const username = "ambientvaselinenurinuriswagger";
+  fetch(`https://www.instagram.com/${username}/?__a=1`)
+    .then(res => res.json())
+    .then(data => {
+      const imgUrl = data.graphql.user.profile_pic_url_hd;
+      document.getElementById('insta-profile-pic').src = imgUrl;
+    })
+    .catch(err => console.error("Instagram fetch error:", err));
+</script>
+
+<!-- STATIC BACKGROUND IMAGES -->
+<script>
+const bgImages = [
+  'https://projectradio.org/artists/images/CCH/475346112_18269450374249307_7093388638628604692_n.jpg',
+  'https://projectradio.org/artists/images/CCH/475348481_18269450329249307_5248766636228553028_n.jpg',
+  'https://projectradio.org/artists/images/CCH/475360625_18269450308249307_9212323284451215899_n.jpg',
+  'https://projectradio.org/artists/images/CCH/475418082_18269450284249307_8238175050115293016_n.jpg',
+  'https://projectradio.org/artists/images/CCH/568199377_18085777423766475_9202875974890987182_n.jpg',
+  'https://projectradio.org/artists/images/CCH/581431744_18177837538318220_3302747709934309950_n.jpg',
+  'https://projectradio.org/artists/images/CCH/589078394_18382827856198555_880149631397372527_n.jpg',
+  'https://projectradio.org/artists/images/CCH/607341392_18308857117249307_7183868200169061864_n.jpg',
+  'https://projectradio.org/artists/images/CCH/607411835_18308857174249307_1492271280453059906_n.jpg'
+];
+
+bgImages.forEach((src, i) => {
+  const img = document.createElement('img');
+  img.src = src;
+  img.className = 'bg-img';
+
+  const cols = Math.ceil(Math.sqrt(bgImages.length));
+  const rows = Math.ceil(bgImages.length / cols);
+  const x = (i % cols) * (window.innerWidth / cols) + 50;
+  const y = Math.floor(i / cols) * (window.innerHeight / rows) + 50;
+
+  img.style.left = x + 'px';
+  img.style.top = y + 'px';
+
+  document.body.appendChild(img);
+});
+</script>
+
+<!-- LANGUAGE TOGGLE SCRIPT -->
+<script>
+const langBtn = document.getElementById('lang-toggle');
+let inJapanese = false;
+
+const translations = {
+  about: "約",
+  bio: "私は東京、日本のタトゥーアーティストです。ご予約はInstagramにDMしてください。ありがとうございます。",
+  artistName: "CCH",
+  showcaseHeader: "ショーケース",
+  hostedBy: "ホスト:"
+};
+
+langBtn.addEventListener('click', () => {
+  inJapanese = !inJapanese;
+
+  const contentArea = document.querySelector('.content-area');
+  contentArea.querySelector('h3').textContent = inJapanese ? translations.artistName : "CCH";
+  contentArea.querySelector('p').textContent = inJapanese ? translations.bio : "I am a tattoo artist from Tokyo, Japan. Please DM me on Instagram for bookings. Thank you.";
+  document.querySelectorAll('.content-area h3')[1].textContent = inJapanese ? translations.showcaseHeader : "Showcase";
+  document.querySelector('.uplink-box .hosted-by').textContent = inJapanese ? translations.hostedBy : "Hosted by";
+  langBtn.textContent = inJapanese ? "English" : "日本語";
+});
+</script>
+
+</body>
+</html>

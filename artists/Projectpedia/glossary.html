@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Radio Wiki</title>
+
+<link rel="icon" type="image/x-icon" href="https://projectradio.org/rah.ico">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #f5f2e8,
+      #f5f2e8 2px,
+      #ece7d8 2px,
+      #ece7d8 4px
+    );
+  color: #2a2a2a;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('https://projectradio.org/artists/box3.png') center/cover no-repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background:
+    url("https://projectradio.org/spinkskull.gif") bottom center no-repeat,
+    #d8d2b8;
+  background-size: contain, cover;
+  border-right: 5px solid #a6a083;
+  box-shadow: 2px 0 6px #8a856c;
+  z-index: 10;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #3a3728;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 1px solid #a6a083;
+  background: #d8d2b8;
+  text-shadow: 1px 1px 0 #fdfbf3;
+}
+
+.sidebar nav a:hover {
+  background: rgba(255,255,255,0.6);
+  color: #000;
+}
+
+.sidebar-logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 0.5rem auto;
+  filter: grayscale(100%) brightness(0.9);
+}
+
+/* MAIN */
+.main-content {
+  margin-left: 220px;
+  flex: 1;
+  padding: 12px;
+}
+
+/* WINDOWS */
+.xp-window {
+  background: rgba(235,232,220,0.85);
+  border: 2px solid #a6a083;
+  margin-bottom: 12px;
+}
+
+.xp-titlebar {
+  background: linear-gradient(#e6e0b9, #bfb88f);
+  padding: 6px;
+  color: #2a2a2a;
+  border-bottom: 2px solid #9a9476;
+  text-align: center;
+}
+
+.title-text {
+  font-size: 13px;
+}
+
+.xp-body {
+  padding: 12px;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* FILTERS */
+.filter-bar {
+  margin-bottom: 12px;
+}
+
+.filter-bar input,
+.filter-bar button {
+  font-family: inherit;
+  font-size: 10px;
+  padding: 6px;
+  margin: 2px;
+  background: #ffffff;
+  border: 2px solid #a6a083;
+}
+
+.filter-bar button:hover {
+  background: #bfb88f;
+  color: #000;
+}
+
+/* GRID */
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.directory-item {
+  background:
+    url("https://projectradio.org/bg-noise.gif"),
+    #ffffff;
+  border: 2px solid #a6a083;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* TAGS */
+.flag {
+  display: inline-block;
+  font-size: 9px;
+  padding: 3px 5px;
+  margin-right: 4px;
+  margin-bottom: 6px;
+  border: 1px solid #000;
+  background: #eee;
+}
+
+.flag.character { background: #e8dc9c; }
+.flag.location { background: #cfd6d6; }
+.flag.event { background: #e3cfcf; }
+
+/* BUTTONS */
+.directory-item button {
+  font-family: inherit;
+  font-size: 10px;
+  padding: 6px;
+  margin-top: 8px;
+  background: #ffffff;
+  border: 2px solid #a6a083;
+}
+
+.directory-item button:hover {
+  background: #bfb88f;
+  color: #000;
+}
+
+/* PAGINATION */
+.pagination {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.pagination button {
+  font-family: inherit;
+  font-size: 10px;
+  padding: 6px 12px;
+  margin: 2px;
+  background: #ffffff;
+  border: 2px solid #a6a083;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background: #bfb88f;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.page-info {
+  display: inline-block;
+  margin: 0 8px;
+  font-size: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<aside class="sidebar">
+  <a href="https://projectradio.org">
+    <img src="https://projectradio.org/projectR-ver1.0.png" class="sidebar-logo">
+  </a>
+  <nav>
+    <a href="#">Wiki Directory</a>
+    <a href="#">Characters</a>
+    <a href="#">Locations</a>
+    <a href="#">Events</a>
+    <a href="/index.html">Return to Radio</a>
+  </nav>
+</aside>
+
+<main class="main-content">
+
+<section class="xp-window">
+  <div class="xp-titlebar">
+    <span class="title-text">PROJECT RADIO WIKI</span>
+  </div>
+  <div class="xp-body">
+    An unofficial in-universe directory documenting characters, locations, and events within the Project Radio mythos.
+  </div>
+</section>
+
+<section class="xp-window">
+  <div class="xp-titlebar">
+    <span class="title-text">DIRECTORY</span>
+  </div>
+  <div class="xp-body">
+
+    <div class="filter-bar">
+      <input type="text" id="search" placeholder="Search entries…">
+      <button data-filter="all">ALL</button>
+      <button data-filter="character">CHARACTERS</button>
+      <button data-filter="location">LOCATIONS</button>
+      <button data-filter="event">EVENTS</button>
+    </div>
+
+    <div class="directory-grid" id="directory-grid">
+
+      <div class="directory-item" data-flags="character">
+        <strong>Naomi</strong><br><br>
+        <span class="flag character">CHARACTER</span>
+        <p>Field agent associated with covert broadcasts and signal recovery.</p>
+        <button>VIEW PAGE</button>
+      </div>
+
+      <div class="directory-item" data-flags="character">
+        <strong>Vandal</strong><br><br>
+        <span class="flag character">CHARACTER</span>
+        <p>Symbolic figure tied to Project Radio’s pirate identity.</p>
+        <button>VIEW PAGE</button>
+      </div>
+
+      <div class="directory-item" data-flags="location">
+        <strong>Dead Channel</strong><br><br>
+        <span class="flag location">LOCATION</span>
+        <p>An abandoned broadcast frequency with corrupted data remnants.</p>
+        <button>VIEW PAGE</button>
+      </div>
+
+      <div class="directory-item" data-flags="event">
+        <strong>The Signal Breach</strong><br><br>
+        <span class="flag event">EVENT</span>
+        <p>First recorded unauthorized transmission incident.</p>
+        <button>VIEW PAGE</button>
+      </div>
+
+    </div>
+
+    <div class="pagination" id="pagination">
+      <button id="prev-page">Prev</button>
+      <span class="page-info" id="page-info"></span>
+      <button id="next-page">Next</button>
+    </div>
+
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+const items = Array.from(document.querySelectorAll('.directory-item'));
+const buttons = document.querySelectorAll('[data-filter]');
+const search = document.getElementById('search');
+
+let currentFilter = 'all';
+let currentSearch = '';
+let currentPage = 1;
+const itemsPerPage = 4;
+
+function updateDisplay() {
+  let filteredItems = items.filter(i => {
+    const matchesFilter = currentFilter === 'all' || i.dataset.flags.includes(currentFilter);
+    const matchesSearch = i.innerText.toLowerCase().includes(currentSearch);
+    return matchesFilter && matchesSearch;
+  });
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage) || 1;
+  if (currentPage > totalPages) currentPage = totalPages;
+
+  items.forEach(i => i.style.display = 'none');
+
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  filteredItems.slice(start, end).forEach(i => i.style.display = 'block');
+
+  const pagination = document.getElementById('pagination');
+  if (filteredItems.length > itemsPerPage) {
+    pagination.style.display = 'block';
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
+    document.getElementById('page-info').innerText = `Page ${currentPage} of ${totalPages}`;
+  } else {
+    pagination.style.display = 'none';
+  }
+}
+
+buttons.forEach(btn => {
+  btn.onclick = () => {
+    currentFilter = btn.dataset.filter;
+    currentPage = 1;
+    updateDisplay();
+  };
+});
+
+search.oninput = () => {
+  currentSearch = search.value.toLowerCase();
+  currentPage = 1;
+  updateDisplay();
+};
+
+document.getElementById('prev-page').onclick = () => {
+  if (currentPage > 1) { currentPage--; updateDisplay(); }
+};
+
+document.getElementById('next-page').onclick = () => {
+  currentPage++; updateDisplay();
+};
+
+updateDisplay();
+</script>
+
+</body>
+</html>

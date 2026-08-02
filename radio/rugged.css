@@ -1,0 +1,150 @@
+/* Reset basic styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Sedgwick Ave", cursive;
+  background-image: url("bgtesterrr94.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.6s ease;
+  color: #333;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== CITY BACKGROUNDS ===== */
+body[data-city="nyc"] {
+  background-image: url("bgtesterrr94.png");
+}
+body[data-city="adelaide"] {
+  background-image: url("rradelaidebg.png");
+}
+body[data-city="paris"] {
+  background-image: url("images/paris_metro.html");
+}
+body[data-city="berlin"] {
+  background-image: url("images/berlin_ubahn.html");
+}
+body[data-city="tokyo"] {
+  background-image: url("rr94tokyo.png");
+}
+/* ============================ */
+
+/* Navigation bar styles */ .top-left-nav { font-family: "Sedgwick Ave Display", cursive; position: absolute; top: 20px; left: 20px; width: 220px; background-color: #d2b48c; border: 2px dotted #5c4033; border-radius: 0; padding: 15px; } .top-left-nav .logo { font-size: 1.2rem; font-weight: bold; color: #3e2f1c; margin-bottom: 10px; text-align: center; } .top-left-nav .nav-links { list-style: none; } .top-left-nav .nav-links li { margin-bottom: 8px; border: 1px dotted #5c4033; padding: 4px; } .top-left-nav .nav-links a { color: #3e2f1c; text-decoration: none; padding: 6px 10px; display: block; border-radius: 0; transition: background 0.2s; } .top-left-nav .nav-links a:hover { background-color: #c19a6b; color: #fff; } .logo { text-align: center; margin-bottom: 15px; } .logo-img { max-width: 80%; height: auto; display: block; margin: 0 auto 8px auto; } .logo-text { font-size: 1.2rem; font-weight: bold; color: #3e2f1c; }
+
+/* Player */
+.hiphop-player {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #d2b48c;
+  max-width: 100%;
+  margin: 190px auto;
+  box-shadow: 0 8px 16px rgba(0,0,0,.90);
+  overflow: hidden;
+}
+
+/* Controls */
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+}
+
+.player-controls button {
+  background-color: #5c4033;
+  color: #d2b48c;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+#volume-slider {
+  width: 120px;
+  accent-color: #5c4033;
+}
+
+/* ===== PAINT TOOLS (ORIGINAL POSITION) ===== */
+.drawing-tools {
+  margin: 10px 0 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: "Sedgwick Ave Display", cursive;
+}
+
+.drawing-tools button {
+  background-color: #5c4033;
+  color: #d2b48c;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+/* ========================================= */
+
+/* ===== CITY SLIDE-OUT TAB ===== */
+.city-tab {
+  position: absolute;
+  top: 50%;
+  left: -220px;
+  transform: translateY(-50%);
+  width: 220px;
+  background: #d2b48c;
+  border-right: 3px dotted #5c4033;
+  padding: 12px;
+  transition: left 0.35s ease;
+  z-index: 5;
+}
+
+.city-tab.open {
+  left: 0;
+}
+
+.city-tab-handle {
+  position: absolute;
+  right: -36px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 120px;
+  background: #5c4033;
+  color: #d2b48c;
+  writing-mode: vertical-rl;
+  text-align: center;
+  cursor: pointer;
+  font-family: "Sedgwick Ave Display", cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* =============================== */
+
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #5c4033;
+  color: #d2b48c;
+  padding: 10px 40px;
+}
+
+@media (max-width: 768px) {
+  .city-tab,
+  .drawing-tools {
+    display: none;
+  }
+}

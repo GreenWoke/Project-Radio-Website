@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CCH Art Interview - ProjectRadio</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+    /* ===============================
+       GLOBAL PAGE STYLES
+       =============================== */
+    html { background-color: white; }
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive, monospace;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      user-select: none;
+      overflow-x: hidden;
+      position: relative;
+    }
+    h1, h2, h3, h4 { font-family: 'Patrick Hand', cursive; letter-spacing: 1.5px; }
+    p { font-family: 'Patrick Hand', cursive; line-height: 1.6; }
+    a { text-decoration: none; color: #333; }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 960px;
+      width: 100%;
+      gap: 2rem;
+      position: relative;
+      z-index: 2;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    svg { position: absolute; width: 0; height: 0; }
+
+    @keyframes wobble {
+      0% { transform: rotate(0deg) translate(0); }
+      20% { transform: rotate(0.8deg) translate(1px, -1px); }
+      40% { transform: rotate(-0.6deg) translate(-1px, 1px); }
+      60% { transform: rotate(0.6deg) translate(1px, 1px); }
+      80% { transform: rotate(-0.4deg) translate(-1px, -1px); }
+      100% { transform: rotate(0deg) translate(0); }
+    }
+
+    @keyframes jitter {
+      0% { filter: url(#squiggle-1); }
+      50% { filter: url(#squiggle-2); }
+      100% { filter: url(#squiggle-3); }
+    }
+
+    /* ===============================
+       ARTICLE HEADER
+       =============================== */
+    .article-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+    .article-header h1 {
+      font-size: 2rem;
+      color: #ff2d2d;
+      border: 5px solid currentColor;
+      border-radius: 18px 10px 22px 12px;
+      padding: 0.5rem 1rem;
+      position: relative;
+      animation: wobble 5s infinite ease-in-out, jitter 1.6s infinite steps(1);
+    }
+    .article-header h1::before, .article-header h1::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border: 4px solid currentColor;
+      border-radius: inherit;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* ===============================
+       ARTICLE CONTENT
+       =============================== */
+    .article-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .section {
+      padding: 1rem;
+      background: #fafafa;
+      border: 5px solid currentColor;
+      border-radius: 18px 10px 22px 12px;
+      animation: wobble 5s infinite ease-in-out, jitter 1.6s infinite steps(1);
+      position: relative;
+    }
+    .section::before, .section::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border: 4px solid currentColor;
+      border-radius: inherit;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .section h2 {
+      color: #2962ff;
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .section img {
+      width: 100%;
+      max-width: 500px;
+      border: 5px solid currentColor;
+      border-radius: 18px 10px 22px 12px;
+      object-fit: cover;
+      display: block;
+      margin: 1rem auto;
+      animation: wobble 5s infinite ease-in-out, jitter 1.6s infinite steps(1);
+      position: relative;
+    }
+
+    /* ===============================
+       QUOTES / HIGHLIGHTS
+       =============================== */
+    .quote {
+      font-style: italic;
+      color: #1fa84f;
+      background: #fff;
+      padding: 0.8rem;
+      border: 5px solid currentColor;
+      border-radius: 18px 10px 22px 12px;
+      animation: wobble 5s infinite ease-in-out, jitter 1.6s infinite steps(1);
+      position: relative;
+    }
+
+    /* ===============================
+       RESPONSIVE
+       =============================== */
+    @media (max-width: 768px) {
+      .article-header h1 { font-size: 1.5rem; }
+      .section h2 { font-size: 1.2rem; }
+    }
+
+    /* ===============================
+       FLOATING BACKGROUND IMAGES
+       =============================== */
+    .bg-img {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+      transform-origin: center center;
+      transition: transform 0.2s;
+    }
+  </style>
+</head>
+<body>
+
+<svg>
+  <filter id="squiggle-1">
+    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" />
+    <feDisplacementMap scale="6" in="SourceGraphic" />
+  </filter>
+  <filter id="squiggle-2">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" />
+    <feDisplacementMap scale="8" in="SourceGraphic" />
+  </filter>
+  <filter id="squiggle-3">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" />
+    <feDisplacementMap scale="5" in="SourceGraphic" />
+  </filter>
+</svg>
+
+<div class="page-wrapper">
+
+  <div class="article-header">
+    <h1>ARTIST SPOTLIGHT - CCH</h1>
+  </div>
+
+  <div class="article-content">
+
+    <div class="section">
+      <h2>Introduction</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel sapien nec erat commodo volutpat. Aliquam erat volutpat.</p>
+      <img src="https://projectradio.org/artists/images/CCH/475346112_18269450374249307_7093388638628604692_n.jpg" alt="CCH Artwork">
+    </div>
+
+    <div class="section">
+      <h2>The Artist's Journey</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo tortor vitae lacus vulputate, vitae bibendum arcu posuere.</p>
+      <p class="quote">"Creating is my way of speaking without words, letting colors and shapes tell the story."</p>
+      <img src="https://projectradio.org/artists/images/CCH/475348481_18269450329249307_5248766636228553028_n.jpg" alt="CCH Artwork">
+    </div>
+
+    <div class="section">
+      <h2>Artistic Style & Inspirations</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut tortor lacinia, volutpat arcu sit amet, sagittis nunc. Vestibulum non ipsum in leo lacinia elementum.</p>
+      <p class="quote">"I love the imperfect, messy, and childlike—it's where the magic happens."</p>
+      <img src="https://projectradio.org/artists/images/CCH/475360625_18269450308249307_9212323284451215899_n.jpg" alt="CCH Artwork">
+    </div>
+
+    <div class="section">
+      <h2>Final Thoughts</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pharetra, urna sit amet luctus laoreet, felis augue pulvinar mi, sed cursus leo sapien vel libero.</p>
+      <img src="https://projectradio.org/artists/images/CCH/475418082_18269450284249307_8238175050115293016_n.jpg" alt="CCH Artwork">
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FLOATING BACKGROUND IMAGES -->
+<script>
+const bgImages = [
+  'https://projectradio.org/artists/images/CCH/475346112_18269450374249307_7093388638628604692_n.jpg',
+  'https://projectradio.org/artists/images/CCH/475348481_18269450329249307_5248766636228553028_n.jpg',
+  'https://projectradio.org/artists/images/CCH/475360625_18269450308249307_9212323284451215899_n.jpg',
+  'https://projectradio.org/artists/images/CCH/475418082_18269450284249307_8238175050115293016_n.jpg',
+  'https://projectradio.org/artists/images/CCH/568199377_18085777423766475_9202875974890987182_n.jpg',
+  'https://projectradio.org/artists/images/CCH/581431744_18177837538318220_3302747709934309950_n.jpg',
+  'https://projectradio.org/artists/images/CCH/589078394_18382827856198555_880149631397372527_n.jpg',
+  'https://projectradio.org/artists/images/CCH/607341392_18308857117249307_7183868200169061864_n.jpg',
+  'https://projectradio.org/artists/images/CCH/607411835_18308857174249307_1492271280453059906_n.jpg'
+];
+
+bgImages.forEach(src => {
+  const img = document.createElement('img');
+  img.src = src;
+  img.className = 'bg-img';
+
+  // randomize size, rotation, position
+  const scale = 0.3 + Math.random() * 0.4; // 0.3 to 0.7
+  const angle = Math.random() * 360; // random rotation
+  const left = Math.random() * window.innerWidth;
+  const top = Math.random() * window.innerHeight;
+
+  img.style.width = (scale * 400) + 'px';
+  img.style.height = 'auto';
+  img.style.left = left + 'px';
+  img.style.top = top + 'px';
+  img.style.transform = `rotate(${angle}deg)`;
+
+  document.body.appendChild(img);
+});
+
+// make background images move slightly with scroll (parallax)
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  document.querySelectorAll('.bg-img').forEach((img, i) => {
+    const speed = 0.1 + (i % 5) * 0.05; // random parallax speed
+    img.style.transform = `translateY(${scrollY * speed}px) rotate(${Math.random()*360}deg)`;
+  });
+});
+</script>
+
+</body>
+</html>

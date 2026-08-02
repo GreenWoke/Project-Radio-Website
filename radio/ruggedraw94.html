@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/radio/ruggedraw94 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:44 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RUGGEDRAW.94</title>
+    <meta property="og:title" content="RuggedRaw.94" />
+  <meta property="og:description" content="RUGGEDRAW.94 on Project Radio is hip hop all day. Boom-bap, vinyl cuts and underground street tracks. Straight from the crates to your speakers" />
+  <meta property="og:image" content="rr94logotrans.png" />
+  <meta property="og:url" content="rr94logotrans.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Project Radio" />
+  <link rel="stylesheet" href="rugged.css" />
+    <link rel="icon" type="image/x-icon" href="rr94logotrans.ico">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave&amp;display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&amp;display=swap');
+
+    #graffitiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      background-color: transparent;
+      pointer-events: auto;
+    }
+
+    body > *:not(canvas) {
+      position: relative;
+      z-index: 1;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .drawing-tools {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: sans-serif;
+      color: #5c4033;
+      font-size: 14px;
+      justify-content: center;
+    }
+
+    .drawing-tools label {
+      font-family: "Sedgwick Ave Display", cursive;
+      font-weight: bold;
+    }
+
+    .drawing-tools input[type="range"] {
+      width: 100px;
+    }
+
+.now-playing-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 280px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: #d2b48c;
+  border: 2px solid #000;
+  padding: 10px 12px;
+
+  color: #000;
+  font-family: "Sedgwick Ave Display", cursive;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+
+  transform: translateY(-120%);
+  opacity: 0;
+  transition: all 0.35s ease;
+
+  z-index: 999;
+}
+
+/* SHOW STATE */
+.now-playing-popup.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Album art */
+.now-playing-popup img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 1px;
+  border: 2px solid #000;
+  flex-shrink: 0;
+}
+
+/* Text container */
+.np-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Track title */
+#np-title {
+  font-size: 14px;
+  font-weight: bold;
+  animation: scroll 5s linear infinite;
+  white-space: nowrap;
+ /* text-overflow: ellipsis;*/
+}
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-200%); }
+  }
+/* Artist */
+#np-artist {
+  font-size: 12px;
+  opacity: 0.75;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Pin button */
+.pin-btn {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Pinned state */
+.now-playing-popup.pinned {
+  box-shadow: 0 0 15px rgba(0,0,0,0.7);
+}
+
+/* ===== MOBILE FIX ===== */
+@media (max-width: 768px) {
+  #graffitiCanvas,
+  .drawing-tools {  /* add .drawing-tools here */
+    display: none !important;
+  }
+
+  body, html {
+    overflow: auto;
+  }
+
+  .hiphop-player {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+    font-size: 20px;
+    position: sticky;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    z-index: 10;
+  }
+
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+  </style>
+</head>
+
+<div id="nowPlayingPopup" class="now-playing-popup hidden">
+  <button id="pinBtn" class="pin-btn">📌</button>
+
+  <img id="np-art" src="#" alt="Album Art" />
+
+  <div class="np-text">
+    <div id="np-title">Loading...</div>
+    <div id="np-artist"></div>
+  </div>
+</div>
+
+<body>
+
+  <canvas id="graffitiCanvas"></canvas>
+
+  <!-- Navigation -->
+  <div class="top-left-nav">
+    <div class="logo">
+      <a href="../index.html">
+        <img src="rr94logotrans.png" alt="Logo" class="logo-img" />
+      </a>
+      <div class="logo-text">RUGGEDRAW.94</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="projectfm.html">project.FM</a></li>
+      <li><a href="dogstar.html">DogStar</a></li>
+      <li><a href="undergroundfm.html">Underground.FM</a></li>
+    </ul>
+  </div>
+
+  <!-- Audio Player -->
+  <div class="hiphop-player">
+    <div class="player-header-video" style="display: flex; align-items: center; justify-content: center;">
+      <video id="playerVideo" width="100%" height="315" autoplay muted loop playsinline>
+        <source src="Out_Ta_Bomb_-_Videograf_Production_1994.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Controls -->
+    <div class="player-controls">
+      <button onclick="playAudio()">▶</button>
+      <button onclick="pauseAudio()">⏸</button>
+      <button onclick="refreshStream()">↻</button>
+      <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" />
+    </div>
+
+    <!-- Drawing Tools (hidden on mobile) -->
+    <div class="drawing-tools">
+      <label for="brush-color">️ Color:</label>
+      <input type="color" id="brush-color" value="#ff0055">
+
+      <label for="brush-size"> Size:</label>
+      <input type="range" id="brush-size" min="1" max="50" value="10">
+
+      <button onclick="clearCanvas()">Clear</button>
+    </div>
+  </div>
+
+  <audio id="audio" preload="none">
+    <source src="https://signal.projectradio.org/listen/ruggedraw94/radio.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2025 <a href="../index.html">PROJECTRADIO.ORG</a> — Keep on, 'til the break of dawn | Web Design by Merlin Green | PROJECTRADIO.ORG takes no ownership of any songs provided!</p>
+    </div>
+  </footer>
+
+  <!--  Audio Script -->
+<script>
+/* ================= AUDIO PLAYER ================= */
+const audio = document.getElementById("audio");
+const volumeSlider = document.getElementById("volume-slider");
+
+function playAudio() {
+  audio.play();
+}
+
+function pauseAudio() {
+  audio.pause();
+}
+
+function refreshStream() {
+  audio.src = "https://radio.projectradio.org/listen/ruggedraw94/radio.mp3?ts=" + new Date().getTime();
+  audio.load();
+  audio.play();
+}
+
+volumeSlider.addEventListener("input", () => {
+  audio.volume = volumeSlider.value;
+});
+
+document.querySelector('.top-left-nav').addEventListener('click', function () {
+  this.classList.toggle('active');
+});
+
+
+/* ================= DRAWING (DESKTOP ONLY) ================= */
+if (window.innerWidth > 768) {
+  const canvas = document.getElementById('graffitiCanvas');
+  const ctx = canvas.getContext('2d');
+
+  const colorInput = document.getElementById('brush-color');
+  const sizeInput = document.getElementById('brush-size');
+
+  let brushColor = colorInput.value;
+  let brushSize = parseInt(sizeInput.value);
+  let drawing = false;
+
+  colorInput.addEventListener('input', () => brushColor = colorInput.value);
+  sizeInput.addEventListener('input', () => brushSize = parseInt(sizeInput.value));
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  window.clearCanvas = clearCanvas;
+
+  function spray(x, y) {
+    const density = 50;
+    for (let i = 0; i < density; i++) {
+      const angle = Math.random() * 2 * Math.PI;
+      const radius = Math.random() * brushSize;
+      const offsetX = Math.cos(angle) * radius;
+      const offsetY = Math.sin(angle) * radius;
+      ctx.fillStyle = brushColor;
+      ctx.fillRect(x + offsetX, y + offsetY, 1, 1);
+    }
+  }
+
+  function getMousePos(e) {
+    const rect = canvas.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }
+
+  function startDrawing(e) {
+    drawing = true;
+    sprayLoop(e);
+  }
+
+  function stopDrawing() {
+    drawing = false;
+  }
+
+  function sprayLoop(e) {
+    if (!drawing) return;
+    const { x, y } = getMousePos(e);
+    spray(x, y);
+    requestAnimationFrame(() => sprayLoop(e));
+  }
+
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mouseout', stopDrawing);
+  canvas.addEventListener('mousemove', (e) => {
+    if (drawing) spray(e.clientX, e.clientY);
+  });
+}
+
+
+/* ================= NOW PLAYING ================= */
+const NOW_PLAYING_URL = "https://signal.projectradio.org/api/nowplaying_static/ruggedraw94.json";
+
+let lastSong = "";
+let isPinned = false;
+let hideTimeout; //  important fix
+
+const popup = document.getElementById("nowPlayingPopup");
+const pinBtn = document.getElementById("pinBtn");
+
+pinBtn.addEventListener("click", () => {
+  isPinned = !isPinned;
+
+  popup.classList.toggle("pinned", isPinned);
+  pinBtn.textContent = isPinned ? "📍" : "📌";
+
+  //  stop any pending hide when pinned
+  if (isPinned) {
+    clearTimeout(hideTimeout);
+  } else {
+    // restart hide timer when unpinned
+    hideTimeout = setTimeout(() => {
+      popup.classList.remove("show");
+      setTimeout(() => popup.classList.add("hidden"), 400);
+    }, 6000);
+  }
+});
+
+async function fetchNowPlaying() {
+  try {
+    const res = await fetch(NOW_PLAYING_URL);
+    const data = await res.json();
+
+    const song = data?.now_playing?.song;
+    if (!song) return;
+
+    const currentSong = song.artist + " - " + song.title;
+
+    if (currentSong !== lastSong) {
+      lastSong = currentSong;
+      showNowPlaying(song);
+    }
+  } catch (err) {
+    console.error("Now playing fetch failed:", err);
+  }
+}
+
+function showNowPlaying(song) {
+  document.getElementById("np-title").textContent = song.title || "Unknown Track";
+  document.getElementById("np-artist").textContent = song.artist || "";
+  document.getElementById("np-art").src = song.art || "";
+
+  popup.classList.remove("hidden");
+
+  setTimeout(() => popup.classList.add("show"), 50);
+
+  //  clear old timers before setting new one
+  clearTimeout(hideTimeout);
+
+  if (!isPinned) {
+    hideTimeout = setTimeout(() => {
+      popup.classList.remove("show");
+      setTimeout(() => popup.classList.add("hidden"), 400);
+    }, 6000);
+  }
+}
+
+// Run polling ONCE
+setInterval(fetchNowPlaying, 15000);
+fetchNowPlaying();
+</script>
+</body>
+
+<!-- Mirrored from projectradio.org/radio/ruggedraw94 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:45 GMT -->
+</html>

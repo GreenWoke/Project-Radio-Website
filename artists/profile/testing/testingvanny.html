@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="rah.ico">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VANDALL'S LOG</title>
+  <meta property="og:title" content="VANDAL'S LOG" />
+  <meta property="og:description" content="Virtual Virus • Real Life Vandal • Singal Descrambler •" />
+  <meta property="og:image" content="https://projectradio.org/tobetransparentfuckyou.png" />
+  <meta property="og:url" content="https://projectradio.org/artists/profile/vand4ll" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="www.projectradio.org" />
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Pixelify Sans";
+    color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas#matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+.xp-window {
+    width: 1000px;
+    background: white;
+}
+
+.xp-titlebar {
+    height: 28px;
+    background: linear-gradient(#0a6cf1, #1a4bb5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    border-bottom: 2px solid #003c74;
+    box-sizing: border-box;
+}
+
+.xp-title-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.xp-window-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.xp-title-text {
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 1px 1px #000;
+}
+
+.xp-title-buttons {
+    display: flex;
+    gap: 2px;
+}
+
+.xp-btn {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #003c74;
+    background: #eaeaea;
+    cursor: default;
+    padding: 0;
+}
+
+.xp-btn:active {
+    background: #c8c8c8;
+}
+
+.xp-min::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 2px;
+    background: black;
+    margin: 9px auto 0;
+}
+
+.xp-max::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border: 2px solid black;
+    margin: 4px auto 0;
+}
+
+.xp-close {
+    background: #c10000;
+    border-color: #4d0000;
+}
+
+.xp-close::before {
+    content: "×";
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+    display: block;
+    text-align: center;
+}
+
+.xp-inner {
+    padding: 8px;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    text-align: center;
+    justify-content: center;
+    background: white;
+}
+
+.sidebar {
+    width: 300px;
+    background: white;
+    padding: 1.5rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 250px;
+    height: 250px;
+    background: url('https://projectradio.org/artists/images/vand4ll_head.gif') center/cover no-repeat;
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 0 10px #bbb39f, 0 0 0 14px #0d0d0d, inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+.profile-pic::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.03) 35%, rgba(255,255,255,0) 60%);
+}
+
+.profile-pic::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to bottom, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 4px);
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+}
+
+.basic-info {
+    color: black;
+    margin-top: 1.5rem;
+    background: white;
+    width: 100%;
+    padding: 1rem 1.2rem;
+}
+
+.basic-info h2 {
+    color: black;
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+}
+
+.basic-info p {
+    color: black;
+    margin: 0.3rem 0;
+    font-size: 0.7rem;
+}
+
+.content-area {
+    flex: 1;
+    background: black;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3), 0 8px 16px rgba(0,0,0,0.2), 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.content-area h3 {
+    font-size: 2rem;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.links a {
+    display: inline-block;
+    background: green;
+    color: white;
+    text-decoration: none;
+    padding: 0.4rem 1rem;
+    margin: 0.2rem;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.uplink-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    max-width: 100px;
+    width: 100%;
+    text-align: center;
+    user-select: none;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.uplink-box img {
+    max-height: 32px;
+    border-radius: 8px;
+    filter: drop-shadow(1px 1px 2px white);
+}
+
+.uplink-box .hosted-by {
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 1px 1px 2px black;
+    margin-bottom: 4px;
+}
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -9999;
+    pointer-events: none;
+}
+
+.profile-marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    margin: 0.5rem 0 1rem 0;
+    box-sizing: border-box;
+    background-color: #00FF00;
+    border: 2px solid #000;
+    border-radius: 4px;
+}
+
+.profile-marquee p {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 12s linear infinite;
+    font-size: 0.8rem;
+    color: black;
+    font-weight: bold;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.discord-popup {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 260px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 3px solid #3e4f22;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    font-family: 'Press Start 2P', monospace;
+    color: black;
+    z-index: 9999;
+    display: none; /* initially hidden */
+}
+
+.popup-header {
+    background: white;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 3px solid #3e4f22;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 12px 12px 0 0;
+}
+
+.popup-header .popup-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.popup-header .popup-title {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.75rem;
+}
+
+.popup-close {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.popup-body {
+    padding: 1rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.popup-from {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    color: #3e4f22;
+    text-shadow: 0 0 2px #fff;
+}
+
+.popup-from .from-pic {
+    width: 18px;
+    height: 18px;
+    object-fit: cover;
+}
+
+.popup-from .from-name {
+    font-weight: bold;
+}
+
+.popup-tail {
+    position: absolute;
+    bottom: -20px;
+    right: 40px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 20px solid rgba(79, 95, 61, 0.95);
+    filter: drop-shadow(0 3px 3px rgba(0,0,0,0.4));
+}
+
+.popup-type {
+    display: inline-block;
+    white-space: normal;
+    border-right: 2px solid black;
+    animation: blinkCursor 0.8s step-end infinite;
+}
+
+@keyframes blinkCursor {
+    50% { border-color: transparent; }
+}
+
+  /* scoped styles (prefixed with .vandal-) */
+  .vandal-explorer-wrapper { max-width:1000px; margin:18px auto; }
+  .vandal-xp-window { background: #f3f3f3; border:3px solid #000; border-radius:6px; overflow:visible; width:100%; box-sizing:border-box; }
+  .vandal-xp-titlebar{ height:28px; background: linear-gradient(#0a6cf1,#1a4bb5); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 8px; box-sizing:border-box; border-bottom:2px solid #003c74; }
+  .vandal-title-text{ font-weight:700; font-size:13px; text-shadow:1px 1px #000 }
+  .vandal-inner{ padding:12px }
+  .vandal-content{ background:#000; color:#00ff00; padding:14px; min-height:120px }
+  .vandal-explorer-launch{ display:flex; gap:12px; align-items:center; flex-wrap:wrap }
+  .vandal-folder-tile{ width:120px; height:120px; background:#0c0c0c; border:2px solid #222; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 6px 14px rgba(0,0,0,0.5); }
+  .vandal-folder-tile img{ width:48px; height:48px; object-fit:contain }
+  .vandal-folder-tile span{ margin-top:8px; font-size:12px; color:#00ff00; font-weight:700; text-align:center }
+  /* popup (fixed) */
+  .vandal-popup { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:720px; background:#f3f3f3; border:3px solid #000; z-index:99999; border-radius:6px; box-shadow:0 18px 50px rgba(0,0,0,0.8); display:none; }
+  .vandal-popup .vandal-popup-body{ padding:12px; background:#0b0b0b; color:#00ff00; min-height:260px; box-sizing:border-box; }
+  .vandal-popup .vandal-icons{ display:flex; gap:12px; flex-wrap:wrap }
+  .vandal-file-icon{ width:96px; height:96px; background:#111; border:2px solid #222; border-radius:6px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; }
+  .vandal-file-icon img{ width:44px; height:44px; object-fit:contain }
+  .vandal-file-icon span{ font-size:11px; text-align:center; color:#aaffaa }
+  .vandal-popup-footer{ padding:10px; display:flex; justify-content:flex-end; gap:8px; background:linear-gradient(#e9e9e9,#dcdcdc); border-top:2px solid #bfbfbf; }
+  .vandal-back-btn{ background:#222; color:#fff; padding:6px 10px; border-radius:6px; cursor:pointer; border:none }
+  .vandal-viewer{ background:#fff; color:#000; padding:12px; border-radius:4px; min-height:160px }
+  .vandal-viewer pre{ white-space:pre-wrap; font-family:monospace; font-size:12px }
+  .vandal-breadcrumbs{ font-size:12px; color:#bbb; margin-bottom:8px }
+
+
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="xp-window">
+    <div class="xp-titlebar">
+        <div class="xp-title-left">
+            <img src="https://projectradio.org/trrransperent.png" class="xp-window-icon">
+            <span class="xp-title-text">V:/Project_Radio/Signal_Descrambler.exe</span>
+        </div>
+        <div class="xp-title-buttons">
+            <button class="xp-btn xp-min"></button>
+            <button class="xp-btn xp-max"></button>
+            <button class="xp-btn xp-close"></button>
+        </div>
+    </div>
+
+    <div class="xp-inner">
+        <div class="page-wrapper">
+            <a href="/artists/uplink.html" class="uplink-box">
+                <span class="hosted-by">Hosted by</span>
+                <img src="https://projectradio.org/R-Transparent.png" alt="Logo" />
+            </a>
+
+            <div class="profile-container">
+                <aside class="sidebar">
+                    <div class="profile-pic"></div>
+                    <div class="basic-info">
+                        <h2>ACTIVE USER: <strong>Vandal</strong></h2>
+                        <h2>LOGIN ORIGIN: <strong>Unkown</strong></h2>
+                        <h2>ACCESS LEVL: <strong>Admin</strong></h2>
+
+                        <button id="theme-toggle" style="padding: 8px 16px; font-size: 0.9rem; font-weight: bold; background: green; color: black; border: 2px solid black; border-radius: 4px; cursor: pointer;">AUDIO</button>
+                        <audio id="vandal-theme" src="https://projectradio.org/artists/images/VandalTheme.mp3"></audio>
+
+                        <script>
+                        window.onload = function() {
+                            const button = document.getElementById('theme-toggle');
+                            const audio = document.getElementById('vandal-theme');
+
+                            button.addEventListener('click', () => {
+                                if (audio.paused) {
+                                    audio.play();
+                                    button.textContent = "AUDIO: ‖";
+                                } else {
+                                    audio.pause();
+                                    button.textContent = "AUDIO: ▶︎";
+                                }
+                            });
+
+                            const popup = document.getElementById("discordPopup");
+                            const closeBtn = document.getElementById("popupClose");
+                            const popupTextEl = popup.querySelector(".popup-body p");
+                            const popupOriginalText = popupTextEl.innerHTML;
+
+                            function typeOutPopup() {
+                                popupTextEl.innerHTML = "";
+                                popupTextEl.classList.add("popup-type");
+
+                                let i = 0;
+                                function type() {
+                                    if (i < popupOriginalText.length) {
+                                        popupTextEl.innerHTML += popupOriginalText.charAt(i);
+                                        i++;
+                                        requestAnimationFrame(type);
+                                    } else {
+                                        popupTextEl.classList.remove("popup-type");
+                                    }
+                                }
+                                type();
+                            }
+
+                            function showPopup() {
+                                popup.style.display = "block";
+                                typeOutPopup();
+                            }
+
+                            setTimeout(showPopup, 15000);
+
+                            closeBtn.addEventListener("click", () => {
+                                popup.style.display = "none";
+                            }
+                            )
+                            ;
+                        };
+                        </script>
+
+                    </div>
+                </aside>
+
+                <section class="content-area">
+                    <h3>VANDAL'S LOG</h3>
+                    <div class="profile-marquee">
+                        <p>Virtual Virus • Real Life Vandal • Project Radio •</p>
+                    </div>
+                    <p>Static’s been running thicker lately. Means they know we’re close... Ran a systems check on the Signal Descrambler, something or someone knows we're coming. I told Naomi to keep chatter minimal. Government ears cling to these channels like mold. But if we pull this off tonight, the city wakes up. And if not... I'd rather not say. This has to work and it WILL. I can feel it in my tubes!</p>
+                    
+                    <div class="vandal-explorer-wrapper">
+  <div class="vandal-xp-window" aria-label="File Repository">
+    <div class="vandal-xp-titlebar">
+      <div class="vandal-title-text">V:/Project_Radio/File_Repository</div>
+      <div style="font-size:12px;color:#fff;padding-right:6px">USR: Vandal</div>
+    </div>
+    <div class="vandal-inner">
+      <div class="vandal-content">
+        <div class="vandal-explorer-launch">
+          <div class="vandal-folder-tile" data-action="open-explorer" title="Open File Explorer">
+            <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-1/72/folder-icon.png" alt="folder">
+            <span>File Explorer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- popup window (namespaced) -->
+<div id="vandalPopup" class="vandal-popup" role="dialog" aria-hidden="true" aria-label="Vandal File Explorer">
+  <div class="vandal-xp-titlebar" style="border-bottom:2px solid #222;">
+    <div class="vandal-title-text" id="vandalPopupTitle">Signal File Explorer</div>
+<div class="xp-title-buttons">
+    <button id="vandalPopupMin" class="xp-btn xp-min"></button>
+    <button id="vandalPopupMax" class="xp-btn xp-max"></button>
+    <button id="vandalPopupClose" class="xp-btn xp-close"></button>
+</div>
+
+  </div>
+
+  <div class="vandal-popup-body">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <div class="vandal-breadcrumbs" id="vandalBreadcrumbs">Signal Strength: %84</div>
+      <button class="vandal-back-btn" id="vandalBackBtn">Back</button>
+    </div>
+
+    <div id="vandalPopupArea">
+      <div class="vandal-icons" id="vandalIconsGrid"></div>
+    </div>
+  </div>
+</div>
+</section>                
+</div>
+</div>
+    </div>
+</div>
+
+<video id="bg-video" autoplay muted loop playsinline>
+    <source src="https://projectradio.org/artists/images/4899.d.mp4" type="video/mp4">
+</video>
+
+<div id="discordPopup" class="discord-popup">
+  <div class="popup-header">
+    <img src="https://projectradio.org/prlogo3.png" class="popup-icon">
+    <span class="popup-title">MESSAGE</span>
+    <button id="popupClose" class="popup-close">×</button>
+  </div>
+  <div class="popup-body">
+    <span class="popup-from">
+      <img src="https://projectradio.org/artists/images/naomi_head.png" alt="Sender" class="from-pic">
+      Naomi
+    </span>
+    <p>
+      Vandal, it's me. I've located the target, moving in to engange.
+    </p>
+  </div>
+  <div class="popup-tail"></div>
+</div>
+
+<script>
+/* Namespaced JavaScript — will NOT override your window.onload.
+   Just include this block after the log text. */
+
+(function(){
+  // small mock filesystem (adjust filenames/URLs as needed)
+  const FS = {
+    root: {
+      type: 'folder', name: 'signal_root', children: {
+        'Dossiers': { type:'folder', name:'Dossiers', children: {
+          'subject_alpha.txt': { type:'text', name:'subject_alpha.txt', content: 'SUBJECT: ALPHA\\n\\nNotes:\\n- Static spike 03:12\\n- Probe scheduled.'},
+          'subject_beta.txt': { type:'text', name:'subject_beta.txt', content: 'SUBJECT: BETA\\n\\nInterrogation log...' }
+        }},
+        'Audio': { type:'folder', name:'Audio', children: {
+          'signal_01.mp3': { type:'audio', name:'signal_01.mp3', url:'https://projectradio.org/artists/images/VandalTheme.mp3' }
+        }},
+        'Images': { type:'folder', name:'Images', children: {
+          'surv_001.png': { type:'image', name:'surv_001.png', url:'https://projectradio.org/artists/images/vand4ll_head.gif' }
+        }},
+        'README.txt': { type:'text', name:'README.txt', content: 'Project Radio — mock repository.' }
+      }
+    }
+  };
+
+  const nav = [ FS.root ];
+
+  const el = id => document.getElementById(id);
+
+  function current(){ return nav[nav.length - 1]; }
+
+  function renderIcons(folder){
+    const grid = el('vandalIconsGrid'); if(!grid) return;
+    grid.innerHTML = '';
+    const children = folder.children || {};
+    Object.keys(children).forEach(key=>{
+      const item = children[key];
+      const node = document.createElement('div'); node.className = 'vandal-file-icon'; node.dataset.name = key;
+      const img = document.createElement('img');
+      if(item.type === 'folder') img.src = 'https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-8/72/folder-icon.png';
+      else if(item.type === 'text') img.src = 'https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/64/Actions-document-open-icon.png';
+      else if(item.type === 'audio') img.src = 'https://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/speaker-icon.png';
+      else if(item.type === 'image') img.src = 'https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/filetype-jpg-icon.png';
+      else img.src = '';
+      const span = document.createElement('span'); span.textContent = item.name;
+      node.appendChild(img); node.appendChild(span); grid.appendChild(node);
+
+      node.addEventListener('click', function(){
+        if(item.type === 'folder'){ nav.push(item); openPopup(); }
+        else openViewer(item);
+      });
+    });
+    if(Object.keys(children).length === 0) grid.innerHTML = '<div style="color:#aaffaa">(empty)</div>';
+  }
+
+  function updateBreadcrumbs(){ el('vandalBreadcrumbs').textContent = nav.map(n=>n.name).join(' / '); }
+
+  function openPopup(){
+    const popup = el('vandalPopup');
+    popup.style.display = 'block'; popup.setAttribute('aria-hidden','false');
+    el('vandalPopupTitle').textContent = current().name;
+    updateBreadcrumbs();
+    // default: show icons
+    el('vandalPopupArea').innerHTML = '<div class="vandal-icons" id="vandalIconsGrid"></div>';
+    renderIcons(current());
+  }
+
+  function closePopup(){ el('vandalPopup').style.display='none'; el('vandalPopup').setAttribute('aria-hidden','true'); nav.length = 1; }
+
+  function openViewer(item){
+    const area = el('vandalPopupArea');
+    area.innerHTML = '';
+    const viewer = document.createElement('div'); viewer.className = 'vandal-viewer';
+    const title = document.createElement('div'); title.style.fontWeight='700'; title.style.marginBottom='8px'; title.textContent = item.name;
+    viewer.appendChild(title);
+    if(item.type === 'text'){
+      const pre = document.createElement('pre'); pre.textContent = item.content || '(no content)'; viewer.appendChild(pre);
+    } else if(item.type === 'audio'){
+      const audio = document.createElement('audio'); audio.controls = true; audio.src = item.url; audio.style.width='100%'; viewer.appendChild(audio);
+    } else if(item.type === 'image'){
+      const img = document.createElement('img'); img.src = item.url; img.style.maxWidth='100%'; viewer.appendChild(img);
+    } else {
+      const p = document.createElement('div'); p.textContent = 'Cannot preview this file type.'; viewer.appendChild(p);
+    }
+    // open-in-new-tab action
+    const openBtn = document.createElement('button'); openBtn.className='vandal-back-btn'; openBtn.textContent = 'Open in new tab'; openBtn.style.marginTop='12px';
+    openBtn.addEventListener('click', ()=>{
+      if(item.url) window.open(item.url,'_blank');
+      else if(item.type === 'text'){ const blob = new Blob([item.content||''],{type:'text/plain'}); window.open(URL.createObjectURL(blob),'_blank'); }
+    });
+    viewer.appendChild(openBtn);
+    area.appendChild(viewer);
+  }
+
+  // wire launcher
+  const launcher = document.querySelector('[data-action="open-explorer"]');
+  if(launcher) launcher.addEventListener('click', openPopup);
+
+  // popup controls
+  el('vandalPopupClose').addEventListener('click', closePopup);
+  el('vandalBackBtn').addEventListener('click', ()=>{
+    if(nav.length > 1){ nav.pop(); openPopup(); } else { /* already root */ }
+  });
+
+  // minimize / maximize (simple toggles)
+  el('vandalPopupMin').addEventListener('click', function(){ const p = el('vandalPopup'); p.style.display = (p.style.display === 'none') ? 'block' : 'none'; });
+  el('vandalPopupMax').addEventListener('click', function(){ const p = el('vandalPopup'); if(p.style.width === '100%'){ p.style.width = '720px'; p.style.left='50%'; p.style.transform='translate(-50%,-50%)'; } else { p.style.width='100%'; p.style.left='0'; p.style.transform='translate(0,0)'; } });
+
+  // keyboard support: Esc closes popup
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closePopup(); } });
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/Miles_DeVoe by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:36 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Miles DeVoe</title>
+  <link rel="icon" type="image/x-icon" href="../images/milesd.ico">
+  <meta property="og:title" content="Miles DeVoe" />
+  <meta property="og:description" content="Sound of the future." />
+  <meta property="og:image" content="../images/milesd.ico" />
+  <meta property="og:url" content="Miles_DeVoe.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="www.projectradio.org" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      background: url('../images/3dgifmaker46940.gif');
+      color: #dce9ea;
+      font-family: 'Press Start 2P', cursive, monospace;
+    }
+
+
+
+    .page-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 1rem;
+    }
+
+    .profile-container {
+      display: flex;
+      flex-direction: row;
+      max-width: 960px;
+      width: 100%;
+      background: black;
+
+      border-top: 6px solid #e0e0e0;
+      border-left: 6px solid #e0e0e0;
+      border-bottom: 6px solid #808080;
+      border-right: 6px solid #808080;
+      border-radius: 16px;
+
+      box-shadow:
+        inset -2px -2px 0 rgba(255,255,255,0.3),
+        inset 2px 2px 0 rgba(0,0,0,0.3);
+
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .sidebar {
+      position: relative;
+      width: 300px;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .sidebar video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6) contrast(1.1);
+      z-index: 0;
+    }
+
+    .profile-pic {
+      width: 290px;
+      height: 290px;
+      background: url('../images/IMG_2053.png') center/cover no-repeat;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 5%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.15);
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(10px) saturate(140%);
+    }
+
+    .basic-info {
+      position: relative;
+      z-index: 1;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 18px;
+      padding: 1.2rem;
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+
+    .basic-info h2 {
+      text-align: center;
+      color: #f0f9f9;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+    }
+    .basic-info p {
+      color: #e4f0f0;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+
+    .content-area {
+      flex: 1;
+      padding: 2rem;
+      color: #e0f2f2;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      background: black;
+    }
+
+    .info-bubble {
+      background: rgba(255, 255, 255, 0.15);
+      border: 3px solid rgba(255, 255, 255, 0.25);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),inset 0 0 20px rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+
+    .name-bio h3 {
+      font-size: 1rem;
+      text-align: center;
+      color: #f7f9f9;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      margin-bottom: 1rem;
+    }
+
+    .name-bio p {
+      text-align: center;
+      color: #d9eaea;
+      line-height: 1.6;
+    }
+
+    .icon-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .icon-links a img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      background: rgba(0,0,0,0.2);
+      padding: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    .icon-links a img:hover {
+      transform: scale(1.1);
+    }
+
+    .spotify-box {
+      padding: 1rem;
+      background: rgba(255,255,255,0.15);
+      border: 3px solid rgba(255,255,255,0.25);
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2),
+                  inset 0 0 20px rgba(255,255,255,0.25);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+    }
+
+    .spotify-box iframe {
+      border-radius: 12px;
+      width: 100%;
+      height: 352px;
+    }
+
+    .row-wrapper {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1280px; 
+    }
+
+    .video-player {
+      width: 360px;
+      height: 235px;
+      background: black;
+      border-top: 6px solid #ffffff;
+      border-left: 6px solid #ffffff;
+      border-bottom: 6px solid #808080;
+      border-right: 6px solid #808080;
+      border-radius: 12px;
+      padding: 0.5rem;
+      box-shadow: inset -2px -2px 0 rgba(255,255,255,0.4), inset 2px 2px 0 rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-self: flex-start;
+    }
+
+    .video-title-bar {
+      background: rgba(255, 255, 255, 0.2);
+      border: 3px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),inset 0 0 20px rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      color: White;
+      padding: 0.4rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
+      text-align: center;
+    }
+
+    .video-player iframe {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .uplink-box {
+      align-self: center;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+      max-width: 120px;
+      text-align: center;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .uplink-box .hosted-by {
+      font-size: 0.75rem;
+      color: #dce9ea;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      margin-bottom: 0.4rem;
+    }
+
+    .uplink-box img {
+      max-height: 36px;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      pointer-events: none;
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+      transition: transform 0.25s ease;
+    }
+
+    .uplink-box:hover img { transform: scale(1.05); }
+
+    @media (max-width: 1000px) {
+      .row-wrapper { flex-direction: column; align-items: center; }
+      .video-player { width: 90%; height: auto; }
+      .profile-container { max-width: 960px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+
+    <div class="row-wrapper">
+
+      <div class="profile-container">
+        <aside class="sidebar">
+
+          <div class="profile-pic" aria-label="Artist profile picture"></div>
+
+          <div class="basic-info">
+            <h2>About</h2>
+            <p><strong>Location:</strong> Florida, USA</p>
+            <p><strong>Mediums:</strong> DJ, Producer</p>
+
+            <h2>Favourites</h2>
+            <p><strong>Album:</strong> TBA</p>
+            <p><strong>Movie:</strong> TBA</p>
+          </div>
+        </aside>
+
+        <section class="content-area">
+          <div class="info-bubble name-bio">
+            <h3>Miles DeVoe</h3>
+            <p>Junglist from Florida.</p>
+          </div>
+
+          <div class="info-bubble icon-links">
+            <a href="https://www.instagram.com/milesdevoe/"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram"></a>
+            <a href="https://soundcloud.com/milesdevoe"><img src="../../../img.magnific.com/premium-vector/soundcloud-logo_578229-2318bb4.jpg?semt=ais_hybrid&amp;w=740&amp;q=80" alt="SoundCloud"></a>
+            <a href="https://milesdevoe.com/"><img src="../images/milesd.ico" alt="Website"></a>
+          </div>
+
+          <div class="spotify-box">
+            <iframe data-testid="embed-iframe"
+              src="https://open.spotify.com/embed/artist/6guKSfJdtdRnm5WLSegwUo?utm_source=generator"
+              frameBorder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
+          </div>
+        </section>
+      </div>
+
+<div class="video-stack" style="display:flex; flex-direction:column; gap:1.5rem;">
+
+
+<div class="video-player" aria-label="Retro video player">
+<div class="video-title-bar">The Nostalgia Mix</div>
+<iframe src="https://www.youtube.com/embed/NRm5GT_FddM" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+</div>
+
+
+<div class="video-player" aria-label="Retro video player 2">
+<div class="video-title-bar">Midnight Shift - Mix 7</div>
+<iframe src="https://www.youtube.com/embed/7Xx9hIyguWU" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+</div>
+
+<div class="video-player" aria-label="Retro video player 2">
+<div class="video-title-bar">The Sex Trance Mix</div>
+<iframe src="https://www.youtube.com/embed/qgvIOPqsrgg" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+</div>
+
+
+    </div>
+
+  </div>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/Miles_DeVoe by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:38 GMT -->
+</html>

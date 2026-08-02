@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/uplink by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:55 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="../rah.ico">
+  <title>Artist Uplink</title>
+  <link rel="stylesheet" href="artist.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <a href="../index.html">
+        <img src="../projectR-ver1.0.png" alt="Uplink Menu" class="sidebar-logo">
+      </a>
+      <nav>
+        <a href="uplink.html">Uplink</a>
+        <a href="profiles.html">Profile List</a>
+        <a href="#" id="randomProfileBtn">Random Profile</a>
+        <a href="https://discord.gg/GZ65Px3RHy">Chatroom</a>
+        <a href="../index-2.html">Return to Radio</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="xp-window full-width-box">
+        <div class="xp-titlebar">
+          <center><span class="title-text">WELCOME TO ARTIST UPLINK</span></center>
+        </div>
+        <div class="xp-body">
+          <p class="description">
+            This is your gateway to the retro social scene. Dive into profiles, updates, and works by your favorite artists. Each link takes you deeper into Project Radio’s creative orbit.
+            <br><br>
+            The Artist Uplink is a creative hub built for artists, by artists. It’s a place to share your work, connect with others, and discover fresh inspiration. Every month, we feature a new lineup of talented creators, shining a spotlight on diverse styles and voices from the community. 
+          </p>
+        </div>
+      </section>
+
+      <div class="content-row">
+        <section class="xp-window featured-box">
+          <div class="xp-titlebar">
+            <center><span class="title-text">FEATURED ARTIST</span></center>
+          </div>
+          <div class="xp-body">
+            <div class="featured-layout">
+              <a href="profile/Miles_DeVoe.html" class="artist-profile featured-image">
+                <img src="images/3dgifmaker46940.gif"/>
+                <div class="artist-info">
+                  <div class="artist-name">Miles DeVoe</div>
+                  <div class="artist-bio">Florida Jungle</div>
+                </div>
+              </a>
+              <p class="featured-text">This months spotlight and the first one of 2026 is Miles Devoe! A Florida based producer drawing from the raw energy and optimism of 90s UK jungle, drum & bass, and atmospheric IDM. Growing up on Aphex Twin, Daft Punk, Boards of Canada, and Justice, his early exposure to forward thinking electronic music, along with UK leaning internet culture, helped shape a sound built on breakbeats, deep atmospheres, and rave futurism. Check out his spotlight article here and make sure to check out his profile page too! </p>
+              
+            </div>
+            
+          </div>
+          
+        </section>
+      </div> 
+
+      <div class="wall-post">
+        <div class="post-header">
+          <img src="images/vand4ll_head.gif" alt="User profile picture" class="post-avatar">
+          <div class="post-meta">
+            <span class="post-author">VANDAL</span>
+            <span class="post-date">Posted on 11/08/25 - PINNED</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <p>If you want to interact with the community here on the site, join our Discord.</p>
+        </div>
+      </div>
+
+      <div class="wall-post">
+        <div class="post-header">
+          <img src="images/balynsus_head.png" alt="User profile picture" class="post-avatar">
+          <div class="post-meta">
+            <span class="post-author">Balnysus</span>
+            <span class="post-date">Posted on 24/01/26</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <p>Miku Vandal!</P>
+        <img src="images/miku%20vandal.png" alt="Uplink Menu" class="sidebar-logo">
+        </div>
+      </div>
+
+      <div class="wall-post">
+        <div class="post-header">
+          <img src="images/20251227_010808%20-%20Alec.jpg" alt="User profile picture" class="post-avatar">
+          <div class="post-meta">
+            <span class="post-author">LICHH</span>
+            <span class="post-date">Posted on 25/12/25</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <p>CHECK OUT MY NEW ALBUM RIOTRAPS*! NOW! LISTEN <a href="https://open.spotify.com/album/3MAI9lJbI5WfIg2tP4BNb2?si=IW9AwgVLSN-8HdmPNwILKg">HERE</a></p>
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/3MAI9lJbI5WfIg2tP4BNb2?utm_source=generator&amp;theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <footer class="footer">
+        Artist Uplink provided to us and by us at Project Radio. Thank you all for the hard work and dedication for making this a possibility.
+        Please keep in mind that this site and all of Project Radio is intended to be viewed on desktop, some mobile displays may not work as intended!
+      </footer>
+
+      <script>
+        const profiles = [
+          "/artists/profile/Aerrow.html",
+          "profile/Balynsus-2.html",
+          "profile/carrionhaven-2.html",
+          "profile/carrophobia-2.html",
+          "profile/chonoes-2.html",
+          "profile/djuno-2.html",
+          "profile/deepin-2.html",
+          "profile/joVee-2.html",
+          "profile/merlin-2.html",
+          "profile/richardFigures-2.html",
+          "profile/stoats-2.html",
+          "profile/yvngbandoboy.html",
+          "profile/vand4ll-2.html",
+          "profile/kaiaradio-2.html"
+        ];
+
+        document.getElementById("randomProfileBtn").addEventListener("click", function(e) {
+          e.preventDefault();
+          const randomIndex = Math.floor(Math.random() * profiles.length);
+          window.location.href = profiles[randomIndex];
+        });
+
+        const uplinkBox = document.querySelector('.uplink-box');
+        const images = [
+          "https://projectradio.org/artists/images/balynsus_head1.png",
+          "images/carrionhaven_head.png",
+          "images/carro_head2.png",
+          "images/djuno_head.jpg",
+          "images/balynsus_head.png",
+          "images/jovee_head1.png",
+          "images/iamhatehehe.png",
+          "images/stoats_head.png",
+          "images/vand4ll_head.gif",
+          "images/merlin_head.png",
+          "images/deepin_head.png",
+          "images/chonoes_head.jpg",
+          "../../dickfigures.net/projectradio/b1.html",
+          "../../i1.sndcdn.com/avatars-adqw5wrz9wh61J5u-OwJvxA-t500x500.jpg"
+        ];
+        let index = 0;
+        function changeBackground() {
+          uplinkBox.style.setProperty('--uplink-bg', `url(%24%7bimages%5bindex%5d%7d.html) center/cover no-repeat`);
+          index = (index + 1) % images.length;
+        }
+        changeBackground();
+        setInterval(changeBackground, 4000);
+      </script>
+
+    </main>
+  </div>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/uplink by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:55 GMT -->
+</html>

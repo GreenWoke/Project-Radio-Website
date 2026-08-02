@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/kestrel by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:25 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- ===============================
+       PAGE TITLE
+       ===============================
+       Change this to the artist's page title -->
+  <title>Kestrel</title>
+<meta property="og:title" content="Project Radio | Kestrel (profile)" />
+<meta property="og:type" content="text/html" />
+<meta property="og:url" content="kestrel.html" />
+<meta property="og:image" content="../../../kestrel.nekoweb.org/Kestrel-Grey-geo-tile-greybrown.png" />
+<meta property="og:image:alt" content="Kestrel logo" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:description" content="Kestrel creates Dark Ambient music using field recordings, electronically generated drones, and both traditional and experimental instruments." />
+
+  <style>
+    /* ===============================
+       FONT IMPORT
+       ===============================
+       Change 'Press Start 2P' to another font if desired */
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+Great+Primer&amp;display=swap');
+
+    /* ===============================
+       GLOBAL PAGE STYLES
+       ===============================
+       Background color, font, and text color */
+    html { background: url(../../../kestrel.nekoweb.org/mighty-duster.jpg) no-repeat, #ffffff; background-size:cover; }
+    body {
+      margin: 0;
+      font-family: 'IM Fell Great Primer', cursive, monospace;
+      color: #111;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      user-select: none;
+    }
+	
+	p { text-shadow: 0 0 1px #DDD, 1px 1px 2px #DDD; }
+
+    h2, h3 { user-select: text; text-shadow: 0 0 2px #DDD, 1px 1px 2px #DDD; } /* Allow headings to be selectable */
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 960px;
+      width: 100%;
+      gap: 1rem;
+    }
+
+    /* ===============================
+       HOSTED BY / RETURN BUTTON
+       ===============================
+       Edit the href to point to your homepage,
+       change the label, or swap the logo image */
+    .uplink-box { 
+      position: fixed; 
+      bottom: 20px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      cursor: pointer; 
+      max-width: 100px; 
+      width: 100%; 
+      text-align: center; 
+      user-select: none; 
+      z-index: 9999; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      text-decoration: none;	  
+    }
+    .uplink-box img { 
+      max-height: 32px; 
+      height: auto; 
+      border-radius: 8px; 
+      display: block; 
+      margin: 0 auto; 
+      pointer-events: none; 
+      filter: drop-shadow(1px 1px 2px #FFF);  
+    }
+    .uplink-box .hosted-by { 
+      font-size: 14px; 
+      color: #333; 
+      text-decoration: none; 
+      text-shadow: 1px 1px 2px #FFF; 
+      margin-bottom: 4px; 
+      user-select: none; 
+      display: block; 
+    }
+
+    /* ===============================
+       PROFILE CONTAINER
+       ===============================
+       Main container that holds the sidebar and content area */
+    .profile-container {
+      display: flex;
+      flex-direction: row;
+      background: transparent;
+      border: 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* ===============================
+       SIDEBAR
+       ===============================
+       Contains profile picture and basic info */
+    .sidebar {
+      width: 300px;
+      padding: 1.5rem 1rem;
+      background: #231D1822;
+      border-right: .5px solid #100C05;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .profile-pic {
+      width: 250px;
+      height: 250px;
+      background: url('../../../kestrel.nekoweb.org/Kestrel-Grey-geo-tile-greybrown.png') center/cover no-repeat;
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    .basic-info {
+      margin-top: 1.5rem;
+      width: 100%;
+      background: transparent;
+      border: 0;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .basic-info h2 { margin-bottom: 0.5rem; font-size: 1rem; }
+    .basic-info p { margin: 0.3rem 0; font-size: 0.8rem; }
+
+    /* ===============================
+       CONTENT AREA
+       ===============================
+       Contains artist name, bio, links, and showcase */
+    .content-area {
+      flex: 1;
+      padding: 2rem;
+      background: #120E0722;  
+    }
+    .content-area h3 {
+      font-size: 1rem;
+      border-bottom: 0;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .links a {
+      display: inline-block;
+      background: #120E07;
+      border: 0;
+      color: #D0B48A;
+      text-decoration: none;
+      padding: .4rem 1rem;
+      margin-right: .5rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: .8rem;
+    }
+    .links a:hover { background: #D0B48A; color:#120E07; }
+
+    .gallery {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border: 0;
+	  box-shadow:3px 3px 5px #000;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+	
+	hr{background-image:linear-gradient(to right,transparent,#100C05,transparent);height:1px;width:100%;margin:7px;border:0;}
+	.sidebar hr{background:transparent;height:0;width:0;margin:0;border:0;}
+	button{background:transparent;border:0;}
+	svg{background:transparent;height:2em;display:inline;vertical-align:bottom;filter:drop-shadow(1px 1px 2px #FFF);display:flex;flex-direction:row;justify-content:space-evenly;}
+	path{stroke-width:2;stroke:currentColor;fill:#D0B48A88;}
+
+    /* ===============================
+       RESPONSIVE DESIGN
+       ===============================
+       Adjusts layout on smaller screens */
+    @media (max-width: 768px) {
+      .profile-container { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 0;
+        align-items: center;
+      }
+	  .sidebar hr{background-image:linear-gradient(to right,transparent,#100C05,transparent);height:1px;width:100%;margin:7px;border:0;}
+      .profile-pic {
+        width: 80%;
+        max-width: 200px;
+        height: auto;
+      }
+      .basic-info { font-size: .9rem; padding: 1rem; }
+      .content-area { font-size: .95rem; padding: 1rem; }
+      .gallery img { width: 45%; height: auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+
+    <!-- ===============================
+         HOSTED BY BUTTON
+         ===============================
+         Change href, text, or logo -->
+    <a href="../uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+      <span class="hosted-by">Hosted by</span>
+      <img src="../../R-Transparent.png" alt="Uplink Logo" />
+    </a>
+
+    <!-- ===============================
+         PROFILE CONTAINER
+         =============================== -->
+    <div class="profile-container">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <!-- PROFILE PICTURE -->
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+
+        <!-- BASIC INFO -->
+        <div class="basic-info">
+          <h2>About</h2>
+          <p><strong>Location:</strong> USA</p>
+          <p><strong>Mediums:</strong> Music Production, Visual Art, Writing, Design</p>
+
+          <h2>Favorites</h2>
+          <p><strong>Album:</strong> The Humming Tapes - Cities Last Broadcast</p>
+          <p><strong>Movie:</strong> Toss-up between Ravenous (1999) and Junk Head (2021)</p>
+		  
+		  <div style="width:250px;margin:auto;box-shadow:inset 0 0 1em #0008">
+							<img src="../../../kestrel.nekoweb.org/kestrel-propagation2.png" alt="Wait" style="border-radius:10%;height:200px;width:200px;overflow:clip;margin:10px 25px;" />
+						<audio id="my-audio">
+							<source src="https://archive.org/download/singles_202405/Wait.flac" type="audio/wav" />
+							<source src="https://archive.org/download/singles_202405/Wait.mp3" type="audio/mpeg" />
+						</audio>
+						<p style="text-align:center;margin:0 auto;">
+						<button id="play">
+							<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" role="img">
+      							<title>play button</title>
+								<path d="M 25 20, 20 25, 20 75, 25 80, 80 50 Z" />
+							</svg>
+						</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button id="pause">
+							<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" role="img">
+      							<title>pause button</title>
+								<path d="M 25 20, 20 25, 20 75, 25 80, 35 80, 40 75, 40 25, 35 20 Z" />
+								<path d="M 65 20, 60 25, 60 75, 65 80, 75 80, 80 75, 80 25, 75 20 Z" />
+							</svg>
+						</button>
+						</p>
+						<p><strong style="font-size:1.3em;text-align:center;margin-left:25px;margin-top:0;">Wait | Propagation | Kestrel</strong></p>
+						</p><hr />
+						</div>
+        </div>
+					<hr class="sidebar" />
+      </aside>
+
+      <!-- CONTENT AREA -->
+      <section class="content-area">
+        <h3>Kestrel</h3>
+        <p>Kestrel creates Dark Ambient music using field recordings, electronically generated drones, and both traditional and experimental instruments.
+<br /><br />
+Kestrel has branched out from the previous music project, Desolo Sub Humus and has been writing, getting back into visual arts, both on paper and with other materials, including embroidery.</p>
+			<hr />
+        <h3>Links &amp; Work</h3>
+        <div class="links">
+          <!-- Replace or remove links as needed -->
+          <a href="https://kestrel.nekoweb.org/">Website</a>
+          <a href="https://soundcloud.com/desolo-sub-humus">SoundCloud</a>
+          <a href="https://archive.org/details/@desolosubhumus">Internet Archive</a>
+        </div>
+			<hr />
+        <h3>Showcase</h3>
+        <div class="gallery">
+          <!-- Replace or add artwork images -->
+          <img src="../../../dn721902.ca.archive.org/0/items/regina-proserpina/Regina%20Proserpina.jpg" alt="Regina Proserpina" />
+          <img src="../../../archive.org/download/Grupta/Grupta.jpg" alt="Grupta" />
+          <img src="../../../dn710002.ca.archive.org/0/items/saturnalia_202405/Saturnalia.jpg" alt="Saturnalia" />
+		  <img src="../../../dn721905.ca.archive.org/0/items/clarus-obscurus/Clarus%20Obscurus.jpg" alt="Clarus Obscurus" />
+		  <img src="../../../dn721909.ca.archive.org/0/items/singles_202405/Stagnatum.png" alt="Stagnatum" />
+		  <img src="../../../kestrel.nekoweb.org/kestrel-propagation2.png" alt="Wait" />
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <script>
+		const audio = document.getElementById("my-audio");
+		const play = document.getElementById("play");
+		const pause = document.getElementById("pause");
+		play.onclick = playAudio;
+		pause.onclick = pauseAudio;
+		function playAudio() {audio.play();}
+		function pauseAudio() {audio.pause();}
+  </script>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/kestrel by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:36 GMT -->
+</html>

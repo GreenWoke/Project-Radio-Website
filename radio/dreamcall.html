@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DREAMCALL</title>
+
+<link rel="icon" href="https://projectradio.org/trrransperent.png">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --glass: rgba(255,255,255,0.26);
+  --border: rgba(255,255,255,0.45);
+  --text: rgba(255,255,255,0.98);
+  --soft: rgba(255,255,255,0.75);
+}
+body.night { --glass: rgba(18,24,60,0.45); }
+
+#day-bg-image,
+#night-bg-image {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.6;
+  z-index: -3;
+  pointer-events: none;
+  transition: opacity 2.5s ease;
+}
+#day-bg-image { background-image: url("https://projectradio.org/radio/dcdaybg.png"); }
+#night-bg-image { background-image: url("https://projectradio.org/radio/dcnightbg.png"); }
+body.night #day-bg-image { opacity: 0; }
+body:not(.night) #night-bg-image { opacity: 0; }
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Quicksand', sans-serif;
+  color: var(--text);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+nav, .player, footer {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.45), rgba(255,255,255,0.05)),
+    var(--glass);
+  backdrop-filter: blur(26px) saturate(160%);
+  border: 1px solid var(--border);
+}
+
+nav {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: calc(100% - 20px);
+  padding: 10px 16px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+nav img { height: 36px; filter: invert(1); }
+.nav-links a { margin-left: 12px; text-decoration: none; color: var(--soft); }
+.toggle {
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.4);
+}
+
+.player {
+  position: relative;
+  z-index: 20;
+  width: 360px;
+  max-width: 90%;
+  padding: 26px;
+  border-radius: 26px;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 20px 0 14px;
+}
+
+button {
+  border: none;
+  background: rgba(255,255,255,0.35);
+  padding: 10px 20px;
+  border-radius: 999px;
+  color: white;
+  cursor: pointer;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-top: 6px;
+  cursor: pointer;
+  position: relative;
+  z-index: 30;
+}
+
+footer {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: calc(100% - 20px);
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 0.75rem;
+  z-index: 10;
+}
+</style>
+</head>
+
+<body>
+
+<div id="day-bg-image"></div>
+<div id="night-bg-image"></div>
+<canvas id="bg"></canvas>
+
+<nav>
+  <img src="https://projectradio.org/PRTITLE.PNG">
+  <div class="nav-links">
+    <a href="#">Project.FM</a>
+    <a href="#">RuggedRaw.94</a>
+    <a href="#">DogStar</a>
+    <a href="#">Underground.FM</a>
+  </div>
+  <div class="toggle" id="nightToggle">Night</div>
+</nav>
+
+<div class="player">
+  <div class="title">DREAMCALL</div>
+  <div class="subtitle">the sky is listening</div>
+
+  <audio id="audio" autoplay crossorigin="anonymous">
+    <source src="https://signal.projectradio.org/listen/dreamcall/radio.mp3">
+  </audio>
+
+  <div class="controls">
+    <button onclick="audio.play()">Play</button>
+    <button onclick="audio.pause()">Pause</button>
+    <button onclick="audio.load();audio.play()">Refresh</button>
+  </div>
+
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+</div>
+
+<footer>© 2025 PROJECTRADIO.ORG — Deep in the Noise.</footer>
+
+<script>
+/* MODE */
+const nightBtn = document.getElementById('nightToggle');
+nightBtn.onclick = () => {
+  document.body.classList.toggle('night');
+  nightBtn.textContent = document.body.classList.contains('night') ? 'Day' : 'Night';
+};
+
+/* SMOOTH DAY ↔ NIGHT MIX */
+let dayNightMix = 0;
+
+/* AUDIO */
+const audio = document.getElementById('audio');
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const src = audioCtx.createMediaElementSource(audio);
+const analyser = audioCtx.createAnalyser();
+const gain = audioCtx.createGain();
+src.connect(gain);
+gain.connect(analyser);
+analyser.connect(audioCtx.destination);
+
+document.getElementById('volumeSlider')
+  .addEventListener('input', e => gain.gain.value = e.target.value);
+
+analyser.fftSize = 256;
+const data = new Uint8Array(analyser.frequencyBinCount);
+
+/* CANVAS */
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+addEventListener('resize', resize); resize();
+
+let t = 0, mouseX = 0.5, mouseY = 0.5;
+addEventListener('mousemove', e=>{
+  mouseX = e.clientX / innerWidth;
+  mouseY = e.clientY / innerHeight;
+});
+
+/* STARS */
+const stars = Array.from({length: 60},()=>({
+  x: Math.random()*innerWidth,
+  y: Math.random()*innerHeight,
+  s: Math.random()*1.5+0.5
+}));
+
+/* DITHER */
+function dither(){
+  const img = ctx.getImageData(0,0,canvas.width,canvas.height);
+  for(let i=0;i<img.data.length;i+=4){
+    const n = (Math.random()-0.5)*6;
+    img.data[i]+=n; img.data[i+1]+=n; img.data[i+2]+=n;
+  }
+  ctx.putImageData(img,0,0);
+}
+
+function draw(){
+  requestAnimationFrame(draw);
+
+  analyser.getByteFrequencyData(data);
+  const bass = data.slice(0,12).reduce((a,b)=>a+b,0)/12/255;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  const target = document.body.classList.contains('night') ? 1 : 0;
+  dayNightMix += (target - dayNightMix) * 0.015;
+
+  /* BASE BLOBS (BLENDED) */
+  for(let i=0;i<6;i++){
+    const r = Math.max(innerWidth,innerHeight)*(0.25+i*0.1+bass*0.2);
+    const x = innerWidth/2 + Math.sin(t*0.0004+i)*160;
+    const y = innerHeight/2 + Math.cos(t*0.0005+i)*120;
+
+    const hue = 335 + (215-335)*dayNightMix + i*9;
+    const light = 72 + (26-72)*dayNightMix;
+
+    const g = ctx.createRadialGradient(x,y,r*0.3,x,y,r);
+    g.addColorStop(0, `hsla(${hue},60%,${light}%,${0.09+bass*0.15})`);
+    g.addColorStop(1,'transparent');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+  }
+
+  /* NIGHT ELEMENTS FADE IN */
+  const moon = ctx.createRadialGradient(
+    innerWidth*0.75, innerHeight*0.25, 0,
+    innerWidth*0.75, innerHeight*0.25, 400
+  );
+  moon.addColorStop(0, `rgba(180,200,255,${(0.15+bass*0.2)*dayNightMix})`);
+  moon.addColorStop(1,'transparent');
+  ctx.fillStyle = moon;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle = `rgba(200,220,255,${0.7*dayNightMix})`;
+  stars.forEach(s=>{
+    s.y -= 0.1; if(s.y<0)s.y=innerHeight;
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.s,0,Math.PI*2); ctx.fill();
+  });
+
+  dither();
+  t++;
+}
+
+audio.onplay = ()=>audioCtx.resume();
+draw();
+</script>
+
+</body>
+</html>

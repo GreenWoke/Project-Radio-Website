@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/merlin.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:55 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../images/merlchao.ico">
+  <title>Merlin</title>
+    <meta property="og:title" content="Merlin Green" />
+<meta property="og:description" content="Web Design • Music Production • Graphic Design" />
+  <meta property="og:image" content="../images/merlin_head.png" />
+  <meta property="og:url" content="merlin/index.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="www.projectradio.org" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&amp;display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,129,0,0.34);
+      z-index: -1;
+    }
+
+    video.bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    body {
+      font-family: 'Bitcount Grid Double', monospace;
+      font-size: 18px;
+      color: #ccffcc;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+}
+
+* {
+  cursor: url("../images/merlmouse.png") 0 0, auto !important;
+}
+
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;   
+      align-items: center;      
+      gap: 1rem;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .profile-container {
+      max-width: 960px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 0 10px green;
+    }
+
+    .sidebar {
+      width: 300px;
+      background: #1a2e1a;
+      border-right: 2px dashed #33cc33;
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 250px;
+      height: 250px;
+      background: url('../images/merlin_head.png') center/cover no-repeat;
+      border: 4px #33ff33;
+      border-radius: 8px;
+      box-shadow: 0 0 9px white;
+    }
+
+    .basic-info {
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      width: 100%;
+      padding: 1rem;
+      color: white;
+    }
+
+    .basic-info h2 {
+      margin: 0 0 0.5rem;
+      color: #99ff99;
+    }
+
+    .basic-info p {
+      margin: 0.4rem 0;
+    }
+
+    .content-area {
+      flex: 1;
+      padding: 2rem;
+      color: #eaffea;
+      background: rgba(0,4,0,0.23);
+      border-left: 2px dashed #33ff33;
+    }
+
+    .content-area h3 {
+      border-bottom: 2px dotted #33ff33;
+      padding-bottom: 0.5rem;
+      color: #b6ffb6;
+    }
+
+    .links {
+      margin: 1rem 0;
+    }
+
+    .links a {
+      display: inline-block;
+      background: rgba(0,92,97,0.69);
+      border: 2px solid #33cc33;
+      color: #d0ffd0;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      margin-right: 0.5rem;
+      border-radius: 6px;
+      text-shadow: 0 0 4px #66ff66;
+      transition: all 0.2s ease;
+    }
+
+    .links a:hover {
+      background: #2f6e2f;
+      color: #fff;
+    }
+
+    .mode-selector {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .mode-selector button {
+      background: #8fbf00;
+      border: 3px solid #4b7400;
+      color: #e0f09d;
+      font-family: 'Press Start 2P', monospace;
+      font-weight: 700;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      text-shadow: 1px 1px 2px #2f4700;
+      user-select: none;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .mode-selector button.active,
+    .mode-selector button:hover {
+      background: #a3d200;
+      color: #1c2f00;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 16 / 9;
+      margin: 1rem auto;
+      overflow: hidden;
+      border: 4px solid #33ff33;
+      border-radius: 10px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel img,
+    .carousel video,
+    .carousel audio {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: url('../images/merlin_bg2.gif') center center / cover no-repeat;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 100, 0, 0.6);
+      border: none;
+      color: #ccffcc;
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      z-index: 1;
+      transition: background 0.2s;
+    }
+
+    .arrow:hover {
+      background: rgba(0, 150, 0, 0.8);
+    }
+
+    .arrow.left { left: 0; }
+    .arrow.right { right: 0; }
+
+    .uplink-box {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 100px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      z-index: 9999;
+    }
+
+    .uplink-box img {
+      max-height: 32px;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(1px 1px 2px white);
+    }
+
+    .uplink-box .hosted-by {
+      font-size: 14px;
+      color: #fff;
+      text-shadow: 1px 1px 2px black;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .profile-container {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px dashed #33ff33;
+        align-items: center;
+      }
+
+      .profile-pic {
+        width: 180px;
+        height: 180px;
+      }
+
+      .basic-info {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .content-area {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+    }
+
+    /* ADDED: Fullscreen GIF overlay */
+    #gifOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+    }
+
+    #gifOverlay img {
+      width: 400px;
+      height: auto;
+    }
+
+  </style>
+</head>
+
+<body>
+  <video class="bg-video" autoplay loop muted playsinline>
+    <source src="../images/merlinbg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="page-wrapper">
+    <div class="profile-container" role="main" aria-label="Artist Profile">
+      <aside class="sidebar">
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+
+        <div class="basic-info">
+          <h2>About</h2>
+          <p><strong>Location:</strong> Australia</p>
+          <p><strong>Mediums:</strong> Music Production, DJ, Graphic Design, Web Design</p>
+
+          <h2>Favourites</h2>
+          <p><strong>Album:</strong> AMplified Heart - Everything But The Girl</p>
+          <p><strong>Movie:</strong> Brick (2005)</p>
+        </div>
+
+        <!-- UPDATED: added id="triggerGif" -->
+        <img id="triggerGif" src="../../../media.tenor.com/RChGxJ8KuRYAAAAj/sonic-chao-chao.gif" alt="Sonic Chao Chao" width="100">
+      </aside>
+
+      <section class="content-area">
+        <h3>Merlin</h3>
+        <p>1 thing abt me is i like to party rock</p>
+
+        <h3>Links &amp; Work</h3>
+        <div class="links">
+          <a href="https://merlverse.neocities.org/">Website</a>
+          <a href="https://soundcloud.com/merlinmp3">SoundCloud</a>
+        </div>
+
+        <h3>Showcase</h3>
+        <div class="mode-selector" role="tablist" aria-label="Showcase modes">
+          <button id="mode-designs" class="active" role="tab" aria-selected="true" aria-controls="carousel-content" tabindex="0" onclick="switchMode('designs')">Graphic</button>
+          <button id="mode-music" role="tab" aria-selected="false" aria-controls="carousel-content" tabindex="-1" onclick="switchMode('music')">Sound</button>
+          <button id="mode-video" role="tab" aria-selected="false" aria-controls="carousel-content" tabindex="-1" onclick="switchMode('video')">Video</button>
+        </div>
+
+        <div class="carousel" aria-live="polite" aria-atomic="true" aria-relevant="additions removals" tabindex="0" id="carousel-content">
+          <button class="arrow left" aria-label="Previous item" onclick="prevItem()">❮</button>
+          <button class="arrow right" aria-label="Next item" onclick="nextItem()">❯</button>
+          <div id="carousel-media" style="width:100%; height: 100%;"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <a href="../uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+    <span class="hosted-by">Hosted by</span>
+    <img src="../../R-Transparent.png" alt="Uplink Logo" />
+  </a>
+
+  <!-- ADDED: Fullscreen popup GIF -->
+  <div id="gifOverlay">
+      <img id="popupGif" src="../images/chaojumpscare.gif">
+  </div>
+
+  <script>
+    const showcases = {
+      designs: [
+        { type: 'image', src: 'https://merlverse.neocities.org/stucksaki.png', alt: 'Merlin graphic design 1' },
+        { type: 'image', src: 'https://merlverse.neocities.org/stickysaki.png', alt: 'Merlin graphic design 2' },
+        { type: 'image', src: 'https://merlverse.neocities.org/celine-saab.png', alt: 'Merlin graphic design 2' },
+        { type: 'image', src: 'https://merlverse.neocities.org/tahoes14.png', alt: 'Merlin web design example' },
+        { type: 'image', src: 'https://merlverse.neocities.org/meow.png', alt: 'Merlin graphic design 4' },
+        { type: 'image', src: 'https://merlverse.neocities.org/shecrazybrazy.png', alt: 'Merlin graphic design 5' }
+      ],
+      music: [
+        { type: 'audio', src: 'https://projectradio.org/artists/sounds/Shape.mp3' }
+      ],
+      video: [
+        { type: 'video', src: 'https://projectradio.org/artists/images/organic.dancer.mp4' }
+      ]
+    };
+
+    let currentMode = 'designs';
+    let currentIndex = 0;
+
+    function renderItem() {
+      const container = document.getElementById('carousel-media');
+      container.innerHTML = ''; 
+
+      const item = showcases[currentMode][currentIndex];
+      if (!item) return;
+
+      let media;
+      if (item.type === 'image') {
+        media = document.createElement('img');
+        media.src = item.src;
+        media.alt = item.alt || '';
+      } else if (item.type === 'audio') {
+        media = document.createElement('audio');
+        media.controls = true;
+        media.src = item.src;
+        media.setAttribute('aria-label', 'Audio track');
+      } else if (item.type === 'video') {
+        media = document.createElement('video');
+        media.src = item.src;
+        media.controls = true;
+        media.autoplay = false;
+        media.loop = false;
+        media.muted = true;
+        media.setAttribute('aria-label', 'Video track');
+      }
+      container.appendChild(media);
+    }
+
+    function switchMode(mode) {
+      if (mode === currentMode) return;
+      currentMode = mode;
+      currentIndex = 0;
+      renderItem();
+      updateButtons();
+    }
+
+    function updateButtons() {
+      document.querySelectorAll('.mode-selector button').forEach(btn => {
+        if (btn.id === `mode-${currentMode}`) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          btn.tabIndex = 0;
+        } else {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+          btn.tabIndex = -1;
+        }
+      });
+    }
+
+    function nextItem() {
+      const length = showcases[currentMode].length;
+      currentIndex = (currentIndex + 1) % length;
+      renderItem();
+    }
+
+    function prevItem() {
+      const length = showcases[currentMode].length;
+      currentIndex = (currentIndex - 1 + length) % length;
+      renderItem();
+    }
+
+    window.onload = () => {
+      renderItem();
+      updateButtons();
+    };
+
+    /* ADDED: Popup GIF click logic */
+    document.getElementById("triggerGif").addEventListener("click", () => {
+      const overlay = document.getElementById("gifOverlay");
+      const popupGif = document.getElementById("popupGif");
+
+      popupGif.src = popupGif.src; 
+      overlay.style.display = "flex";
+
+      setTimeout(() => {
+        overlay.style.display = "none";
+      }, 3000);
+    });
+
+  </script>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/merlin.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:55 GMT -->
+</html>

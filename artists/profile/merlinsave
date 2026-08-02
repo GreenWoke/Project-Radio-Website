@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artist Profile - Merlin</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,129,0,0.34)); /* Optional overlay */
+      z-index: -1;
+    }
+
+    video.bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .bitcount-grid-double-<uniquifier> {
+      font-family: "Bitcount Grid Double", system-ui;
+      font-optical-sizing: auto;
+      font-weight: <weight>;
+      font-style: normal;
+      font-variation-settings:
+        "slnt" 0,
+        "CRSV" 0.5,
+        "ELSH" 0,
+        "ELXP" 0;
+    }
+
+    body {
+      font-family: 'Bitcount Grid Double', monospace;
+      font-size: 18px;
+      color: #ccffcc;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .page-wrapper {
+      display: flex;
+      gap: 1rem;
+      max-width: 1200px;
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    nav.navigation {
+      width: 180px;
+      background: linear-gradient(135deg, #d1e3a3, #a7c050);
+      border: 5px solid #2f7a00;
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+    }
+
+    nav.navigation a {
+      font-family: 'Press Start 2P', monospace;
+      background: #8fbf00;
+      border: 3px solid #4b7400;
+      color: #e0f09d;
+      text-decoration: none;
+      padding: 0.6rem 1rem;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+      border-radius: 10px;
+      text-shadow: 1px 1px 2px #2f4700;
+      cursor: pointer;
+      text-align: center;
+      user-select: none;
+      display: block;
+      font-size: 1rem;
+    }
+
+    nav.navigation a:hover {
+      background: #a3d200;
+      color: #1c2f00;
+    }
+
+    .profile-container {
+      max-width: 960px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 0 10px green;
+    }
+
+    .sidebar {
+      width: 300px;
+      background: #1a2e1a;
+      border-right: 2px dashed #33cc33;
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 250px;
+      height: 250px;
+      background: url('https://projectradio.org/artists/images/merlin_head.png') center/cover no-repeat;
+      border: 4px #33ff33;
+      border-radius: 8px;
+      box-shadow: 0 0 9px white;
+    }
+
+    .basic-info {
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      width: 100%;
+      padding: 1rem;
+      color: white;
+    }
+
+    .basic-info h2 {
+      margin: 0 0 0.5rem;
+      color: #99ff99;
+    }
+
+    .basic-info p {
+      margin: 0.4rem 0;
+    }
+
+    .content-area {
+      flex: 1;
+      padding: 2rem;
+      color: #eaffea;
+      background: rgba(0,4,0,0.23);
+      border-left: 2px dashed #33ff33;
+    }
+
+    .content-area h3 {
+      border-bottom: 2px dotted #33ff33;
+      padding-bottom: 0.5rem;
+      color: #b6ffb6;
+    }
+
+    .links {
+      margin: 1rem 0;
+    }
+
+    .links a {
+      display: inline-block;
+      background: rgba(0,92,97,0.69);
+      border: 2px solid #33cc33;
+      color: #d0ffd0;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      margin-right: 0.5rem;
+      border-radius: 6px;
+      text-shadow: 0 0 4px #66ff66;
+      transition: all 0.2s ease;
+    }
+
+    .links a:hover {
+      background: #2f6e2f;
+      color: #fff;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 16 / 9;
+      margin: 1rem auto;
+      overflow: hidden;
+      border: 4px solid #33ff33;
+      border-radius: 10px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+    }
+
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: url('https://projectradio.org/artists/images/merlin_bg2.gif') center center / cover no-repeat;
+}
+
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 100, 0, 0.6);
+      border: none;
+      color: #ccffcc;
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      z-index: 1;
+      transition: background 0.2s;
+    }
+
+    .arrow:hover {
+      background: rgba(0, 150, 0, 0.8);
+    }
+
+    .arrow.left {
+      left: 0;
+    }
+
+    .arrow.right {
+      right: 0;
+    }
+
+    @media (max-width: 768px) {
+      .page-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+      }
+
+      nav.navigation {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      nav.navigation a {
+        margin: 0.3rem;
+        flex: 1 0 40%;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      .profile-container {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px dashed #33ff33;
+        align-items: center;
+      }
+
+      .profile-pic {
+        width: 180px;
+        height: 180px;
+      }
+
+      .basic-info {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .content-area {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+      
+    }
+  </style>
+</head>
+
+<body>
+  <video class="bg-video" autoplay loop muted playsinline>
+    <source src="https://projectradio.org/artists/images/merlinbg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="page-wrapper">
+    <nav class="navigation" aria-label="Main navigation">
+      <a href="https://projectradio.org/artists/uplink">Uplink</a>
+      <a href="#">The Wall</a>
+      <a href="https://discord.gg/GZ65Px3RHy">Chatroom</a>
+      <a href="https://projectradio.org">Back to Radio</a>
+    </nav>
+
+    <div class="profile-container" role="main" aria-label="Artist Profile">
+      <aside class="sidebar">
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+
+        <div class="basic-info">
+          <h2>About</h2>
+          <p><strong>Location:</strong> Australia</p>
+          <p><strong>Mediums:</strong> Music Production, DJ, Graphic Design, Web Design</p>
+
+          <h2>Favourites</h2>
+          <p><strong>Album:</strong> AMplified Heart - Everything But The Girl</p>
+          <p><strong>Movie:</strong> Brick (2005)</p>
+        </div>
+      </aside>
+
+      <section class="content-area">
+        <h3>Merlin</h3>
+        <p>[Short artist bio or description goes here. Mention genre, style, influences, etc.]</p>
+
+        <h3>Links &amp; Work</h3>
+        <div class="links">
+          <a href="https://merlverse.neocities.org">Website</a>
+          <a href="https://soundcloud.com/merlinmp3">SoundCloud</a>
+        </div>
+
+        <h3>Showcase</h3>
+        <div class="carousel">
+          <button class="arrow left" onclick="prevSlide()">&#9664;</button>
+          <img id="carouselImage" src="https://merlverse.neocities.org/celine-saab.png" alt="Artwork 1">
+          <button class="arrow right" onclick="nextSlide()">&#9654;</button>
+        </div>
+      </section>
+    </div>
+    
+  </div>
+
+  <script>
+    const images = [
+      "https://merlverse.neocities.org/stucksaki.png",
+      "https://merlverse.neocities.org/tahoes14.png",
+      "https://merlverse.neocities.org/celine-saab.png",
+      "https://merlverse.neocities.org/stickysaki.png",
+      "https://merlverse.neocities.org/freebird.png",
+      "https://merlverse.neocities.org/shecrazybrazy.png",
+      "https://merlverse.neocities.org/meow.png"
+    ];
+
+    let currentImage = 0;
+    const imgElement = document.getElementById("carouselImage");
+
+    function showImage(index) {
+      currentImage = (index + images.length) % images.length;
+      imgElement.src = images[currentImage];
+      imgElement.alt = `Artwork ${currentImage + 1}`;
+    }
+
+    function prevSlide() {
+      showImage(currentImage - 1);
+    }
+
+    function nextSlide() {
+      showImage(currentImage + 1);
+    }
+  </script>
+
+  <div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); justify-content:center; align-items:center; cursor: zoom-out; z-index:1000;">
+    <img id="lightbox-img" src="" alt="Enlarged artwork" style="max-width:90%; max-height:90%; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.5);" />
+  </div>
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const galleryImages = document.querySelectorAll('.carousel img');
+
+    galleryImages.forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || 'Artwork';
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+      lightboxImg.alt = '';
+    });
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+  font-family: 'Press Start 2P', monospace;
+  background-image: url('https://projectradio.org/DRAINPAPER.PNG');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-position: center;  color: #111;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.player-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.player-box {
+  background: linear-gradient(to bottom, #e6e6e6 0%, #d4d4d4 100%);
+  border: 1px solid #999;
+  border-radius: 6px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  width: 450px;
+  cursor: grab;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.player-header {
+  background: linear-gradient(to bottom, #6ebf00 0%, #6ebf00 100%);
+  color: white;
+  font-size: 0.8rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #1f3c66;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.player-content {
+  padding: 1.5rem 2rem;
+}
+
+.now-playing h2 { font-size: 0.9rem; margin-bottom: 0.5rem; color: #333; }
+#track-title { font-size: 0.8rem; color: #111; margin-bottom: 1.5rem; }
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.controls button {
+  background: #4d90fe;
+  border: 1px solid #1a5fb4;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.controls button:hover {
+  background: #357ae8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+}
+
+.controls input[type="range"] { width: 100px; }
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-start;
+  padding: 0.5rem 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+
+  background: linear-gradient(to bottom, #e6e6e6, #a6a6a6);
+  border-top: 2px solid #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 -3px 5px rgba(0,0,0,0.4);
+  border-radius: 0;
+  color: #111;
+}
+
+.footer .logo { max-width: 120px; height: auto; }
+.footer .tagline { font-size: 0.7rem; color: #111; }
+
+.player-box:active { cursor: grabbing; }

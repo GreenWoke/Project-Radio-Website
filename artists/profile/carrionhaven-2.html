@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/carrionhaven.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:55 GMT -->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Carrion Haven</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&amp;display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'EB Garamond', serif;
+    color: #E6C08E;
+    background: #000 url('../images/carrionhaven_bg300.png') center/cover no-repeat fixed;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* B&W overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url('../images/carrionhaven_bg300.png') center/cover no-repeat fixed;
+    filter: grayscale(100%) brightness(0.6);
+    z-index: -1;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 960px;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    overflow: hidden;
+    border-radius: 12px;
+    margin: 0 auto;
+}
+
+.sidebar {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(0,0,0,0.1);
+}
+
+.profile-pic {
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1;
+    background: url('../images/carrion_head2.jpg') center/cover no-repeat;
+    box-shadow: 0 0 10px black;
+    margin-bottom: 1rem;
+}
+
+.basic-info {
+    width: 100%;
+    color: black;
+}
+
+.basic-info h2 {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.basic-info p {
+    margin: 0.2rem 0;
+    font-size: 0.85rem;
+}
+
+.content-area {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: black;
+}
+
+.content-area h3 {
+    font-size: 1.2rem;
+    color: #906D43;
+    border-bottom: 2px solid #906D43;
+    padding-bottom: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.links a {
+    display: inline-block;
+    background: #906D43;
+    border: 2px solid #E6C08E;
+    color: #E6C08E;
+    text-decoration: none;
+    padding: 0.4rem 1rem;
+    margin: 0.2rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.gallery {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.gallery img,
+.gallery iframe {
+    width: 100%;
+    max-width: 160px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 2px solid #906D43;
+}
+
+.responsive-iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    border: none;
+}
+
+.uplink-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    max-width: 100px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    z-index: 9999;
+}
+
+.uplink-box img {
+    max-height: 32px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(1px 1px 2px white);
+}
+
+.uplink-box .hosted-by {
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 1px 1px 2px black;
+    margin-bottom: 4px;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        max-width: 90%;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .profile-pic {
+        max-width: 150px;
+        margin: 0 auto; 
+    }
+    
+    .basic-info {
+        text-align: center; 
+    }
+
+    .content-area {
+        padding: 1rem;
+    }
+
+    .gallery img,
+    .gallery iframe {
+        max-width: 120px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="profile-container">
+    <aside class="sidebar">
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+        <div class="basic-info">
+            <h2>File: Carrie ██████</h2>
+            <p><strong>Location:</strong> Carrion Haven 570-1</p>
+            <p><strong>File status:</strong>  Ongoing</p>
+            <p><strong>File type:</strong>  Immunity event</p>
+            <h2>Favourites</h2>
+            <p><strong>Album:</strong> i let it in and it took everything - loathe</p>
+            <p><strong>Movie:</strong> i saw the tv glow</p>
+        </div>
+    </aside>
+    <section class="content-area">
+        <center><h3>Property of HAVENALGIA CORPS</h3></center>
+        <p>i am going to BLOW your MIND out of your SCALP with SCREECHING SYNTHESIZERS, BLASTED BASS, and VICIOUS VOCALS!!! and then i am going to LULL you to SLEEP with SOOTHING TONES 🎶</p>
+        <center><h3>DATA CENTERS</h3></center>
+        <div class="links">
+            <a href="https://www.instagram.com/carrionhaven/">Instagram</a>
+            <a href="https://soundcloud.com/carrionhaven">SoundCloud</a>
+            <a href="https://open.spotify.com/artist/08LQWOf6XdaDpPdqdZKKdh?si=0WmIWAF-RN-euR3uiLcvtA">Spotify</a>
+            <a href="https://carrionhaven.bandcamp.com/">Bandcamp</a>
+        </div>
+        <h3>Showcase</h3>
+        <div class="gallery">
+            <iframe class="responsive-iframe" src="https://open.spotify.com/embed/artist/08LQWOf6XdaDpPdqdZKKdh?utm_source=generator" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+    </section>
+</div>
+<a href="../uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+    <span class="hosted-by">Hosted by</span>
+    <img src="../../R-Transparent.png" alt="Uplink Logo" />
+</a>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/carrionhaven.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:55 GMT -->
+</html>

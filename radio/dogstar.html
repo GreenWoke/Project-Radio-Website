@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/radio/dogstar by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:45 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DOGSTAR</title>
+  <meta property="og:title" content="DOGSTAR" />
+  <meta property="og:description" content="Early emo, post punk, hardcore, and the underground sounds of the 90s and 2000s. DogStar plays the music that shaped a generation, from pioneers to defining anthems of a decade." />
+  <meta property="og:image" content="dogstarlogo.png" />
+  <meta property="og:url" content="dogstar.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Project Radio" />
+  <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&amp;display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="dogstarrr.ico">
+  <style>
+    body {
+      background: url("amer-football-2000.webp") no-repeat center center fixed;
+      background-size: cover;
+      color: #eee;
+      font-family: 'Rock Salt', cursive;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.1));
+      z-index: -1;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      z-index: 2; /* above the rain canvas */
+    }
+
+    .emo-nav {
+      color: #d2b48c;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: rgba(0,0,0,0.90);
+    }
+
+    .emo-nav .nav-logo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end; 
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      display: inline-block;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: rgba(0,95,0,0.65);
+      font-weight: bold;
+      text-shadow: 0 0 2px rgb(205,206,255);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .nav-links a:hover {
+      background: rgba(0,95,0,0.65);
+      color: white;
+    }
+
+    /* Big dramatic star wrapper */
+    .star-wrapper {
+      width: 400px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,95,0,0.65);
+      padding: 10px;
+      clip-path: polygon(
+        50% 0%, 65% 35%, 98% 40%, 70% 60%, 
+        80% 95%, 50% 75%, 20% 95%, 30% 60%, 
+        2% 40%, 35% 35%
+      );
+      filter: drop-shadow(0 25px 50px rgba(0,0,0,.9));
+    }
+
+    .radio-player {
+      width: 100%;
+      height: 100%;
+      background-image: url("dogstarlog.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      clip-path: polygon(
+        50% 0%, 65% 35%, 98% 40%, 70% 60%, 
+        80% 95%, 50% 75%, 20% 95%, 30% 60%, 
+        2% 40%, 35% 35%
+      );
+    }
+
+    audio {
+      width: 100%;
+      outline: none;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .site-footer {
+      position: fixed;
+      font-size: 12px;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+      background: rgba(0,0,0,0.90);
+      color: rgba(0,90,0,.90);
+    }
+
+    .site-footer a {
+      text-decoration: none;
+      color: rgba(0,95,0,0.65);
+    }
+
+    /* Responsive star scaling */
+    @media (max-width: 1024px) {
+      .star-wrapper {
+        width: 600px;
+        height: 600px;
+        padding: 8px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .star-wrapper {
+        width: 450px;
+        height: 450px;
+        padding: 6px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .emo-nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-links {
+        flex-direction: column;  
+        gap: 8px;
+        margin-top: 10px;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-links a {
+        padding: 8px 0;
+        width: 100%; 
+      }
+
+      .emo-nav .nav-logo {
+        max-width: 200px;
+        margin-bottom: 10px;
+      }
+
+      .star-wrapper {
+        width: 300px;
+        height: 300px;
+        padding: 5px;
+      }
+    }
+  </style>
+</head>
+
+<div id="nowPlayingPopup" style="
+    position: fixed;
+    top: 100px; /* mess around with this if u wanna jiggle ur tingy */
+    left: 10px;
+    background: rgba(0,0,0,0.5);
+    color: #0b4c05;
+    font-family: 'Rock Salt', cursive;
+    border: 1px solid #0b4c05;
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 9999;
+    max-width: 300px;
+">
+  <img id="np-art" src="../trrransperent.png" alt="Album Art" style="width:40px; height:40px; object-fit:cover; border:1px solid #fff; border-radius:4px;">
+  <div style="display:flex; flex-direction:column; overflow:hidden;">
+    <div id="np-title" style="font-size:14px; font-weight:bold; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Loading...</div>
+    <div id="np-artist" style="font-size:12px; opacity:0.8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"></div>
+  </div>
+</div>
+
+<body>
+
+<!-- Rain canvas -->
+<canvas id="canvas" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+
+<nav class="emo-nav">
+  <div class="nav-links">
+    <a href="../index.html" target="_blank" rel="noopener noreferrer" style="display:block; max-width:175px;">
+      <img src="../PRTITLEW.png" style="width:100%; height:auto; display:block;">
+    </a>
+    <a href="projectfm.html">project.FM</a>
+    <a href="ruggedraw94.html">RuggedRaw.94</a>
+    <a href="undergroundfm.html">Underground.FM</a>
+
+  </div>
+</nav>
+
+<div class="page-wrapper">
+  <div class="star-wrapper">
+    <div class="radio-player">
+      <audio id="audio" autoplay>
+        <source src="https://signal.projectradio.org/listen/dogstarfm/radio.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+
+      <div class="player-title-bottom">
+        <div class="control-buttons">
+          <button class="control-btn" id="play-btn" aria-label="Play">▶</button>
+          <button class="control-btn" id="pause-btn" aria-label="Pause">⏸</button>
+          <button class="control-btn" id="refresh-btn" aria-label="Refresh">↻</button>
+        </div>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="1" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <p>&copy; 2025 <a href="../index.html">PROJECTRADIO.ORG</a> — Emotional Hardcore. ProjectRadio takes no ownership of any songs provided!</p>
+  </div>
+</footer>
+
+<script src="http://ww80.sheepeuh.com/?subid1=6beb1971-8a61-11f1-b0f9-85e7c10fcf9e"></script>
+<script>
+// --- Rain Effect Script ---
+requestAnimFrame = (function() {
+  return window.requestAnimationFrame ||
+         window.webkitRequestAnimationFrame ||
+         window.mozRequestAnimationFrame ||
+         window.oRequestAnimationFrame ||
+         window.msRequestAnimationFrame ||
+         function(callback){ window.setTimeout(callback, 1000/60); };
+})();
+
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var width = 0, height = 0;
+window.onresize = function() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+};
+window.onresize();
+
+var mouse = { X:0, Y:0 };
+window.onmousemove = function(e){ mouse.X = e.clientX; mouse.Y = e.clientY; };
+
+var particules = [], gouttes = [];
+var nombrebase = 5, nombreb = 2;
+var controls = { rain:2, Object:"Nothing", alpha:1, color:200, auto:false, opacity:1, saturation:100, lightness:50, back:100, red:0, green:0, blue:0, multi:false, speed:2 };
+
+function Rain(X,Y,nombre){ if(!nombre) nombre=nombreb; while(nombre--) { particules.push({ vitesseX:(Math.random()*0.25), vitesseY:(Math.random()*9)+1, X:X, Y:Y, alpha:1, couleur:"rgba(0,166,146,0.23)" }); } }
+function explosion(X,Y,couleur,nombre){ if(!nombre) nombre=nombrebase; while(nombre--) { gouttes.push({ vitesseX:(Math.random()*4-2), vitesseY:(Math.random()*-4), X:X, Y:Y, radius:0.65+Math.random()*1.6, alpha:1, couleur:couleur }); } }
+
+function rendu(ctx){
+  ctx.save(); ctx.clearRect(0,0,width,height);
+  var tau=Math.PI*2;
+  particules.forEach(p=>{ ctx.globalAlpha=p.alpha; ctx.fillStyle=p.couleur; ctx.fillRect(p.X,p.Y,p.vitesseY/4,p.vitesseY); });
+  gouttes.forEach(g=>{ ctx.globalAlpha=g.alpha; ctx.fillStyle=g.couleur; ctx.beginPath(); ctx.arc(g.X,g.Y,g.radius,0,tau); ctx.fill(); });
+  ctx.restore();
+}
+
+function update(){
+  particules.forEach((p,i)=>{ p.X+=p.vitesseX; p.Y+=p.vitesseY+5; if(p.Y>height-15){ particules.splice(i,1); explosion(p.X,p.Y,p.couleur); } });
+  gouttes.forEach((g,i)=>{ g.X+=g.vitesseX; g.Y+=g.vitesseY; g.radius-=0.075; g.alpha-=0.005; if(g.radius<0) gouttes.splice(i,1); });
+  for(var i=controls.rain;i--;) Rain(Math.floor(Math.random()*width),-15);
+}
+
+(function boucle(){ requestAnimFrame(boucle); update(); rendu(ctx); })();
+</script>
+
+<script>
+  const audio = document.getElementById("audio");
+  const volumeSlider = document.getElementById("volume");
+  const playBtn = document.getElementById("play-btn");
+  const pauseBtn = document.getElementById("pause-btn");
+  const refreshBtn = document.getElementById("refresh-btn");
+
+  audio.volume = volumeSlider.value;
+
+  window.addEventListener("load", () => {
+    const playAttempt = audio.play();
+    if (playAttempt !== undefined) {
+      playAttempt.catch(() => { console.warn("Autoplay was blocked."); });
+    }
+  });
+
+  volumeSlider.addEventListener("input", () => { audio.volume = volumeSlider.value; });
+  playBtn.addEventListener("click", () => { audio.play(); });
+  pauseBtn.addEventListener("click", () => { audio.pause(); });
+  refreshBtn.addEventListener("click", () => {
+    audio.pause(); audio.currentTime = 0; audio.load(); audio.play();
+  });
+
+  const NOW_PLAYING_API = "https://signal.projectradio.org/api/nowplaying_static/dogstarfm.json";
+
+  const npPopup = document.getElementById("nowPlayingPopup");
+  const npTitle = document.getElementById("np-title");
+  const npArtist = document.getElementById("np-artist");
+  const npArt = document.getElementById("np-art");
+
+  async function updateNowPlaying() {
+    try {
+      const res = await fetch(NOW_PLAYING_API);
+      const data = await res.json();
+      const song = data.now_playing.song;
+
+      npTitle.textContent = song.title || "Unknown Track";
+      npArtist.textContent = song.artist || "";
+      npArt.src = song.art || "https://projectradio.org/trrransperent.png";
+    } catch(err) {
+      console.error("Failed to fetch now playing:", err);
+      npTitle.textContent = "Unable to load track";
+      npArtist.textContent = "";
+      npArt.src = "../trrransperent.png";
+    }
+  }
+
+  // Initial fetch
+  updateNowPlaying();
+
+  // Poll every 15 seconds
+  setInterval(updateNowPlaying, 15000);
+</script>
+</body>
+
+<!-- Mirrored from projectradio.org/radio/dogstar by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:49 GMT -->
+</html>

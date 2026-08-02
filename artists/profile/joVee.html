@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/joVee by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:03 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>joVee</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap');
+
+    html {
+      background-color: #fafafa;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive, monospace;
+      color: #333;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      max-width: 960px;
+      width: 100%;
+    }
+
+    .profile-container {
+      font-family: "Crimson Text", serif;
+      font-size: 16px;
+      width: 100%;
+      background: #fff;
+      border: 2px solid black;
+      border-radius: 12px;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 300px;
+      background: black;
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 250px;
+      height: 250px;
+      background: url('../images/Jovee_head.png') center/cover no-repeat;
+      border: 4px solid black;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .basic-info {
+      margin-top: 1.5rem;
+      color: red;
+      background: black;
+      border: 2px solid black;
+      border-radius: 10px;
+      width: 100%;
+      padding: 1rem 1.2rem;
+    }
+
+    .basic-info h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .basic-info p {
+      margin: 0.3rem 0;
+      font-size: 0.7rem;
+    }
+
+    .content-area {
+      color: red;
+      flex: 1;
+      background: black;
+      padding: 2rem 2.5rem;
+      border-left: 2px solid black;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content-area h3 {
+      font-size: 1rem;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .links {
+      margin: 1rem 0;
+    }
+
+    .links a {
+      display: inline-block;
+      background: black;
+      border: 2px solid black;
+      color: red;
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      margin-right: 0.6rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .gallery {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .gallery img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    video.bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    /* Hosted by button */
+    .uplink-box {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer;
+      max-width: 100px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      z-index: 9999;
+    }
+
+    .uplink-box img {
+      max-height: 32px;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(1px 1px 2px white);
+    }
+
+    .uplink-box .hosted-by {
+      font-size: 14px;
+      color: #fff;
+      text-shadow: 1px 1px 2px black;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .profile-container {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+        align-items: center;
+      }
+
+      .profile-pic {
+        width: 180px;
+        height: 180px;
+      }
+
+      .gallery img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <video class="bg-video" autoplay loop muted playsinline>
+    <source src="../images/jovee_bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="page-wrapper">
+    <div class="profile-container" role="main" aria-label="Artist Profile">
+      <aside class="sidebar">
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+
+        <div class="basic-info">
+          <h2>>ABOUT</h2>
+          <p><strong>Location:</strong> United States</p>
+          <p><strong>Mediums:</strong> Producer, Singer/songwriter, composter, visual artist, 3d artist </p>
+
+          <h2>>FAVOURITES</h2>
+          <p><strong>Album:</strong> The Downward Spiral - Nine Inch Nails</p>
+          <p><strong>Movie:</strong> Gummo</p>
+        </div>
+      </aside>
+
+      <section class="content-area">
+        <h3>>joVee</h3>
+        <p>Creator of strange and dark music</p>
+
+        <h3>>Links &amp; Work</h3>
+        <div class="links">
+          <a href="https://joveedubstep.bandcamp.com/">Bandcamp</a>
+          <a href="https://soundcloud.com/joveeofficial">SoundCloud</a>
+          <a href="https://www.instagram.com/jovee_official/">Instagram</a>
+          <a href="https://www.youtube.com/channel/UCwmEdT6bl8OxIHboBBpXXgQ">Youtube</a>
+        </div>
+
+        <h3>>Showcase</h3>
+        <div class="gallery">
+          <a href="https://soundcloud.com/officialfeverdream/jovee-again">
+            <img src="../../../i1.sndcdn.com/artworks-fdUSwn28qT8AWn2F-HFARQg-t500x500.jpg" alt="Showcase Item 1" />
+          </a>
+          <a href="https://soundcloud.com/officialfeverdream/jovee-portal">
+            <img src="../../../i1.sndcdn.com/artworks-imzSe4QZSvEeXASF-yxa9Tw-t500x500.jpg" alt="Showcase Item 2" />
+          </a>
+          <a href="https://soundcloud.com/joveeofficial/jovee-architect">
+            <img src="../../../i1.sndcdn.com/artworks-oy8YkIu7brBCwL4O-LPkDVw-t500x500.jpg" alt="Showcase Item 3" />
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Hosted by footer -->
+  <a href="../uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+    <span class="hosted-by">Hosted by</span>
+    <img src="../../R-Transparent.png" alt="Uplink Logo" />
+  </a>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/joVee by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:06 GMT -->
+</html>

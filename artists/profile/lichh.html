@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from projectradio.org/artists/profile/lichh by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:39 GMT -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>Lichh</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Aldrich&amp;display=swap');
+
+    html, body {
+      margin: 0;
+      font-family: "Aldrich", sans-serif;
+      color: #ff96ff;
+      text-shadow: 1px 1px 5px black;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('../images/lichh_bg.png') center/cover no-repeat;
+      filter: grayscale(20%) contrast(120%) brightness(80%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 200%; height: 200%;
+      background: url('../../../png.pngtree.com/png-clipart/20211018/ourmid/pngtree-smoke-white-dream-fog-picture-image_6860988.png') repeat;
+      opacity: 0.15;
+      animation: smokeScroll 70s linear infinite;
+      z-index: -1;
+      mix-blend-mode: lighten;
+    }
+
+    @keyframes smokeScroll {
+      0% { transform: translate(0%, 0%) scale(1); }
+      25% { transform: translate(-15%, 10%) scale(1.05); }
+      50% { transform: translate(-30%, -10%) scale(1.1); }
+      75% { transform: translate(-45%, 5%) scale(1.05); }
+      100% { transform: translate(-60%, 0%) scale(1); }
+    }
+
+    h2, h3 { user-select: text; }
+
+    .page-wrapper { display: flex; flex-direction: column; max-width: 960px; width: 100%; gap: 1rem; }
+
+    .uplink-box {
+      position: fixed; bottom: 20px; left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer; max-width: 100px; width: 100%;
+      text-align: center; user-select: none; z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; text-decoration: none;
+    }
+    .uplink-box img { max-height: 32px; border-radius: 8px; display: block; margin: 0 auto; filter: drop-shadow(1px 1px 2px white); }
+    .uplink-box .hosted-by { font-size: 14px; color: #ff96ff; text-shadow: 1px 1px 2px white; margin-bottom: 4px; display: block; }
+
+    .profile-container { display: flex; flex-direction: row; border: 2px solid #ff96ff; overflow: hidden; }
+
+    .sidebar {
+      width: 300px; padding: 1.5rem 1rem;
+      background: rgba(144, 13, 144, 0.55); border-right: 2px solid #ff96ff;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .profile-pic {
+      width: 250px; height: 250px;
+      background: url('../images/20251227_010808%20-%20Alec.jpg') center/cover no-repeat;
+      border: 4px solid #ff96ff; border-radius: 50px; cursor: pointer;
+    }
+    .basic-info {
+      margin-top: 1.5rem; width: 100%; background: rgba(0, 0, 0, 0.5);
+      border: 2px solid #ff96ff; padding: 1rem;
+    }
+    .basic-info h2 { margin-bottom: 0.5rem; font-size: 1rem; }
+    .basic-info p { margin: 0.3rem 0; font-size: 0.8rem; }
+
+    .content-area { flex: 1; padding: 2rem; background: rgba(0, 0, 0, 0.75); }
+    .content-area h3 { font-size: 1rem; border-bottom: 2px solid #ccc; padding-bottom: 0.4rem; margin-bottom: 1rem; }
+    .links a {
+      display: inline-block; border: 2px solid #ccc; color: #ff96ff;
+      text-decoration: none; padding: 0.4rem 1rem; margin-right: 0.5rem;
+      font-weight: 700; border-radius: 8px; cursor: pointer; font-size: 0.8rem;
+    }
+    .links a:hover { background: purple; }
+
+    .mp3-player-cassette {
+      margin-top: 1rem;
+      background: rgba(0,0,0,0.8);
+      border: 3px solid #ff96ff;
+      border-radius: 10px;
+      padding: 1rem;
+      font-family: "Press Start 2P", monospace;
+      color: #ff96ff;
+      position: relative;
+    }
+
+    .cassette-deck { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+    .deck-display {
+      width: 100%;
+      background: #111;
+      padding: 0.5rem;
+      text-align: center;
+      border: 2px solid #ff96ff;
+      border-radius: 6px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .controls button {
+      background: #222;
+      border: 2px solid #ff96ff;
+      color: #ff96ff;
+      font-size: 1rem;
+      padding: 0.4rem 0.8rem;
+      margin: 0 0.3rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .controls button:hover { background: #440044; }
+
+    .playlist {
+      display: flex; flex-direction: column; width: 100%; gap: 0.3rem;
+      max-height: 150px; overflow-y: auto;
+    }
+    .playlist .track {
+      background: #111;
+      border: 1px solid #ff96ff;
+      padding: 0.4rem;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.7rem;
+    }
+    .playlist .track.active { background: #440044; color: #fff; }
+
+    #visualizer {
+      width: 100%; height: 60px;
+      border: 2px solid #ff96ff;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+      background: #000;
+    }
+
+    @media (max-width: 768px) {
+      .profile-container { flex-direction: column; }
+      .sidebar { width: 100%; border-right: none; border-bottom: 2px solid #ccc; align-items: center; }
+      .profile-pic { width: 80%; max-width: 200px; height: auto; }
+      .basic-info { font-size: 0.9rem; padding: 1rem; }
+      .content-area { font-size: 0.95rem; padding: 1rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <a href="../uplink.html" class="uplink-box">
+      <span class="hosted-by">Hosted by</span>
+      <img src="../../R-Transparent.png" alt="Uplink Logo" />
+    </a>
+
+    <div class="profile-container">
+      <aside class="sidebar">
+        <div class="profile-pic" tabindex="0"></div>
+
+        <div class="basic-info">
+          <h2>About</h2>
+          <p><strong>Location:</strong>Miami, Florida</p>
+          <p><strong>Mediums:</strong>Rapper</p>
+
+          <h2>Favourites</h2>
+          <p><strong>Album:</strong>From Filthy Tongue of Gods and Griots- Dälek</p>
+          <p><strong>Movie:</strong>Chainsaw Man Movie: Reze Arc!!!</p>
+        </div>
+      </aside>
+
+      <section class="content-area">
+        <h3>LICHH</h3>
+        <p>I live for that noisy shit. I rap to piss off rednecks and advocate for Latino people. Cuban American MC mixin the raps w the industrial n rap rock stew.</p>
+
+        <h3>Links &amp; Work</h3>
+        <div class="links">
+          <a href="https://tr.ee/jQf34rFrK9">Spotify</a>
+          <a href="https://soundcloud.com/lichh-174155857">SoundCloud</a>
+          <a href="https://www.instagram.com/lichhdyre/">Instagram</a>
+          <a href="https://lichh.bandcamp.com/">Bandcamp</a>
+        </div>
+
+        <h3>Showcase</h3>
+        <div class="mp3-player-cassette">
+          <div class="cassette-deck">
+            <div class="deck-display">
+              <span id="current-track">Select a track</span>
+            </div>
+
+            <div class="controls">
+              <button id="prev">⏮</button>
+              <button id="play-pause">▶️</button>
+              <button id="next">⏭</button>
+            </div>
+
+            <div class="playlist">
+              <div class="track" data-src="https://projectradio.org/artists/images/7.%20COP%20IT%20-%20Alec.wav">Cop It</div>
+              <div class="track" data-src="https://projectradio.org/artists/images/2.HOW2GETRICH%20-%20Alec.wav">How To Get Rich</div>
+              <div class="track" data-src="https://projectradio.org/artists/images/8.%20RUN%20THA%20HALL%20-%20Alec.wav">Run Tha Hall</div>
+            </div>
+
+            <canvas id="visualizer"></canvas>
+          </div>
+          <audio id="audio" crossorigin="anonymous"></audio>
+        </div>
+      </section>
+    </div>
+  </div>
+
+<script>
+const audio = document.getElementById('audio');
+const playPauseBtn = document.getElementById('play-pause');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const tracks = Array.from(document.querySelectorAll('.playlist .track'));
+const currentTrackLabel = document.getElementById('current-track');
+
+let currentIndex = 0;
+let playing = false;
+
+function loadTrack(index) {
+  tracks.forEach(t => t.classList.remove('active'));
+  const track = tracks[index];
+  track.classList.add('active');
+  audio.src = track.dataset.src;
+  currentTrackLabel.textContent = track.textContent;
+}
+
+tracks.forEach((t,i) => {
+  t.addEventListener('click', () => { currentIndex = i; loadTrack(currentIndex); playTrack(); });
+});
+
+function playTrack() { audio.play(); playing = true; playPauseBtn.textContent = '⏸'; }
+function pauseTrack() { audio.pause(); playsing = false; playPauseBtn.textContent = '▶️'; }
+
+playPauseBtn.addEventListener('click', () => { playing ? pauseTrack() : playTrack(); });
+prevBtn.addEventListener('click', () => { currentIndex = (currentIndex-1+tracks.length)%tracks.length; loadTrack(currentIndex); playTrack(); });
+nextBtn.addEventListener('click', () => { currentIndex = (currentIndex+1)%tracks.length; loadTrack(currentIndex); playTrack(); });
+
+audio.addEventListener('ended', () => { nextBtn.click(); });
+
+const canvas = document.getElementById('visualizer');
+const ctx = canvas.getContext('2d');
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const analyser = audioCtx.createAnalyser();
+const source = audioCtx.createMediaElementSource(audio);
+source.connect(analyser);
+analyser.connect(audioCtx.destination);
+analyser.fftSize = 64;
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+function draw() {
+  requestAnimationFrame(draw);
+  analyser.getByteFrequencyData(dataArray);
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const barWidth = canvas.width / bufferLength;
+  for(let i=0; i<bufferLength; i++){
+    const barHeight = dataArray[i]/2;
+    ctx.fillStyle = '#ff96ff';
+    ctx.fillRect(i*barWidth, canvas.height - barHeight, barWidth-1, barHeight);
+  }
+}
+draw();
+
+document.body.addEventListener('click', () => { if(audioCtx.state === 'suspended'){ audioCtx.resume(); } }, {once:true});
+
+loadTrack(currentIndex);
+</script>
+</body>
+
+<!-- Mirrored from projectradio.org/artists/profile/lichh by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:53:39 GMT -->
+</html>

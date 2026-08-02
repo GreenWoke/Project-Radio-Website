@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Underground.fm</title>
+<script type="text/javascript" nonce="be6d014fdc124790ba662814f0e" src="//local.adguard.org?ts=1757913793576&amp;type=content-script&amp;dmn=neocities.org&amp;url=https%3A%2F%2Fneocities.org%2Fsite_files%2Fdownload%2Fradio%2Fundergroundfm.html%3F_%3D1757915429137&amp;app=com.google.Chrome&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script><script type="text/javascript" nonce="be6d014fdc124790ba662814f0e" src="//local.adguard.org?ts=1757913793576&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="stylesheet" href="underground.css">
+<style>
+#wallpaper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000 url('https://projectradio.org/DRAINPAPER.PNG') no-repeat center center;
+  background-size: 100% 100%; /* 🔄 stretch to fit */
+  z-index: -1;
+}
+
+.player-box, .gallery-box, .discord-box {
+  width: 300px;
+  background: #c0c0c0;
+  border: 2px solid #808080;
+  border-radius: 4px;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  box-shadow: 2px 2px 0 #fff inset, -2px -2px 0 #404040 inset;
+  font-family: Tahoma, sans-serif;
+  z-index: 1000;
+}
+
+.player-header, .gallery-header, .discord-header {
+  background: linear-gradient(to bottom, #96bf55 0%, #6ebf00 100%);
+  color: #fff;
+  padding: 6px;
+  font-weight: bold;
+  cursor: move;
+  border-bottom: 2px solid #000080;
+}
+
+.player-content, .gallery-content, .discord-content {
+  padding: 10px;
+}
+
+.now-playing h2 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+}
+
+.now-playing-message {
+  font-size: 14px;
+  color: #333;
+}
+
+.controls button {
+  background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+  border: 2px solid #808080;
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-family: "Tahoma", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+  margin-right: 5px;
+}
+
+.controls button:hover {
+  background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+}
+
+.controls button:active {
+  box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #fff;
+}
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to bottom, #96bf55 0%, #6ebf00 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  z-index: 1000;
+  justify-content: space-between;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(to bottom, #96bf55 0%, #6ebf00 100%);
+  padding: 4px 6px;
+  border-radius: 3px;
+}
+
+.start-button, .gallery-button, .discord-button {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.start-button img, .gallery-button img, .discord-button img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.speaker-icon {
+  width: 36px;
+  height: 36px;
+  background: url('https://projectradio.org/radio/Sound_Recorder_2001.webp') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.volume-popup {
+  display: none;
+  position: fixed;
+  bottom: 55px;
+  right: 20px;
+  width: 140px;
+  background: #c0c0c0;
+  border: 2px solid #808080;
+  border-radius: 3px;
+  padding: 10px;
+  box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+  z-index: 2000;
+}
+.volume-arrow {
+  position: absolute;
+  bottom: -6px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #c0c0c0;
+}
+.volume-popup input[type="range"] {
+  width: 100%;
+}
+
+.start-menu {
+  display: none;
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  width: 200px;
+  background: #c0c0c0;
+  border: 2px solid #808080;
+  border-radius: 3px;
+  box-shadow: 2px 2px 0 #fff inset, -2px -2px 0 #404040 inset;
+  z-index: 1500;
+}
+.start-menu ul {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+.start-menu li {
+  margin-bottom: 5px;
+}
+.start-menu li a {
+  text-decoration: none;
+  color: #000;
+  font-family: Tahoma, sans-serif;
+  display: block;
+  padding: 5px;
+}
+.start-menu li a:hover {
+  background: #0a64ad;
+  color: #fff;
+}
+
+.gallery-content {
+  display: flex;
+  overflow-x: auto;
+  gap: 5px;
+}
+.gallery-content img {
+  max-height: 150px;
+  border: 1px solid #808080;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .speaker-icon { width: 24px; height: 24px; }
+  .volume-popup { width: 120px; padding: 8px; }
+  .start-button, .gallery-button, .discord-button { width: 32px; height: 32px; }
+}
+</style>
+</head>
+<body>
+
+<div id="wallpaper"></div>
+
+<main class="player-container">
+  <div class="player-box" id="player-box">
+    <div class="player-header">/pr/underground/uplink.exe</div>
+    <div class="player-content">
+      <div class="now-playing">
+        <h2>Underground.fm Player</h2>
+        <p class="now-playing-message">>Check Discord for current song playing or to submit songs!</p>
+        <p class="now-playing-message">>Use the gallery to change wallpapers!</p>
+      </div>
+      <div class="controls">
+        <button id="play-btn">▶ Play</button>
+        <button id="pause-btn">⏸ Pause</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio" autoplay>
+    <source src="https://radio.projectradio.org/listen/underground.fm/radio.mp3" type="audio/mpeg">
+  </audio>
+</main>
+
+<div class="taskbar">
+  <div class="icon-container">
+    <div class="start-button" id="start-button">
+      <img src="https://projectradio.org/R-Transparent.png" alt="Start Logo">
+    </div>
+    <div class="gallery-button" id="gallery-button">
+      <img src="https://projectradio.org/radio/RjMRqmK.png" alt="Gallery Icon">
+    </div>
+    <div class="discord-button" id="discord-button">
+      <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/41611b21-a7ce-419b-bc77-4644f8105930/dek5r4f-2a6c12b8-588e-4224-b723-62d328f3a77c.png/v1/fill/w_894,h_894/3d_discord_icon_by_therprtnetwork_dek5r4f-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAwMCIsInBhdGgiOiJcL2ZcLzQxNjExYjIxLWE3Y2UtNDE5Yi1iYzc3LTQ2NDRmODEwNTkzMFwvZGVrNXI0Zi0yYTZjMTJiOC01ODhlLTQyMjQtYjcyMy02MmQzMjhmM2E3N2MucG5nIiwid2lkdGgiOiI8PTEwMDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.LGtFaLbHGgh-_ZF0i_vwjb1DZn5WrwnVYEDEGIslJqQ" alt="Discord Icon">
+    </div>
+  </div>
+  <div class="speaker-icon" id="speaker-icon"></div>
+  <div class="volume-popup" id="volume-popup">
+    <div class="volume-arrow"></div>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+  </div>
+</div>
+
+<div class="start-menu" id="start-menu">
+  <ul>
+    <li><a href="https://projectradio.org">Return To Radio</a></li>
+    <li><a href="https://projectradio.org/radio/projectfm">Project.fm</a></li>
+    <li><a href="https://projectradio.org/radio/ruggedraw94">RuggedRaw.94</a></li>
+    <li><a href="https://projectradio.org/radio/dogstar">DogStar</a></li>
+  </ul>
+</div>
+
+<div class="gallery-box" id="gallery-box" style="display:none; top:100px; left:100px;">
+  <div class="gallery-header">Gallery</div>
+  <div class="gallery-content">
+        <img src="https://projectradio.org/DRAINPAPER.PNG" alt="Sample5">
+        <img src="https://projectradio.org/radio/PRwallpaper2024.png" alt="Sample3">
+        <img src="https://projectradio.org/PROJECTR.jpg" alt="Sample2">
+        <img src="https://projectradio.org/whatthefuckboom.png" alt="Sample4">
+        <img src="https://projectradio.org/downloads/agentnaomiwallpaper.png" alt="Sample1">
+  </div>
+</div>
+
+<div class="discord-box" id="discord-box" style="display:none; top:150px; left:150px;">
+  <div class="discord-header">Discord</div>
+  <div class="discord-content">
+    <p>Join our community on Discord:</p>
+    <a href="https://discord.gg/qUFrxKxchg" target="_blank">Click here to join</a>
+  </div>
+</div>
+
+<script>
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('play-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const speakerIcon = document.getElementById('speaker-icon');
+const volumePopup = document.getElementById('volume-popup');
+const volumeSlider = document.getElementById('volume-slider');
+const startButton = document.getElementById('start-button');
+const startMenu = document.getElementById('start-menu');
+const galleryButton = document.getElementById('gallery-button');
+const galleryBox = document.getElementById('gallery-box');
+const discordButton = document.getElementById('discord-button');
+const discordBox = document.getElementById('discord-box');
+const wallpaper = document.getElementById('wallpaper');
+
+playBtn.addEventListener('click', () => audio.play());
+pauseBtn.addEventListener('click', () => audio.pause());
+
+audio.volume = volumeSlider.value;
+volumeSlider.addEventListener('input', () => audio.volume = volumeSlider.value);
+
+speakerIcon.addEventListener('click', e => {
+  e.stopPropagation();
+  volumePopup.style.display = volumePopup.style.display === 'block' ? 'none' : 'block';
+});
+
+startButton.addEventListener('click', e => {
+  e.stopPropagation();
+  startMenu.style.display = startMenu.style.display === 'block' ? 'none' : 'block';
+});
+
+galleryButton.addEventListener('click', e => {
+  e.stopPropagation();
+  galleryBox.style.display = galleryBox.style.display === 'block' ? 'none' : 'block';
+});
+
+discordButton.addEventListener('click', e => {
+  e.stopPropagation();
+  discordBox.style.display = discordBox.style.display === 'block' ? 'none' : 'block';
+});
+
+document.addEventListener('click', e => {
+  if (!volumePopup.contains(e.target) && e.target !== speakerIcon) volumePopup.style.display = 'none';
+  if (!startMenu.contains(e.target) && e.target !== startButton) startMenu.style.display = 'none';
+  if (!galleryBox.contains(e.target) && e.target !== galleryButton) galleryBox.style.display = 'none';
+  if (!discordBox.contains(e.target) && e.target !== discordButton) discordBox.style.display = 'none';
+});
+
+function makeDraggable(box, headerClass) {
+  const boxEl = document.getElementById(box);
+  const header = boxEl.querySelector(headerClass);
+  let isDragging=false, startX=0, startY=0, origX=0, origY=0;
+
+  header.addEventListener('mousedown', e=>{
+    isDragging=true;
+    startX=e.clientX; startY=e.clientY;
+    const rect=boxEl.getBoundingClientRect();
+    origX=rect.left; origY=rect.top;
+    boxEl.style.position='absolute'; boxEl.style.zIndex=1000; boxEl.style.margin=0;
+  });
+
+  document.addEventListener('mousemove', e=>{
+    if(!isDragging) return;
+    let dx=e.clientX-startX, dy=e.clientY-startY;
+    let newLeft=origX+dx, newTop=origY+dy;
+    const rect=boxEl.getBoundingClientRect();
+    const windowWidth=window.innerWidth, windowHeight=window.innerHeight;
+    if(newLeft<0)newLeft=0;
+    if(newTop<0)newTop=0;
+    if(newLeft+rect.width>windowWidth)newLeft=windowWidth-rect.width;
+    if(newTop+rect.height>windowHeight)newTop=windowHeight-rect.height;
+    boxEl.style.left=newLeft+'px';
+    boxEl.style.top=newTop+'px';
+  });
+
+  document.addEventListener('mouseup',()=>{isDragging=false;});
+}
+
+makeDraggable('player-box', '.player-header');
+makeDraggable('gallery-box', '.gallery-header');
+makeDraggable('discord-box', '.discord-header');
+
+const galleryImages = galleryBox.querySelectorAll('img');
+galleryImages.forEach(img => {
+  img.addEventListener('click', () => {
+    wallpaper.style.background = `#000 url(${img.src}) no-repeat center center`;
+    wallpaper.style.backgroundSize = "100% 100%"; // 🔄 stretch to fit
+  });
+});
+</script>
+
+</body>
+</html>

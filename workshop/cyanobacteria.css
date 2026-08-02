@@ -1,0 +1,277 @@
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --gradientTop: Rgba(0, 55, 0, 0.95);
+  --gradientBottom: rgba(0,139,0,0.85);
+  --text: White;
+}
+
+body {
+  background: white;
+  background-size: 1em 1em;
+  background-color: black;
+  opacity: 1;
+  padding: 0 10px 10px; /* tightened up top */
+  font-family: "Orbitron", sans-serif;
+  color: var(--text);
+  margin: 0;
+}
+
+.container {
+  max-width: 55rem;
+  margin: 1rem auto 1rem auto; /* reduced top spacing */
+  border: 6px ridge var(--border);
+  outline: 3px solid var(--gradientTop);
+  outline-offset: 4px;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  gap: 5px;
+  background-image: url(https://projectradio.org/whatthefuckboom.png);
+  background-size: 100% auto;
+}
+
+
+.small { flex: 1 1 9%; }
+.large { flex: 1 1 82%; }
+.full  { flex: 1 1 100%; }
+.half  { flex: 1 1 49%; }
+
+nav {
+  border: 2px ridge var(--border);
+  border-radius: 5px;
+  padding: 5px;
+  background: linear-gradient(var(--gradientTop), var(--gradientBottom));
+}
+nav div {
+  text-align: center;
+  font-size: 1.25rem;
+  margin: 5px 5px 10px 5px;
+}
+nav a {
+  display: block;
+  margin: 5px;
+  background: rgb(0,0,0);
+  border-radius: 5px;
+  padding: 2px 7px;
+  text-decoration: none;
+}
+nav a:link,
+nav a:visited {
+  color: var(--text);
+}
+nav a:hover,
+nav a:focus {
+  background: black;
+}
+
+div.small > img {
+  display: block;
+  margin: 5px auto;
+  border: 2px ridge var(--border);
+  border-radius: 5px;
+}
+
+div.vandal-box {
+  border: 2px ridge var(--border);
+  border-radius: 5px;
+  padding: 5px;
+  background: linear-gradient(var(--gradientTop), var(--gradientBottom));
+}
+
+section {
+  border: 2px ridge var(--border);
+  border-radius: 5px;
+  background: linear-gradient(var(--gradientTop), var(--gradientBottom));
+  padding: 5px;
+}
+
+footer {
+  text-align: center;
+  margin-bottom: 5vw;
+  font-size: 0.8rem;
+  color: black;
+}
+footer a {
+  text-decoration: black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 5px;
+  line-height: 1.2;
+}
+h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: normal;
+  text-align: center;
+  border-bottom: 2px ridge var(--border);
+  padding-bottom: 5px;
+  margin-top: 0; /* Removed gap above heading */
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  text-align: center;
+}
+h3 {
+  font-size: 1.1rem;
+}
+h4 {
+  font-size: 1rem;
+  color: var(--accent);
+  padding-left: 12px;
+}
+
+img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+
+a:hover,
+a:focus {
+  font-style: italic;
+}
+a:visited {
+  color: var(--accent);
+}
+
+/* --- Splash Screen --- */
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  background: white;
+  color: black;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1s ease;
+}
+#splash-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Splash screen bar animation */
+.bar__segment {
+  display: inline-block;
+  background: lime;
+  width: calc(var(--length, 10) * 1px);
+  height: 8px;
+  margin: 2px;
+  animation: popin 0.5s ease-in-out forwards;
+  animation-delay: calc(var(--delay) * 1ms);
+  opacity: 0;
+}
+
+@keyframes popin {
+  from {
+    transform: scaleY(0.1);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Accessibility helper */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Glitchy Title Box Styles */
+.glitch-title-box {
+  margin: 30px auto;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  color: #0f0;
+  background: linear-gradient(135deg, rgba(0,255,0,0.05) 0%, rgba(0,255,0,0.15) 100%);
+  border: 2px solid #0f0;
+  border-radius: 12px;
+  padding: 30px 20px;
+  max-width: 600px;
+  box-shadow: 0 0 15px #0f0;
+  animation: pulseBox 3s infinite;
+}
+
+/* Glitch animation on text */
+.glitch {
+  position: relative;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  animation: glitch 2s infinite;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: #0f0;
+  background: black;
+  clip: rect(0, 0, 0, 0);
+}
+.glitch::before {
+  animation: glitchTop 2s infinite;
+}
+.glitch::after {
+  animation: glitchBottom 2s infinite;
+  color: #f0f;
+}
+.subtitle {
+  font-size: 1rem;
+  color: #aaa;
+  margin-top: 10px;
+  font-family: 'VT323', monospace;
+}
+
+
+
+/* Animations */
+@keyframes glitch {
+  0% { transform: none; }
+  20% { transform: skewX(10deg); }
+  40% { transform: skewX(-10deg); }
+  60% { transform: skewX(10deg); }
+  80% { transform: skewX(-10deg); }
+  100% { transform: none; }
+}
+@keyframes glitchTop {
+  0%   { clip: rect(0, 9999px, 0, 0); }
+  10%  { clip: rect(0, 9999px, 50%, 0); transform: translate(-2px, -2px); }
+  20%  { clip: rect(0, 9999px, 10%, 0); transform: translate(2px, 2px); }
+  100% { clip: rect(0, 9999px, 0, 0); transform: none; }
+}
+@keyframes glitchBottom {
+  0%   { clip: rect(0, 9999px, 0, 0); }
+  10%  { clip: rect(80%, 9999px, 100%, 0); transform: translate(2px, 2px); }
+  20%  { clip: rect(60%, 9999px, 90%, 0); transform: translate(-2px, -1px); }
+  100% { clip: rect(0, 9999px, 0, 0); transform: none; }
+}
+@keyframes pulseBox {
+  0%, 100% { box-shadow: 0 0 15px #0f0; }
+  50%      { box-shadow: 0 0 25px #0f0; }
+}

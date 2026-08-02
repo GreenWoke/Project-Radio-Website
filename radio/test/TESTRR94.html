@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RUGGEDRAW.94</title>
+    <meta property="og:title" content="RuggedRaw.94" />
+  <meta property="og:description" content="RUGGEDRAW.94 on Project Radio is hip hop all day. Boom-bap, vinyl cuts and underground street tracks. Straight from the crates to your speakers" />
+  <meta property="og:image" content="https://projectradio.org/radio/rr94logotrans.png" />
+  <meta property="og:url" content="https://projectradio.org/radio/rr94logotrans.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Project Radio" />
+<link rel="stylesheet" href="https://projectradio.org/radio/rugged.css">
+<link rel="icon" href="https://projectradio.org/radio/rr94logotrans.ico">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
+
+#graffitiCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+body > *:not(canvas) {
+  position: relative;
+  z-index: 1;
+}
+</style>
+</head>
+
+<body data-city="nyc">
+
+<canvas id="graffitiCanvas"></canvas>
+
+  <!-- Navigation -->
+  <div class="top-left-nav">
+    <div class="logo">
+      <a href="https://projectradio.org">
+        <img src="https://projectradio.org/radio/rr94logotrans.png" alt="Logo" class="logo-img" />
+      </a>
+      <div class="logo-text">RUGGEDRAW.94</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="https://projectradio.org/radio/projectfm">project.FM</a></li>
+      <li><a href="https://projectradio.org/radio/dogstar">DogStar</a></li>
+      <li><a href="https://projectradio.org/radio/undergroundfm">Underground.FM</a></li>
+    </ul>
+  </div>
+<!-- PLAYER -->
+<div class="hiphop-player">
+
+
+
+  <video autoplay muted loop playsinline width="100%">
+    <source src="https://projectradio.org/radio/Out_Ta_Bomb_-_Videograf_Production_1994.mp4">
+  </video>
+
+  <div class="player-controls">
+    <button onclick="playAudio()">▶</button>
+    <button onclick="pauseAudio()">⏸</button>
+    <button onclick="refreshStream()">🗘</button>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+  </div>
+  
+  
+    <!-- SLIDE TAB -->
+  <div class="tool-tab" id="toolTab">
+      <div class="tool-tab" id="toolTab">
+          <div class="drawing-tools">
+      <button onclick="changeCity()">City</button>
+      <span id="city-name">NYC</span>
+      </div>
+      
+      
+  </div>
+    <div class="drawing-tools">
+      <label>Color</label>
+      <input type="color" id="brush-color" value="#ff0055">
+
+      <label>Size</label>
+      <input type="range" id="brush-size" min="1" max="50" value="10">
+
+      <button onclick="clearCanvas()">Clear</button>
+
+
+
+    </div>
+</div>
+
+<audio id="audio">
+  <source src="https://radio.projectradio.org/listen/ruggedraw94/radio.mp3">
+</audio>
+
+<script>
+const audio = document.getElementById("audio");
+document.getElementById("volume-slider").oninput = e => audio.volume = e.target.value;
+function playAudio(){ audio.play(); }
+function pauseAudio(){ audio.pause(); }
+function refreshStream(){
+  audio.src = audio.src.split("?")[0] + "?t=" + Date.now();
+  audio.play();
+}
+</script>
+
+<script>
+const cities = [
+  { name: "NYC", value: "nyc" },
+  { name: "Adelaide", value: "adelaide" },
+  { name: "Paris", value: "paris" },
+  { name: "Berlin", value: "berlin" },
+  { name: "Tokyo", value: "tokyo" }
+];
+
+let cityIndex = 0;
+
+function changeCity() {
+  cityIndex = (cityIndex + 1) % cities.length;
+  document.body.setAttribute("data-city", cities[cityIndex].value);
+  document.getElementById("city-name").textContent = cities[cityIndex].name;
+}
+
+function toggleTab() {
+  document.getElementById("toolTab").classList.toggle("open");
+}
+</script>
+
+<!-- GRAFFITI SCRIPT (unchanged, still works) -->
+<script>
+if (window.innerWidth > 768) {
+  const canvas = document.getElementById('graffitiCanvas');
+  const ctx = canvas.getContext('2d');
+  let drawing = false;
+  let color = document.getElementById('brush-color').value;
+  let size = document.getElementById('brush-size').value;
+
+  document.getElementById('brush-color').oninput = e => color = e.target.value;
+  document.getElementById('brush-size').oninput = e => size = e.target.value;
+
+  function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+  resize();
+  addEventListener('resize', resize);
+
+  window.clearCanvas = () => ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  canvas.onmousedown = () => drawing = true;
+  canvas.onmouseup = () => drawing = false;
+  canvas.onmousemove = e => {
+    if (!drawing) return;
+    for(let i=0;i<40;i++){
+      const a=Math.random()*Math.PI*2;
+      const r=Math.random()*size;
+      ctx.fillStyle=color;
+      ctx.fillRect(e.clientX+Math.cos(a)*r, e.clientY+Math.sin(a)*r,1,1);
+    }
+  };
+}
+</script>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2025 <a href="https://projectradio.org">PROJECTRADIO.ORG</a> — Keep on, 'til the break of dawn | Web Design by Merlin Green | PROJECTRADIO.ORG takes no ownership of any songs provided!</p>
+    </div>
+  </footer>
+
+</body>
+</html>

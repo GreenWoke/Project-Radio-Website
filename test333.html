@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Radio</title>
+  <meta property="og:title" content="Project Radio" />
+  <meta property="og:description" content="Your digital gateway to underground creativity. Streaming experimental art, music, and culture directly to your digital consciousness." />
+  <meta property="og:image" content="https://projectradio.org/prlogo3.png" />
+  <meta property="og:url" content="https://projectradio.org/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Project Radio" />
+  <link rel="stylesheet" href="PR3.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="rah.ico">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', monospace;
+      background-color: black;
+      color: white;
+      position: relative;
+      line-height: 1.6;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('https://projectradio.org/artists/box3.png') center/cover no-repeat;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(2px);
+    }
+    body > * { position: relative; z-index: 1; }
+    
+    .container {
+      display: flex;
+      min-height: 100vh;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 220px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background: url("https://projectradio.org/vanav.png") bottom center no-repeat, rgb(46, 56, 34);
+      background-size: contain, cover;
+      border-right: 5px solid #3e4f22;
+      padding: 0;
+      box-shadow: 2px 0 10px #0d0e0a;
+      z-index: 10;
+    }
+    .sidebar-logo {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto 0.5rem auto;
+    }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+}
+
+
+    .main-content {
+      margin-left: 220px;
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .xp-window {
+      border: 2px solid #0d0e0a;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6), inset 0 0 6px rgba(255,255,255,0.05);
+      background: rgba(79, 95, 61, 0.9);
+      backdrop-filter: blur(4px);
+      overflow: hidden;
+      animation: fadeSlideUp 0.8s ease forwards;
+    }
+    .xp-titlebar {
+      background: linear-gradient(to bottom, #3b5a26, #1f3920);
+      padding: 0.6rem;
+      border-bottom: 2px solid #26431e;
+      color: #dce3b5;
+      text-shadow: 1px 1px 1px #1b2a17;
+      text-align: center;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .title-text {
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #dce3b5; 
+      width: 0; 
+      animation: typing 4s steps(30, end) forwards, blink 0.8s step-end infinite alternate;
+      display: inline-block;
+    }
+
+    .mobile-title {
+      display: none;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 1px #1b2a17;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      from { border-color: transparent }
+      to { border-color: #dce3b5 }
+    }
+
+    .xp-body { padding: 1rem 1.5rem; color: #dce3b5; }
+
+    .uplink-box {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      flex: 1 1 auto;
+      min-width: 320px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      padding: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideUp 0.8s ease forwards;
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+    }
+    .uplink-box:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 30px rgba(255,255,255,0.25);
+    }
+    .uplink-box .profile-image {
+      flex: 0 0 auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 12px;
+      border: 2px solid #3e4f22;
+      transition: all 0.3s ease;
+      object-fit: cover;
+      box-shadow: 0 0 25px #8bc34a;
+    }
+    .uplink-box .profile-image:hover {
+      transform: scale(1.1);
+    }
+    .uplink-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-shadow: 1px 1px 1px black;      
+    }
+    .uplink-text h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+      border-bottom: 2px solid currentColor;
+      padding-bottom: 0.4rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      text-shadow: 1px 3px 1px black;      
+    }
+    
+    .uplink-box:hover .profile-image {
+      animation: neonGlow 2s infinite alternate;
+    }
+
+    @keyframes neonGlow {
+      0% { box-shadow: 0 0 15px #8bc34a; }
+      50% { box-shadow: 0 0 25px #cddc39; }
+      100% { box-shadow: 0 0 15px #8bc34a; }
+    }
+
+    .uplink-text h2:hover {
+      animation: flicker 1s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 2px currentColor, 0 0 10px currentColor;
+      }
+      20%, 24%, 55% {
+        opacity: 0.4;
+        text-shadow: none;
+      }
+    }
+
+    .uplink-text p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .artist-uplink { background: rgba(204, 211, 158, 0.35); border: 3px solid #3e4f22; color: #dce3b5; animation-delay: 0.2s; }
+    .radio-uplink { background: rgba(208, 222, 240, 0.35); border: 3px solid #2c4e70; color: #dce3b5; animation-delay: 0.4s; }
+    .article-uplink { background: rgba(207, 165, 214, 0.35); border: 3px solid #613369; color: #dce3b5; animation-delay: 0.6s; }
+
+    .footer {
+      margin-top: 2rem;
+      padding: 1rem;
+      text-align: center;
+      border-top: 2px solid #333;
+      font-size: 0.8rem;
+      color: #9fae85;
+      background: rgba(30, 35, 20, 0.8);
+      text-shadow: 0 0 5px #0d0e0a;
+      animation: fadeSlideUp 0.8s ease forwards;
+      animation-delay: 0.8s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+
+    /* --- POPUP --- */
+    .discord-popup {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 260px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 3px solid #3e4f22;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      font-family: 'Press Start 2P', monospace;
+      color: black;
+      z-index: 9999;
+      display: block;
+    }
+
+    .popup-header {
+      background: white;
+      padding: 0.5rem 0.8rem;
+      border-bottom: 3px solid #3e4f22;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .popup-header .popup-icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .popup-header .popup-title {
+      flex: 1;
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+
+    .popup-close {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .popup-body {
+      padding: 1rem;
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .popup-from {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.75rem;
+      color: #3e4f22;
+      text-shadow: 0 0 2px #fff;
+    }
+
+    .popup-from .from-pic {
+      width: 18px;
+      height: 18px;
+      object-fit: cover;
+    }
+
+    .popup-from .from-name {
+      font-weight: bold;
+    }
+
+    .popup-tail {
+      position: absolute;
+      bottom: -20px;
+      right: 40px;
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 20px solid rgba(79, 95, 61, 0.95);
+      filter: drop-shadow(0 3px 3px rgba(0,0,0,0.4));
+    }
+
+    .popup-type {
+      display: inline-block;
+      white-space: normal;
+      border-right: 2px solid black;
+      animation: blinkCursor 0.8s step-end infinite;
+    }
+
+    /* --- TERMINAL --- */
+.terminal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  z-index: 9998;
+}
+
+.terminal-window {
+  width: 80%;
+  max-width: 800px;
+  margin: 5vh auto;
+}
+
+.terminal-body {
+  background: rgba(10, 15, 5, 0.95);
+  color: #cddc39;
+  padding: 1rem;
+  font-size: 0.75rem;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Press Start 2P', monospace;
+}
+
+#terminalOutput {
+  flex: 1;
+  overflow-y: auto;
+}
+
+#terminalOutput p {
+  margin: 0 0 0.5rem 0;
+}
+
+.terminal-input-line {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  border-top: 2px solid #3e4f22;
+  padding-top: 0.5rem;
+}
+
+#terminalInput {
+  background: black;
+  border: none;
+  color: #cddc39;
+  outline: none;
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.75rem;
+}
+
+.cmd {
+  color: #8bc34a;
+}
+
+/* --- NO TERMINAL ON MOBILE --- */
+@media (max-width: 768px) {
+  .terminal-overlay {
+    display: none !important;
+  }
+}
+
+    /* --- MOBILE PHONE MOMENT --- */
+    @media (max-width: 768px) {
+      body { cursor: default; }
+      .container { flex-direction: column; margin: 0; }
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; padding: 1rem; flex-direction: column; gap: 1rem; }
+      .xp-window { border-radius: 0; width: 100%; padding: 1rem; box-shadow: none; }
+      .title-text { display: none; }
+      .mobile-title { display: inline-block; }
+      .uplink-box { flex-direction: column; align-items: center; gap: 1rem; padding: 1rem; }
+      .uplink-box .profile-image { width: 100px; height: 100px; border-radius: 8px; }
+      .uplink-text { text-align: center; }
+      .uplink-text h2 { font-size: 1rem; }
+      .uplink-text p { font-size: 0.8rem; }
+      .footer { font-size: 0.7rem; padding: 0.5rem; }
+      .cursor-dot, .cursor-trail { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TERMINAL OVERLAY -->
+  <div id="terminalOverlay" class="terminal-overlay">
+    <div class="xp-window terminal-window">
+      <div class="xp-titlebar">
+        <span class="mobile-title">PR TERMINAL</span>
+        <button id="closeTerminal" class="popup-close">×</button>
+      </div>
+
+      <div class="terminal-body">
+        <div id="terminalOutput">
+          <p>-PROJECT RADIO SIGNAL RECLAMATION TERMINAL-</p>
+          <p>Type <span class="cmd">help</span> to view available commands. Additional commands can be found across the site.</p>
+        </div>
+        <div class="terminal-input-line">
+          <span>&gt;</span>
+          <input type="text" id="terminalInput" autocomplete="off" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">
+      <a href="https://projectradio.org">
+        <img src="https://projectradio.org/geengo.png" alt="Uplink Menu" class="sidebar-logo">
+      </a>
+      <nav>
+        <a href="https://projectradio.org/artists/uplink">Artist Uplink</a>
+        <a href="https://projectradio.org/radio/tuner">Radio Tuner</a>
+        <a href="https://projectradio.org/Articles/uplink">Article Uplink</a>
+        <a href="https://projectradio.org/downloads">Downloads</a>
+        <a href="#" id="openTerminal">Terminal</a>
+        <a href="https://discord.gg/qUFrxKxchg">Chat Room</a>
+      </nav>
+    </aside>
+
+     <main class="main-content">
+      <section class="xp-window full-width-box">
+        <div class="xp-titlebar">
+          <span class="title-text">PROJECT RADIO IS ONLINE</span>
+          <span class="mobile-title">PROJECT RADIO</span>
+        </div>
+        <div class="xp-body section-content">          
+          <p>PROJECT RADIO is your digital gateway to underground creativity. A digital hub connecting the global noise network. We stream a carefully curated yet chaotic blend of boundary pushing art, experimental music, and cyberpunk inspired resources directly to your digital consciousness.</p>
+        </div>
+      </section>
+      
+
+<div class="uplink-box artist-uplink">
+  <a href="https://projectradio.org/artists/uplink" style="text-decoration:none!important;">
+    <img class="profile-image" src="https://projectradio.org/artists/uplinklogo.png" alt="Artist">
+    <div class="uplink-text">
+      <h2>Artist Uplink</h2>
+      <p>The Artist Uplink is a creative hub built for artists, by artists. Share your work, connect with others, and discover inspiration...</p>
+                  </a>
+    </div>
+</div>
+
+
+      <div class="uplink-box radio-uplink" id="radioBox">
+        <a href="https://projectradio.org/radio/tuner">
+          <img class="profile-image" src="https://projectradio.org/radio/radio%20logo.png" alt="Radio">
+        <div class="uplink-text">
+          <h2>Radio Tuner</h2>
+          <p>Click here to check out the Radio Tuner. Explore underground frequencies and connect with digital audio creators worldwide...</p>
+                   </a>
+
+        </div>
+      </div>
+
+      <div class="uplink-box article-uplink">
+        <a href="https://projectradio.org/Articles/uplink">
+          <img class="profile-image" src="https://projectradio.org/Articles/article.png" alt="Article">
+        <div class="uplink-text">
+          <h2>Article Uplink</h2>
+          <p>Discover unique articles and insights. Music, art, and culture featured from creators across the community...</p>
+                   </a>
+        </div>
+      </div>
+      
+      <section class="xp-window full-width-box">
+        <div class="xp-body section-content">          
+          <p>Want to shape the signal with us? Join our Discord to connect with fellow creators, share your work, contribute ideas, or just vibe with the PROJECT RADIO community. We’re building this together, frequency by frequency.</p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Artist Uplink provided to us and by us at Project Radio. Please keep in mind this site is intended for desktop viewing.
+      </footer>
+    </main>
+  </div>
+
+  <audio id="radioStatic" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+  <!-- DISCORD POPUP (FIXED) -->
+  <div id="discordPopup" class="discord-popup">
+    <div class="popup-header">
+      <img src="https://projectradio.org/prlogo3.png" class="popup-icon">
+      <span class="popup-title">MESSAGE</span>
+      <button id="popupClose" class="popup-close">×</button>
+    </div>
+    
+    <div class="popup-body">
+      <span class="popup-from">
+        <img src="https://projectradio.org/tobetransparentfuckyou.png" alt="Sender" class="from-pic">
+        Vandal
+      </span>
+      <p>
+        This site is intended to be viewed on desktop computers! Some stuff on mobile phone won't work, sorry!
+      </p>
+    </div>
+
+    <div class="popup-tail"></div>
+  </div>
+
+  <script>
+    // Popup JS
+    const popup = document.getElementById("discordPopup");
+    const closeBtn = document.getElementById("popupClose");
+    const popupTextEl = popup.querySelector(".popup-body p");
+    const popupOriginalText = popupTextEl.innerHTML;
+
+    function typeOutPopup() {
+      popupTextEl.innerHTML = "";
+      popupTextEl.classList.add("popup-type");
+      let i = 0;
+      function type() {
+        if (i < popupOriginalText.length) {
+          popupTextEl.innerHTML += popupOriginalText.charAt(i);
+          i++;
+          requestAnimationFrame(type);
+        } else {
+          popupTextEl.classList.remove("popup-type");
+        }
+      }
+      type();
+    }
+
+    typeOutPopup();
+
+    closeBtn.addEventListener("click", () => {
+      popup.style.display = "none";
+    });
+
+    // --- TERMINAL ---
+    const terminalOverlay = document.getElementById("terminalOverlay");
+    const openTerminalBtn = document.getElementById("openTerminal");
+    const closeTerminalBtn = document.getElementById("closeTerminal");
+    const terminalInput = document.getElementById("terminalInput");
+    const terminalOutput = document.getElementById("terminalOutput");
+
+    function printLine(text) {
+      if (!text) return;
+      text.split("\n").forEach(line => {
+        const p = document.createElement("p");
+        p.textContent = line;
+        terminalOutput.appendChild(p);
+      });
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+
+    function isUnlocked(cmd) {
+      if (cmd === "contact") return !!localStorage.getItem("visited_vand4ll");
+      return false;
+    }
+
+    const commands = {
+      
+      help: {
+        unlocked: true,
+        run() {
+          let list = ["help","about","frequency","clear","listen"];
+          if (isUnlocked("contact")) list.push("contact");
+          return "AVAILABLE COMMANDS:\n- " + list.join("\n- ");
+        }
+      },
+      about() { return "PROJECT RADIO Signal Reclamation Protocol active. Independent. Decentralized. Alive."; },
+      frequency() { return "TUNING SIGNAL... FOUND: 101.9 MHz // NOISE CONFIRMED"; },
+      clear() { terminalOutput.innerHTML = ""; return ""; },
+      contact: {
+        unlocked: () => localStorage.getItem("visited_vand4ll"),
+        run() {
+          const messages = [
+            "You found the signal faster than expected.",
+            "Not everyone who listens can hear.",
+            "The noise hides patterns. Follow them.",
+            "This channel isn’t public. Keep it that way.",
+            "If you’re seeing this, you’re already involved."
+          ];
+          const msg = messages[Math.floor(Math.random() * messages.length)];
+          return `INCOMING TRANSMISSION...\nFROM: VANDAL\n---\n${msg}`;
+        }
+      },
+      listen: {
+        unlocked: true,
+        run() {
+          let radioAudio = document.getElementById("radioAudio");
+          if (!radioAudio) {
+            radioAudio = document.createElement("audio");
+            radioAudio.id = "radioAudio";
+            radioAudio.src = "https://signal.projectradio.org/listen/prfm/radio.mp3"; // <-- Your MP3 URL
+            radioAudio.autoplay = true;
+            radioAudio.controls = true;
+            radioAudio.loop = true;
+            radioAudio.style.marginTop = "1rem";
+            radioAudio.style.width = "100%";
+            document.body.appendChild(radioAudio);
+            return "🎵 Radio stream starting! Enjoy the vibes...";
+          } else {
+            radioAudio.play();
+            return "🎵 Radio already loaded. Resuming playback...";
+          }
+        }
+      }
+    
+    };
+
+    terminalInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const input = terminalInput.value.trim().toLowerCase();
+        printLine("> " + input);
+
+        if (commands[input]) {
+          const cmd = commands[input];
+          if (typeof cmd === "function") {
+            printLine(cmd());
+          } else if (cmd.run) {
+            printLine(cmd.run());
+          }
+        } else {
+          printLine("UNKNOWN COMMAND. TYPE 'help'.");
+        }
+
+        terminalInput.value = "";
+      }
+    });
+
+    openTerminalBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      terminalOverlay.style.display = "block";
+      terminalInput.focus();
+    });
+
+    closeTerminalBtn.addEventListener("click", () => {
+      terminalOverlay.style.display = "none";
+    });
+
+  </script>
+</body>
+</html>

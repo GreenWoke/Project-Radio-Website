@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>Crabmaster's Profile</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: url('http://1-background.com/images/stars-1/star-space-tile.jpg') no-repeat center center fixed;
+      background-size: cover;        
+      font-family: 'Archivo Black', cursive, monospace;
+      color: #000;
+      display: flex;
+      justify-content: center;   
+      align-items: center;       
+      user-select: none;
+    }
+
+    h2, h3 { user-select: text; }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 960px;
+      width: 100%;
+      gap: 1rem;
+    }
+
+    .uplink-box { 
+      position: fixed; 
+      bottom: 20px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      cursor: pointer; 
+      max-width: 100px; 
+      width: 100%; 
+      text-align: center; 
+      user-select: none; 
+      z-index: 9999; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      text-decoration: none; 
+    }
+    .uplink-box img { 
+      max-height: 32px; 
+      height: auto; 
+      border-radius: 8px; 
+      display: block; 
+      margin: 0 auto; 
+      pointer-events: none; 
+      filter: drop-shadow(1px 1px 2px white); 
+    }
+    .uplink-box .hosted-by { 
+      font-size: 14px; 
+      color: #333; 
+      text-decoration: none; 
+      text-shadow: 1px 1px 2px white; 
+      margin-bottom: 4px; 
+      user-select: none; 
+      display: block; 
+    }
+
+    .profile-container {
+      display: flex;
+      flex-direction: row;
+      background: #00000;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 300px;
+      padding: 1.5rem 1rem;
+      background: #f9f9f9;
+      border-right: 2px solid #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .profile-pic {
+      width: 250px;
+      height: 250px;
+      background: url('https://i.pinimg.com/736x/6d/e5/81/6de581096adfe2750291a9a844f3aa9f.jpg') center/cover no-repeat;
+      border: 4px solid #aaa;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    .basic-info {
+      margin-top: 1.5rem;
+      width: 100%;
+      background: #f5f5f5;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .basic-info h2 { margin-bottom: 0.5rem; font-size: 1rem; }
+    .basic-info p { margin: 0.3rem 0; font-size: 0.8rem; }
+
+    .content-area {
+      flex: 1;
+      padding: 1rem;
+      background: url('https://textures.neocities.org/thumbnails/fabric/thumb_084C.jpg');
+    }
+    .content-area h3 {
+      font-size: 1rem;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .links a {
+      display: inline-block;
+      background: #sehj;
+      border: 2px solid #ccc;
+      color: #333;
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      margin-right: 0.5rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .links a:hover { background: #ddd; }
+
+    .gallery {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .profile-container { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+        align-items: center;
+      }
+      .profile-pic {
+        width: 80%;
+        max-width: 200px;
+        height: auto;
+      }
+      .basic-info { font-size: 0.9rem; padding: 1rem; }
+      .content-area { font-size: 0.95rem; padding: 1rem; }
+      .gallery img { width: 45%; height: auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <a href="/artists/uplink.html" class="uplink-box" aria-label="Return to Uplink page">
+      <span class="hosted-by">Hosted by</span>
+      <img src="https://projectradio.org/R-Transparent.png" alt="Uplink Logo" />
+    </a>
+
+    <div class="profile-container">
+      <aside class="sidebar">
+        <div class="profile-pic" tabindex="0" aria-label="Artist profile picture"></div>
+        <div class="basic-info">
+          <h2>About:</h2>
+          <p><strong>Location: Texas, United States of America</strong></p>
+          <p><strong>Mediums:</strong> Web Design</p>
+          <h2>Favourites</h2>
+          <p><strong>Album: Disintegration - The Cure</strong></p>
+          <p><strong>Movie:</strong> Amélie</p>
+        </div>
+      </aside>
+
+      <section class="content-area">
+        <h3>Crabmaster</h3>
+        <p><strong>Interests:</strong> I really Like old tech from the 70s-00s, I collect vhs, I mostly listen to cassette, I listen to cds, I love crts, and alarm clocks.</p>
+        <p><strong>Music:</strong> I really like 80s music, It's pretty much 100% of what I listen to, mostly <strong>New Wave</strong>, new beat, alternative, industrial, grunge, and very early techno. My favorite groups are: The Cure, The police, New Order, Men at Work, Phycadelic Furs, Aha, Tears to Fears, Gary Newman, Devo, Cutting Crew, Toto, Кино and many more!</p>
+        <p><strong>Games I like:</strong> Half-life, Stalker, Garry's Mod,and Straftat.</p>
+
+        <h3>Links</h3>
+        <div class="links">
+          <a href="https://crabmaster.neocities.org/Crabmaster'site/">Website(NOT FINISHED AT ALL)</a>
+          <a href="https://www.youtube.com/@Retro-Ferret">Youtube</a>  
+        </div>
+
+        <h3>Showcase</h3>
+        <div class="gallery">
+          <img src="https://i.imgur.com/19BMtk4.png" alt="Showcase Item 1" />
+          <img src="https://i.imgur.com/VPVpk4u.jpg" alt="Showcase Item 2" />
+          <img src="https://i.imgur.com/VIf91aF.jpg" alt="Showcase Item 3" />
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

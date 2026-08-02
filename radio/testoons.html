@@ -1,0 +1,46 @@
+<div id="now-playing">Loading...</div>
+<img id="now-playing-art" src="" alt="Album Art" style="max-width:150px; display:none; opacity:0; transition: opacity 0.5s;">
+
+<script>
+async function updateNowPlaying() {
+  try {
+    const res = await fetch("https://eoji0pbbl8hbfm0.m.pipedream.net");
+    const data = await res.json();
+
+    const station = Array.isArray(data) ? data.find(s => s.station.shortcode === "underground.fm") : data;
+
+    const nowPlayingElem = document.getElementById("now-playing");
+    const img = document.getElementById("now-playing-art");
+
+    if (station && station.now_playing && station.now_playing.song) {
+      const artist = station.now_playing.song.artist;
+      const title  = station.now_playing.song.title;
+      const art    = station.now_playing.song.art;
+
+      nowPlayingElem.textContent = "Now Playing: " + artist + " – " + title;
+
+      if (art) {
+        img.src = art;
+        img.style.display = "block";
+        requestAnimationFrame(() => img.style.opacity = 1);
+      } else {
+        img.style.opacity = 0;
+        setTimeout(() => { img.style.display = "none"; img.src = ""; }, 500);
+      }
+    } else {
+      nowPlayingElem.textContent = "Now Playing: unavailable";
+      img.style.opacity = 0;
+      setTimeout(() => { img.style.display = "none"; img.src = ""; }, 500);
+    }
+  } catch (err) {
+    console.error("Error fetching metadata:", err);
+    document.getElementById("now-playing").textContent = "Now Playing: error loading";
+    const img = document.getElementById("now-playing-art");
+    img.style.opacity = 0;
+    setTimeout(() => { img.style.display = "none"; img.src = ""; }, 500);
+  }
+}
+
+updateNowPlaying();
+setInterval(updateNowPlaying, 15000);
+</script>

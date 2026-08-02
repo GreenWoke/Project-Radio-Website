@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 2px 0 red, -2px 0 blue, 2px 2px green, -2px -2px yellow; transform: translateX(0); }
+            10% { text-shadow: -2px 0 red, 2px 0 blue, -2px 2px green, 2px -2px yellow; transform: translateX(1px); }
+            20% { text-shadow: 3px 0 red, -3px 0 blue, 3px 3px green, -3px -3px yellow; transform: translateX(-2px); }
+            30% { text-shadow: -4px 0 red, 4px 0 blue, -4px 4px green, 4px -4px yellow; transform: translateX(3px); }
+            40% { text-shadow: 5px 0 red, -5px 0 blue, 5px 5px green, -5px -5px yellow; transform: translateX(-3px); }
+            50% { text-shadow: 6px 0 red, -6px 0 blue, 6px 6px green, -6px -6px yellow; transform: translateX(4px); }
+            60% { text-shadow: -7px 0 red, 7px 0 blue, -7px 7px green, 7px -7px yellow; transform: translateX(-4px); }
+        }
+
+        marquee {
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            color: #00FF00;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        marquee span {
+            display: inline-block;
+            animation: glitch 1s infinite linear;
+        }
+
+        .highlight-box {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 1.5em;
+            margin: 1em 0;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            box-shadow: 0 0 10px #0ff3;
+        }
+
+        .section-with-image {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-image: url('https://projectradio.org/radio/banner2-2.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .section-with-image h2 {
+            padding: 0.5em;
+            border-radius: 5px;
+            background-color: transparent;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .marquee-section {
+            background-color: black;
+            padding: 10px 0;
+        }
+
+        .flavour-label {
+            background-color: black;
+            color: white;
+            padding: 0.2em 0.5em;
+            border-radius: 0.3em;
+            font-family: monospace;
+            display: inline-block;
+            margin-bottom: 0.2em;
+        }
+
+        .content-box {
+            background: rgba(0,0,0,0.6);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            color: #ccc;
+        }
+
+        .content-box h4 {
+            color: #0f0;
+            margin-bottom: 0.5rem;
+        }
+
+        .artist-uplink-box {
+            background-image: url('https://projectradio.org/radio/banner1-1.png'); /* New image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .artist-uplink-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .artist-interface-box {
+            background-image: url('https://projectradio.org/radio/banner3-3.png'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .artist-interface-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+        
+        .download-box {
+            background-image: url('https://projectradio.org/radio/banner4-4.png'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .download-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+                .comm-box {
+            background-image: url('https://projectradio.org/radio/banner2-2.png'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .comm-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+                .workshop-box {
+            background-image: url('https://projectradio.org/radio/banner5-5.png'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+
+        .workshop-box .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .intro-paragraph, .category-paragraph {
+            line-height: 1.5;
+            font-size: 1rem;
+        }
+
+        .white-text {
+            color: #ffffff;
+        }
+    </style>
+    
+    
+
+    <title>SLAPS</title>
+    <link rel="icon" type="image/x-icon" href="rah.ico">
+    <link href="cyanobacteria.css" rel="stylesheet" type="text/css" media="all">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+</head>
+
+<body>
+  <div class="container">
+    <div class="small">
+      <nav>
+        <div><img src="https://projectradio.org/PRTITLEW.png" >
+</div>
+        <a href="">Home</a>
+        <a href="https://projectradio.org/radio">The Radio</a>
+        <a href="https://projectradio.org/artists/uplink">Artist Uplink</a>
+        <a href="https://projectradio.org/downloads">Downloads</a>
+        <a href="https://projectradio.org/workshop">Workshop</a>
+        <a href="https://project-radio.neocities.org/magazine/issue0">Magazine (coming soon)</a>
+        <a>Contact (coming soon)</a>
+        <a>Credits (coming soon)</a>
+        <a href="https://neocities.org">Build Your Own Site</a>
+        <a href="https://discord.gg/qUFrxKxchg">Discord</a>
+      </nav>
+    </div>
+
+<section class="half">
+  <center>
+    <h3>LET'S GET TO WORK</h3>
+  </center>
+
+  <div class="content-box">
+    <center>
+      <h3>DIY GRAFFITI STICKER SLAPS</h3>
+    </center>
+    
+        <center>
+      <p>In this workshop we will show you how to make your own DIY sticker slaps. These aren't the pinnacle of quality stickers, for that you'll need eggshell or vinyl but they can be pretty expensive! These are made with label paper so they last as long as the weather allows. This method will explain how to make about 600 of our 'Skull Stuck' designs for under $20 USD.</p>
+    </center>
+    
+      <div class="content-box">
+    <center>
+      <span class="highlight-text">Steps</span>
+    </center>
+
+    <div style="margin-top: 1em;">
+      <div class="step" style="margin-bottom: 1em;">
+        <h4>Step 1: Sticker Paper</h4>
+        <p>You’ll need a certain type of sticker paper for this method, typically all sizes are very similar when it comes to the A4 label paper but we suggest <a href="https://www.amazon.com/Risepekt-Shipping-Printers-Mailing-Printer/dp/B0DG35878D/ref=sr_1_11?crid=120MBQ6BHP2E7&dib=eyJ2IjoiMSJ9.4k8kcA-_0PlWv0QIYFUNtW_4TwCzEXDFewjXZ4w3HN10d0lm4jz36IVha2274f09nhE2c9IPo5535JG-v5hgnztMBtn42LCAwwyttBaWMoD_sb3lpWYMnUSHXq6HwUD6z3FiR2m6gSbILIHUg2Rq8Qo7QZq3Er3zrCYooCQDH_En9GX2CuVxO1ca6Vjir_pjdAtle4uNPzAx41BfDeTnMOrQwa_i4BEnRE4oCxIMUfvMfOvYBfqN4mkoXkNHykZ_tcatGZeMNfSGfv9xGV3IHHwvKHGBLd_C-9sAQC-ED6s.NB_4Tc_rEVlGnuNJX5LoPxZQPax3BCoq51PYES1UBAo&dib_tag=se&keywords=A4%2Blabel%2Bsticker%2Bpaper&qid=1753096725&sprefix=a4%2Blabel%2Bsticker%2Bpap%2Caps%2C325&sr=8-11&th=1">this specific type found on Amazon.</a>That being said, any A4 sticker label paper should work!</p>
+      </div>
+
+      <div class="step" style="margin-bottom: 1em;">
+        <h4>Step 2: Apply Design</h4>
+        <p>For this example we will be using the 'Skull Stuck' design found <a href="https://projectradio.org/downloads">here</a> on the download page. This will be the design we print onto the label paper for this example. There's other designs on the downloads page for official Project Radio designs, or make your own!</p>
+      </div>
+
+      <div class="step" style="margin-bottom: 1em;">
+        <h4>Step 3: Transfer to Sticker Paper</h4>
+        <p>Print your design directly on sticker paper at home using pretty much any type of printer. This design is black and white so requires no special ink colors or anything crazy. If you don't have a printer at home, take advantage of your local office supply place, friends house or wherever you can manage to print. The cost of printing in black in white is almost always next to nothing.  </p>
+      </div>
+
+      <div class="step" style="margin-bottom: 1em;">
+        <h4>Step 4: Cut Out Your Stickers</h4>
+        <p>Pretty self explanatory! Use scissors or a cutting blade to carefully trim your sticker.</p>
+      </div>
+
+      <div class="step" style="margin-bottom: 1em;">
+        <h4>Step 5: Set It Up (Optional)</h4>
+        <p>Peel off a corner of the sticker before heading out. Fussing around trying to get the edge peeled of on these can be a bit of a struggle on the spot, peeling them a bit helps get them up faster.</p>
+      </div>
+
+      <div class="step" style="margin-bottom: 1em;">
+        <h4>Step 6: Deploy Tactically</h4>
+        <p>Stick it wherever you feel it belongs: light poles, bus stops, sketchbooks, laptops. Keep it legal (or don’t i'm not ur dad). Make sure to post you getting up or spotting Project Radio in the wild in the Discord!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+</section>
+
+
+
+  </div>
+</body>
+</html>
