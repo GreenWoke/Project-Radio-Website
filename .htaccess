@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ! \.html$
+RewriteRule ^(.*)$ $1.html
