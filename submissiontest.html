@@ -458,14 +458,11 @@ a:hover {
 
 <main class="main-content"><section class="xp-window full-width-box"><div class="xp-titlebar"><span class="title-text">PROJECT RADIO TRACK SUBMISSION</span><span class="mobile-title">SUBMIT MUSIC</span></div><div class="xp-body section-content">
 <p>Transmit your music into the PROJECT RADIO network. Fill out the form below. We accept links to streaming platforms, not downloadablefiles. Submission does not guarantee airplay.</p>
-<form action="submit.php" method="POST" style="display:flex;flex-direction:column;gap:14px;max-width:800px;">
-  <label>Contact Email<br/><input name="email" required="" style="width:100%;padding:8px;" type="email"/></label>
-<label>Artist Name<br/><input name="artist" required="" style="width:100%;padding:8px;" type="text"/></label>
-<label>Song Title<br/><input name="song" required="" style="width:100%;padding:8px;" type="text"/></label>
-<label>Streaming Link<br/><input name="stream" placeholder="Spotify, SoundCloud, YouTube..." style="width:100%;padding:8px;" type="url"/></label>
-<label>Tell us about you and this track<br/><textarea name="message" rows="8" style="width:100%;padding:8px;"></textarea></label>
-<label><input required="" type="checkbox"/> I understand that to remove a song from the airwaves, you must contact us directly.</label>
-<button style="padding:12px;font-family:'Press Start 2P',monospace;" type="submit">TRANSMIT SIGNAL</button>
+<form id="submissionForm">
+  <input id="artist" placeholder="Artist" required>
+  <input id="track" placeholder="Track" required>
+  <input id="link" type="url" placeholder="Music Link" required>
+  <button type="submit">Submit</button>
 </form>
 </div></section></main></div>
 
@@ -602,6 +599,53 @@ a:hover {
     closeTerminalBtn.addEventListener("click", () => {
       terminalOverlay.style.display = "none";
     });
+
+
+const webhook = "https://discord.com/api/webhooks/1471428095662756061/7PS46UGQEgfn0Zpymgsjl2ky1mXCBGLTQ4PFHGWHsKWSv29E64q4bQIuHdQcMGTae0uZ";
+
+document.getElementById("submissionForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const artist = document.getElementById("artist").value;
+    const track = document.getElementById("track").value;
+    const link = document.getElementById("link").value;
+
+    const response = await fetch(webhook, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            embeds: [{
+                title: "🎵 New Music Submission",
+                color: 0x00ff88,
+                fields: [
+                    {
+                        name: "Artist",
+                        value: artist,
+                        inline: true
+                    },
+                    {
+                        name: "Track",
+                        value: track,
+                        inline: true
+                    },
+                    {
+                        name: "Link",
+                        value: link
+                    }
+                ]
+            }]
+        })
+    });
+
+    if (response.ok) {
+        alert("Submission sent!");
+    } else {
+        alert("Failed to send.");
+        console.log(await response.text());
+    }
+});
 
   </script>
 </body>
