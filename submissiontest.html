@@ -447,17 +447,12 @@ a:hover {
         <img src="geengo.png" alt="Uplink Menu" class="sidebar-logo">
       </a>
       <nav>
-        <a href="#">Artist Uplink</a>
-        <a href="radio/tuner.html">Radio Tuner</a>
-        <a href="https://ko-fi.com/projectradio">Donate</a>
-        <a href="downloads_page.html">Downloads</a>
-        <a href="#" id="openTerminal">Terminal</a>
         <a href="https://discord.gg/qUFrxKxchg">Discord</a>
       </nav>
     </aside>
 
 <main class="main-content"><section class="xp-window full-width-box"><div class="xp-titlebar"><span class="title-text">PROJECT RADIO TRACK SUBMISSION</span><span class="mobile-title">SUBMIT MUSIC</span></div><div class="xp-body section-content">
-<p>Transmit your music into the PROJECT RADIO network. Fill out the form below. We accept links to streaming platforms, not downloadablefiles. Submission does not guarantee airplay.</p>
+<p>Transmit your music into the PROJECT RADIO network. Fill out the form below. We accept links to streaming platforms, not downloadable files. Submission does not guarantee airplay.</p>
 <form id="submissionForm">
   <input id="artist" placeholder="Artist" required>
   <input id="track" placeholder="Track" required>
@@ -469,33 +464,7 @@ a:hover {
 
 
   <script>
-    // Popup JS
-    const popup = document.getElementById("discordPopup");
-    const closeBtn = document.getElementById("popupClose");
-    const popupTextEl = popup.querySelector(".popup-body p");
-    const popupOriginalText = popupTextEl.innerHTML;
-
-    function typeOutPopup() {
-      popupTextEl.innerHTML = "";
-      popupTextEl.classList.add("popup-type");
-      let i = 0;
-      function type() {
-        if (i < popupOriginalText.length) {
-          popupTextEl.innerHTML += popupOriginalText.charAt(i);
-          i++;
-          requestAnimationFrame(type);
-        } else {
-          popupTextEl.classList.remove("popup-type");
-        }
-      }
-      type();
-    }
-
-    typeOutPopup();
-
-    closeBtn.addEventListener("click", () => {
-      popup.style.display = "none";
-    });
+    
 
     // --- TERMINAL ---
     const terminalOverlay = document.getElementById("terminalOverlay");
@@ -601,10 +570,12 @@ a:hover {
     });
 
 
-const webhook = "https://discord.com/api/webhooks/1471428095662756061/7PS46UGQEgfn0Zpymgsjl2ky1mXCBGLTQ4PFHGWHsKWSv29E64q4bQIuHdQcMGTae0uZ";
+
 
 document.getElementById("submissionForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+    console.log('joemomma')
+    const webhook = "https://discord.com/api/webhooks/1471428095662756061/7PS46UGQEgfn0Zpymgsjl2ky1mXCBGLTQ4PFHGWHsKWSv29E64q4bQIuHdQcMGTae0uZ";
 
     const artist = document.getElementById("artist").value;
     const track = document.getElementById("track").value;
