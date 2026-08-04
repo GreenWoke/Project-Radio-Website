@@ -459,6 +459,8 @@ a:hover {
   <input id="link" type="url" placeholder="Music Link" required>
   <button type="submit">Submit</button>
 </form>
+<p>Please note that submissions are reviewed periodically and may take some time to be processed. Each artist is granted 3 submissions for airplay. Users must contact us via our Discord server for any inquiries or removals.</p>
+
 </div></section></main></div>
 
 
@@ -575,7 +577,7 @@ a:hover {
 document.getElementById("submissionForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     console.log('joemomma')
-    const webhook = "https://discord.com/api/webhooks/1471428095662756061/7PS46UGQEgfn0Zpymgsjl2ky1mXCBGLTQ4PFHGWHsKWSv29E64q4bQIuHdQcMGTae0uZ";
+    const webhook = "https://discord.com/api/webhooks/1534100401740316672/6lsZIaI8hYdeQ2E74rKhz3Knueiy2O94_MhfkQGNbXENcaPOdPuDgvChTBrgKt1Sq06Q";
 
     const artist = document.getElementById("artist").value;
     const track = document.getElementById("track").value;
