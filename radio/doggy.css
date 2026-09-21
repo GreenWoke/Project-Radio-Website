@@ -127,7 +127,7 @@ audio {
   width: 100%;
   z-index: 10;
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
   padding: 10px 30px;
   background: rgba(0,0,0,0.90);
@@ -139,6 +139,7 @@ audio {
   color: rgba(0,95,0,0.65);
 }
 
+/*what the hell is this vvvv*/
 /* Responsive star scaling */
 @media (max-width: 1024px) {
   .star-wrapper { width: 650px; height: 650px; }
