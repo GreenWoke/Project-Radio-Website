@@ -77,9 +77,10 @@ body::before {
 .radio-player {
   width: 100%;
   height: 100%;
+  margin-left:30px;
   background-image: url("dogstarlogo.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   display: flex;
   flex-direction: column;
   justify-content: center;
