@@ -24,7 +24,7 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  position: relative;
+  position: fixed;
   z-index: 2; /* above the rain canvas */
 }
 .emo-nav {
