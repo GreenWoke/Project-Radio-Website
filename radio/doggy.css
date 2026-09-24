@@ -66,7 +66,7 @@ body::before {
   color: white;
 }
 /* Big dramatic star wrapper */
-.star-wrapper {
+.dog-bg {
   width: 400px;
   height: 431px;
   display: flex;
@@ -91,6 +91,20 @@ audio {
   outline: none;
   border-radius: 10px;
   margin-bottom: 10px;
+}
+
+button {
+  /*background-image: url("/radio/dogstar-assets/placeholder-play.png");*/
+  color: aquamarine;
+  border: none;
+  padding: 16px;
+  background: darkolivegreen;
+  transition-duration: 0.2s;
+}
+button:hover{
+  color:green;
+  background: darkslategray;
+  animation: wiggle .3s linear infinite;
 }
 
 .site-footer {
@@ -125,14 +139,14 @@ audio {
 }
 /* Responsive star scaling */
 @media (max-width: 1024px) {
-  .star-wrapper {
+  .dog-bg {
     width: 600px;
     height: 600px;
     padding: 8px;
   }
 }
 @media (max-width: 800px) {
-  .star-wrapper {
+  .dog-bg {
     width: 450px;
     height: 450px;
     padding: 6px;
@@ -159,9 +173,18 @@ audio {
     max-width: 200px;
     margin-bottom: 10px;
   }
-  .star-wrapper {
+  .dog-bg {
     width: 300px;
     height: 300px;
     padding: 5px;
   }
+}
+
+/*wiggly hover effect pulled from the Borderworld site*/
+@keyframes wiggle{
+  0% {filter: url("#dancingstroke0");}
+  25% {filter: url("#dancingstroke1");}
+  50% {filter: url("#dancingstroke2");}
+  75% {filter: url("#dancingstroke3");}
+  100% {filter: url("#dancingstroke4");}
 }

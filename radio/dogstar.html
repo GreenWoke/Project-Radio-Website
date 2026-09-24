@@ -57,7 +57,7 @@
 </nav>
 
 <div class="page-wrapper">
-  <div class="star-wrapper">
+  <div class="dog-bg">
     <div class="radio-player">
       <audio id="audio" autoplay>
         <source src="https://signal.projectradio.org/listen/dogstarfm/radio.mp3" type="audio/mpeg" />
@@ -184,6 +184,32 @@ function update(){
   setInterval(updateNowPlaying, 15000);
 </script>
 </body>
+
+<!--wiggly hover effect pulled from the Borderworld site-->
+<svg>
+  <defs>
+    <filter id="dancingstroke0">
+      <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" seed="0"/>
+      <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="7" />
+    </filter>
+    <filter id="dancingstroke1">
+      <feTurbulence id="turbulence" baseFrequency="0.03" numOctaves="3" seed="1"/>
+      <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="5" />
+    </filter>
+    <filter id="dancingstroke2">
+      <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" seed="2"/>
+      <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="8" />
+    </filter>
+    <filter id="dancingstroke3">
+      <feTurbulence id="turbulence" baseFrequency="0.04" numOctaves="3" seed="3"/>
+      <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="5" />
+    </filter>
+    <filter id="dancingstroke4">
+      <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" seed="4"/>
+      <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="6" />
+    </filter>
+  </defs>
+</svg>
 
 <!-- Mirrored from projectradio.org/radio/dogstar by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:49 GMT -->
 </html>
