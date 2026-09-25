@@ -96,15 +96,16 @@ audio {
 
 button {
   /*background-image: url("/radio/dogstar-assets/placeholder-play.png");*/
-  color: aquamarine;
+  color: rgb(253, 101, 0);
   border: none;
   padding: 16px;
-  background: darkolivegreen;
+  background: rgba(67, 95, 40, 0.78);
   transition-duration: 0.2s;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
 }
 button:hover{
   color:green;
-  background: darkslategray;
+  background: rgba(1, 255, 1, 0.658);
   animation: wiggle .3s linear infinite;
 }
 
