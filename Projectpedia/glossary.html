@@ -60,10 +60,10 @@ body > * { position: relative; z-index:1; }
   left: 0;
   height: 100vh;
   background:
-    url("https://projectradio.org/Projectpedia/wikinav.png") bottom center no-repeat,
-    linear-gradient(#dcd4a8, #c9c192);
+    url("../projectpedia/art/ppedianav.png") bottom center no-repeat,
+    linear-gradient(#8bbb8c, #8bbb8c);
   background-size: contain, cover;
-  border-right: 5px solid #9f986a;
+  border-right: 5px solid #242e24;rgb(112, 150, 112)rgb(57, 78, 58)
   box-shadow: 2px 0 8px rgba(0,0,0,0.2);
 }
 
@@ -75,16 +75,16 @@ body > * { position: relative; z-index:1; }
 .sidebar nav a {
   display: block;
   padding: 0.8rem 1rem;
-  color: #2f2d1f;
+  color: #f1f1ef;
   text-decoration: none;
   font-weight: 700;
-  border-bottom: 1px solid #9f986a;
-  background: #dcd4a8;
-  text-shadow: 1px 1px 0 #fdfcf4;
+  border-bottom: 1px solid #242e24;
+  background: #8bbb8c;
+  text-shadow: 1.5px 1.5px 0 #080808;
 }
 
 .sidebar nav a:hover {
-  background: #efeac8;
+  background: #242e24;
 }
 
 .sidebar-logo {
@@ -115,18 +115,18 @@ body > * { position: relative; z-index:1; }
 /* XP Window */
 .xp-window {
   background: rgba(50,50,50,0.85);
-  border: 2px solid #9f986a;
+  border: 2px solid #364b37;
   margin-bottom: 24px;
 }
 
 .xp-titlebar {
-  background: linear-gradient(#fff6d1, #f1e2a2);
+  background: linear-gradient(#8bbb8c, #364b37);
   padding:6px;
-  border-bottom:2px solid #9f986a;
+  border-bottom:2px solid #364b37;
   text-align:center;
 }
 
-.title-text { font-size:13px; color:#2b2a23; }
+.title-text { font-size:13px; color:#fcfbf9; }
 
 .xp-body { padding:14px; font-size:11px; line-height:1.9; color:#f0f0f0; }
 
@@ -161,7 +161,7 @@ body > * { position: relative; z-index:1; }
   flex: 0 0 140px;
   min-width:140px;
   height:200px;
-  border:2px solid #9f986a;
+  border:2px solid #364b37;
   border-radius:12px;
   box-shadow:0 6px 16px rgba(0,0,0,0.5);
   cursor:pointer;
@@ -232,18 +232,18 @@ body > * { position: relative; z-index:1; }
 }
 
 .directory-toggle {
-  background: linear-gradient(#dcd4a8, #c9c192);
-  border: 2px solid #9f986a;
+  background: linear-gradient(#8bbb8c, #364b37);
+  border: 2px solid #364b37;
   padding: 8px 12px;
   font-size: 9px;
   font-family: 'Press Start 2P', monospace;
-  color: #2f2d1f;
+  color: #ffffff;
   cursor: pointer;
   border-radius: 4px;
-  text-shadow: 1px 1px 0 #fdfcf4;
+  text-shadow: 1px 1px 0 #020202;
 }
 .directory-toggle:hover { 
-  background: linear-gradient(#efeac8, #dcd4a8); 
+  background: linear-gradient(#364b37, #364b37); 
 }
 
 .directory-section { display: none; margin-bottom:16px; }
@@ -271,14 +271,14 @@ body > * { position: relative; z-index:1; }
 
 <aside class="sidebar">
   <a href="https://projectradio.org/"><img src="https://projectradio.org/projectR-ver1.0.png" class="sidebar-logo"></a>
-  <nav>
-        <a href="https://artist.projectradio.org/">Artist Uplink</a>
-        <a href="https://projectradio.org/radio/tuner">Radio Tuner</a>
-        <a href="https://projectradio.org/Articles/uplink">Article Uplink</a>
-        <a href="https://projectradio.org/downloads_page.html">Downloads</a>
+      <nav>
+        <a href="#">Artist Uplink</a>
+        <a href="radio/tuner.html">Radio Tuner</a>
+        <a href="https://ko-fi.com/projectradio">Donate</a>
+        <a href="downloads_page.html">Downloads</a>
+        <a href="submit.html">Submit Music</a>
         <a href="https://discord.gg/qUFrxKxchg">Discord</a>
-    <a href="https://projectradio.org/">Return to Radio</a>
-  </nav>
+      </nav>
 </aside>
 
 <main class="main-content">
@@ -287,11 +287,8 @@ body > * { position: relative; z-index:1; }
 <section class="xp-window hero">
   <div class="xp-titlebar"><span class="title-text">PROJECT RADIO WIKI</span></div>
   <div class="xp-body">The Project Radio Wiki is a collaborative encyclopedia documenting the characters, organizations, locations, technology, and events of the Project Radio universe. The wiki is continuously expanding as new material is developed, refined, and integrated into the setting’s timeline.</div>
-</section>
 
 <!-- CARD CAROUSEL -->
-<section class="xp-window">
-  <div class="xp-titlebar"><span class="title-text">POPULAR PAGES</span></div>
   <div class="xp-body">
     <div class="carousel-wrapper">
       <div class="carousel-track" id="cardCarousel">
@@ -362,14 +359,9 @@ body > * { position: relative; z-index:1; }
       </div>
     </div>
   </div>
-</section>
-
-<section class="xp-window hero">
   <div class="xp-body">Built as an open, community-driven resource, the Project Radio Wiki allows anyone to create or edit articles. Its goal is to serve as a comprehensive and internally consistent archive of the world of Project Radio, from the upper levels of The City to its lowest depths, and from early corporate consolidation to the rise of Project Radio and beyond.</div>
-</section>
 
 <!-- DIRECTORY -->
-<section class="xp-window">
   <div class="xp-titlebar"><span class="title-text">DIRECTORY</span></div>
   <div class="xp-body">
     <div class="directory-buttons">
