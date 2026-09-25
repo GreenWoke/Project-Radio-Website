@@ -3,824 +3,833 @@
 <html lang="en">
 
 
-<!-- Mirrored from projectradio.org/radio/undergroundfm by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:49 GMT -->
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Underground.fm</title>
+  <!-- Mirrored from projectradio.org/radio/undergroundfm by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:49 GMT -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Underground.fm</title>
     <meta property="og:title" content="UNDERGROUND.FM" />
-  <meta property="og:description" content="UNDERGROUND.FM on Project Radio is music for us. By Us. Tune in to hear underground tracks, live mixes and preformances, talk shows and more!" />
-  <meta property="og:image" content="../ragedyanne.png" />
-  <meta property="og:url" content="undergroundfm.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Project Radio" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=VT323&amp;display=swap');
+    <meta property="og:description" content="UNDERGROUND.FM on Project Radio is music for us. By Us. Tune in to hear underground tracks, live mixes and preformances, talk shows and more!" />
+    <meta property="og:image" content="../ragedyanne.png" />
+    <meta property="og:url" content="undergroundfm.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Project Radio" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=VT323&amp;display=swap');
 
-    @font-face {
-      font-family: 'W95';
-      src: url(fonts/w95font.html);
-    }
+      @font-face {
+        font-family: 'W95';
+        src: url(fonts/w95font.html);
+      }
 
-    /* global variables, for manipulation via JS */
-    :root {
-      --skin-gradient-color: #6ebf00;
-      --skin-primary-color: #96bf55;
-      --preview-gradient-color: #f0f0f0;
-      --preview-primary-color: #d0d0d0;
-    }
+      /* global variables, for manipulation via JS */
+      :root {
+        --skin-gradient-color: #6ebf00;
+        --skin-primary-color: #96bf55;
+        --preview-gradient-color: #f0f0f0;
+        --preview-primary-color: #d0d0d0;
+      }
 
-    #wallpaper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000 url('../DRAINPAPER.png') no-repeat center center;
-      background-size: 100% 100%;
-      /*  stretch to fit */
-      z-index: -1;
-    }
+      #wallpaper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000 url('../DRAINPAPER.png') no-repeat center center;
+        background-size: 100% 100%;
+        /*  stretch to fit */
+        z-index: -1;
+      }
 
-#np-art {
-  max-width: 80px;      
-  max-height: 80px;
-  object-fit: contain;   
-  display: block;        
-  margin-bottom: 8px;    
-  border: 1px solid #808080; 
-}
+      #np-art {
+        max-width: 80px;
+        max-height: 80px;
+        object-fit: contain;
+        display: block;
+        margin-bottom: 8px;
+        border: 1px solid #808080;
+      }
 
-.now-playing-popup {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+      .now-playing-popup {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-    .window-box {
-      width: 300px;
-      background: #c0c0c0;
-      border: 2px solid #808080;
-      border-radius: 4px;
-      position: absolute;
-      top: 50px;
-      left: 50px;
-      box-shadow: 2px 2px 0 #fff inset, -2px -2px 0 #404040 inset;
-      font-family: Tahoma, sans-serif;
-      z-index: 1000;
-    }
+      .window-box {
+        width: 300px;
+        background: #c0c0c0;
+        border: 2px solid #808080;
+        border-radius: 4px;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        box-shadow: 2px 2px 0 #fff inset, -2px -2px 0 #404040 inset;
+        font-family: Tahoma, sans-serif;
+        z-index: 1000;
+      }
 
-    .window-header {
-      background: linear-gradient(to bottom, var(--skin-gradient-color) 0%, var(--skin-primary-color) 100%);
-      color: #fff;
-      padding: 6px;
-      font-weight: bold;
-      cursor: move;
-      border-bottom: 2px solid #000080;
-      font-family: 'W95', 'VT323', monospace;
-    }
+      .window-header {
+        background: linear-gradient(to bottom, var(--skin-gradient-color) 0%, var(--skin-primary-color) 100%);
+        color: #fff;
+        padding: 6px;
+        font-weight: bold;
+        cursor: move;
+        border-bottom: 2px solid #000080;
+        font-family: 'W95', 'VT323', monospace;
+      }
 
-    .window-content {
-      padding: 10px;
-      font-family: 'W95', 'VT323', monospace;
-    }
+      .window-content {
+        padding: 10px;
+        font-family: 'W95', 'VT323', monospace;
+      }
 
-    .now-playing h2 {
-      margin: 0 0 5px 0;
-      font-size: 16px;
-    }
+      .now-playing h2 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+      }
 
-    .now-playing-message {
-      font-size: 14px;
-      color: #333;
-    }
+      .now-playing-message {
+        font-size: 14px;
+        color: #333;
+      }
 
-    .controls button {
-      background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
-      border: 2px solid #808080;
-      border-radius: 3px;
-      padding: 6px 12px;
-      font-family: "W95", sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
-      margin-right: 5px;
-    }
+      .controls button {
+        background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+        border: 2px solid #808080;
+        border-radius: 3px;
+        padding: 6px 12px;
+        font-family: "W95", sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+        margin-right: 5px;
+      }
 
-    .controls button:hover {
-      background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
-    }
+      .controls button:hover {
+        background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+      }
 
-    .controls button:active {
-      box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #fff;
-    }
+      .controls button:active {
+        box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #fff;
+      }
 
-    .taskbar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 50px;
-      background: linear-gradient(to bottom, var(--skin-gradient-color) 0%, var(--skin-primary-color) 100%);
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-      z-index: 1000;
-      justify-content: space-between;
-    }
+      .taskbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background: linear-gradient(to bottom, var(--skin-gradient-color) 0%, var(--skin-primary-color) 100%);
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        z-index: 1000;
+        justify-content: space-between;
+      }
 
-    .icon-container {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: linear-gradient(to bottom, var(--skin-gradient-color) 0%, var(--skin-primary-color) 100%);
-      padding: 4px 6px;
-      border-radius: 3px;
-    }
+      .icon-container {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: linear-gradient(to bottom, var(--skin-gradient-color) 0%, var(--skin-primary-color) 100%);
+        padding: 4px 6px;
+        border-radius: 3px;
+      }
 
-    .window-button {
-      width: 44px;
-      height: 44px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .window-button {
+        width: 44px;
+        height: 44px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .window-button img {
-      max-width: 90%;
-      max-height: 90%;
-    }
+      .window-button img {
+        max-width: 90%;
+        max-height: 90%;
+      }
 
-    .speaker-icon {
-      width: 36px;
-      height: 36px;
-      background: url('Sound_Recorder_2001.webp') no-repeat center center;
-      background-size: contain;
-      cursor: pointer;
-      margin-right: 20px;
-      flex-shrink: 0;
-    }
-
-    .volume-popup {
-      display: none;
-      position: fixed;
-      bottom: 55px;
-      right: 20px;
-      width: 140px;
-      background: #c0c0c0;
-      border: 2px solid #808080;
-      border-radius: 3px;
-      padding: 10px;
-      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
-      z-index: 2000;
-    }
-
-    .volume-arrow {
-      position: absolute;
-      bottom: -6px;
-      right: 10px;
-      width: 0;
-      height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 6px solid #c0c0c0;
-    }
-
-    .volume-popup input[type="range"] {
-      width: 100%;
-    }
-
-    .start-menu {
-      display: none;
-      position: fixed;
-      bottom: 50px;
-      left: 0;
-      width: 200px;
-      background: #c0c0c0;
-      border: 2px solid #808080;
-      border-radius: 3px;
-      box-shadow: 2px 2px 0 #fff inset, -2px -2px 0 #404040 inset;
-      z-index: 1500;
-    }
-
-    .start-menu ul {
-      list-style: none;
-      padding: 10px;
-      margin: 0;
-    }
-
-    .start-menu li {
-      margin-bottom: 5px;
-    }
-
-    .start-menu li a {
-      text-decoration: none;
-      color: #000;
-      font-family: Tahoma, sans-serif;
-      display: block;
-      padding: 5px;
-    }
-
-    .start-menu li a:hover {
-      background: #0a64ad;
-      color: #fff;
-    }
-
-    #gallery-content {
-      display: flex;
-      overflow-x: auto;
-      gap: 5px;
-    }
-
-    #gallery-content img {
-      max-height: 150px;
-      border: 1px solid #808080;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-
-    #skin-list li {
-      background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
-      border: 2px solid #808080;
-      border-radius: 3px;
-      padding: 6px 12px;
-      font-family: "W95", 'VT323', monospace;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
-      margin-right: 5px;
-      list-style-type: none;
-      width: 70%;
-    }
-
-    #skin-list li:hover {
-      background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
-    }
-
-    #custom-skin-button {
-      background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
-      border: 2px solid #808080;
-      border-radius: 3px;
-      padding: 6px 12px;
-      text-align: center;
-    }
-
-    #custom-skin-button:hover {
-      background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
-      cursor: pointer;
-    }
-
-    #custom-skin-create {
-      position: absolute;
-      right: 5%;
-      top: 43%;
-      background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
-      border: 2px solid #808080;
-      border-radius: 3px;
-      padding: 2px 3px;
-      text-align: center;
-    }
-
-    #custom-skin-create:hover {
-      background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
-      cursor: pointer;
-      font-style: italic;
-    }
-
-    #custom-skin-preview {
-      width: 100%;
-      height: 1.5em;
-      background: linear-gradient(to bottom, var(--preview-gradient-color) 0%, var(--preview-primary-color) 100%);
-      color: white;
-      text-align: center;
-    }
-
-    #credits-blurb {
-      font-family: 'W95', 'VT323', monospace;
-      font-weight: 400;
-      font-style: normal;
-      margin-top: 0;
-      margin-bottom: 8px;
-    }
-
-    #credits-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      max-height: 320px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .credits-box {
-      background: linear-gradient(to bottom, #d4d4d4 0%, #b0b0b0 100%);
-      border: 2px solid #808080;
-      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
-      padding: 6px 8px;
-      font-family: 'W95', 'VT323', monospace;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      cursor: default;
-    }
-
-    .credits-box span {
-      display: block;
-      font-weight: bold;
-      text-transform: lowercase;
-      letter-spacing: 0.5px;
-      text-align: left;
-    }
-
-    .credits-box p {
-      margin: 0;
-      font-size: 13px;
-    }
-
-    .credits-link {
-      display: block;
-      color: inherit;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .credits-link:hover .credits-box {
-      background: linear-gradient(to bottom, #f0f0f0 0%, #c8c8c8 100%);
-      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset, 0 0 0 1px #00000033;
-    }
-
-    .credits-box:hover {
-      background: linear-gradient(to bottom, #f0f0f0 0%, #c8c8c8 100%);
-      box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset, 0 0 0 1px #00000033;
-    }
-
-    @media (max-width: 500px) {
       .speaker-icon {
-        width: 24px;
-        height: 24px;
+        width: 36px;
+        height: 36px;
+        background: url('Sound_Recorder_2001.webp') no-repeat center center;
+        background-size: contain;
+        cursor: pointer;
+        margin-right: 20px;
+        flex-shrink: 0;
       }
 
       .volume-popup {
-        width: 120px;
-        padding: 8px;
+        display: none;
+        position: fixed;
+        bottom: 55px;
+        right: 20px;
+        width: 140px;
+        background: #c0c0c0;
+        border: 2px solid #808080;
+        border-radius: 3px;
+        padding: 10px;
+        box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+        z-index: 2000;
       }
 
-      .start-button,
-      .gallery-button,
-      .discord-button {
-        width: 32px;
-        height: 32px;
-      }
-            .submit-button {
-        width: 32px;
-        height: 32px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <div id="wallpaper"></div>
-
-  <main class="player-container">
-    <div class="window-box" id="player-box">
-      <div class="window-header" id="player-header">/pr/underground/uplink.exe</div>
-      <div class="window-content" id="player-content">
-        <div class="now-playing">
-          <h2>Underground.fm Player</h2>
-<div id="nowPlayingPopup" class="now-playing-popup hidden">
-
-  <img id="np-art" src="#" alt="Album Art" />
-
-  <div class="np-text">
-    <div id="np-title">Loading...</div>
-    <div id="np-artist"></div>
-  </div>
-</div>         
-        <div class="controls">
-          <button id="play-btn">▶ Play</button>
-          <button id="pause-btn">⏸ Pause</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="app" style="height: 100vh; display: none;">
-    </div>
-    <script type="module">
-      import Webamp from "https://unpkg.com/webamp@^2";
-      let currentPlayedAt = null;
-
-
-      function setInitialElapsed(backElapsed) {
-        if (!window.webamp) return;
-        if (typeof backElapsed !== 'number' || backElapsed < 0) return;
-        try {
-          window.webamp.store.dispatch({ type: 'UPDATE_TIME_ELAPSED', elapsed: backElapsed });
-        } catch (e) { }
+      .volume-arrow {
+        position: absolute;
+        bottom: -6px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid #c0c0c0;
       }
 
-      function updateWebampMetadata({ artist, title, duration, elapsed, played_at }) {
-        if (!window.webamp) return;
-        try {
-          const state = window.webamp.store.getState();
-          const currentId = state.playlist.currentTrack;
-          if (currentId != null) {
-            if (typeof duration === 'number' && duration > 0) {
-              window.webamp.store.dispatch({ type: 'SET_MEDIA_DURATION', id: currentId, duration });
+      .volume-popup input[type="range"] {
+        width: 100%;
+      }
+
+      .start-menu {
+        display: none;
+        position: fixed;
+        bottom: 50px;
+        left: 0;
+        width: 200px;
+        background: #c0c0c0;
+        border: 2px solid #808080;
+        border-radius: 3px;
+        box-shadow: 2px 2px 0 #fff inset, -2px -2px 0 #404040 inset;
+        z-index: 1500;
+      }
+
+      .start-menu ul {
+        list-style: none;
+        padding: 10px;
+        margin: 0;
+      }
+
+      .start-menu li {
+        margin-bottom: 5px;
+      }
+
+      .start-menu li a {
+        text-decoration: none;
+        color: #000;
+        font-family: Tahoma, sans-serif;
+        display: block;
+        padding: 5px;
+      }
+
+      .start-menu li a:hover {
+        background: #0a64ad;
+        color: #fff;
+      }
+
+      #gallery-content {
+        display: flex;
+        overflow-x: auto;
+        gap: 5px;
+      }
+
+      #gallery-content img {
+        max-height: 150px;
+        border: 1px solid #808080;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      #skin-list li {
+        background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+        border: 2px solid #808080;
+        border-radius: 3px;
+        padding: 6px 12px;
+        font-family: "W95", 'VT323', monospace;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+        margin-right: 5px;
+        list-style-type: none;
+        width: 70%;
+      }
+
+      #skin-list li:hover {
+        background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+      }
+
+      #custom-skin-button {
+        background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+        border: 2px solid #808080;
+        border-radius: 3px;
+        padding: 6px 12px;
+        text-align: center;
+      }
+
+      #custom-skin-button:hover {
+        background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+        cursor: pointer;
+      }
+
+      #custom-skin-create {
+        position: absolute;
+        right: 5%;
+        top: 43%;
+        background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+        border: 2px solid #808080;
+        border-radius: 3px;
+        padding: 2px 3px;
+        text-align: center;
+      }
+
+      #custom-skin-create:hover {
+        background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+        cursor: pointer;
+        font-style: italic;
+      }
+
+      #custom-skin-preview {
+        width: 100%;
+        height: 1.5em;
+        background: linear-gradient(to bottom, var(--preview-gradient-color) 0%, var(--preview-primary-color) 100%);
+        color: white;
+        text-align: center;
+      }
+
+      #credits-blurb {
+        font-family: 'W95', 'VT323', monospace;
+        font-weight: 400;
+        font-style: normal;
+        margin-top: 0;
+        margin-bottom: 8px;
+      }
+
+      #credits-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        max-height: 320px;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+
+      .credits-box {
+        background: linear-gradient(to bottom, #d4d4d4 0%, #b0b0b0 100%);
+        border: 2px solid #808080;
+        box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset;
+        padding: 6px 8px;
+        font-family: 'W95', 'VT323', monospace;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        cursor: default;
+      }
+
+      .credits-box span {
+        display: block;
+        font-weight: bold;
+        text-transform: lowercase;
+        letter-spacing: 0.5px;
+        text-align: left;
+      }
+
+      .credits-box p {
+        margin: 0;
+        font-size: 13px;
+      }
+
+      .credits-link {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .credits-link:hover .credits-box {
+        background: linear-gradient(to bottom, #f0f0f0 0%, #c8c8c8 100%);
+        box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset, 0 0 0 1px #00000033;
+      }
+
+      .credits-box:hover {
+        background: linear-gradient(to bottom, #f0f0f0 0%, #c8c8c8 100%);
+        box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #404040 inset, 0 0 0 1px #00000033;
+      }
+
+      @media (max-width: 500px) {
+        .speaker-icon {
+          width: 24px;
+          height: 24px;
+        }
+
+        .volume-popup {
+          width: 120px;
+          padding: 8px;
+        }
+
+        .start-button,
+        .gallery-button,
+        .discord-button {
+          width: 32px;
+          height: 32px;
+        }
+        .submit-button {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    </style>
+    </head>
+
+    <body>
+
+      <div id="wallpaper"></div>
+
+      <main class="player-container">
+        <div class="window-box" id="player-box">
+          <div class="window-header" id="player-header">/pr/underground/uplink.exe</div>
+          <div class="window-content" id="player-content">
+            <div class="now-playing">
+              <h2>Underground.fm Player</h2>
+              <div id="nowPlayingPopup" class="now-playing-popup hidden">
+
+                <img id="np-art" src="#" alt="Album Art" />
+
+                <div class="np-text">
+                  <div id="np-title">Loading...</div>
+                  <div id="np-artist"></div>
+                </div>
+              </div>
+              <div class="controls">
+                <button id="play-btn">▶ Play</button>
+                <button id="pause-btn">⏸ Pause</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="app" style="height: 100vh; display: none;">
+          </div>
+          <script type="module">
+            import Webamp from "https://unpkg.com/webamp@^2";
+            let currentPlayedAt = null;
+
+
+            function setInitialElapsed(backElapsed) {
+              if (!window.webamp) return;
+              if (typeof backElapsed !== 'number' || backElapsed < 0) return;
+              try {
+                window.webamp.store.dispatch({ type: 'UPDATE_TIME_ELAPSED', elapsed: backElapsed });
+              } catch (e) { }
             }
-            if (typeof played_at === 'number' && played_at > 0) {
-              currentPlayedAt = played_at;
-              const nowSec = Date.now() / 1000;
-              const alreadyElapsed = Math.max(0, nowSec - currentPlayedAt);
-              const startingElapsed = typeof elapsed === 'number' && elapsed >= 0 ? elapsed : alreadyElapsed;
-              setInitialElapsed(startingElapsed);
+
+            function updateWebampMetadata({ artist, title, duration, elapsed, played_at }) {
+              if (!window.webamp) return;
+              try {
+                const state = window.webamp.store.getState();
+                const currentId = state.playlist.currentTrack;
+                if (currentId != null) {
+                  if (typeof duration === 'number' && duration > 0) {
+                    window.webamp.store.dispatch({ type: 'SET_MEDIA_DURATION', id: currentId, duration });
+                  }
+                  if (typeof played_at === 'number' && played_at > 0) {
+                    currentPlayedAt = played_at;
+                    const nowSec = Date.now() / 1000;
+                    const alreadyElapsed = Math.max(0, nowSec - currentPlayedAt);
+                    const startingElapsed = typeof elapsed === 'number' && elapsed >= 0 ? elapsed : alreadyElapsed;
+                    setInitialElapsed(startingElapsed);
+                  }
+                  window.webamp.store.dispatch({
+                    type: "SET_MEDIA_TAGS",
+                    id: currentId,
+                    artist: artist || "",
+                    title: title || "",
+                    album: undefined,
+                    albumArtUrl: null,
+                    numberOfChannels: state.tracks[currentId]?.channels ?? 2,
+                    bitrate: state.tracks[currentId]?.kbps ? Number(state.tracks[currentId].kbps) * 1000 : 128000,
+                    sampleRate: 44100,
+                  });
+                  if (typeof elapsed === 'number' && elapsed >= 0 && !played_at) {
+                    setInitialElapsed(elapsed);
+                  }
+                }
+              } catch (e) {
+              }
+              const marquee = document.querySelector("#app .marquee, #app .winamp2-js__title .marquee");
+              if (marquee) marquee.textContent = `${artist || ''}${artist && title ? ' - ' : ''}${title || ''}`;
             }
-            window.webamp.store.dispatch({
-              type: "SET_MEDIA_TAGS",
-              id: currentId,
-              artist: artist || "",
-              title: title || "",
-              album: undefined,
-              albumArtUrl: null,
-              numberOfChannels: state.tracks[currentId]?.channels ?? 2,
-              bitrate: state.tracks[currentId]?.kbps ? Number(state.tracks[currentId].kbps) * 1000 : 128000,
-              sampleRate: 44100,
+
+            async function applyMetadataOnce() {
+              const meta = await fetchNowPlaying();
+              if (meta.title && meta.artist) {
+                updateWebampMetadata({ artist: meta.artist, title: meta.title, duration: meta.duration, elapsed: meta.elapsed, played_at: meta.played_at });
+              }
+            }
+
+            function startPolling() { setInterval(applyMetadataOnce, 10000); }
+
+            async function init() {
+              const meta = await fetchNowPlaying();
+
+              const initialTitle = (meta.title && meta.artist) ? meta.title : "";
+              const initialArtist = (meta.title && meta.artist) ? meta.artist : "";
+              currentPlayedAt = meta.played_at || null;
+
+              const skinUrlMap = {
+                "Wired Lime": "skin1.wsz",
+                "Terminal Tulip": "skin2.wsz",
+                "Take Cover": "skin3.wsz",
+                "Mosh Pit": "skin4.wsz",
+                "Uranium Junkyard": "skin5.wsz"
+              };
+              const skinColorMap = {
+                "Wired Lime": ["#6ebf00", "#96bf55"],
+                "Terminal Tulip": ['#ff5b5b', '#676767'],
+                "Take Cover": ["#40713b", "#34552d"],
+                "Mosh Pit": ["#000000", "#2f2f2f"],
+                "Uranium Junkyard": ["#555555", "#f8f861"]
+              };
+
+              let initialSkin = "skin1.wsz";
+              try {
+                const savedSkinName = window.localStorage.getItem("selectedWinampSkin");
+                if (savedSkinName && skinUrlMap[savedSkinName]) {
+                  initialSkin = skinUrlMap[savedSkinName];
+                  const savedSkinData = skinColorMap[savedSkinName];
+                  if (savedSkinData) {
+                    document.querySelector(':root').style.setProperty('--skin-primarsy-color', savedSkinData[0]);
+                    document.querySelector(':root').style.setProperty('--skin-gradient-color', savedSkinData[1]);
+                  }
+                }
+              } catch (e) {
+              }
+              const webamp = new Webamp({
+                initialTracks: [{
+                  url: meta.streamUrl,
+                  metaData: { title: initialTitle, artist: initialArtist },
+                  duration: 0
+                }],
+                initialSkin: { url: initialSkin },
+                windowLayout: {
+                  main: { position: { x: 0, y: 0 } },
+                  equalizer: { position: { x: 0, y: 116 } },
+                  playlist: { position: { x: 275, y: 0 }, size: [0, 4], closed: true }
+                }
+              });
+
+              await webamp.renderWhenReady(document.getElementById("app"));
+              window.webamp = webamp;
+
+              setTimeout(() => { updateWebampMetadata({ artist: initialArtist, title: initialTitle, duration: meta.duration, elapsed: meta.elapsed, played_at: meta.played_at }); }, 300);
+              setTimeout(applyMetadataOnce, 1500);
+              startPolling();
+              init().catch(() => { });
+            }
+
+          </script>
+            <audio id="audio" preload="none">
+              <source src="https://signal.projectradio.org/listen/undergroundfm/radio.mp3" type="audio/mpeg">
+            </audio>
+          </main>
+
+          <div class="taskbar">
+            <div class="icon-container">
+              <div class="window-button" id="start-button">
+                <img src="./OFR-WHITE.png" alt="Start Logo">
+              </div>
+              <div class="window-button" id="gallery-button">
+                <img src="RjMRqmK.png" alt="Gallery Icon">
+              </div>
+              <div class="window-button" id="skin-selector-button">
+                <img
+                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwinaero.com%2Fblog%2Fwp-content%2Fuploads%2F2019%2F05%2FMicrosoft-Paint-icon-big-256.png&amp;f=1&amp;nofb=1&amp;ipt=bbe778048491c3b87b6c9b8508b070d1212eafe7cc945d504044b4d8cfce6121"
+                alt="Skin Selector">
+              </div>
+              <a href="https://projectradio.org/submit" target="_blank" rel="noopener noreferrer">
+                <div class="window-button" id="submit-button">
+                  <img
+                  src="./freak.png"
+                  alt="Submit Icon">
+                </div>
+              </a>
+              <div class="window-button" id="discord-button">
+                <img
+                src="./discord.webp"
+                alt="Discord Icon">
+              </div>
+              <div class="window-button" id="credits-button">
+                <img src="taskmanager-icon.png" alt="Task Manager">
+              </div>
+            </div>
+            <div class="speaker-icon" id="speaker-icon"></div>
+            <div class="volume-popup" id="volume-popup">
+              <div class="volume-arrow"></div>
+              <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+            </div>
+          </div>
+
+          <div class="start-menu" id="start-menu">
+            <ul>
+              <li><a href="../index.html">Return To Radio</a></li>
+              <li><a href="projectfm.html">Project.fm</a></li>
+              <li><a href="ruggedraw94.html">RuggedRaw.94</a></li>
+              <li><a href="dogstar.html">DogStar</a></li>
+            </ul>
+          </div>
+
+          <div class="window-box" id="gallery-box" style="display:none; top:100px; left:100px;">
+            <div class="window-header" id="gallery-header">Gallery</div>
+            <div class="window-content" id="gallery-content">
+              <img src="../DRAINPAPER.png" alt="Sample5">
+              <img src="PRwallpaper2024.png" alt="Sample3">
+              <img src="../PROJECTR.jpg" alt="Sample2">
+              <img src="../whatthefuckboom.png" alt="Sample4">
+              <img src="../downloads/agentnaomiwallpaper.png" alt="Sample1">
+            </div>
+          </div>
+
+          <div class="window-box" id="skin-selector-box" style="display:none; top: 150px; left: 150px;">
+            <div class="window-header" id="skin-selector-header">Skins</div>
+            <div class="window-content" id="skin-selector-content">
+              <ul id="skin-list">
+              </ul>
+              <div id="custom-skin-button">Make your own!</div>
+            </div>
+          </div>
+
+          <div class="window-box" id="custom-skin-box" style="display:none; top: 150px; left: 150px;">
+            <div class="window-header" id="custom-skin-header">Custom Skin</div>
+            <div class="window-content" id="custom-skin-content">
+              <input type="text" id="custom-skin-name" placeholder="Tribal Drums">
+              <input type="text" id="custom-skin-primary" placeholder="HEX 0 (ex #111111)">
+              <input type="text" id="custom-skin-secondary" placeholder="HEX 1">
+              <div id="custom-skin-create">SKIN MY SHIT</div>
+              <div id="custom-skin-preview"></div>
+            </div>
+          </div>
+
+          <div class="window-box" id="discord-box" style="display:none; top:200px; left:200px;">
+            <div class="window-header" id="discord-header">Discord</div>
+            <div class="window-content" id="discord-content">
+              <p>Join our community on Discord:</p>
+              <a href="https://discord.gg/qUFrxKxchg" target="_blank">Click here to join</a>
+            </div>
+          </div>
+
+          <div class="window-box" id="credits-box" style="display:none; top:200px; left:200px;">
+            <div class="window-header" id="credits-header">Task Manager</div>
+            <div class="window-content" id="credits-content">
+              <p id="credits-blurb">project radio rocks. here are the people who brought you this kickass site:</p>
+              <div id="credits-list">
+                <div id="merlin-credit" class="credits-link" href="" target="_blank" rel="noopener noreferrer">
+                  <div class="credits-box">
+                    <span>merlin</span>
+                    <p>the grand mastermind themself - big dawg behind PR as a whole</p>
+                  </div>
+                </div>
+                <div id="autumn-credit" class="credits-link" href="" target="_blank" rel="noopener noreferrer">
+                  <div class="credits-box">
+                    <span>autumn</span>
+                    <p>backend blacksmith and DJ extraordinaire</p>
+                  </div>
+                </div>
+                <div id="guac-credit" class="credits-box">
+                  <span>guac</span>
+                  <p>front-end fool and general jester</p>
+                </div>
+
+                <div id="lou-credit" class="credits-box">
+                  <span>v1peridae</span>
+                  <p>webamp wizard and tastemaker supreme</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <script type="module">
+            // ------------------- Audio Setup -------------------
+            const audio = document.getElementById("audio");
+            const playBtn = document.getElementById("play-btn");
+            const pauseBtn = document.getElementById("pause-btn");
+            const volumeSlider = document.getElementById("volume-slider");
+
+            // Set initial volume
+            audio.volume = volumeSlider.value;
+
+            // Play / Pause controls
+            playBtn.addEventListener("click", () => audio.play());
+            pauseBtn.addEventListener("click", () => audio.pause());
+            volumeSlider.addEventListener("input", () => audio.volume = volumeSlider.value);
+
+            // ------------------- Now Playing -------------------
+            async function fetchNowPlaying() {
+              try {
+                const response = await fetch("https://signal.projectradio.org/api/nowplaying_static/undergroundfm.json");
+                if (!response.ok) return {};
+                return await response.json();
+              } catch {
+                return {};
+              }
+            }
+
+            async function updateNowPlaying() {
+              try {
+                const meta = await fetchNowPlaying();
+
+                const song = meta?.now_playing?.song || {};
+
+                const title = song.title || "Loading...";
+                const artist = song.artist || "";
+
+                document.getElementById("np-title").textContent = title;
+                document.getElementById("np-artist").textContent = artist;
+
+                const popup = document.getElementById("nowPlayingPopup");
+                popup.classList.remove("hidden");
+
+                const art = document.getElementById("np-art");
+                art.src = song.art || "https://projectradio.org/ragedyanne.png";
+                art.style.display = "block";
+
+              } catch (err) {
+                console.error("Failed to fetch now playing:", err);
+              }
+            }
+            updateNowPlaying();
+            setInterval(updateNowPlaying, 10000);
+
+            // ------------------- Gallery Backgrounds -------------------
+                const wallpaper = document.getElementById("wallpaper");
+                const galleryImages = document.querySelectorAll("#gallery-content img");
+
+                galleryImages.forEach(img => {
+                 img.addEventListener("click", () => {
+                  wallpaper.style.backgroundImage = `url("${img.src}")`;
+               });
+              });
+
+            
+            // ------------------- Window toggles -------------------
+            function toggleWindow(el) {
+              return (e) => { e.stopPropagation(); el.style.display = el.style.display === "block" ? "none" : "block"; };
+            }
+
+            const controlsMap = [
+            ["speaker-icon", "volume-popup"],
+            ["start-button", "start-menu"],
+            ["gallery-button", "gallery-box"],
+            ["skin-selector-button", "skin-selector-box"],
+            ["custom-skin-button", "custom-skin-box"],
+            ["discord-button", "discord-box"],
+            ["credits-button", "credits-box"]
+            ];
+
+            controlsMap.forEach(([btnId, boxId]) => {
+              const btn = document.getElementById(btnId);
+              const box = document.getElementById(boxId);
+              if (btn && box) btn.addEventListener("click", toggleWindow(box));
             });
-            if (typeof elapsed === 'number' && elapsed >= 0 && !played_at) {
-              setInitialElapsed(elapsed);
+
+            // Hide windows when clicking outside
+            document.addEventListener("click", (e) => {
+              const windows = ["volume-popup", "start-menu", "gallery-box", "discord-box"];
+              windows.forEach(id => {
+                const el = document.getElementById(id);
+                const btn = document.getElementById(id.split("-")[0] + "-icon") || document.getElementById(id.split("-")[0] + "-button");
+                if (el && e.target !== btn && !el.contains(e.target)) el.style.display = "none";
+              });
+            });
+
+            // ------------------- Drag & Drop -------------------
+            document.querySelectorAll(".window-header").forEach(header => {
+              const box = header.parentElement;
+              let dragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
+
+              header.addEventListener("mousedown", e => {
+                dragging = true;
+                startX = e.clientX; startY = e.clientY;
+                const rect = box.getBoundingClientRect();
+                origX = rect.left; origY = rect.top;
+                box.style.position = "absolute"; box.style.zIndex = 1000; box.style.margin = 0;
+              });
+
+              document.addEventListener("mousemove", e => {
+                if (!dragging) return;
+                let newX = origX + (e.clientX - startX);
+                let newY = origY + (e.clientY - startY);
+                const rect = box.getBoundingClientRect();
+                if (newX < 0) newX = 0;
+                if (newY < 0) newY = 0;
+                if (newX + rect.width > window.innerWidth) newX = window.innerWidth - rect.width;
+                if (newY + rect.height > window.innerHeight) newY = window.innerHeight - rect.height;
+                box.style.left = newX + "px";
+                box.style.top = newY + "px";
+              });
+
+              document.addEventListener("mouseup", () => { dragging = false; });
+            });
+
+            // ------------------- Skin selector -------------------
+            const skinDictionary = {
+              "Wired Lime": ["#6ebf00", "#96bf55"],
+              "Terminal Tulip": ["#ff5b5b", "#676767"],
+              "Take Cover": ["#40713b", "#34552d"],
+              "Mosh Pit": ["#000000", "#2f2f2f"],
+              "Uranium Junkyard": ["#555555", "#f8f861"]
+            };
+
+            function changeSkin(name, colors) {
+              document.documentElement.style.setProperty("--skin-primary-color", colors[0]);
+              document.documentElement.style.setProperty("--skin-gradient-color", colors[1]);
+              localStorage?.setItem("selectedSkin", name);
             }
-          }
-        } catch (e) {
-        }
-        const marquee = document.querySelector("#app .marquee, #app .winamp2-js__title .marquee");
-        if (marquee) marquee.textContent = `${artist || ''}${artist && title ? ' - ' : ''}${title || ''}`;
-      }
 
-      async function applyMetadataOnce() {
-        const meta = await fetchNowPlaying();
-        if (meta.title && meta.artist) {
-          updateWebampMetadata({ artist: meta.artist, title: meta.title, duration: meta.duration, elapsed: meta.elapsed, played_at: meta.played_at });
-        }
-      }
-
-      function startPolling() { setInterval(applyMetadataOnce, 10000); }
-
-      async function init() {
-        const meta = await fetchNowPlaying();
-
-        const initialTitle = (meta.title && meta.artist) ? meta.title : "";
-        const initialArtist = (meta.title && meta.artist) ? meta.artist : "";
-        currentPlayedAt = meta.played_at || null;
-
-        const skinUrlMap = {
-          "Wired Lime": "skin1.wsz",
-          "Terminal Tulip": "skin2.wsz",
-          "Take Cover": "skin3.wsz",
-          "Mosh Pit": "skin4.wsz",
-          "Uranium Junkyard": "skin5.wsz"
-        };
-        const skinColorMap = {
-          "Wired Lime": ["#6ebf00", "#96bf55"],
-          "Terminal Tulip": ['#ff5b5b', '#676767'],
-          "Take Cover": ["#40713b", "#34552d"],
-          "Mosh Pit": ["#000000", "#2f2f2f"],
-          "Uranium Junkyard": ["#555555", "#f8f861"]
-        };
-
-        let initialSkin = "skin1.wsz";
-        try {
-          const savedSkinName = window.localStorage.getItem("selectedWinampSkin");
-          if (savedSkinName && skinUrlMap[savedSkinName]) {
-            initialSkin = skinUrlMap[savedSkinName];
-            const savedSkinData = skinColorMap[savedSkinName];
-            if (savedSkinData) {
-              document.querySelector(':root').style.setProperty('--skin-primarsy-color', savedSkinData[0]);
-              document.querySelector(':root').style.setProperty('--skin-gradient-color', savedSkinData[1]);
+            const skinList = document.getElementById("skin-list");
+            for (let skin in skinDictionary) {
+              const li = document.createElement("li");
+              const p = document.createElement("p");
+              p.textContent = skin;
+              li.appendChild(p);
+              li.addEventListener("mousedown", () => { changeSkin(skin, skinDictionary[skin]); });
+              skinList.appendChild(li);
             }
-          }
-        } catch (e) {
-        }
-        const webamp = new Webamp({
-          initialTracks: [{
-            url: meta.streamUrl,
-            metaData: { title: initialTitle, artist: initialArtist },
-            duration: 0
-          }],
-          initialSkin: { url: initialSkin },
-          windowLayout: {
-            main: { position: { x: 0, y: 0 } },
-            equalizer: { position: { x: 0, y: 116 } },
-            playlist: { position: { x: 275, y: 0 }, size: [0, 4], closed: true }
-          }
-        });
 
-        await webamp.renderWhenReady(document.getElementById("app"));
-        window.webamp = webamp;
+            // ------------------- Custom skins -------------------
+            let customSkins = {};
+            if (localStorage.getItem("customSkins")) {
+              try { customSkins = JSON.parse(localStorage.getItem("customSkins")); } catch {}
+            }
 
-        setTimeout(() => { updateWebampMetadata({ artist: initialArtist, title: initialTitle, duration: meta.duration, elapsed: meta.elapsed, played_at: meta.played_at }); }, 300);
-        setTimeout(applyMetadataOnce, 1500);
-        startPolling();
-        init().catch(() => { });
-      }
-      
-    </script>
-    <audio id="audio" preload="none">
-      <source src="https://signal.projectradio.org/listen/undergroundfm/radio.mp3" type="audio/mpeg">
-    </audio>
-  </main>
+            const nameInput = document.getElementById("custom-skin-name");
+            const primaryInput = document.getElementById("custom-skin-primary");
+            const secondaryInput = document.getElementById("custom-skin-secondary");
+            const createBtn = document.getElementById("custom-skin-create");
+            const preview = document.getElementById("custom-skin-preview");
 
-  <div class="taskbar">
-    <div class="icon-container">
-      <div class="window-button" id="start-button">
-        <img src="./OFR-WHITE.png" alt="Start Logo">
-      </div>
-      <div class="window-button" id="gallery-button">
-        <img src="RjMRqmK.png" alt="Gallery Icon">
-      </div>
-      <div class="window-button" id="skin-selector-button">
-        <img
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwinaero.com%2Fblog%2Fwp-content%2Fuploads%2F2019%2F05%2FMicrosoft-Paint-icon-big-256.png&amp;f=1&amp;nofb=1&amp;ipt=bbe778048491c3b87b6c9b8508b070d1212eafe7cc945d504044b4d8cfce6121"
-          alt="Skin Selector">
-      </div>
-<a href="https://projectradio.org/submit" target="_blank" rel="noopener noreferrer">
-  <div class="window-button" id="submit-button">
-    <img
-      src="./freak.png"
-      alt="Submit Icon">
-  </div>
-</a>
-      <div class="window-button" id="discord-button">
-        <img
-          src="./discord.webp"
-          alt="Discord Icon">
-      </div>
-      <div class="window-button" id="credits-button">
-        <img src="taskmanager-icon.png" alt="Task Manager">
-      </div>
-    </div>
-    <div class="speaker-icon" id="speaker-icon"></div>
-    <div class="volume-popup" id="volume-popup">
-      <div class="volume-arrow"></div>
-      <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
-    </div>
-  </div>
+            function validateHex(hex) { return /^#?([a-f0-9]{3}|[a-f0-9]{6})$/i.test(hex); }
 
-  <div class="start-menu" id="start-menu">
-    <ul>
-      <li><a href="../index.html">Return To Radio</a></li>
-      <li><a href="projectfm.html">Project.fm</a></li>
-      <li><a href="ruggedraw94.html">RuggedRaw.94</a></li>
-      <li><a href="dogstar.html">DogStar</a></li>
-    </ul>
-  </div>
+            createBtn.addEventListener("click", () => {
+              const name = nameInput.value.trim();
+              const hex0 = primaryInput.value.trim();
+              const hex1 = secondaryInput.value.trim();
+              if (!name || !validateHex(hex0) || !validateHex(hex1)) return;
+              customSkins[name] = [hex0, hex1];
+              localStorage.setItem("customSkins", JSON.stringify(customSkins));
+              skinDictionary[name] = [hex0, hex1];
+              changeSkin(name, [hex0, hex1]);
+            });
 
-  <div class="window-box" id="gallery-box" style="display:none; top:100px; left:100px;">
-    <div class="window-header" id="gallery-header">Gallery</div>
-    <div class="window-content" id="gallery-content">
-      <img src="../DRAINPAPER.png" alt="Sample5">
-      <img src="PRwallpaper2024.png" alt="Sample3">
-      <img src="../PROJECTR.jpg" alt="Sample2">
-      <img src="../whatthefuckboom.png" alt="Sample4">
-      <img src="../downloads/agentnaomiwallpaper.png" alt="Sample1">
-    </div>
-  </div>
+            // Update preview on input
+            [primaryInput, secondaryInput].forEach(input => {
+              input.addEventListener("input", () => {
+                const hex0 = primaryInput.value.trim();
+                const hex1 = secondaryInput.value.trim();
+                if (validateHex(hex0) && validateHex(hex1)) {
+                  preview.style.background = `linear-gradient(to bottom, ${hex0}, ${hex1})`;
+                }
+              });
+            });
+          </script>
+          </body>
 
-  <div class="window-box" id="skin-selector-box" style="display:none; top: 150px; left: 150px;">
-    <div class="window-header" id="skin-selector-header">Skins</div>
-    <div class="window-content" id="skin-selector-content">
-      <ul id="skin-list">
-      </ul>
-      <div id="custom-skin-button">Make your own!</div>
-    </div>
-  </div>
-
-  <div class="window-box" id="custom-skin-box" style="display:none; top: 150px; left: 150px;">
-    <div class="window-header" id="custom-skin-header">Custom Skin</div>
-    <div class="window-content" id="custom-skin-content">
-      <input type="text" id="custom-skin-name" placeholder="Tribal Drums">
-      <input type="text" id="custom-skin-primary" placeholder="HEX 0 (ex #111111)">
-      <input type="text" id="custom-skin-secondary" placeholder="HEX 1">
-      <div id="custom-skin-create">SKIN MY SHIT</div>
-      <div id="custom-skin-preview"></div>
-    </div>
-  </div>
-
-  <div class="window-box" id="discord-box" style="display:none; top:200px; left:200px;">
-    <div class="window-header" id="discord-header">Discord</div>
-    <div class="window-content" id="discord-content">
-      <p>Join our community on Discord:</p>
-      <a href="https://discord.gg/qUFrxKxchg" target="_blank">Click here to join</a>
-    </div>
-  </div>
-
-  <div class="window-box" id="credits-box" style="display:none; top:200px; left:200px;">
-    <div class="window-header" id="credits-header">Task Manager</div>
-    <div class="window-content" id="credits-content">
-      <p id="credits-blurb">project radio rocks. here are the people who brought you this kickass site:</p>
-      <div id="credits-list">
-          <div id="merlin-credit" class="credits-link" href="" target="_blank" rel="noopener noreferrer">
-            <div class="credits-box">
-              <span>merlin</span>
-              <p>the grand mastermind themself - big dawg behind PR as a whole</p>
-            </div>
-          </div>
-          <div id="autumn-credit" class="credits-link" href="" target="_blank" rel="noopener noreferrer">
-            <div class="credits-box">
-              <span>autumn</span>
-              <p>backend blacksmith and DJ extraordinaire</p>
-            </div>
-          </div>
-          <div id="guac-credit" class="credits-box">
-            <span>guac</span>
-            <p>front-end fool and general jester</p>
-          </div>
-
-          <div id="lou-credit" class="credits-box">
-            <span>v1peridae</span>
-            <p>webamp wizard and tastemaker supreme</p>
-          </div>
-      </div>
-    </div>
-  </div>
-  
-  
-<script type="module">
-  // ------------------- Audio Setup -------------------
-  const audio = document.getElementById("audio");
-  const playBtn = document.getElementById("play-btn");
-  const pauseBtn = document.getElementById("pause-btn");
-  const volumeSlider = document.getElementById("volume-slider");
-
-  // Set initial volume
-  audio.volume = volumeSlider.value;
-
-  // Play / Pause controls
-  playBtn.addEventListener("click", () => audio.play());
-  pauseBtn.addEventListener("click", () => audio.pause());
-  volumeSlider.addEventListener("input", () => audio.volume = volumeSlider.value);
-
-  // ------------------- Now Playing -------------------
-  async function fetchNowPlaying() {
-    try {
-      const response = await fetch("https://signal.projectradio.org/api/nowplaying_static/undergroundfm.json");
-      if (!response.ok) return {};
-      return await response.json();
-    } catch {
-      return {};
-    }
-  }
-
-async function updateNowPlaying() {
-  try {
-    const meta = await fetchNowPlaying();
-
-    const song = meta?.now_playing?.song || {};
-
-    const title = song.title || "Loading...";
-    const artist = song.artist || "";
-
-    document.getElementById("np-title").textContent = title;
-    document.getElementById("np-artist").textContent = artist;
-
-    const popup = document.getElementById("nowPlayingPopup");
-    popup.classList.remove("hidden");
-
-    const art = document.getElementById("np-art");
-    art.src = song.art || "https://projectradio.org/ragedyanne.png";
-    art.style.display = "block";
-
-  } catch (err) {
-    console.error("Failed to fetch now playing:", err);
-  }
-}
-updateNowPlaying();
-setInterval(updateNowPlaying, 10000);
-
-  // ------------------- Window toggles -------------------
-  function toggleWindow(el) {
-    return (e) => { e.stopPropagation(); el.style.display = el.style.display === "block" ? "none" : "block"; };
-  }
-
-  const controlsMap = [
-    ["speaker-icon", "volume-popup"],
-    ["start-button", "start-menu"],
-    ["gallery-button", "gallery-box"],
-    ["skin-selector-button", "skin-selector-box"],
-    ["custom-skin-button", "custom-skin-box"],
-    ["discord-button", "discord-box"],
-    ["credits-button", "credits-box"]
-  ];
-
-  controlsMap.forEach(([btnId, boxId]) => {
-    const btn = document.getElementById(btnId);
-    const box = document.getElementById(boxId);
-    if (btn && box) btn.addEventListener("click", toggleWindow(box));
-  });
-
-  // Hide windows when clicking outside
-  document.addEventListener("click", (e) => {
-    const windows = ["volume-popup", "start-menu", "gallery-box", "discord-box"];
-    windows.forEach(id => {
-      const el = document.getElementById(id);
-      const btn = document.getElementById(id.split("-")[0] + "-icon") || document.getElementById(id.split("-")[0] + "-button");
-      if (el && e.target !== btn && !el.contains(e.target)) el.style.display = "none";
-    });
-  });
-
-  // ------------------- Drag & Drop -------------------
-  document.querySelectorAll(".window-header").forEach(header => {
-    const box = header.parentElement;
-    let dragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
-
-    header.addEventListener("mousedown", e => {
-      dragging = true;
-      startX = e.clientX; startY = e.clientY;
-      const rect = box.getBoundingClientRect();
-      origX = rect.left; origY = rect.top;
-      box.style.position = "absolute"; box.style.zIndex = 1000; box.style.margin = 0;
-    });
-
-    document.addEventListener("mousemove", e => {
-      if (!dragging) return;
-      let newX = origX + (e.clientX - startX);
-      let newY = origY + (e.clientY - startY);
-      const rect = box.getBoundingClientRect();
-      if (newX < 0) newX = 0;
-      if (newY < 0) newY = 0;
-      if (newX + rect.width > window.innerWidth) newX = window.innerWidth - rect.width;
-      if (newY + rect.height > window.innerHeight) newY = window.innerHeight - rect.height;
-      box.style.left = newX + "px";
-      box.style.top = newY + "px";
-    });
-
-    document.addEventListener("mouseup", () => { dragging = false; });
-  });
-
-  // ------------------- Skin selector -------------------
-  const skinDictionary = {
-    "Wired Lime": ["#6ebf00", "#96bf55"],
-    "Terminal Tulip": ["#ff5b5b", "#676767"],
-    "Take Cover": ["#40713b", "#34552d"],
-    "Mosh Pit": ["#000000", "#2f2f2f"],
-    "Uranium Junkyard": ["#555555", "#f8f861"]
-  };
-
-  function changeSkin(name, colors) {
-    document.documentElement.style.setProperty("--skin-primary-color", colors[0]);
-    document.documentElement.style.setProperty("--skin-gradient-color", colors[1]);
-    localStorage?.setItem("selectedSkin", name);
-  }
-
-  const skinList = document.getElementById("skin-list");
-  for (let skin in skinDictionary) {
-    const li = document.createElement("li");
-    const p = document.createElement("p");
-    p.textContent = skin;
-    li.appendChild(p);
-    li.addEventListener("mousedown", () => { changeSkin(skin, skinDictionary[skin]); });
-    skinList.appendChild(li);
-  }
-
-  // ------------------- Custom skins -------------------
-  let customSkins = {};
-  if (localStorage.getItem("customSkins")) {
-    try { customSkins = JSON.parse(localStorage.getItem("customSkins")); } catch {}
-  }
-
-  const nameInput = document.getElementById("custom-skin-name");
-  const primaryInput = document.getElementById("custom-skin-primary");
-  const secondaryInput = document.getElementById("custom-skin-secondary");
-  const createBtn = document.getElementById("custom-skin-create");
-  const preview = document.getElementById("custom-skin-preview");
-
-  function validateHex(hex) { return /^#?([a-f0-9]{3}|[a-f0-9]{6})$/i.test(hex); }
-
-  createBtn.addEventListener("click", () => {
-    const name = nameInput.value.trim();
-    const hex0 = primaryInput.value.trim();
-    const hex1 = secondaryInput.value.trim();
-    if (!name || !validateHex(hex0) || !validateHex(hex1)) return;
-    customSkins[name] = [hex0, hex1];
-    localStorage.setItem("customSkins", JSON.stringify(customSkins));
-    skinDictionary[name] = [hex0, hex1];
-    changeSkin(name, [hex0, hex1]);
-  });
-
-  // Update preview on input
-  [primaryInput, secondaryInput].forEach(input => {
-    input.addEventListener("input", () => {
-      const hex0 = primaryInput.value.trim();
-      const hex1 = secondaryInput.value.trim();
-      if (validateHex(hex0) && validateHex(hex1)) {
-        preview.style.background = `linear-gradient(to bottom, ${hex0}, ${hex1})`;
-      }
-    });
-  });
-</script>
-</body>
-
-
-<!-- Mirrored from projectradio.org/radio/undergroundfm by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jul 2026 08:50:57 GMT -->
-</html>
+        </html>
