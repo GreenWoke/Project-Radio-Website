@@ -109,6 +109,35 @@ button:hover{
   animation: wiggle .3s linear infinite;
 }
 
+.volume-slider{
+  -webkit-appearance: none; /*this overrides the default look*/
+  appearance: none;
+  outline: none;
+  background: rgba(67, 95, 40, 0.78);
+  transition-duration: 0.2s;
+}
+/*handle thumb thingy*/
+.volume-slider::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: url("/radio/dogstar-assets/dogstarrr.png");
+}
+/*same styling but for Mozilla truecels vv*/
+.volume-slider::-moz-range-thumb{
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: url("/radio/dogstar-assets/dogstarrr.png");
+  transition-duration: 0.2s;
+}
+.volume-slider::-moz-range-thumb:hover{
+  filter:brightness(0);
+  animation: wiggle .3s linear infinite;
+}
+
 .site-footer {
   position: fixed;
   bottom: 0;
