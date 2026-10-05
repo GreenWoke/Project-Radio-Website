@@ -13,7 +13,9 @@
 <title>Project Radio Wiki</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="icon" type="image/x-icon" href="https://projectradio.org/rah.ico">
+
 <style>
+
 /* ===== BASE ===== */
 body {
   margin: 0;
@@ -51,6 +53,656 @@ body::after {
 body > * { position: relative; z-index:1; }
 
 .container { display: flex; min-height:100vh; overflow-x: hidden; }
+
+
+    .action-bar {
+      position: fixed;
+      top: 0;
+      left: 220px;
+      right: 0;
+      height: 100vh;
+      font-family: 'EuroStyle Normal.ttf', monospace;
+
+      padding: 0.75rem;
+
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      min-width: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .xp-window {
+      width: 100%;
+
+      position: relative;
+      z-index: 1000;
+
+      border: 2px solid #0d0e0a;
+      border-radius: 6px;
+
+      box-shadow:
+        0 0 15px rgba(0,0,0,0.6),
+        inset 0 0 6px rgba(255,255,255,0.05);
+
+      background-image: url("abbg.png");
+      background-size: cover;
+      background-position: center;
+
+      backdrop-filter: blur(4px);
+
+      overflow: visible;
+
+      animation: fadeSlideUp 0.8s ease forwards;
+    }
+
+    .xp-titlebar {
+  background: linear-gradient(#8bbb8c, #364b37););
+
+      padding: 0.35rem;
+
+      border-bottom: 2px solid #26431e;
+
+      border-radius: 6px 6px 6px 6pxed;
+
+      color: #0c0c0c;
+
+      text-shadow: 1px 1px 1px #1b2a17;
+
+      text-align: center;
+
+      letter-spacing: 1px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    .title-text {
+      font-size: 0.7rem;
+
+      white-space: nowrap;
+      overflow: hidden;
+
+      border-right: 2px solid #393f19;
+
+      width: 0;
+
+      animation:
+        typing 1s steps(30, end) forwards,
+        blink 0.8s step-end infinite alternate;
+
+      display: inline-block;
+    }
+
+    .mobile-title {
+      display: none;
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    @keyframes typing {
+
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+
+    }
+
+    @keyframes blink {
+
+      from {
+        border-color: transparent;
+      }
+
+      to {
+        border-color: #dce3b5;
+      }
+
+    }
+
+    .xp-body {
+      padding: 0.45rem;
+      color: #dce3b5;
+      overflow: visible;
+    }
+
+    .radio-dashboard {
+
+      width: 100%;
+
+      position: relative;
+      z-index: 1001;
+
+      display: flex;
+      align-items: center;
+
+      gap: 0.45rem;
+
+      padding: 0.45rem;
+
+      background: rgba(30, 54, 27, 0.664);
+
+      border: 1px solid #52663b;
+      border-radius: 7px;
+
+      color: #dce3b5;
+
+      box-sizing: border-box;
+
+      min-width: 0;
+
+      height: 54px;
+
+      overflow: visible;
+    }
+
+    .profile-panel {
+
+      display: flex;
+      align-items: center;
+
+      gap: 0.35rem;
+
+      flex: 0 0 auto;
+
+      min-width: 0;
+
+      padding-right: 0.45rem;
+
+      border-right: 1px solid rgba(220,227,181,0.2);
+
+      height: 38px;
+    }
+
+    .profile-avatar {
+
+      width: 28px;
+      height: 28px;
+
+      flex-shrink: 0;
+
+      border-radius: 15%;
+
+      overflow: hidden;
+
+      background: #292929;
+
+    }
+
+    .profile-avatar img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .profile-info {
+
+      min-width: 85px;
+    }
+
+    .profile-info h3 {
+
+      margin: 0;
+
+      font-size: 0.60rem;
+
+      white-space: nowrap;
+    }
+
+    .profile-info p {
+
+      margin: 0.1rem 0 0;
+
+      color: #a9b894;
+
+      font-size: 0.60rem;
+
+      white-space: nowrap;
+    }
+
+    .profile-actions {
+
+      display: flex;
+
+      gap: 0.2rem;
+
+      margin-left: 0;
+    }
+
+    .login-btn,
+    .signup-btn {
+
+      padding: 0.3rem 0.4rem;
+
+      border-radius: 4px;
+
+      font-family: inherit;
+
+      font-size: 0.60rem;
+
+      cursor: pointer;
+
+      transition: 0.2s ease;
+
+      white-space: nowrap;
+    }
+
+    .login-btn {
+
+      background: transparent;
+
+      border: 1px solid #657653;
+
+      color: #dce3b5;
+    }
+
+    .signup-btn {
+
+      background: #b6ff4a;
+
+      border: 1px solid #b6ff4a;
+
+      color: #111;
+    }
+
+    .login-btn:hover,
+    .signup-btn:hover {
+
+      transform: translateY(-1px);
+    }
+
+    .radio-panel {
+
+      flex: 1 1 auto;
+
+      min-width: 0;
+
+      display: flex;
+      align-items: center;
+
+      gap: 0.45rem;
+
+      position: relative;
+
+      height: 38px;
+    }
+
+    .radio-heading {
+
+      display: flex;
+      align-items: center;
+
+      gap: 0.25rem;
+
+      flex: 0 0 auto;
+
+      color: #b8c69b;
+
+      font-size: 0.60rem;
+
+      letter-spacing: 0.06em;
+
+      white-space: nowrap;
+    }
+
+    .radio-status {
+
+      width: 5px;
+      height: 5px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: #b6ff4a;
+
+      box-shadow: 0 0 7px #b6ff4a;
+    }
+
+    .radio-current {
+
+      display: flex;
+      align-items: center;
+
+      gap: 0.35rem;
+
+      flex: 0 1 155px;
+
+      min-width: 105px;
+
+      padding: 0.25rem 0.35rem;
+
+      background: rgba(255,255,255,0.04);
+
+      border: 1px solid rgba(220,227,181,0.12);
+
+      border-radius: 5px;
+
+      height: 34px;
+    }
+
+    .radio-current img {
+
+      width: 27px;
+      height: 27px;
+
+      flex-shrink: 0;
+
+      object-fit: cover;
+
+      border-radius: 3px;
+
+      background: rgba(210, 235, 218, 0.507);
+    }
+
+    .radio-current-info {
+
+      min-width: 0;
+    }
+
+    .radio-current-info h3 {
+
+      margin: 0;
+
+      font-size: 0.60rem;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+    }
+
+    .radio-current-info p {
+
+      margin: 0.05rem 0 0;
+
+      color: #a9b894;
+
+      font-size: 0.60rem;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+    }
+
+    .station-dropdown {
+
+      position: relative;
+      z-index: 1002;
+
+      flex: 1 1 180px;
+
+      min-width: 130px;
+
+      height: 34px;
+    }
+
+    .station-toggle {
+
+      width: 100%;
+
+      height: 34px;
+
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 0.4rem;
+
+      padding: 0.35rem 0.5rem;
+
+      background: #283522;
+
+      color: #dce3b5;
+
+      border: 1px solid #657653;
+
+      border-radius: 5px;
+
+      font-family: inherit;
+
+      font-size: 0.60rem;
+
+      cursor: pointer;
+
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .station-toggle:hover {
+
+      background: #394a2e;
+
+      border-color: #8bc34a;
+    }
+
+    .station-toggle:focus {
+
+      outline: none;
+
+      border-color: #b6ff4a;
+
+      box-shadow: 0 0 0 1px rgba(182,255,74,0.25);
+    }
+
+    .station-toggle span:first-child {
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+    }
+
+    .dropdown-arrow {
+
+      flex-shrink: 0;
+
+      font-size: 1rem;
+
+      line-height: 1;
+
+      transition: transform 0.15s ease;
+    }
+
+    .station-dropdown.open .dropdown-arrow {
+
+      transform: rotate(180deg);
+    }
+
+    .station-menu {
+
+      display: none;
+
+      position: absolute;
+
+      top: calc(100% + 5px);
+
+      left: 0;
+
+      right: 0;
+
+      z-index: 99999;
+
+      padding: 0.3rem;
+
+      background: #20291c;
+
+      border: 1px solid #657653;
+
+      border-radius: 6px;
+
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.65),
+        0 0 8px rgba(0,0,0,0.3);
+
+      max-height: 220px;
+
+      overflow-y: auto;
+    }
+
+    .station-dropdown.open .station-menu {
+
+      display: block;
+    }
+
+    .station-option {
+
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+
+      gap: 0.45rem;
+
+      padding: 0.35rem;
+
+      background: transparent;
+
+      border: none;
+
+      border-radius: 4px;
+
+      color: #dce3b5;
+
+      text-align: left;
+
+      font-family: inherit;
+
+      font-size: 0.85rem;
+
+      cursor: pointer;
+
+      transition: background 0.15s ease;
+    }
+
+    .station-option:hover {
+
+      background: #394a2e;
+    }
+
+    .station-option:focus {
+
+      outline: none;
+
+      background: #394a2e;
+    }
+
+    .station-option img {
+
+      width: 25px;
+      height: 25px;
+
+      object-fit: cover;
+
+      border-radius: 3px;
+
+      flex-shrink: 0;
+    }
+
+    .radio-controls {
+
+      display: flex;
+      align-items: center;
+
+      gap: 0.35rem;
+
+      flex: 0 0 125px;
+
+      min-width: 110px;
+
+      height: 34px;
+    }
+
+    .play-button {
+
+      width: 31px;
+      height: 31px;
+
+      flex-shrink: 0;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background: #b6ff4a;
+
+      color: #0b3317;
+
+      cursor: pointer;
+
+      font-size: 0.65rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .play-button:hover {
+
+      transform: scale(1.06);
+
+      background: #d0ff80;
+    }
+
+    .volume-control {
+
+      display: flex;
+      align-items: center;
+
+      gap: 0.25rem;
+
+      flex: 1;
+
+      min-width: 0;
+
+      color: #a9b894;
+
+      font-size: 0.65rem;
+    }
+
+    .volume-control input {
+
+      width: 100%;
+
+      min-width: 0;
+
+      accent-color: #b6ff4a;
+
+      cursor: pointer;
+    }
+
+    #volume-value {
+
+      min-width: 25px;
+
+      text-align: right;
+
+      color: #dce3b5;
+
+      font-size: 0.32rem;
+    }
+
 
 /*/* ===== SIDEBAR (UNCHANGED STRUCTURE) ===== */
 .sidebar {
@@ -94,28 +746,22 @@ body > * { position: relative; z-index:1; }
   filter: grayscale(100%) brightness(0.85);
 }
 /* ===== MAIN ===== */
-.main-content { 
-  margin-left: 220px; 
-  padding: 24px; 
-  flex: 1; 
-  overflow-x: hidden; 
+.main-content {
+  box-sizing: border-box;
+  width: 100%;
   max-width: 1100px;
-  margin-right: auto;
-  margin-left: calc(220px + (100vw - 220px - 1100px) / 2);
+  margin: 0 auto;
+  padding: 24px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
-@media (max-width: 1400px) {
-  .main-content {
-    margin-left: 220px;
-    margin-right: 0;
-    max-width: none;
-  }
-}
 
 /* XP Window */
 .xp-window {
   background: rgba(50,50,50,0.85);
-  border: 2px solid #364b37;
+  border: 2px solid #8bbb8c;
   margin-bottom: 24px;
 }
 
@@ -274,6 +920,8 @@ body > * { position: relative; z-index:1; }
   box-shadow: 2px 2px 5px #0f120c;
 }
 
+
+
 </style>
 </head>
 <body>
@@ -291,6 +939,242 @@ body > * { position: relative; z-index:1; }
         <a href="https://discord.gg/qUFrxKxchg">Discord</a>
       </nav>
 </aside>
+
+   <main class="action-bar">
+
+      <section class="xp-window full-width-box">
+
+        <div class="xp-body section-content">
+
+          <div class="radio-dashboard">
+
+            <div class="profile-panel">
+
+              <div class="profile-avatar">
+
+                <img
+                  src="uplinklogo.png"
+                  alt="Profile"
+                >
+
+              </div>
+
+              <div class="profile-info">
+
+                <h3>
+                  Guest User
+                </h3>
+
+                <p>
+                  Not signed in
+                </p>
+
+              </div>
+
+              <div class="profile-actions">
+
+                <button
+                  class="login-btn"
+                  type="button"
+                >
+                  Log In
+                </button>
+
+                <button
+                  class="signup-btn"
+                  type="button"
+                >
+                  Sign Up
+                </button>
+
+              </div>
+
+            </div>
+
+            <div class="radio-panel">
+
+              <div class="radio-heading">
+
+                <span class="radio-status"></span>
+
+              </div>
+
+              <div class="radio-current">
+
+                <img
+                  id="current-station-image"
+                  src="uplinklogo.png"
+                  alt="Current station"
+                >
+
+                <div class="radio-current-info">
+
+                  <h3 id="current-station-name">
+                    NO SIGNAL
+                  </h3>
+
+                  <p id="radio-status-text">
+                    Select a Station
+                  </p>
+
+                </div>
+
+              </div>
+
+              <div
+                class="station-dropdown"
+                id="station-dropdown"
+              >
+
+                <button
+                  class="station-toggle"
+                  id="station-toggle"
+                  type="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+
+                  <span>
+                    Select Signal
+                  </span>
+
+                  <span class="dropdown-arrow">
+                    ⌄
+                  </span>
+
+                </button>
+
+                <div
+                  class="station-menu"
+                  id="station-menu"
+                >
+
+                  <button
+                    class="station-option"
+                    type="button"
+                    data-name="underground.fm"
+                    data-image="undergroundlogo.png"
+                    data-stream="https://signal.projectradio.org/listen/undergroundfm/radio.mp3"
+                  >
+
+                    <img
+                      src="undergroundlogo.png"
+                      alt="underground.fm"
+                    >
+
+                    <span>
+                      underground.fm
+                    </span>
+
+                  </button>
+
+                  <button
+                    class="station-option"
+                    type="button"
+                    data-name="RuggedRaw.94"
+                    data-image="rr94logotrans.png"
+                    data-stream="https://signal.projectradio.org/listen/ruggedraw94/radio.mp3"
+                  >
+
+                    <img
+                      src="rr94logotrans.png"
+                      alt="RuggedRaw.94"
+                    >
+
+                    <span>
+                      RuggedRaw.94
+                    </span>
+
+                  </button>
+
+                  <button
+                    class="station-option"
+                    type="button"
+                    data-name="project.fm"
+                    data-image="prlogo3.png"
+                    data-stream="https://signal.projectradio.org/listen/prfm/radio.mp3"
+                  >
+
+                    <img
+                      src="prlogo3.png"
+                      alt="project.fm"
+                    >
+
+                    <span>
+                      project.fm
+                    </span>
+
+                  </button>
+
+                  <button
+                    class="station-option"
+                    type="button"
+                    data-name="DogStar"
+                    data-image="dogstarrr.png"
+                    data-stream="https://signal.projectradio.org/listen/dogstarfm/radio.mp3"
+                  >
+
+                    <img
+                      src="dogstarrr.png"
+                      alt="DogStar"
+                    >
+
+                    <span>
+                      DogStar
+                    </span>
+
+                  </button>
+
+                </div>
+
+              </div>
+
+              <div class="radio-controls">
+
+                <button
+                  id="play-button"
+                  class="play-button"
+                  type="button"
+                  aria-label="Play radio"
+                >
+                  ▶
+                </button>
+
+                <div class="volume-control">
+
+                  <span>
+                    VOL
+                  </span>
+
+                  <input
+                    type="range"
+                    id="volume-slider"
+                    min="0"
+                    max="100"
+                    value="50"
+                    aria-label="Volume"
+                  >
+
+                  <span id="volume-value">
+                    50%
+                  </span>
+
+                </div>
+
+              </div>
+
+              <audio
+                id="radio-audio"
+                preload="none"
+              ></audio>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
 
 <main class="main-content">
 
@@ -427,111 +1311,581 @@ Want to contribute or learn more about Project Radio? <a href="https://discord.g
 </main>
 </div>
 
+```html
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const track = document.getElementById('cardCarousel');
-  let isDown = false;
-  let startX;
-  let currentTranslate = 0;
-  let prevTranslate = 0;
-  let animationId;
-  let isDragging = false;
+document.addEventListener("DOMContentLoaded", function () {
 
-  // Disable default drag
-  track.addEventListener('dragstart', (e) => e.preventDefault());
+  /* =========================================================
+     PROJECTPEDIA CAROUSEL
+     ========================================================= */
 
-  track.addEventListener('mousedown', (e) => {
-    isDown = true;
-    isDragging = true;
-    startX = e.clientX;
-    track.style.animationPlayState = 'paused';
-    track.style.cursor = 'grabbing';
-  });
+  const track = document.getElementById("cardCarousel");
 
-  track.addEventListener('mouseleave', () => {
-    if (isDown) {
-      isDown = false;
-      isDragging = false;
-      track.style.animationPlayState = 'running';
-      track.style.cursor = 'grab';
+  if (track) {
+
+    const cards = track.querySelectorAll(".carousel-card");
+
+    let currentIndex = 0;
+
+    function updateCarousel() {
+
+      if (!cards.length) {
+        return;
+      }
+
+      const cardWidth =
+        cards[0].getBoundingClientRect().width + 16;
+
+      track.style.transform =
+        "translateX(-" + (currentIndex * cardWidth) + "px)";
     }
-  });
 
-  track.addEventListener('mouseup', () => {
-    isDown = false;
-    isDragging = false;
-    track.style.animationPlayState = 'running';
-    track.style.cursor = 'grab';
-  });
+    const nextButton =
+      document.getElementById("carouselNext");
 
-  track.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.clientX;
-    const diff = startX - x;
-    const newTranslate = prevTranslate - diff;
-    track.style.transform = `translateX(${newTranslate}px)`;
-    currentTranslate = newTranslate;
-  });
+    const prevButton =
+      document.getElementById("carouselPrev");
 
-  // Reset position after drag ends to maintain loop
-  track.addEventListener('mouseup', () => {
-    if (currentTranslate < -track.offsetWidth / 2) {
-      currentTranslate += track.offsetWidth / 2;
-    } else if (currentTranslate > 0) {
-      currentTranslate -= track.offsetWidth / 2;
+    if (nextButton) {
+
+      nextButton.addEventListener("click", function () {
+
+        if (currentIndex < cards.length - 1) {
+
+          currentIndex++;
+
+          updateCarousel();
+        }
+
+      });
     }
-    prevTranslate = currentTranslate;
-    track.style.transition = 'transform 0.3s ease-out';
-    track.style.transform = `translateX(${currentTranslate}px)`;
-    setTimeout(() => {
-      track.style.transition = 'none';
-    }, 300);
-  });
 
-  // Touch support
-  track.addEventListener('touchstart', (e) => {
-    isDown = true;
-    isDragging = true;
-    startX = e.touches[0].clientX;
-    track.style.animationPlayState = 'paused';
-  });
+    if (prevButton) {
 
-  track.addEventListener('touchend', () => {
-    isDown = false;
-    isDragging = false;
-    track.style.animationPlayState = 'running';
-    
-    if (currentTranslate < -track.offsetWidth / 2) {
-      currentTranslate += track.offsetWidth / 2;
-    } else if (currentTranslate > 0) {
-      currentTranslate -= track.offsetWidth / 2;
+      prevButton.addEventListener("click", function () {
+
+        if (currentIndex > 0) {
+
+          currentIndex--;
+
+          updateCarousel();
+        }
+
+      });
     }
-    prevTranslate = currentTranslate;
-    track.style.transition = 'transform 0.3s ease-out';
-    track.style.transform = `translateX(${currentTranslate}px)`;
-    setTimeout(() => {
-      track.style.transition = 'none';
-    }, 300);
-  });
 
-  track.addEventListener('touchmove', (e) => {
-    if (!isDown) return;
-    const x = e.touches[0].clientX;
-    const diff = startX - x;
-    const newTranslate = prevTranslate - diff;
-    track.style.transform = `translateX(${newTranslate}px)`;
-    currentTranslate = newTranslate;
-  });
+    window.addEventListener("resize", updateCarousel);
+
+    updateCarousel();
+  }
+
+
+  /* =========================================================
+     PROJECT RADIO
+     ========================================================= */
+
+  const audio =
+    document.getElementById("radio-audio");
+
+  const toggle =
+    document.getElementById("station-toggle");
+
+  const menu =
+    document.getElementById("station-menu");
+
+  const playButton =
+    document.getElementById("radio-play");
+
+  const volumeSlider =
+    document.getElementById("radio-volume");
+
+  const stationName =
+    document.getElementById("station-name");
+
+  const stationImage =
+    document.getElementById("station-image");
+
+  const radioStatus =
+    document.getElementById("radio-status");
+
+
+  /* ---------------------------------------------------------
+     Make sure the radio exists
+     --------------------------------------------------------- */
+
+  if (!audio || !toggle || !menu) {
+
+    console.warn(
+      "Project Radio: required radio elements were not found."
+    );
+
+  } else {
+
+
+    /* -------------------------------------------------------
+       STATION DROPDOWN
+       ------------------------------------------------------- */
+
+    toggle.addEventListener("click", function (event) {
+
+      event.stopPropagation();
+
+      menu.classList.toggle("open");
+
+      toggle.classList.toggle("open");
+
+    });
+
+
+    /* -------------------------------------------------------
+       CLOSE DROPDOWN WHEN CLICKING OUTSIDE
+       ------------------------------------------------------- */
+
+    document.addEventListener("click", function (event) {
+
+      if (
+        !menu.contains(event.target) &&
+        !toggle.contains(event.target)
+      ) {
+
+        menu.classList.remove("open");
+
+        toggle.classList.remove("open");
+
+      }
+
+    });
+
+
+    /* -------------------------------------------------------
+       STATION SELECTION
+       ------------------------------------------------------- */
+
+    const stationOptions =
+      document.querySelectorAll(".station-option");
+
+
+    stationOptions.forEach(function (option) {
+
+      option.addEventListener("click", async function (event) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+
+        const name =
+          option.dataset.name || "Project Radio";
+
+        const image =
+          option.dataset.image || "";
+
+        const stream =
+          option.dataset.stream || "";
+
+
+        /* Update station name */
+
+        if (stationName) {
+
+          stationName.textContent = name;
+
+        }
+
+
+        /* Update station image */
+
+        if (stationImage && image) {
+
+          stationImage.src = image;
+
+          stationImage.alt = name;
+
+        }
+
+
+        /* Make sure stream exists */
+
+        if (!stream) {
+
+          if (radioStatus) {
+
+            radioStatus.textContent =
+              "No stream available";
+
+          }
+
+          return;
+
+        }
+
+
+        /* Change audio stream */
+
+        audio.src = stream;
+
+        audio.load();
+
+
+        /* Close dropdown */
+
+        menu.classList.remove("open");
+
+        toggle.classList.remove("open");
+
+
+        /* Show connecting status */
+
+        if (radioStatus) {
+
+          radioStatus.textContent =
+            "Connecting...";
+
+        }
+
+
+        /* Start stream */
+
+        try {
+
+          await audio.play();
+
+
+          if (playButton) {
+
+            playButton.textContent = "❚❚";
+
+            playButton.setAttribute(
+              "aria-label",
+              "Pause radio"
+            );
+
+          }
+
+
+          if (radioStatus) {
+
+            radioStatus.textContent =
+              "Playing";
+
+          }
+
+        } catch (error) {
+
+          console.error(
+            "Project Radio playback error:",
+            error
+          );
+
+
+          if (radioStatus) {
+
+            radioStatus.textContent =
+              "Unable to play stream";
+
+          }
+
+
+          if (playButton) {
+
+            playButton.textContent = "▶";
+
+            playButton.setAttribute(
+              "aria-label",
+              "Play radio"
+            );
+
+          }
+
+        }
+
+      });
+
+    });
+
+
+    /* -------------------------------------------------------
+       PLAY / PAUSE BUTTON
+       ------------------------------------------------------- */
+
+    if (playButton) {
+
+      playButton.addEventListener(
+        "click",
+        async function () {
+
+          /* No station selected */
+
+          if (!audio.src) {
+
+            if (radioStatus) {
+
+              radioStatus.textContent =
+                "Select a station first";
+
+            }
+
+            return;
+
+          }
+
+
+          /* Pause */
+
+          if (!audio.paused) {
+
+            audio.pause();
+
+            playButton.textContent = "▶";
+
+            playButton.setAttribute(
+              "aria-label",
+              "Play radio"
+            );
+
+
+            if (radioStatus) {
+
+              radioStatus.textContent =
+                "Paused";
+
+            }
+
+            return;
+
+          }
+
+
+          /* Play */
+
+          try {
+
+            await audio.play();
+
+            playButton.textContent = "❚❚";
+
+            playButton.setAttribute(
+              "aria-label",
+              "Pause radio"
+            );
+
+
+            if (radioStatus) {
+
+              radioStatus.textContent =
+                "Playing";
+
+            }
+
+          } catch (error) {
+
+            console.error(
+              "Project Radio playback error:",
+              error
+            );
+
+
+            if (radioStatus) {
+
+              radioStatus.textContent =
+                "Unable to play stream";
+
+            }
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /* -------------------------------------------------------
+       VOLUME CONTROL
+       ------------------------------------------------------- */
+
+    if (volumeSlider) {
+
+      const initialVolume =
+        parseFloat(volumeSlider.value);
+
+      if (!Number.isNaN(initialVolume)) {
+
+        audio.volume =
+          Math.max(0, Math.min(1, initialVolume));
+
+      }
+
+
+      volumeSlider.addEventListener(
+        "input",
+        function () {
+
+          const volume =
+            parseFloat(volumeSlider.value);
+
+          if (!Number.isNaN(volume)) {
+
+            audio.volume =
+              Math.max(0, Math.min(1, volume));
+
+          }
+
+        }
+      );
+
+    } else {
+
+      audio.volume = 1;
+
+    }
+
+
+    /* -------------------------------------------------------
+       AUDIO: PLAYING
+       ------------------------------------------------------- */
+
+    audio.addEventListener(
+      "playing",
+      function () {
+
+        if (playButton) {
+
+          playButton.textContent = "❚❚";
+
+          playButton.setAttribute(
+            "aria-label",
+            "Pause radio"
+          );
+
+        }
+
+
+        if (radioStatus) {
+
+          radioStatus.textContent =
+            "Playing";
+
+        }
+
+      }
+    );
+
+
+    /* -------------------------------------------------------
+       AUDIO: PAUSED
+       ------------------------------------------------------- */
+
+    audio.addEventListener(
+      "pause",
+      function () {
+
+        if (playButton) {
+
+          playButton.textContent = "▶";
+
+          playButton.setAttribute(
+            "aria-label",
+            "Play radio"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* -------------------------------------------------------
+       AUDIO: BUFFERING
+       ------------------------------------------------------- */
+
+    audio.addEventListener(
+      "waiting",
+      function () {
+
+        if (radioStatus) {
+
+          radioStatus.textContent =
+            "Buffering...";
+
+        }
+
+      }
+    );
+
+
+    /* -------------------------------------------------------
+       AUDIO: ERROR
+       ------------------------------------------------------- */
+
+    audio.addEventListener(
+      "error",
+      function () {
+
+        console.error(
+          "Project Radio: stream could not be loaded.",
+          audio.error
+        );
+
+
+        if (radioStatus) {
+
+          radioStatus.textContent =
+            "Stream unavailable";
+
+        }
+
+
+        if (playButton) {
+
+          playButton.textContent = "▶";
+
+          playButton.setAttribute(
+            "aria-label",
+            "Play radio"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* -------------------------------------------------------
+       AUDIO: ENDED
+       ------------------------------------------------------- */
+
+    audio.addEventListener(
+      "ended",
+      function () {
+
+        if (playButton) {
+
+          playButton.textContent = "▶";
+
+          playButton.setAttribute(
+            "aria-label",
+            "Play radio"
+          );
+
+        }
+
+
+        if (radioStatus) {
+
+          radioStatus.textContent =
+            "Stopped";
+
+        }
+
+      }
+    );
+
+  }
+
 });
 </script>
-
-<script>
-function toggleDirectory(id) {
-  const section = document.getElementById(id);
-  section.classList.toggle('show');
-}
-</script>
+```
 
 </body>
 </html>
