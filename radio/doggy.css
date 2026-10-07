@@ -77,7 +77,7 @@ body::before {
 .radio-player {
   width: 100%;
   height: 100%;
-  margin-left:30px;
+  margin:30px;
   background-image: url("dogstarlogo.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -87,17 +87,21 @@ body::before {
   align-items: center;
   text-align: center;
 }
+.player-title-bottom {
+  transform: translate(120px, 80px);
+  rotate: -39deg;
+}
 audio {
   width: 100%;
   outline: none;
   border-radius: 10px;
   margin-bottom: 10px;
 }
-
 button {
   /*background-image: url("/radio/dogstar-assets/placeholder-play.png");*/
   color: rgb(253, 101, 0);
   border: none;
+  border-radius: 10px;
   padding: 16px;
   background: rgba(67, 95, 40, 0.78);
   transition-duration: 0.2s;
@@ -113,7 +117,10 @@ button:hover{
   -webkit-appearance: none; /*this overrides the default look*/
   appearance: none;
   outline: none;
+  border-radius: 10px;
+  width: 90%;
   background: rgba(67, 95, 40, 0.78);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
   transition-duration: 0.2s;
 }
 /*handle thumb thingy*/
