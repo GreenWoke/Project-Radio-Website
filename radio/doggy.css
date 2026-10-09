@@ -1,6 +1,6 @@
 
 body {
-  background: url("amer-football-2000.webp") no-repeat center center fixed;
+  background: url("/radio/dogstar-assets/amer-football-2000.webp") no-repeat center center fixed;
   background-size: cover;
   color: #eee;
   font-family: 'Rock Salt', cursive;
@@ -78,7 +78,7 @@ body::before {
   width: 100%;
   height: 100%;
   margin:30px;
-  background-image: url("dogstarlogo.png");
+  background-image: url("/radio/dogstar-assets/dogstarlogo.png");
   background-repeat: no-repeat;
   background-size: contain;
   display: flex;
@@ -159,7 +159,7 @@ button:hover{
   padding: 0px 10px;
   min-height: 120px;
 
-  background-image: url("bg-trees-transparent.png");
+  background-image: url("/radio/dogstar-assets/bg-trees-transparent.png");
   background-repeat: repeat-x;
   background-position: bottom;
   background-size: auto 180px;
